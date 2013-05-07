@@ -1,11 +1,15 @@
 <project default="compile">
 
   <!-- build.xml for Choice points, S12, CS56
-       name: Minh Le -->
+       name: Minh Le 
+	   
+	   Edited by: Daniel Ly
+	   Version: S13, CS56
+	   Refactored package name -->
 
   <!-- MAKING THIS CHOICE POINTS FRIENDLY -->
 
-  <property name="projectName" value="issue842" />
+  <property name="projectName" value="rougelike" />
 
   <!-- adding properties
   load env variables
@@ -17,7 +21,7 @@
    <property name="webRoot" value="${env.HOME}/public_html/cs56" />
    <property name="webBaseURL" value="http://www.cs.ucsb.edu/~${env.USER}/cs56" />
 
-   <property name="fullPkg" value="edu.ucsb.cs56.S12.choice.issue842" />
+   <property name="fullPkg" value="edu.ucsb.cs56.projects.games.roguelike" />
    <property name="pkgDirectory" value="/edu/ucsb/cs56/S12/choice/" />
 
    <property name="mainClass" value="RogueController" />
@@ -44,7 +48,7 @@
     <javac srcdir="src" destdir="build" includeantruntime="false" debug="true" debuglevel="lines,source" >
     <classpath>
       <pathelement location="build"/>
-      <pathelement location="/cs/faculty/pconrad/public_html/cs56/lib/junit-4.8.2.jar"/>
+      <pathelement location="lib/junit-4.8.2.jar"/>
     </classpath>
     </javac>
   </target>
@@ -79,7 +83,7 @@
    <javadoc  destdir="javadoc" author="true" version="true" use="true" >
       <fileset dir="src" includes="**/*.java"/>
       <classpath>
-          <pathelement location="/cs/faculty/pconrad/public_html/cs56/lib/junit-4.8.2.jar"/>
+          <pathelement location="lib/junit-4.8.2.jar"/>
      </classpath>
    </javadoc>
 
@@ -102,7 +106,7 @@
 
     <junit haltonerror="no" haltonfailure="no">
        <classpath>
-         <pathelement location="/cs/faculty/pconrad/public_html/cs56/lib/junit-4.8.2.jar"/>
+         <pathelement location="lib/junit-4.8.2.jar"/>
          <pathelement location="build"/>
        </classpath>
 
