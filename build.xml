@@ -25,10 +25,12 @@
    <property name="mainClass" value="RogueController" />
 
    <!-- javadoc properties -->
+   <!-- Remember to change webRoot and webBaseURL to link to your username
+		rather than dly -->
    <property name="webRoot" value="${env.HOME}/public_html/cs56/13S/dly" />
    <property name="webBaseURL" value="http://www.cs.ucsb.edu/~${env.USER}/cs56/13S/dly" />
-  <property name="javadocDest" value="${webRoot}/${projectRepo}/javadoc" />
-  <property name="javadocURL" value="${webBaseURL}/${projectRepo}/javadoc" />
+   <property name="javadocDest" value="${webRoot}/${projectRepo}/javadoc" />
+   <property name="javadocURL" value="${webBaseURL}/${projectRepo}/javadoc" />
 
   <!-- END OF PROPERTIES -->
 
