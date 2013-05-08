@@ -18,28 +18,17 @@
 
    <property environment="env"/> <!-- load the environment variables -->
 
-   <property name="webRoot" value="${env.HOME}/public_html/cs56" />
-   <property name="webBaseURL" value="http://www.cs.ucsb.edu/~${env.USER}/cs56" />
-
    <property name="fullPkg" value="edu.ucsb.cs56.projects.games.roguelike" />
    <property name="pkgDirectory" value="/edu/ucsb/cs56/projects/games/" />
+   <property name="projectRepo" value="cs56-games-roguelike" />
 
    <property name="mainClass" value="RogueController" />
 
-   <property name="jwsDest" value="${webRoot}/${projectName}/jws" />
-   <property name="jwsURL" value="${webBaseURL}/${projectName}/jws" />
-
-
-  <!-- MANTIS PUBLISH -->
-  <property name="course" value="cs56"/>
-  <property name="quarter" value="S12"/>
-  <property name="issueNum" value="0000842"/>
-  <property name="projectName" value="${course}_${quarter}_${issueNum}"/>
-  <property name="projectPath" value="${quarter}/issues/${issueNum}"/>
-
    <!-- javadoc properties -->
-  <property name="javadocDest" value="${webRoot}/${projectPath}/javadoc" />
-  <property name="javadocURL" value="${webBaseURL}/${projectPath}/javadoc" />
+   <property name="webRoot" value="${env.HOME}/public_html/cs56/13S/dly" />
+   <property name="webBaseURL" value="http://www.cs.ucsb.edu/~${env.USER}/cs56/13S/dly" />
+  <property name="javadocDest" value="${webRoot}/${projectRepo}/javadoc" />
+  <property name="javadocURL" value="${webBaseURL}/${projectRepo}/javadoc" />
 
   <!-- END OF PROPERTIES -->
 
@@ -123,126 +112,11 @@
 
   <target name="jar" depends="compile">
     <mkdir dir="dist" />
-    <jar destfile="dist/${projectName}.jar" basedir="build" >
+    <jar destfile="dist/${pkgDirectory}.jar" basedir="build" >
       <manifest>
 	<attribute name="Main-Class" value="${mainClass}" />
       </manifest>
     </jar>
   </target>
-
-
-
-  <!-- PUBLISH TARGET HERE -->
-
-  <target name="publish" depends="jar,javadoc,download,jws,numberedsource" description="Publishes to ${webRootURL}/${projectPath}">
-    <mkdir dir="${webRoot}/${projectPath}" />
-
-    <delete dir="${webRoot}/${projectPath}/browse" />
-    <mkdir dir="${webRoot}/${projectPath}/browse" />
-
-    <delete dir="${webRoot}/${projectPath}/download" />
-    <mkdir dir="${webRoot}/${projectPath}/download" />
-
-    <copy file="html/index.html" todir="${webRoot}/${projectPath}"/>
-
-    <copy todir="${webRoot}/${projectPath}/download" >
-      <fileset dir="download"/>
-      <fileset dir="dist" />
-    </copy>
-
-    <copy file="build.xml" todir="${webRoot}/${projectPath}/browse"/>
-
-    <copy todir="${webRoot}/${projectPath}/browse/src" >
-      <fileset dir="src"/>
-    </copy>
-
-    <copy todir="${webRoot}/${projectPath}/jws" >
-      <fileset dir="jws" includes="*.html"/>
-      <fileset dir="jws" includes="*.jnlp"/>
-      <fileset dir="jws" includes="*.png"/>
-      <fileset dir="jws" includes=".htaccess"/>
-    </copy>
-
-    <copy file="numberedsource.txt" todir="${webRoot}/${projectPath}/browse"/>
-
-    <chmod dir="${webRoot}/${projectPath}"
-	   perm="755" type="both" includes="**/*"/>
-
-    <echo>Project published to ${webBaseURL}/${projectPath}</echo>
-  </target>
-
-  <target name="download" depends="">
-    <!-- delete everything under the "temp" and "download" subdirectories
-	 In Ant, **/* means "all files under any number of directory levels" -->
-
-    <delete quiet="true">
-      <fileset dir="temp" includes="**/*" />
-      <fileset dir="download" includes="**/*" />
-    </delete>
-
-    <!-- create the directories we'll need to stage the zip file and tarballs -->
-
-    <mkdir dir="download" />
-    <mkdir dir="temp" />
-    <mkdir dir="temp/${projectName}" />
-
-    <!-- copy everything from the current directory that we want to put in the zip file/tarball into the
-	 temp subdirectory.   Exclude things we do NOT want to include in the tarball/zip file -->
-
-    <copy todir="temp/${projectName}">
-      <fileset dir="."
-	       excludes="build/**, javadoc/**, **/*~, temp/**, dist/**, download/**"/>
-    </copy>
-
-    <!-- create the tar file from the temp directory -->
-
-    <tar destfile="temp/${projectName}.tar"
-	 basedir="temp"
-	 includes="${projectName}/**"
-	 />
-
-    <!-- compress the tar file into a tarball (using "gzip") -->
-
-    <gzip zipfile="download/${projectName}.tgz"
-	  src="temp/${projectName}.tar" />
-
-    <!-- create a zip file -->
-
-    <zip destfile="download/${projectName}.zip"
-	 basedir="temp"
-	 includes="${projectName}/**"
-	 />
-
-    <!-- Now we have the tarball and zip file in the download
-	 subdirectory, so we are finished with the temp directory -->
-
-    <delete quiet="true">
-      <fileset dir="temp" includes="**/*"/>
-    </delete>
-
-  </target>
-
-  <target name="jws" depends="compile,jar" description="Generates Java Web Start page.">
-
-    <delete dir="${webRoot}/${projectName}/jws" />
-    <mkdir dir="${webRoot}/${projectName}/jws" />
-
-    <copy todir="${jwsDest}" file="dist/${projectName}.jar" />
-    <copy todir="${jwsDest}" >
-      <fileset dir="jws" includes="*.html"/>
-      <fileset dir="jws" includes="*.jnlp"/>
-      <fileset dir="jws" includes="*.png"/>
-      <fileset dir="jws" includes=".htaccess"/>
-    </copy>
-    <echo>Java web start at ${jwsURL}</echo>
-  </target>
-
-
-  <target name="numberedsource" depends="compile" description="WHEN THE HECK WAS THIS PUT UP?">
-   <exec executable="bash">
-     <arg value="-c"/>
-     <arg value='tree -ifQ src | grep \.java\"$ | xargs pr -n > numberedsource.txt'/>
-   </exec>
-</target>
 
 </project>
