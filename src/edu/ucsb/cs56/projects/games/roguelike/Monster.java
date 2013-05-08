@@ -22,7 +22,7 @@ public class Monster {
 	}
 	/**
 	 * creates a player with 20 hitPoints and 10 attack
-	 * @param randomMovement whether or not the monster will move randomly or not
+	 * @param typeOfMovement whether or not the monster will move randomly or not
 	 */
 	public Monster(int typeOfMovement){
 		this(20,10,typeOfMovement);
@@ -31,7 +31,7 @@ public class Monster {
 	 * creates a player with 20 hitPoints and 10 attack
 	 * @param hitPoints the monster's hitPoints
 	 * @param attack the monster's attack
-	 * @param randomMovement whether or not the monster will move randomly or not
+	 * @param typeOfMovement whether or not the monster will move randomly or not
 	 */
 	public Monster(int hitPoints, int attack, int typeOfMovement){
 		this.hitPoints = hitPoints;
