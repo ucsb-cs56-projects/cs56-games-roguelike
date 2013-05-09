@@ -5,7 +5,7 @@ package edu.ucsb.cs56.project.games.roguelike;
  @version cs56 Spring 13 
 */
 
-    public class Golem extends Monster{
+    public class Golem{
     public Golem(){
 	super();
     }

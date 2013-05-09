@@ -6,7 +6,7 @@ package edu.ucsb.cs56.projects.games.roguelike;
  *
  */
 
-public class Troll extends Monster { 
+public class Troll{ 
     
     public Troll(){
     super ();    

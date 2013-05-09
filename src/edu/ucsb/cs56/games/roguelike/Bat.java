@@ -6,7 +6,7 @@ package edu.ucsb.cs56.project.games.roguelike;
 
 */
 
-public class Bat extends Monster{
+public class Bat{
     public Bat(){
 	super();
 	    
