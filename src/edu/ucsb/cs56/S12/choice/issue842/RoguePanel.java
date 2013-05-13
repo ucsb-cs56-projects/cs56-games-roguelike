@@ -569,12 +569,13 @@ private LookupOp setColors(Color bgColor, Color fgColor) {
 	 * Prints the x and y coordinates of the character.
 	 */
 	   
+
 	public void drawHUD(){
 		write("Input:",0,23,RoguePanel.white,RoguePanel.black);
 		write("X:",10,23,RoguePanel.white,RoguePanel.black);
 		write("Y:",14,23,RoguePanel.white,RoguePanel.black);
 		write("Hp:",20,23,RoguePanel.white,RoguePanel.black);
-		
+		write("Score",30,23,RoguePanel.white,RoguePanel.black);
 	}
     
 	/**
