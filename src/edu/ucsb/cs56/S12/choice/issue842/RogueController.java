@@ -1,4 +1,5 @@
-package edu.ucsb.cs56.S12.choice.issue842;
+package edu.ucsb.cs56.projects.games.cs56_games_roguelike;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Random;

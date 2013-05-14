@@ -1,5 +1,4 @@
-package edu.ucsb.cs56.S12.choice.issue842;
-
+package edu.ucsb.cs56.projects.games.cs56_games_roguelike;
 
 /**
  * A Player character class which the user uses
