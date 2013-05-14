@@ -14,6 +14,7 @@ public class Golem{
     private int direction = 0;
     private int typeOfMovement;
     private int[] position = new int[2];
+    private int pointValue=20;
 
     /**
      *creates a Golem with 50 hitPoints and 20 attack with no random movement
@@ -67,6 +68,23 @@ public class Golem{
 	//this.hitPoints = newHp;
 	this.hitPoints=-42; //@@stub
 
+    }
+    /**
+     * gets the point value of the Golem
+     */
+    	
+    public int getPointValue(){
+    //return this.pointValue;
+    return -42;
+    }
+    /**
+	* sets the pointValue of the Golem
+	* @param pointValue number of points for killing the Golem.
+	*/
+     
+    public void setPointValue(int pointValue){
+     //this.pointValue=pointValue;
+     this.pointValue=-42;
     }
 
     /**
