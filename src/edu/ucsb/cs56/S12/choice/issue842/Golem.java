@@ -27,7 +27,7 @@ public class Golem{
      * @ param randomMovement whether or not the Golem will move randomly
      */
     public Golem(int typeOfMovement){
-	this(40,20,typeOfMovement);
+	this(50,20,typeOfMovement);
     }
     
     /**
