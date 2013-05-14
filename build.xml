@@ -102,7 +102,7 @@
 
     <junit haltonerror="no" haltonfailure="no">
        <classpath>
-         <pathelement location="/cs/faculty/pconrad/public_html/cs56/lib/junit-4.8.2.jar"/>
+         <pathelement location="lib/junit-4.82.jar"/>
          <pathelement location="build"/>
        </classpath>
 
