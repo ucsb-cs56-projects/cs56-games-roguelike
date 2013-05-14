@@ -14,6 +14,7 @@ public class Troll{
     private int direction = 0;
     private int typeOfMovement;
     private int[] position = new int[2];
+    private int pointValue=15;
 
     /**
      *creates a troll with 15 hitPoints and 10 attack with no random movement
@@ -67,6 +68,23 @@ public class Troll{
 	//this.hitPoints = newHp;
 	this.hitPoints=-42; //@@stub
 	
+    }
+        /**
+	* gets the point value of the Troll
+	*/
+    
+    public int getPointValue(){
+    //return this.pointValue;
+    return -42;
+    }
+    /**
+	* sets the pointValue of the Troll.
+	* @param pointValue number of points for killing the Troll.
+	*/
+     
+    public void setPointValue(int pointValue){
+     //this.pointValue=pointValue;
+     this.pointValue=-42;
     }
 
     /**
