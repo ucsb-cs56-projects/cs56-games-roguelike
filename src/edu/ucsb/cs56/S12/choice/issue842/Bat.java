@@ -14,6 +14,7 @@ public class Bat{
     private int direction = 0;
     private int typeOfMovement;
     private int[] position = new int[2];
+    private int pointValue=10;
 
     /**
      *creates a Bat with 10 hitPoints and 10 attack with no random movement
@@ -67,6 +68,22 @@ public class Bat{
 	//this.hitPoints = newHp;
 	this.hitPoints=-42; //@@stub
 
+    }
+    /**
+     * 	get the point value of the Bat
+     */
+    public int getPointValue(){
+    	//return this.pointValue;
+    	return -42;
+    }
+    /**
+     * sets the pointValue of the Bat
+     * @param pointValue number of points for killing the bat.
+     */
+     
+    public void setPointValue(int pointValue){
+    	//this.pointValue=pointValue;
+    	this.pointValue=-42;
     }
 
     /**
