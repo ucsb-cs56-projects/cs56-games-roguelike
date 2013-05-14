@@ -581,7 +581,7 @@ private LookupOp setColors(Color bgColor, Color fgColor) {
 	/**
 	 * moves the player to position xPosition,yPosition and updates its hp using write
 	 */
-	public void moveHeroAnimated(int xPosition, int yPosition, int hp){
+    public void moveHeroAnimated(int xPosition, int yPosition, int hp,int score){
 		
 		drawHUD();
 		
@@ -594,6 +594,7 @@ private LookupOp setColors(Color bgColor, Color fgColor) {
 		write(""+xPosition,12,23,RoguePanel.white,RoguePanel.black);
 		write(""+yPosition,16,23,RoguePanel.white,RoguePanel.black);
 		write(""+hp+ " ",22,23,RoguePanel.white,RoguePanel.black);
+		write(""+score+ " ",36,23,RoguePanel.white,RoguePanel.black);
 	}
 	
 	
