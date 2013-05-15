@@ -217,10 +217,19 @@ public class LogicEngine {
 			 int xPos = numGenerator.nextInt(70);
 			 int yPos = numGenerator.nextInt(20);
 			 if(floor[xPos][yPos]==null){
+			     x=numGenerator.nextInt(4);
+			     if (x==0)
 				 floor[xPos][yPos] = new Monster(numGenerator.nextInt(2)+1);
-				 listOfMonsters[xPos][yPos] = (Monster) floor[xPos][yPos];
-				 listOfMonsters[xPos][yPos].setMonsterPosition(xPos,yPos);
-				 break;
+			     if (x==1)
+				 floor[xPos][yPos] = new Bat(numGenerator.nextInt(2)+1);
+			     if (x==2)
+				 floor[xPos][yPos] = new Golem(numGenerator.nextInt(2)+1);
+			     if (x==3)
+				 floor[xPos][yPos] = new Troll(numGenerator.nextInt(2)+1);
+			     
+			     listOfMonsters[xPos][yPos] = (Monster) floor[xPos][yPos];
+			     listOfMonsters[xPos][yPos].setMonsterPosition(xPos,yPos);
+			     break;
 			 }
 		 }
 	}
