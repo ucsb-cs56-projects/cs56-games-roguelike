@@ -631,6 +631,7 @@ private LookupOp setColors(Color bgColor, Color fgColor) {
 	 */
 	public void displayWinningScreen(int score){
 		write("YOU WIN",40,12,RoguePanel.white,RoguePanel.black);
+		
 		write("Score:"+ score,40,14,RoguePanel.white,RoguePanel.black);
 	}
 	
