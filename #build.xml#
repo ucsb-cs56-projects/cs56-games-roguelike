@@ -1,0 +1,244 @@
+0;136;0clib/junit-4.8.2.jarlib/junit-4.8.2.jar<project default="compile">
+
+  <!-- build.xml for Choice points, S12, CS56
+       name: Minh Le -->
+
+  <!-- MAKING THIS CHOICE POINTS FRIENDLY -->
+
+  <property name="projectName" value="issue842" />
+
+  <!-- adding properties
+  load env variables
+  declare webRoot, initialize to env.HOME
+  declare webBaseURL, init to user page -->
+
+   <property environment="env"/> <!-- load the environment variables -->
+
+   <property name="webRoot" value="${env.HOME}/public_html/cs56" />
+   <property name="webBaseURL" value="http://www.cs.ucsb.edu/~${env.USER}/cs56" />
+
+   <property name="fullPkg" value="edu.ucsb.cs56.projects.games.cs56_games_roguelike" />
+   <property name="pkgDirectory" value="/edu/ucsb/cs56/S12/choice/" />
+
+   <property name="mainClass" value="RogueController" />
+
+   <property name="jwsDest" value="${webRoot}/${projectName}/jws" />
+   <property name="jwsURL" value="${webBaseURL}/${projectName}/jws" />
+
+
+  <!-- MANTIS PUBLISH -->
+  <property name="course" value="cs56"/>
+  <property name="quarter" value="S12"/>
+  <property name="issueNum" value="0000842"/>
+  <property name="projectName" value="${course}_${quarter}_${issueNum}"/>
+  <property name="projectPath" value="${quarter}/issues/${issueNum}"/>
+
+   <!-- javadoc properties -->
+  <property name="javadocDest" value="${webRoot}/${projectPath}/javadoc" />
+  <property name="javadocURL" value="${webBaseURL}/${projectPath}/javadoc" />
+
+  <!-- END OF PROPERTIES -->
+
+  <target name="compile" description="compile my code">
+    <mkdir dir="build" />
+    <javac srcdir="src" destdir="build" includeantruntime="false" debug="true" debuglevel="lines,source" >
+    <classpath>
+      <pathelement location="build"/>
+      <pathelement location="lib/junit-4.8.2.jar"/>
+    </classpath>
+    </javac>
+  </target>
+
+
+<!-- HOW THINGS RUN -->
+
+  <target name="run" depends="compile" description="runs the RogueController.">
+    <copy todir="build/${pkgDirectory}/${projectName}">
+      <fileset dir="src/${pkgDirectory}/${projectName}" includes="*.png"/>
+    </copy>
+      <java fork="true" classname="${fullPkg}.${mainClass}" classpath="build" />
+  </target>
+
+<!-- END OF HOW THINGS RUN -->
+
+
+  <target name="clean" description="delete unncessary files and directories">
+    <delete dir="build" quiet="true" />
+    <delete dir="javadoc" quiet="true"/>
+    <delete dir="dist" quiet="true" />
+    <delete dir="download" quiet="true" />
+    <delete dir="temp" quiet="true" />
+  </target>
+
+
+<!-- Professor-endorsed space for Javadoc command! -->
+
+   <target name="javadoc" depends="compile" description="Generates javadoc.">
+
+   <delete dir="javadoc" quiet="true" />
+   <javadoc  destdir="javadoc" author="true" version="true" use="true" >
+      <fileset dir="src" includes="**/*.java"/>
+      <classpath>
+          <pathelement location="lib/junit-4.8.2.jar"/>
+     </classpath>
+   </javadoc>
+
+   <!-- delete the old javadoc -->
+   <delete quiet="true" dir="${javadocDest}" />lib/junit-4.8.2.jar
+
+   <!-- copy everything you just made to the javadoc destination, and then make it readable -->
+
+   <copy todir="${javadocDest}" >
+     <fileset dir="javadoc"/>
+   </copy>
+
+   <chmod dir="${javadocDest}" perm="755"  type="dir" includes="**" />
+   <chmod dir="${javadocDest}" perm="755"  type="file" includes="**/*" />
+   <echo>Javadoc deployed to ${javadocURL}</echo>
+
+ </target>
+
+  <target name="test" depends="compile">
+
+    <junit haltonerror="no" haltonfailure="no">
+       <classpath>
+         <pathelement location="lib/junit-4.8.2.jar"/>
+         <pathelement location="build"/>
+       </classpath>
+
+       <batchtest fork="yes">
+          <fileset dir="src">
+            <include name="**/*Test.java"/>
+          </fileset>
+       </batchtest>
+
+        <formatter type="plain" usefile="false" />
+
+    </junit>
+  </target>
+
+  <target name="jar" depends="compile">
+    <mkdir dir="dist" />
+    <jar destfile="dist/${projectName}.jar" basedir="build" >
+      <manifest>
+	<attribute name="Main-Class" value="${mainClass}" />
+      </manifest>
+    </jar>
+  </target>
+
+
+
+  <!-- PUBLISH TARGET HERE -->
+
+  <target name="publish" depends="jar,javadoc,download,jws,numberedsource" description="Publishes to ${webRootURL}/${projectPath}">
+    <mkdir dir="${webRoot}/${projectPath}" />
+
+    <delete dir="${webRoot}/${projectPath}/browse" />
+    <mkdir dir="${webRoot}/${projectPath}/browse" />
+
+    <delete dir="${webRoot}/${projectPath}/download" />
+    <mkdir dir="${webRoot}/${projectPath}/download" />
+
+    <copy file="html/index.html" todir="${webRoot}/${projectPath}"/>
+
+    <copy todir="${webRoot}/${projectPath}/download" >
+      <fileset dir="download"/>
+      <fileset dir="dist" />
+    </copy>
+
+    <copy file="build.xml" todir="${webRoot}/${projectPath}/browse"/>
+
+    <copy todir="${webRoot}/${projectPath}/browse/src" >
+      <fileset dir="src"/>
+    </copy>
+
+    <copy todir="${webRoot}/${projectPath}/jws" >
+      <fileset dir="jws" includes="*.html"/>
+      <fileset dir="jws" includes="*.jnlp"/>
+      <fileset dir="jws" includes="*.png"/>
+      <fileset dir="jws" includes=".htaccess"/>
+    </copy>
+
+    <copy file="numberedsource.txt" todir="${webRoot}/${projectPath}/browse"/>
+
+    <chmod dir="${webRoot}/${projectPath}"
+	   perm="755" type="both" includes="**/*"/>
+
+    <echo>Project published to ${webBaseURL}/${projectPath}</echo>
+  </target>
+
+  <target name="download" depends="">
+    <!-- delete everything under the "temp" and "download" subdirectories
+	 In Ant, **/* means "all files under any number of directory levels" -->
+
+    <delete quiet="true">
+      <fileset dir="temp" includes="**/*" />
+      <fileset dir="download" includes="**/*" />
+    </delete>
+
+    <!-- create the directories we'll need to stage the zip file and tarballs -->
+
+    <mkdir dir="download" />
+    <mkdir dir="temp" />
+    <mkdir dir="temp/${projectName}" />
+
+    <!-- copy everything from the current directory that we want to put in the zip file/tarball into the
+	 temp subdirectory.   Exclude things we do NOT want to include in the tarball/zip file -->
+
+    <copy todir="temp/${projectName}">
+      <fileset dir="."
+	       excludes="build/**, javadoc/**, **/*~, temp/**, dist/**, download/**"/>
+    </copy>
+
+    <!-- create the tar file from the temp directory -->
+
+    <tar destfile="temp/${projectName}.tar"
+	 basedir="temp"
+	 includes="${projectName}/**"
+	 />
+
+    <!-- compress the tar file into a tarball (using "gzip") -->
+
+    <gzip zipfile="download/${projectName}.tgz"
+	  src="temp/${projectName}.tar" />
+
+    <!-- create a zip file -->
+
+    <zip destfile="download/${projectName}.zip"
+	 basedir="temp"
+	 includes="${projectName}/**"
+	 />
+
+    <!-- Now we have the tarball and zip file in the download
+	 subdirectory, so we are finished with the temp directory -->
+
+    <delete quiet="true">
+      <fileset dir="temp" includes="**/*"/>
+    </delete>
+
+  </target>
+
+  <target name="jws" depends="compile,jar" description="Generates Java Web Start page.">
+
+    <delete dir="${webRoot}/${projectName}/jws" />
+    <mkdir dir="${webRoot}/${projectName}/jws" />
+
+    <copy todir="${jwsDest}" file="dist/${projectName}.jar" />
+    <copy todir="${jwsDest}" >
+      <fileset dir="jws" includes="*.html"/>
+      <fileset dir="jws" includes="*.jnlp"/>
+      <fileset dir="jws" includes="*.png"/>
+      <fileset dir="jws" includes=".htaccess"/>
+    </copy>
+    <echo>Java web start at ${jwsURL}</echo>
+  </target>
+
+
+  <target name="numberedsource" depends="compile" description="WHEN THE HECK WAS THIS PUT UP?">
+   <exec executable="bash">
+     <arg value="-c"/>
+     <arg value='tree -ifQ src | grep \.java\"$ | xargs pr -n > numberedsource.txt'/>
+   </exec>
+</target>
+
+</project>

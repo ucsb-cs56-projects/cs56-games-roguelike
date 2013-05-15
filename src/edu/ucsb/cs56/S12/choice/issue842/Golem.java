@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  *@author Hans Marasigan & Richard Nguyen
  *@version cs56 Spring 13
- *
+ *This is a monster called a golem that is very healthy with a ton of attack.
  */
 
 public class Golem{ 
@@ -47,8 +47,7 @@ public class Golem{
      * 
      */
     public int getHitPoints(){
-	//return this.hitPoints;
-	return -42; //@@stub
+	return this.hitPoints;
     }
 
     /**
@@ -56,26 +55,23 @@ public class Golem{
      * 
      */
     public int getAttack(){
-	//return this.attack;
-	return -42; //@@stub
-    }
+	return this.attack;
+ }
 
     /** 
      * sets the hitPoints of the Golem
      * @param newHp is the new hp for the Golem
      */
     public void setHitPoints(int newHp){
-	//this.hitPoints = newHp;
-	this.hitPoints=-42; //@@stub
-
+	this.hitPoints = newHp;
+        
     }
     /**
      * gets the point value of the Golem
      */
     	
     public int getPointValue(){
-    //return this.pointValue;
-    return -42;
+    return this.pointValue;
     }
     /**
 	* sets the pointValue of the Golem
@@ -83,8 +79,7 @@ public class Golem{
 	*/
      
     public void setPointValue(int pointValue){
-     //this.pointValue=pointValue;
-     this.pointValue=-42;
+    this.pointValue=pointValue;
     }
 
 

@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  *@author Hans Marasigan & Richard Nguyen
  *@version cs56 Spring 13
- *
+ *This class represents a monster called a troll that is a medium damaged melee creature.
  */
 
 public class Troll{ 
@@ -47,8 +47,7 @@ public class Troll{
      * 
      */
     public int getHitPoints(){
-	//return this.hitPoints;
-	return -42; //@@stub
+	return this.hitPoints;
     }
 
     /**
@@ -56,17 +55,15 @@ public class Troll{
      * 
      */
     public int getAttack(){
-	//return this.attack;
-	return -42; //@@stub
-    }
+	return this.attack;
+ }
 
     /** 
      * sets the hitPoints of the Trolls
      * @param newHp is the new hp for the Trolls
      */
     public void setHitPoints(int newHp){
-	//this.hitPoints = newHp;
-	this.hitPoints=-42; //@@stub
+	this.hitPoints = newHp;
 	
     }
         /**
@@ -74,8 +71,7 @@ public class Troll{
 	*/
     
     public int getPointValue(){
-    //return this.pointValue;
-    return -42;
+    return this.pointValue;
     }
     /**
 	* sets the pointValue of the Troll.
@@ -83,8 +79,7 @@ public class Troll{
 	*/
      
     public void setPointValue(int pointValue){
-     //this.pointValue=pointValue;
-     this.pointValue=-42;
+     this.pointValue=pointValue;
     }
 
 }
