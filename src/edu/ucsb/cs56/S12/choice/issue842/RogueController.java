@@ -3,6 +3,7 @@ package edu.ucsb.cs56.projects.games.roguelike;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Random;
+import java.io.*;
 
 import javax.swing.JFrame;
 
@@ -133,9 +134,32 @@ public class RogueController extends JFrame implements KeyListener
 	 * 
 	 */
 	public void checkPlayerStatus(){
+		String highScore="";
 		if(logicHandler.playerIsDead()){
+			try{ 
+				FileWriter writer = new FileWriter("Score.txt");
+				writer.write(""+logicHandler.getPlayer().getScore());
+				writer.close();
+			}catch(Exception ex){
+				ex.printStackTrace();
+			}
+			try{
+				File myFile = new File( "Score.txt");
+				FileReader fileReader = new FileReader("Score.txt");
+				BufferedReader reader = new Buffered Reader(fileReader);
+				String line = null;
+				while((line = reader.readLine())!= null){
+					highScore = ""+logicHandler.getPlayer().getScore();
+					if( Integer.parseInt(line) > Integer.parseInt(highScore))
+					{
+						highScore= line;		
+					}
+				}catch(Exception ex){
+					ex.printStackTrace();
+				}
+			}
 			canvas.clear();
-			canvas.displayLosingScreen(logicHandler.getPlayer().getScore());
+			canvas.displayLosingScreen(logicHandler.getPlayer().getScore(),highScore);
 		}
 		
 
@@ -157,8 +181,11 @@ public class RogueController extends JFrame implements KeyListener
 	        	  }
 	          }
 	     }
-	    canvas.clear();
-		canvas.displayWinningScreen(logicHandler.getPlayer().getScore());
+	     for(inta = 0 ; a< 10; a++){
+	     	logicHandler.createMonster();
+	     }
+	    //canvas.clear();
+	//	canvas.displayWinningScreen(logicHandler.getPlayer().getScore());
 	     
 		
 	}
