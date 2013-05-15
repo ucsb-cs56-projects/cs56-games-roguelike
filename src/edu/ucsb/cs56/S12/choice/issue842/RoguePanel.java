@@ -1,5 +1,4 @@
-package edu.ucsb.cs56.projects.games.roguelike;
-
+package edu.ucsb.cs56.S12.choice.issue842;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -621,19 +620,24 @@ private LookupOp setColors(Color bgColor, Color fgColor) {
 	/**
 	 * displays the losing screen
 	 */
-	public void displayLosingScreen(int score,String highScore){
+    public void displayLosingScreen(int score,int[] array){
 		write("YOU LOSE",40,12,RoguePanel.white,RoguePanel.black);
-		write("Score:"+ score,40,14,RoguePanel.white,RoguePanel.black);
-		write("High Score:"+highScore,40,16,RoguePanel.white,RoguePanel.black);
-	}
-	
+		write("Score:"+score,40,14,RoguePanel.white,RoguePanel.black);
+		write("High Scores", 40,16,RoguePanel.white,RoguePanel.black);
+		int b = 17;
+		int rank = 1;
+		for( int a: array){
+		    write("" + rank +":" + a, 40,b,RoguePanel.white,RoguePanel.black);
+		    b++;
+		    rank++;
+		}
+    
+    }	
 	/**
 	 * displays the winning screen
 	 */
-	public void displayWinningScreen(int score){
+	public void displayWinningScreen(){
 		write("YOU WIN",40,12,RoguePanel.white,RoguePanel.black);
-		
-		write("Score:"+ score,40,14,RoguePanel.white,RoguePanel.black);
 	}
 	
 	public void emptySpace(int xPosition, int yPosition){

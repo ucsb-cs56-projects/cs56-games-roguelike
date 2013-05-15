@@ -1,4 +1,5 @@
-package edu.ucsb.cs56.projects.games.roguelike;
+package edu.ucsb.cs56.S12.choice.issue842;
+
 
 /**
  * A Player character class which the user uses
@@ -72,9 +73,9 @@ public class Player {
      * @param mon the monster being attacked
      */
     public void attacking(Monster mon){
-	this.score += mon.getHitPoints();
+	this.score+= mon.getHitPoints();
 	mon.setHitPoints(mon.getHitPoints()-this.attack);
-	
+       
     }
 	
     

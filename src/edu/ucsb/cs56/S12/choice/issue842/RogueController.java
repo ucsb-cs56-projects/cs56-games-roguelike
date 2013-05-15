@@ -1,10 +1,8 @@
-package edu.ucsb.cs56.projects.games.roguelike;
-
+package edu.ucsb.cs56.S12.choice.issue842;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Random;
 import java.io.*;
-
 import javax.swing.JFrame;
 
 /**
@@ -134,38 +132,55 @@ public class RogueController extends JFrame implements KeyListener
 	 * 
 	 */
 	public void checkPlayerStatus(){
-		String highScore="";
-		if(logicHandler.playerIsDead()){
-			try{ 
-				FileWriter writer = new FileWriter("Score.txt");
-				writer.write(""+logicHandler.getPlayer().getScore());
-				writer.close();
-			}catch(Exception ex){
-				ex.printStackTrace();
-			}
-			
-			try{
-				File myFile = new File( "Score.txt");
-				FileReader fileReader = new FileReader("Score.txt");
-				BufferedReader reader = new BufferedReader(fileReader);
-				String line = null;
-				while((line = reader.readLine())!= null){
-					highScore = ""+logicHandler.getPlayer().getScore();
-					if( Integer.parseInt(line) > Integer.parseInt(highScore))
-					{
-						highScore= line;		
-					}}
-			}catch(Exception ex){
-			    ex.printStackTrace();
-			}
-		}
+	    int[] array= new int[5];
+	    int a  = 0;
+	    if(logicHandler.playerIsDead()){
 		canvas.clear();
-		canvas.displayLosingScreen(logicHandler.getPlayer().getScore(),highScore);
+		try{ 
+		    File myFile = new File( "Score.txt");
+		    FileReader fileReader = new FileReader("Score.txt");
+		    BufferedReader reader = new BufferedReader(fileReader);
+		    String line = null; 
+		    while((line = reader.readLine())!= null){
+			array[a]= Integer.parseInt(line);
+			a++;
+		    }
+		}catch (Exception ex){
+		    ex.printStackTrace();
+		}
+		int temp=0;
+		int temp2 = 0;
+		for(int count = 0;count <5;count++){
+		    if(array[count] < logicHandler.getPlayer().getScore()){
+			temp = array[count];
+			array[count] = logicHandler.getPlayer().getScore();
+			if( count != 4){
+			    for( int c = count+1; count < 5; count++){
+				temp2 = array[c];
+				array[c] = temp;
+				temp = temp2;
+			    }
+			}
+			break;
+		    }
+		}
+		canvas.displayLosingScreen(logicHandler.getPlayer().getScore(),array);
+		try{
+		    FileWriter writer = new FileWriter("Score.txt");
+		    for( int b = 0 ; b< 5;b++){
+			writer.write(""+array[b]+ "\n");
+		    }
+		    writer.close();
+		}catch(IOException ex){
+		    ex.printStackTrace();
+		}
+		//canvas.clear();
+		//canvas.displayLosingScreen(logicHandler.getPlayer().getScore(),array);
+	    }
+	    
+	    
 	}
     
-    
-    
-
 	/**
 	 * Check to see if all monsters are dead
 	 */
@@ -182,11 +197,10 @@ public class RogueController extends JFrame implements KeyListener
 	        	  }
 	          }
 	     }
-	     for(int a = 0 ; a< 10; a++){
-	     	logicHandler.createMonster();
-	     }
-	    //canvas.clear();
-	//	canvas.displayWinningScreen(logicHandler.getPlayer().getScore());
+	     for(int a =0 ; a < 10 ;a++){
+		 logicHandler.createMonster();}
+	     //    canvas.clear();
+	     //	canvas.displayWinningScreen();
 	     
 		
 	}

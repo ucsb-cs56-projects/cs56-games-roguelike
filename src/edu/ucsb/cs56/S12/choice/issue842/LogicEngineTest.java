@@ -1,5 +1,4 @@
-package edu.ucsb.cs56.projects.games.roguelike;
-
+package edu.ucsb.cs56.S12.choice.issue842;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
