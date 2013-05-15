@@ -72,8 +72,9 @@ public class Player {
      * @param mon the monster being attacked
      */
     public void attacking(Monster mon){
+	this.score += mon.getHitPoints();
 	mon.setHitPoints(mon.getHitPoints()-this.attack);
-	this.score+=20;
+	
     }
 	
     
