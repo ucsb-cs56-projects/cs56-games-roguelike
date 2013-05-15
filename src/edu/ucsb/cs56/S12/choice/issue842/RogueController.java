@@ -135,7 +135,7 @@ public class RogueController extends JFrame implements KeyListener
 	public void checkPlayerStatus(){
 		if(logicHandler.playerIsDead()){
 			canvas.clear();
-			canvas.displayLosingScreen();
+			canvas.displayLosingScreen(logicHandler.getPlayer().getScore());
 		}
 		
 
@@ -158,7 +158,7 @@ public class RogueController extends JFrame implements KeyListener
 	          }
 	     }
 	    canvas.clear();
-		canvas.displayWinningScreen();
+		canvas.displayWinningScreen(logicHandler.getPlayer().getScore());
 	     
 		
 	}
