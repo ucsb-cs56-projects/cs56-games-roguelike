@@ -621,9 +621,10 @@ private LookupOp setColors(Color bgColor, Color fgColor) {
 	/**
 	 * displays the losing screen
 	 */
-	public void displayLosingScreen(int score){
+	public void displayLosingScreen(int score,String highScore){
 		write("YOU LOSE",40,12,RoguePanel.white,RoguePanel.black);
 		write("Score:"+ score,40,14,RoguePanel.white,RoguePanel.black);
+		write("High Score:"+highScore,40,16,RoguePanel.white,RoguePanel.black);
 	}
 	
 	/**
