@@ -143,28 +143,29 @@ public class RogueController extends JFrame implements KeyListener
 			}catch(Exception ex){
 				ex.printStackTrace();
 			}
+			
 			try{
 				File myFile = new File( "Score.txt");
 				FileReader fileReader = new FileReader("Score.txt");
-				BufferedReader reader = new Buffered Reader(fileReader);
+				BufferedReader reader = new BufferedReader(fileReader);
 				String line = null;
 				while((line = reader.readLine())!= null){
 					highScore = ""+logicHandler.getPlayer().getScore();
 					if( Integer.parseInt(line) > Integer.parseInt(highScore))
 					{
 						highScore= line;		
-					}
-				}catch(Exception ex){
-					ex.printStackTrace();
-				}
+					}}
+			}catch(Exception ex){
+			    ex.printStackTrace();
 			}
-			canvas.clear();
-			canvas.displayLosingScreen(logicHandler.getPlayer().getScore(),highScore);
 		}
-		
-
+		canvas.clear();
+		canvas.displayLosingScreen(logicHandler.getPlayer().getScore(),highScore);
 	}
-	
+    
+    
+    
+
 	/**
 	 * Check to see if all monsters are dead
 	 */
@@ -181,7 +182,7 @@ public class RogueController extends JFrame implements KeyListener
 	        	  }
 	          }
 	     }
-	     for(inta = 0 ; a< 10; a++){
+	     for(int a = 0 ; a< 10; a++){
 	     	logicHandler.createMonster();
 	     }
 	    //canvas.clear();
