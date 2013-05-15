@@ -621,15 +621,17 @@ private LookupOp setColors(Color bgColor, Color fgColor) {
 	/**
 	 * displays the losing screen
 	 */
-	public void displayLosingScreen(){
+	public void displayLosingScreen(int score){
 		write("YOU LOSE",40,12,RoguePanel.white,RoguePanel.black);
+		write("Score:"+ score,40,14,RoguePanel.white,RoguePanel.black);
 	}
 	
 	/**
 	 * displays the winning screen
 	 */
-	public void displayWinningScreen(){
+	public void displayWinningScreen(int score){
 		write("YOU WIN",40,12,RoguePanel.white,RoguePanel.black);
+		write("Score:"+ score,40,14,RoguePanel.white,RoguePanel.black);
 	}
 	
 	public void emptySpace(int xPosition, int yPosition){
