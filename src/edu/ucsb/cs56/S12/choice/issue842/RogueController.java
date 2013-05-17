@@ -136,7 +136,19 @@ public class RogueController extends JFrame implements KeyListener
 	    int a  = 0;
 	       if( logicHandler.getGameOver() == true){
 	    	canvas.clear();
-	    	//canvas.displayLosingScreen(logicHandler.getPlayer().getScore(),array); 
+			try{ 
+		    File myFile = new File( "Score.txt");
+		    FileReader fileReader = new FileReader("Score.txt");
+		    BufferedReader reader = new BufferedReader(fileReader);
+		    String line = null; 
+		    while((line = reader.readLine())!= null){
+			array[a]= Integer.parseInt(line);
+			a++;
+		    }
+		}catch (Exception ex){
+		    ex.printStackTrace();
+			}
+	    	canvas.displayLosingScreen(logicHandler.getPlayer().getScore(),array); 
 	     }
 	    if(logicHandler.playerIsDead()&& logicHandler.getGameOver() == false){
 		try{ 
