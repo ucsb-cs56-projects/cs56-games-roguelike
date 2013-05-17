@@ -6,6 +6,7 @@ import java.util.Random;
  * A Monster class to represents monster in the game
  * @author Minh Le 
  *@author Hans Marasigan & Richard Nguyen
+ *@version cs56 s13
  */
 public class Monster {
 	private int hitPoints;
@@ -60,7 +61,10 @@ public class Monster {
     public int getHitPoints(){
 	return this.hitPoints;
     }
-    
+    /**
+     *sets the attack of the monster
+     *@param attack the attack points of the monster
+     */
     
     public void setAttack(int attack){
 	this.attack=attack;

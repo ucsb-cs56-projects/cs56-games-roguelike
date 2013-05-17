@@ -5,6 +5,8 @@ import java.util.Random;
 /**
  *@author Hans Marasigan & Richard Nguyen
  *@version cs56 Spring 13
+ */
+/**
  *This class represents a monster called a troll that is a medium damaged melee creature.
  */
 
@@ -34,6 +36,13 @@ public class Troll extends Monster{
     public Troll(int hitPoints, int attack, int typeOfMovement){
 	super(hitPoints, attack, typeOfMovement,15);
     }
+    /**
+     *creates a Troll to the parameters given to it
+     * @param hp the Troll's hitPoints
+     * @param att the Troll's attack
+     * @param typeOfMove whether or not the Troll will move randomly or not
+     * @param points the amount of points the Troll is worth
+     */
     public Troll(int hitPoints,int att,int typeOfMove, int points){
 	super(hitPoints,att,typeOfMove,points);  
  }
