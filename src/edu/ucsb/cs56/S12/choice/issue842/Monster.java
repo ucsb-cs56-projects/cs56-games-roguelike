@@ -60,8 +60,12 @@ public class Monster {
 	public int getHitPoints(){
 		return this.hitPoints;
 	}
-	
-	/**
+
+    
+    public void setAttack(int attack){
+	this.attack=attack;
+    }
+    /**
 	 * @return the monster's attack
 	 * 
 	 */
