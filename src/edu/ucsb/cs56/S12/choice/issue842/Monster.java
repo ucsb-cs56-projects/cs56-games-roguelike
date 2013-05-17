@@ -13,6 +13,8 @@ public class Monster {
 	private int direction = 0;
 	private int typeOfMovement;
 	private int[] position = new int[2];
+        private int points=5;
+
 	/**
 	 * creates a monster with 20 hitPoints and 10 attack and  no random movement
 	 * 
