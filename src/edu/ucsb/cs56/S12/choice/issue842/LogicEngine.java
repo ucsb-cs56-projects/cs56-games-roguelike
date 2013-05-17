@@ -8,16 +8,16 @@ import java.util.Random;
  * @author Hans Marasigan & Richard Nguyen
  */
 public class LogicEngine {
-	//list of all the monsters
-	private Monster[][] listOfMonsters;
-	//the player the user uses
-	private Player thePlayer;
-	//all the cells that all object in the game can move in
-	private Object[][] floor;
-	private int floorWidth;
-	private int floorHeight;
-	private int[] playerPosition;
-
+    //list of all the monsters
+    private Monster[][] listOfMonsters;
+    //the player the user uses
+    private Player thePlayer;
+    //all the cells that all object in the game can move in
+    private Object[][] floor;
+    private int floorWidth;
+    private int floorHeight;
+    private int[] playerPosition;
+    private boolean gameOver ;
 	
 
 	
@@ -44,9 +44,16 @@ public class LogicEngine {
 		storeMonsters();
 		int[] position = {40,12};
 		thePlayer.setPlayerPosition(position);
+		gameOver= false; 
 	}
 	
-	
+    public void setGameOver(boolean a){
+	this.gameOver = a;
+    }
+    
+    public boolean getGameOver(){
+	return gameOver;
+    }
 	/**
 	 * @return the list of monsters
 	 * 
@@ -94,7 +101,9 @@ public class LogicEngine {
 	 * @return true if its movable, false if not
 	 */
 	public boolean movable(int x,int y,int xOrig, int yOrig){
-		
+	    if(thePlayer.getHitPoints() <= 0){
+		return false;
+	    }
 		/* not movable, out of boundary*/
 	    if (x < 1 || x >= floorWidth-1){
 		return false;

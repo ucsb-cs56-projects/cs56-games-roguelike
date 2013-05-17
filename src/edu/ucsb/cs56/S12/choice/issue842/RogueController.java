@@ -134,8 +134,11 @@ public class RogueController extends JFrame implements KeyListener
 	public void checkPlayerStatus(){
 	    int[] array= new int[5];
 	    int a  = 0;
-	    if(logicHandler.playerIsDead()){
-		canvas.clear();
+	       if( logicHandler.getGameOver() == true){
+	    	canvas.clear();
+	    	//canvas.displayLosingScreen(logicHandler.getPlayer().getScore(),array); 
+	     }
+	    if(logicHandler.playerIsDead()&& logicHandler.getGameOver() == false){
 		try{ 
 		    File myFile = new File( "Score.txt");
 		    FileReader fileReader = new FileReader("Score.txt");
@@ -164,7 +167,7 @@ public class RogueController extends JFrame implements KeyListener
 			break;
 		    }
 		}
-		canvas.displayLosingScreen(logicHandler.getPlayer().getScore(),array);
+		//canvas.displayLosingScreen(logicHandler.getPlayer().getScore(),array);
 		try{
 		    FileWriter writer = new FileWriter("Score.txt");
 		    for( int b = 0 ; b< 5;b++){
@@ -174,9 +177,14 @@ public class RogueController extends JFrame implements KeyListener
 		}catch(IOException ex){
 		    ex.printStackTrace();
 		}
-		//canvas.clear();
-		//canvas.displayLosingScreen(logicHandler.getPlayer().getScore(),array);
+		canvas.clear();
+		canvas.displayLosingScreen(logicHandler.getPlayer().getScore(),array);
+		logicHandler.setGameOver(true);
 	    }
+	    // if( logicHandler.getGameOver() == true){
+	    // 	canvas.clear();
+	    // 	//canvas.displayLosingScreen(logicHandler.getPlayer().getScore(),array); 
+	    //  }
 	    
 	    
 	}
@@ -215,8 +223,8 @@ public class RogueController extends JFrame implements KeyListener
 	 */
 	public void keyPressed(KeyEvent key){	
 		
-
-		
+	    
+	    
 		//WASD moves
 		origX = x; 
 		origY = y;

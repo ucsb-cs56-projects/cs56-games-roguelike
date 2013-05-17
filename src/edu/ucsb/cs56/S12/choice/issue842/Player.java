@@ -74,7 +74,7 @@ public class Player {
      */
     public void attacking(Monster mon){
 	if(hitPoints > 0){
-	this.score+= mon.getHitPoints();
+	    this.score+= mon.getPointValue();
 	mon.setHitPoints(mon.getHitPoints()-this.attack);
 	}
     }
