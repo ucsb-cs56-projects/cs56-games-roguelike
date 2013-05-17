@@ -42,6 +42,9 @@ public class Troll extends Monster{
 	this.attack = attack;
 	this.typeOfMovement = typeOfMovement;
     }
+    public Troll(int hp,int att,int typeOfMove, int points){
+	super(hp,att,typeOfMove,points);
+    }
     /**
      * @return the Trolls's hitPoints
      * 

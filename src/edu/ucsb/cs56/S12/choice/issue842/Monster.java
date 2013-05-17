@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * A Monster class to represents monster in the game
  * @author Minh Le 
- *
+ *@author Hans Marasigan & Richard Nguyen
  */
 public class Monster {
 	private int hitPoints;
@@ -13,7 +13,7 @@ public class Monster {
 	private int direction = 0;
 	private int typeOfMovement;
 	private int[] position = new int[2];
-        private int points=5;
+        private int pointValue=5;
 
 	/**
 	 * creates a monster with 20 hitPoints and 10 attack and  no random movement
@@ -40,7 +40,19 @@ public class Monster {
 		this.attack = attack;
 		this.typeOfMovement = typeOfMovement;
 	}
-	
+    /**
+     *creates a monster with the makers preference of status
+     *@param hp, hit points of the monster
+     *@param att, the attack power of the monster
+     *@param typeOfMovement determines whether it is random or not
+     *@param points, determines how many points it is.
+     */
+    public Monster (int hp, int att, int typeOfMovement,int points){
+		this.hitPoints = hitPoints;
+		this.attack = attack;
+		this.typeOfMovement = typeOfMovement;
+		this.pointValue=points;
+    }
 	/**
 	 * @return the monster's hitPoints
 	 * 
