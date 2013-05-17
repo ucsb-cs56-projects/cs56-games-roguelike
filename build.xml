@@ -28,10 +28,10 @@
 
   <!-- MANTIS PUBLISH -->
   <property name="course" value="cs56"/>
-  <property name="quarter" value="S12"/>
-  <property name="issueNum" value="0000842"/>
+  <property name="quarter" value="projects"/>
+  <property name="issueNum" value="roguelike"/>
   <property name="projectName" value="${course}_${quarter}_${issueNum}"/>
-  <property name="projectPath" value="${quarter}/issues/${issueNum}"/>
+  <property name="projectPath" value="${quarter}/games/${issueNum}"/>
 
    <!-- javadoc properties -->
   <property name="javadocDest" value="${webRoot}/${projectPath}/javadoc" />
