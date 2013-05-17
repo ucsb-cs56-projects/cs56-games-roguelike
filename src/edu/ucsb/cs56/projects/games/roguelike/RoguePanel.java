@@ -1,4 +1,4 @@
-package edu.ucsb.cs56.S12.choice.issue842;
+package edu.ucsb.cs56.projects.games.roguelike;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
