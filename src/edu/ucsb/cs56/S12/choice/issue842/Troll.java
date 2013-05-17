@@ -8,7 +8,7 @@ import java.util.Random;
  *This class represents a monster called a troll that is a medium damaged melee creature.
  */
 
-public class Troll{ 
+public class Troll extends Monster{ 
     private int hitPoints;
     private int attack;
     private int direction = 0;

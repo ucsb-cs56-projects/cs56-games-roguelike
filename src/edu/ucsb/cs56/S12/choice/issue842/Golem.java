@@ -8,7 +8,7 @@ import java.util.Random;
  *This is a monster called a golem that is very healthy with a ton of attack.
  */
 
-public class Golem{ 
+public class Golem extends Monster{ 
     private int hitPoints;
     private int attack;
     private int direction = 0;

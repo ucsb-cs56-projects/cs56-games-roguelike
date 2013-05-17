@@ -8,7 +8,7 @@ import java.util.Random;
  *This class represents a class of monster called a Bat which is a weak melee monster.
  */
 
-public class Bat{ 
+public class Bat extends Monster{ 
     private int hitPoints;
     private int attack;
     private int direction = 0;
