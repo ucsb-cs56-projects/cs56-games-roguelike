@@ -64,7 +64,11 @@ public class Golem extends Monster{
      */
     public int getAttack(){
 	return this.attack;
- }
+    }
+    
+    public void setAttack(int attack){
+        this.attack=attack;
+    }
 
     /** 
      * sets the hitPoints of the Golem

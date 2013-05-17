@@ -86,5 +86,51 @@ public class SubMonsterTest{
 	    assertEquals(20,m.getAttack());
 	    assertEquals(30,m.getPointValue());
 
+	}
+    @Test 
+    public void test_MonsterSetter(){
+	Monster m = new Monster();
+	m.setHitPoints(1);
+	assertEquals(1,m.getHitPoints());
+	m.setAttack(2);
+	assertEquals(2,m.getAttack());
+	m.setPointValue(3);
+	assertEquals(3,m.getPointValue());
     }
+    @Test
+    public void test_BatSetter(){
+        Bat m = new Bat();
+        m.setHitPoints(1);
+        assertEquals(1,m.getHitPoints());
+        m.setAttack(2);
+        assertEquals(2,m.getAttack());
+        m.setPointValue(3);
+        assertEquals(3,m.getPointValue());
+    }
+
+
+    @Test
+    public void test_TrollSetter(){
+        Troll t = new Troll();
+        t.setHitPoints(1);
+        assertEquals(1,t.getHitPoints());
+        t.setAttack(2);
+        assertEquals(2,t.getAttack());
+        t.setPointValue(3);
+        assertEquals(3,t.getPointValue());
+    }
+
+
+    @Test
+    public void test_GolemSetter(){
+        Golem g = new Golem();
+        g.setHitPoints(1);
+        assertEquals(1,g.getHitPoints());
+        g.setAttack(2);
+        assertEquals(2,g.getAttack());
+        g.setPointValue(3);
+        assertEquals(3,g.getPointValue());
+    }
+
+
 }

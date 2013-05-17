@@ -63,7 +63,9 @@ public class Troll extends Monster{
     public int getAttack(){
 	return this.attack;
  }
-
+    public void setAttack(int attack){
+	this.attack=attack;
+    }
     /** 
      * sets the hitPoints of the Trolls
      * @param newHp is the new hp for the Trolls

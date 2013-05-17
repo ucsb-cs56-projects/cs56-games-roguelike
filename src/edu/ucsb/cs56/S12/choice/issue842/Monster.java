@@ -53,33 +53,33 @@ public class Monster {
 		this.typeOfMovement = typeOfMovement;
 		this.pointValue=points;
     }
-	/**
-	 * @return the monster's hitPoints
-	 * 
-	 */
-	public int getHitPoints(){
-		return this.hitPoints;
-	}
-
+    /**
+     * @return the monster's hitPoints
+     * 
+     */
+    public int getHitPoints(){
+	return this.hitPoints;
+    }
+    
     
     public void setAttack(int attack){
 	this.attack=attack;
     }
     /**
-	 * @return the monster's attack
-	 * 
-	 */
-	public int getAttack(){
+     * @return the monster's attack
+     * 
+     */
+    public int getAttack(){
 		return this.attack;
-	}
-	
-	/** 
-	 * sets the hitPoints of the monster
-	 * @param newHp is the new hp for the monster
-	 */
-	public void setHitPoints(int newHp){
-		this.hitPoints = newHp;
-	}
+    }
+    
+    /** 
+     * sets the hitPoints of the monster
+     * @param newHp is the new hp for the monster
+     */
+    public void setHitPoints(int newHp){
+	this.hitPoints = newHp;
+    }
     /**
      * get the point value of the Monster
      */
@@ -91,17 +91,17 @@ public class Monster {
      * sets the pointValue of the Monster
      * @param pointValue number of points for killing the bat.
      */
-     
+    
     public void setPointValue(int pointValue){
 	this.pointValue=pointValue;
 	
     }
-	
+    
 	/**
 	 * a method for attacking the player
 	 * @param mainChar the player being attacked
 	 */
-	public void attacking(Player mainChar){
+    public void attacking(Player mainChar){
 		mainChar.setHitPoints(mainChar.getHitPoints()-this.attack);
 	}
 	

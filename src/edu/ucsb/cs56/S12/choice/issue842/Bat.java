@@ -65,7 +65,9 @@ public class Bat extends Monster{
 	return this.attack;
 	
     }
-
+    public void setAttack(int attack){
+	this.attack=attack;
+    }
     /** 
      * sets the hitPoints of the Bat
      * @param newHp is the new hp for the Bat
