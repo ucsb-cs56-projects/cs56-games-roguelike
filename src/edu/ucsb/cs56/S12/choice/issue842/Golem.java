@@ -9,26 +9,20 @@ import java.util.Random;
  */
 
 public class Golem extends Monster{ 
-    private int hitPoints;
-    private int attack;
-    private int direction = 0;
-    private int typeOfMovement;
-    private int[] position = new int[2];
-    private int pointValue=20;
 
     /**
      *creates a Golem with 50 hitPoints and 20 attack with no random movement
      *
      */
     public Golem(){
-	this (50,20,0);    
+	super(50,20,0,20);    
     }
     /**
      * creates a Golem with 50 HP and 20 attack
      * @ param randomMovement whether or not the Golem will move randomly
      */
     public Golem(int typeOfMovement){
-	this(50,20,typeOfMovement);
+	super(50,20,typeOfMovement,20);
     }
     
     /**
@@ -38,62 +32,11 @@ public class Golem extends Monster{
      * @param randomMovement whether or not the Golem will move randomly or not
      */
     public Golem(int hitPoints, int attack, int typeOfMovement){
-	this.hitPoints = hitPoints;
-	this.attack = attack;
-	this.typeOfMovement = typeOfMovement;
+	super(hitPoints,attack,typeOfMovement,20);
     }
 
         public Golem(int hp,int att,int typeOfMove, int points){
-	    this.hitPoints = hp;
-	    this.attack = att;
-	    this.typeOfMovement = typeOfMovement;
-	    this.pointValue=points;
+	super(hp,att,typeOfMove,points);
 
     }
-    /**
-     * @return the Golem's hitPoints
-     * 
-     */
-    public int getHitPoints(){
-	return this.hitPoints;
-    }
-
-    /**
-     * @return the Golem's attack
-     * 
-     */
-    public int getAttack(){
-	return this.attack;
-    }
-    
-    public void setAttack(int attack){
-        this.attack=attack;
-    }
-
-    /** 
-     * sets the hitPoints of the Golem
-     * @param newHp is the new hp for the Golem
-     */
-    public void setHitPoints(int newHp){
-	this.hitPoints = newHp;
-        
-    }
-    /**
-     * gets the point value of the Golem
-     */
-    	
-    public int getPointValue(){
-    return this.pointValue;
-    }
-    /**
-	* sets the pointValue of the Golem
-	* @param pointValue number of points for killing the Golem.
-	*/
-     
-    public void setPointValue(int pointValue){
-    this.pointValue=pointValue;
-    }
-
-
 }
-

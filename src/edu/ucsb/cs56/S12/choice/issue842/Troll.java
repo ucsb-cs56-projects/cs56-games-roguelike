@@ -9,26 +9,20 @@ import java.util.Random;
  */
 
 public class Troll extends Monster{ 
-    private int hitPoints;
-    private int attack;
-    private int direction = 0;
-    private int typeOfMovement;
-    private int[] position = new int[2];
-    private int pointValue=15;
 
     /**
      *creates a troll with 15 hitPoints and 10 attack with no random movement
      *
      */
     public Troll(){
-	this (15,10,0);    
+	super(15,10,0,15);    
     }
     /**
      * creates a troll with 15 HP and 10 attack
      * @ param randomMovement whether or not the monster will move randomly
      */
     public Troll(int typeOfMovement){
-	this(15,10,typeOfMovement);
+	super(15,10,typeOfMovement,15);
     }
     
     /**
@@ -38,58 +32,10 @@ public class Troll extends Monster{
      * @param randomMovement whether or not the Troll will move randomly or not
      */
     public Troll(int hitPoints, int attack, int typeOfMovement){
-	this.hitPoints = hitPoints;
-	this.attack = attack;
-	this.typeOfMovement = typeOfMovement;
+	super(hitPoints, attack, typeOfMovement,15);
     }
     public Troll(int hitPoints,int att,int typeOfMove, int points){
-	this.hitPoints = hitPoints;
-        this.attack = att;
-        this.typeOfMovement = typeOfMovement;
-	this.pointValue=points;
-    }
-    /**
-     * @return the Trolls's hitPoints
-     * 
-     */
-    public int getHitPoints(){
-	return this.hitPoints;
-    }
-
-    /**
-     * @return the Trolls's attack
-     * 
-     */
-    public int getAttack(){
-	return this.attack;
+	super(hitPoints,att,typeOfMove,points);  
  }
-    public void setAttack(int attack){
-	this.attack=attack;
-    }
-    /** 
-     * sets the hitPoints of the Trolls
-     * @param newHp is the new hp for the Trolls
-     */
-    public void setHitPoints(int newHp){
-	this.hitPoints = newHp;
-	
-    }
-        /**
-	* gets the point value of the Troll
-	*/
     
-    public int getPointValue(){
-    return this.pointValue;
-    }
-    /**
-	* sets the pointValue of the Troll.
-	* @param pointValue number of points for killing the Troll.
-	*/
-     
-    public void setPointValue(int pointValue){
-     this.pointValue=pointValue;
-    }
-
 }
-
-
