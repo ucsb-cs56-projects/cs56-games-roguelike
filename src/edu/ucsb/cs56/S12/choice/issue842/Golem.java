@@ -44,7 +44,11 @@ public class Golem extends Monster{
     }
 
         public Golem(int hp,int att,int typeOfMove, int points){
-	super(hp,att,typeOfMove,points);
+	    this.hitPoints = hp;
+	    this.attack = att;
+	    this.typeOfMovement = typeOfMovement;
+	    this.pointValue=points;
+
     }
     /**
      * @return the Golem's hitPoints

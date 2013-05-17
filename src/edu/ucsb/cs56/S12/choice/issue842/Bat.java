@@ -43,7 +43,10 @@ public class Bat extends Monster{
 	this.typeOfMovement = typeOfMovement;
     }
     public Bat(int hp,int att,int typeOfMove, int points){
-	super(hp,att,typeOfMove,points);
+	this.hitPoints = hp;
+        this.attack = att;
+        this.typeOfMovement = typeOfMovement;
+	this.pointValue=points;
     }
     /**
      * @return the Bat's hitPoints

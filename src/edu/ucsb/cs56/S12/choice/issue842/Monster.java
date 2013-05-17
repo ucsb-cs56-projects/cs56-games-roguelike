@@ -48,8 +48,8 @@ public class Monster {
      *@param points, determines how many points it is.
      */
     public Monster (int hp, int att, int typeOfMovement,int points){
-		this.hitPoints = hitPoints;
-		this.attack = attack;
+		this.hitPoints = hp;
+		this.attack = att;
 		this.typeOfMovement = typeOfMovement;
 		this.pointValue=points;
     }
@@ -76,6 +76,22 @@ public class Monster {
 	public void setHitPoints(int newHp){
 		this.hitPoints = newHp;
 	}
+    /**
+     * get the point value of the Monster
+     */
+    public int getPointValue(){
+	return this.pointValue;
+	
+    }
+    /**
+     * sets the pointValue of the Monster
+     * @param pointValue number of points for killing the bat.
+     */
+     
+    public void setPointValue(int pointValue){
+	this.pointValue=pointValue;
+	
+    }
 	
 	/**
 	 * a method for attacking the player
