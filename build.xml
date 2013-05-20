@@ -17,8 +17,8 @@
    <property name="webRoot" value="${env.HOME}/public_html/cs56" />
    <property name="webBaseURL" value="http://www.cs.ucsb.edu/~${env.USER}/cs56" />
 
-   <property name="fullPkg" value="edu.ucsb.cs56.S12.choice.issue842" />
-   <property name="pkgDirectory" value="/edu/ucsb/cs56/S12/choice/" />
+   <property name="fullPkg" value="edu.ucsb.cs56.projects.games.roguelike" />
+   <property name="pkgDirectory" value="/edu/ucsb/cs56/projects/games/roguelike" />
 
    <property name="mainClass" value="RogueController" />
 
@@ -28,10 +28,10 @@
 
   <!-- MANTIS PUBLISH -->
   <property name="course" value="cs56"/>
-  <property name="quarter" value="S12"/>
-  <property name="issueNum" value="0000842"/>
+  <property name="quarter" value="projects"/>
+  <property name="issueNum" value="roguelike"/>
   <property name="projectName" value="${course}_${quarter}_${issueNum}"/>
-  <property name="projectPath" value="${quarter}/issues/${issueNum}"/>
+  <property name="projectPath" value="${quarter}/games/${issueNum}"/>
 
    <!-- javadoc properties -->
   <property name="javadocDest" value="${webRoot}/${projectPath}/javadoc" />
@@ -44,7 +44,7 @@
     <javac srcdir="src" destdir="build" includeantruntime="false" debug="true" debuglevel="lines,source" >
     <classpath>
       <pathelement location="build"/>
-      <pathelement location="/cs/faculty/pconrad/public_html/cs56/lib/junit-4.8.2.jar"/>
+      <pathelement location="lib/junit-4.8.2.jar"/>
     </classpath>
     </javac>
   </target>
@@ -53,8 +53,8 @@
 <!-- HOW THINGS RUN -->
 
   <target name="run" depends="compile" description="runs the RogueController.">
-    <copy todir="build/${pkgDirectory}/${projectName}">
-      <fileset dir="src/${pkgDirectory}/${projectName}" includes="*.png"/>
+    <copy todir="build/${pkgDirectory}">
+      <fileset dir="src/${pkgDirectory}" includes="*.png"/>
     </copy>
       <java fork="true" classname="${fullPkg}.${mainClass}" classpath="build" />
   </target>
@@ -79,7 +79,7 @@
    <javadoc  destdir="javadoc" author="true" version="true" use="true" >
       <fileset dir="src" includes="**/*.java"/>
       <classpath>
-          <pathelement location="/cs/faculty/pconrad/public_html/cs56/lib/junit-4.8.2.jar"/>
+          <pathelement location="lib/junit-4.8.2.jar"/>
      </classpath>
    </javadoc>
 
@@ -102,7 +102,7 @@
 
     <junit haltonerror="no" haltonfailure="no">
        <classpath>
-         <pathelement location="/cs/faculty/pconrad/public_html/cs56/lib/junit-4.8.2.jar"/>
+         <pathelement location="lib/junit-4.8.2.jar"/>
          <pathelement location="build"/>
        </classpath>
 
