@@ -8,7 +8,7 @@ import static org.junit.Assert.assertFalse;
 
 /** test class for my subclasses
     @author Hans Marasigan & Richard Nguyen
-    @version cs56 S13,lab04
+    @version cs56 S13
     @see Troll,Golem,Bat
 */
 /**Tests my monster subclasses
