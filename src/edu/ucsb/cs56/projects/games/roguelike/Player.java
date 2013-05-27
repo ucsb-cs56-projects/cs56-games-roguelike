@@ -4,9 +4,13 @@ package edu.ucsb.cs56.projects.games.roguelike;
 /**
  * A Player character class which the user uses
  * @author Minh Le 
- *
+ *@author Hans Marasigan & Richard Nguyen
+ @version cs56 S13
  */
-public class Player {
+
+/** a class that represents the character the player uses.
+ */
+public class Player extends GamePiece{
 	//character hit points and attack
     private int hitPoints;
     private int attack;
@@ -16,9 +20,10 @@ public class Player {
      * creates a player with 100 hitPoints and 20 attack
      */
     public Player(){
-	this.hitPoints = 50;
+	this.hitPoints = 100;
 	this.attack = 20;
 	this.score= 0;
+	this.setTypeOfPiece("Player");
     }
     
     /**
