@@ -87,4 +87,93 @@ public class GamePieceTest{
 	gp.setTypeOfPiece("monster");
 	assertEquals("monster",gp.getTypeOfPiece());
     }
+    @Test
+    /** this tests that the monster constructor works and the type should be monster
+     */
+    public void test_defaultMonsterType_Constructor(){
+	Monster m=new Monster();
+	assertEquals("Monster",m.getTypeOfPiece());
+    }
+    @Test
+    /** this tests that the player constructor works and the type should be player
+     */
+    public void test_defaultPlayerType_Constructor(){
+	Player p=new Player();
+	assertEquals("Player",p.getTypeOfPiece());
+    }
+    @Test
+    /** this test that the Bat constructor works and is a Monster type
+     */
+        public void test_defaulBatType_Constructor(){
+	Bat b=new Bat();
+	assertEquals("Monster",b.getTypeOfPiece());
+    }
+    @Test
+    /** this test that the Golem constructor works and is a Monster type
+     */
+    public void test_defaultGolemType_Constructor(){
+	Golem g=new Golem();
+	assertEquals("Monster",g.getTypeOfPiece());
+    }
+    @Test
+    /** this test that the Troll constructor works and is a Monster type
+     */
+        public void test_defaultTrollType_Constructor(){
+	Troll t=new Troll();
+	assertEquals("Monster",t.getTypeOfPiece());
+    }
+    @Test
+    /**tests the monsters 3arg Constructor to see if it is still a Monster Type
+     */
+    public void test_3ArgConstructorMonster(){
+	Monster m=new Monster(1,2,0);
+	assertEquals("Monster",m.getTypeOfPiece());
+    }
+    @Test
+    /**tests the Bat 3arg Constructor to see if it is still a Monster Type
+     */
+    public void test_3ArgConstructorBat(){
+	Bat m=new Bat(1,2,0);
+	assertEquals("Monster",m.getTypeOfPiece());
+    }
+    @Test
+    /**tests the Golem 3arg Constructor to see if it is still a Monster Type
+     */
+    public void test_3ArgConstructorGolem(){
+	Golem m=new Golem(1,2,0);
+	assertEquals("Monster",m.getTypeOfPiece());
+    }
+    @Test
+    /**tests the Troll 3arg Constructor to see if it is still a Monster Type
+     */
+    public void test_3ArgConstructorTroll(){
+	Troll m=new Troll(1,2,0);
+	assertEquals("Monster",m.getTypeOfPiece());
+    }
+    @Test
+    /**tests the Monster 4arg Constructor to see if it is still a Monster Type
+     */
+    public void test_4argConstructorMonsterType(){
+	Monster b=new Monster(1,2,0,3);
+    }
+    @Test
+    /**tests the Bat 4arg Constructor to see if it is still a Monster Type
+     */
+    public void test_4argConstructorBatType(){
+	Bat b=new Bat(1,2,0,3);
+    }
+    @Test
+    /**tests the Golem 4arg Constructor to see if it is still a Monster Type
+     */
+    public void test_4argConstructorGolemType(){
+	Golem b=new Golem(1,2,0,3);
+    }
+    @Test
+    /**tests the Monster 4arg Constructor to see if it is still a Monster Type
+     */
+    public void test_4argConstructorTrollType(){
+	Troll b=new Troll(1,2,0,3);
+    }
+
+
 }
