@@ -8,7 +8,7 @@ import java.util.Random;
  *@author Hans Marasigan & Richard Nguyen
  *@version cs56 s13
  */
-public class Monster {
+public class Monster extends GamePiece{
 	private int hitPoints;
 	private int attack;
 	private int direction = 0;
@@ -24,6 +24,7 @@ public class Monster {
 	    this.hitPoints=20;
 	    this.attack=10;
 	    this.typeOfMovement=0;
+	    this.setTypeOfPiece("Monster");
 	}
 	/**
 	 * creates a player with 20 hitPoints and 10 attack
@@ -33,6 +34,7 @@ public class Monster {
 	    this.hitPoints = 20;
 	    this.attack=10;
 	    this.typeOfMovement=typeOfMovement;
+	    this.setTypeOfPiece("Monster");
 	}
 	/**
 	 * creates a player with 20 hitPoints and 10 attack
@@ -44,6 +46,7 @@ public class Monster {
 		this.hitPoints = hitPoints;
 		this.attack = attack;
 		this.typeOfMovement = typeOfMovement;
+		this.setTypeOfPiece("Monster");
 	}
     /**
      *creates a monster with the makers preference of status
@@ -57,6 +60,7 @@ public class Monster {
 		this.attack = att;
 		this.typeOfMovement = typeOfMovement;
 		this.pointValue=points;
+		this.setTypeOfPiece("Monster");
     }
     /**
      * @return the monster's hitPoints
