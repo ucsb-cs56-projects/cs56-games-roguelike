@@ -109,9 +109,6 @@ public class LogicEngine {
 	 * @return true if its movable, false if not
 	 */
 	public boolean movable(int x,int y,int xOrig, int yOrig){
-	    if(thePlayer.getHitPoints() <= 0){
-		return false;
-	    }
 		/* not movable, out of boundary*/
 	    if (x < 1 || x >= floorWidth-1){
 		return false;
@@ -125,30 +122,30 @@ public class LogicEngine {
 		
 		//player isn't movable, start attack for player
 	    if(floor[x][y] instanceof Monster){
-			if(floor[xOrig][yOrig]instanceof Player){
-			    thePlayer.attacking(listOfMonsters[x][y]);
+		//		if(floor[xOrig][yOrig]instanceof Player){
+		//	    thePlayer.attacking(listOfMonsters[x][y]);
 				return false;
-			}else{
-				return false;
-			}
+				//	}else{
+				//	return false;
+				//	}
 		}
 				
 		//monster isn't movable, start attack for monster
 		if(floor[x][y] instanceof Player && floor[xOrig][yOrig] instanceof Monster){
-		    listOfMonsters[xOrig][yOrig].attacking(thePlayer);
+		    // listOfMonsters[xOrig][yOrig].attacking(thePlayer);
 			return false;
 		}
 		
 
 		// monster or player is movable	
 
-		floor[x][y] = floor[xOrig][yOrig];
-		floor[xOrig][yOrig] = null;
+		//	floor[x][y] = floor[xOrig][yOrig];
+		//	floor[xOrig][yOrig] = null;
 
-		int[] position = {x,y};
-        if(floor[x][y] instanceof Player){
-        	thePlayer.setPlayerPosition(position);
-        }
+		//		int[] position = {x,y};
+		// if(floor[x][y] instanceof Player){
+		//	thePlayer.setPlayerPosition(position);
+		// }
 		return true;
 	}
 	

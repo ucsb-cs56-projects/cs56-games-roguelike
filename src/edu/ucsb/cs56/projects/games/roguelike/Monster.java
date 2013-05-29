@@ -24,7 +24,7 @@ public class Monster extends GamePiece{
 	    this.hitPoints=20;
 	    this.attack=10;
 	    this.typeOfMovement=0;
-	    this.setTypeOfPiece("Monster");
+	    this.setTypeOfPiece("monster");
 	}
 	/**
 	 * creates a player with 20 hitPoints and 10 attack
@@ -34,7 +34,7 @@ public class Monster extends GamePiece{
 	    this.hitPoints = 20;
 	    this.attack=10;
 	    this.typeOfMovement=typeOfMovement;
-	    this.setTypeOfPiece("Monster");
+	    this.setTypeOfPiece("monster");
 	}
 	/**
 	 * creates a player with 20 hitPoints and 10 attack
@@ -46,7 +46,7 @@ public class Monster extends GamePiece{
 		this.hitPoints = hitPoints;
 		this.attack = attack;
 		this.typeOfMovement = typeOfMovement;
-		this.setTypeOfPiece("Monster");
+		this.setTypeOfPiece("monster");
 	}
     /**
      *creates a monster with the makers preference of status
@@ -60,7 +60,7 @@ public class Monster extends GamePiece{
 		this.attack = att;
 		this.typeOfMovement = typeOfMovement;
 		this.pointValue=points;
-		this.setTypeOfPiece("Monster");
+		this.setTypeOfPiece("monster");
     }
     /**
      * @return the monster's hitPoints

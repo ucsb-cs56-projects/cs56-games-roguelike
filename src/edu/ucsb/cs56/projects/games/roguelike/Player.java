@@ -23,7 +23,7 @@ public class Player extends GamePiece{
 	this.hitPoints = 100;
 	this.attack = 20;
 	this.score= 0;
-	this.setTypeOfPiece("Player");
+	this.setTypeOfPiece("player");
     }
     
     /**
