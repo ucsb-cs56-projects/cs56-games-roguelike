@@ -15,6 +15,77 @@ import static org.junit.Assert.assertFalse;
 
 public class GamePieceTest{
     
+    /** tests for the default GamePiece which is nothing
+     */
+    @Test public void test_defaultConstructor_and_Getters(){
+	GamePiece gp=new GamePiece();
+	assertEquals("nothing",gp.getTypeOfPiece());
+    }	    
+    
+        /** tests for the 1 arg constructor of GamePiece which is red
+     */
+    @Test public void test_1ArgConstructor_and_GettersRed(){
+	GamePiece gp=new GamePiece("red");
+	assertEquals("red",gp.getTypeOfPiece());
+    }
+    
+    /** tests for the 1 arg constructor of GamePiece which is blue
+     */
+    @Test public void test_1ArgConstructor_and_GettersBlue(){
+	GamePiece gp=new GamePiece("blue");
+	assertEquals("blue",gp.getTypeOfPiece());
+    }
+    
+    /** tests for the 1 arg constructor of GamePiece which is player
+     */
+    @Test public void test_1ArgConstructor_and_GettersPlayer(){
+	GamePiece gp=new GamePiece("player");
+	assertEquals("player",gp.getTypeOfPiece());
+    }
+    
+        /** tests for the 1 arg constructor of GamePiece which is monster
+     */
+    @Test public void test_1ArgConstructor_and_GettersMonster(){
+	GamePiece gp=new GamePiece("monster");
+	assertEquals("monster",gp.getTypeOfPiece());
+    }
+    
+    /** tests for the default GamePiece which is nothing and seeing if the setter works.
+     *setting it to monster
+     */
+    @Test public void test_defaultConstructor_and_setter(){
+	GamePiece gp=new GamePiece();
+	gp.setTypeOfPiece("monster");
+	assertEquals("monster",gp.getTypeOfPiece());
+    }
+    
+    /** tests for the default GamePiece which is nothing and seeing if the setter works.
+     *setting it to player
+     */
+    @Test public void test_defaultConstructor_and_setterPlayer(){
+	GamePiece gp=new GamePiece();
+	gp.setTypeOfPiece("player");
+	assertEquals("player",gp.getTypeOfPiece());
+    }
+    
+    /** tests for the 1 arg constructor of GamePiece which is monster
+     *then setting it to player
+     */
+    @Test public void test_1ArgConstructor_and_SetterPlayer(){
+	GamePiece gp=new GamePiece("monster");
+	gp.setTypeOfPiece("player");
+	assertEquals("player",gp.getTypeOfPiece());
+    }
+    
+    /** tests for the 1 arg constructor of GamePiece which is player
+     *then setting it to monster
+     */
+    @Test public void test_1ArgConstructor_and_SetterMonster(){
+	GamePiece gp=new GamePiece("player");
+	gp.setTypeOfPiece("monster");
+	assertEquals("monster",gp.getTypeOfPiece());
+    }
+    
     /** this tests that the monster constructor works and the type should be monster
      */
     @Test public void test_defaultMonsterType_Constructor(){

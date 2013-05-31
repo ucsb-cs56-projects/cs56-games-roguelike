@@ -15,7 +15,6 @@ public class Monster implements GamePiece{
 	private int typeOfMovement;
 	private int[] position = new int[2];
         private int pointValue=5;
-	private String typeOfPiece;
 
 	/**
 	 * creates a monster with 20 hitPoints and 10 attack and  no random movement

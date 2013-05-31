@@ -1,0 +1,45 @@
+package edu.ucsb.cs56.projects.games.roguelike;
+
+import java.util.Random;
+
+/**
+* A Monster class to represents monster in the game
+* @author Minh Le
+*@author Hans Marasigan & Richard Nguyen
+*@version cs56 s13
+*/
+
+
+public class GameItem extends GamePiece{
+    private int effect;
+    private int[] position = new int[2];
+    private int pointValue=5;
+
+    /**
+       creates a default item with effect value of 10;
+    */
+    public GameItem(){
+	this.effect=10;
+    }
+    /**
+       creates an item with an effect value of the user's choice;
+       @param NewEffect this will be how much the item will effect the user.
+    */
+
+    public GameItem(int NewEffect){
+	this.effect=NewEffect;
+    }
+    /** 
+	gets the item's effect value
+    */
+    public int getEffect(){
+	    return this.effect();
+	}
+    /**
+       sets the item's effect value
+       @param NewEffect this is the value the computer/programmer can set
+    */
+    public void setEffect(int NewEffect){
+	this.effect=NewEffect;
+    }
+}
