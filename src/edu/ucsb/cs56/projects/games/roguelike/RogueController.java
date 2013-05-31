@@ -2,7 +2,7 @@ package edu.ucsb.cs56.projects.games.roguelike;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Random;
-
+import java.io.*;
 import javax.swing.JFrame;
 
 /**
@@ -64,7 +64,7 @@ public class RogueController extends JFrame implements KeyListener
 			x = origX;
 			y = origY;		
 		}
-		canvas.moveHeroAnimated(x, y,logicHandler.getPlayer().getHitPoints());
+		canvas.moveHeroAnimated(x, y,logicHandler.getPlayer().getHitPoints(),logicHandler.getPlayer().getScore());
 	}
 	
 	/**
@@ -100,7 +100,7 @@ public class RogueController extends JFrame implements KeyListener
 	        			  //display the you were attacked flag if the collision was with a player
 	        			  if(logicHandler.getObject(xPos, yPos) instanceof Player){
 	        				  canvas.monsterAttack();
-	        				  canvas.moveHeroAnimated(x, y,logicHandler.getPlayer().getHitPoints());
+	        				  canvas.moveHeroAnimated(x, y,logicHandler.getPlayer().getHitPoints(),logicHandler.getPlayer().getScore());
 	        			  }
 	        			  canvas.moveMonster(xOrig, yOrig);
 
@@ -128,20 +128,84 @@ public class RogueController extends JFrame implements KeyListener
 	}
 	
 	/**
-	 * Checks to see if player is dead
+	 * Checks to see if player is dead, and store score into txt file for HighScores
 	 * 
 	 */
 	public void checkPlayerStatus(){
-		if(logicHandler.playerIsDead()){
-			canvas.clear();
-			canvas.displayLosingScreen();
+	    int[] array= new int[5];
+	    int a  = 0;
+	    if( logicHandler.getGameOver() == true){
+	    	canvas.clear();
+		// display the HighScore after game is over by reading from Score.txt...
+		try{ 
+		    File myFile = new File( "Score.txt");
+		    FileReader fileReader = new FileReader("Score.txt");
+		    BufferedReader reader = new BufferedReader(fileReader);
+		    String line = null; 
+		    while((line = reader.readLine())!= null){
+			array[a]= Integer.parseInt(line);
+			a++;
+		    }
+		}catch (Exception ex){
+		    ex.printStackTrace();
+			}
+	    	canvas.displayLosingScreen(logicHandler.getPlayer().getScore(),array); 
+	     }
+	    // display the score and highScores after game is over and write the new highScore into Score.txt 
+	    if(logicHandler.playerIsDead()&& logicHandler.getGameOver() == false){
+		try{ 
+		    File myFile = new File( "Score.txt");
+		    FileReader fileReader = new FileReader("Score.txt");
+		    BufferedReader reader = new BufferedReader(fileReader);
+		    String line = null; 
+		    while((line = reader.readLine())!= null){
+			array[a]= Integer.parseInt(line);
+			a++;
+		    }
+		}catch (Exception ex){
+		    ex.printStackTrace();
 		}
-		
-
+		// updating the Score.txt file after getting new highScore
+		int temp=0;
+		int temp2 = 0;
+		for(int count = 0;count <5;count++){
+		    if(array[count] < logicHandler.getPlayer().getScore()){
+			temp = array[count];
+			array[count] = logicHandler.getPlayer().getScore();
+			if( count != 4){
+			    for( int c = count+1; count < 5; count++){
+				temp2 = array[c];
+				array[c] = temp;
+				temp = temp2;
+			    }
+			}
+			break;
+		    }
+		}
+		//canvas.displayLosingScreen(logicHandler.getPlayer().getScore(),array);
+		try{
+		    FileWriter writer = new FileWriter("Score.txt");
+		    for( int b = 0 ; b< 5;b++){
+			writer.write(""+array[b]+ "\n");
+		    }
+		    writer.close();
+		}catch(IOException ex){
+		    ex.printStackTrace();
+		}
+		canvas.clear();
+		canvas.displayLosingScreen(logicHandler.getPlayer().getScore(),array);
+		logicHandler.setGameOver(true);
+	    }
+	    // if( logicHandler.getGameOver() == true){
+	    // 	canvas.clear();
+	    // 	//canvas.displayLosingScreen(logicHandler.getPlayer().getScore(),array); 
+	    //  }
+	    
+	    
 	}
-	
+    
 	/**
-	 * Check to see if all monsters are dead
+	 * Check to see if all monsters are dead and creates more monsters!!! OMG!!
 	 */
 	public void checkAllMonsterStatus(){
 		int gridWidth, gridHeight;
@@ -156,8 +220,10 @@ public class RogueController extends JFrame implements KeyListener
 	        	  }
 	          }
 	     }
-	    canvas.clear();
-		canvas.displayWinningScreen();
+	     for(int a =0 ; a < 10 ;a++){
+		 logicHandler.createMonster();}
+	     //    canvas.clear();
+	     //	canvas.displayWinningScreen();
 	     
 		
 	}
@@ -172,8 +238,8 @@ public class RogueController extends JFrame implements KeyListener
 	 */
 	public void keyPressed(KeyEvent key){	
 		
-
-		
+	    
+	    
 		//WASD moves
 		origX = x; 
 		origY = y;

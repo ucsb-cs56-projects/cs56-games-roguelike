@@ -14,7 +14,7 @@ public class LogicEngineTest
 	
     /**
        test to see if a player can move to a spot with a monster
-       @see LogicEngine#movable(int x, int y, int xOrig, int yOrig)
+       @see LogicEngine#movable()
 
      */
    @Test public void testMovable()
@@ -26,7 +26,7 @@ public class LogicEngineTest
     }   
     /**
        test to see if a monster can move to a spot with a player
-       @see LogicEngine#movable(int x, int y, int xOrig, int yOrig)
+       @see LogicEngine#movable()
 
      */
    @Test public void testMovable2()
@@ -39,7 +39,7 @@ public class LogicEngineTest
 	
     /**
        test to see if a monster/player can move to a spot that is empty
-       @see LogicEngine#movable(int x, int y, int xOrig, int yOrig)
+       @see LogicEngine#movable()
 
      */
    @Test public void testMovable3()
@@ -52,7 +52,7 @@ public class LogicEngineTest
 
     /**
        test to see if a monster/player can move to a spot that is out of bound
-       @see LogicEngine#movable(int x, int y, int xOrig, int yOrig)
+       @see LogicEngine#movable()
 
      */
    @Test public void testMovable4()
@@ -64,7 +64,7 @@ public class LogicEngineTest
     }   
     /**
        test to see if a monster/player can move to a spot that is out of bound
-       @see LogicEngine#movable(int x, int y, int xOrig, int yOrig)
+       @see LogicEngine#movable()
 
      */
    @Test public void testMovable5()
@@ -76,7 +76,7 @@ public class LogicEngineTest
     }   
     /**
        test to see if a monster/player can move to a spot that is out of bound
-       @see LogicEngine#movable(int x, int y, int xOrig, int yOrig)
+       @see LogicEngine#movable()
 
      */
    @Test public void testMovable6()
@@ -88,7 +88,7 @@ public class LogicEngineTest
     } 
       /**
        test to see if a monster/player can move to a spot that is out of bound
-       @see LogicEngine#movable(int x, int y, int xOrig, int yOrig)
+       @see LogicEngine#movable()
 
      */
    @Test public void testMovable7()
@@ -127,7 +127,7 @@ public class LogicEngineTest
 
     /**
        test for a monster that is dead
-       @see LogicEngine#monsterIsDead(int x, int y)
+       @see LogicEngine#monsterIsDead()
 
      */
    @Test public void testMonsterStatus()
@@ -141,7 +141,7 @@ public class LogicEngineTest
 
     /**
        test for a monster that isnt dead
-       @see LogicEngine#monsterIsDead(int x, int y)
+       @see LogicEngine#monsterIsDead()
 
      */
    @Test public void testMonsterStatus2()

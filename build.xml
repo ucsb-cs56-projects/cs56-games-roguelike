@@ -1,20 +1,20 @@
 <project default="compile">
 
   <!-- build.xml for Choice points, S12, CS56
-       name: Minh Le 
-	   
-	   Edited by: Daniel Ly
-	   Version: S13, CS56
-	   Refactored package name -->
+	name: Minh Le
+	
+		Edited by: Daniel Ly
+		Version: S13, CS56
+		Refactored package name -->
 
   <!-- MAKING THIS CHOICE POINTS FRIENDLY -->
 
   <property name="projectName" value="roguelike" />
 
   <!-- adding properties
-  load env variables
-  declare webRoot, initialize to env.HOME
-  declare webBaseURL, init to user page -->
+	load env variables
+	declare webRoot, initialize to env.HOME
+	declare webBaseURL, init to user page -->
 
    <property environment="env"/> <!-- load the environment variables -->
 
@@ -25,10 +25,8 @@
    <property name="mainClass" value="RogueController" />
 
    <!-- javadoc properties -->
-   <!-- Remember to change webRoot and webBaseURL to link to your username
-		rather than dly -->
-   <property name="webRoot" value="${env.HOME}/public_html/cs56/13S/dly" />
-   <property name="webBaseURL" value="http://www.cs.ucsb.edu/~${env.USER}/cs56/13S/dly" />
+   <property name="webRoot" value="${env.HOME}/public_html/cs56/13S/${env.USER}" />
+   <property name="webBaseURL" value="http://www.cs.ucsb.edu/~${env.USER}/cs56/13S/${env.USER}" />
    <property name="javadocDest" value="${webRoot}/${projectRepo}/javadoc" />
    <property name="javadocURL" value="${webBaseURL}/${projectRepo}/javadoc" />
 
@@ -44,18 +42,12 @@
     </javac>
   </target>
 
-
-<!-- HOW THINGS RUN -->
-
   <target name="run" depends="compile" description="runs the RogueController.">
     <copy todir="build/${pkgDirectory}/${projectName}">
       <fileset dir="src/${pkgDirectory}/${projectName}" includes="*.png"/>
     </copy>
       <java fork="true" classname="${fullPkg}.${mainClass}" classpath="build" />
   </target>
-
-<!-- END OF HOW THINGS RUN -->
-
 
   <target name="clean" description="delete unncessary files and directories">
     <delete dir="build" quiet="true" />
@@ -65,13 +57,10 @@
     <delete dir="temp" quiet="true" />
   </target>
 
-
-<!-- Professor-endorsed space for Javadoc command! -->
-
    <target name="javadoc" depends="compile" description="Generates javadoc.">
 
    <delete dir="javadoc" quiet="true" />
-   <javadoc  destdir="javadoc" author="true" version="true" use="true" >
+   <javadoc destdir="javadoc" author="true" version="true" use="true" >
       <fileset dir="src" includes="**/*.java"/>
       <classpath>
           <pathelement location="lib/junit-4.8.2.jar"/>
@@ -87,8 +76,8 @@
      <fileset dir="javadoc"/>
    </copy>
 
-   <chmod dir="${javadocDest}" perm="755"  type="dir" includes="**" />
-   <chmod dir="${javadocDest}" perm="755"  type="file" includes="**/*" />
+   <chmod dir="${javadocDest}" perm="755" type="dir" includes="**" />
+   <chmod dir="${javadocDest}" perm="755" type="file" includes="**/*" />
    <echo>Javadoc deployed to ${javadocURL}</echo>
 
  </target>
@@ -116,7 +105,7 @@
     <mkdir dir="dist" />
     <jar destfile="dist/${pkgDirectory}.jar" basedir="build" >
       <manifest>
-	<attribute name="Main-Class" value="${mainClass}" />
+<attribute name="Main-Class" value="${mainClass}" />
       </manifest>
     </jar>
   </target>
