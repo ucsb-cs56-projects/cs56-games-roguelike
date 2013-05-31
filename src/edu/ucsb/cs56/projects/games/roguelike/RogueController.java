@@ -65,8 +65,8 @@ public class RogueController extends JFrame implements KeyListener
 	    //		y = origY;		
 	    //	}
 	    //	canvas.moveHeroAnimated(x, y,logicHandler.getPlayer().getHitPoints(),logicHandler.getPlayer().getScore());
-	    if(logicHandler.moveable(x,y,origX,origY)){
-		logicHaandler.move(x,y,origX,origY);
+	    if(logicHandler.movable(x,y,origX,origY)){
+		logicHandler.move(x,y,origX,origY);
 	    }
 	    else{
 		// see if it is becase of a monster. If so, 
@@ -77,9 +77,9 @@ public class RogueController extends JFrame implements KeyListener
 		    canvas.clear(x,y);
 	    }
 		canvas.moveHeroAnimated(x,y,logicHandler.getPlayer().getHitPoints(),logicHandler.getPlayer().getScore());
+	    }
 	}
-	
-	/**
+    /**
 	 * Handles movement of all monsters by checking if it can move there first through the logic engine
 	 * if it can move, invoke the canvas to animate it
 	 * if it can't, it checks if its because of out of bounds or a monster or a player

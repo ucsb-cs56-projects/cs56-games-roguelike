@@ -96,7 +96,10 @@ public class LogicEngine {
 	public int[] getPlayerPosition(){
 		return thePlayer.getPlayerPosition();
 	}
-	
+    public void move(int x,int y,int xOrig, int yOrig){
+	floor[x][y]= floor[xOrig][yOrig];
+	floor[xOrig][yOrig]=null;
+    }
 
 	
 	/**
