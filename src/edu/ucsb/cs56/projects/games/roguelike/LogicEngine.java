@@ -13,7 +13,7 @@ public class LogicEngine {
     //the player the user uses
     private Player thePlayer;
     //all the cells that all object in the game can move in
-    private Object[][] floor;
+    private GamePiece[][] floor;
     private int floorWidth;
     private int floorHeight;
     private int[] playerPosition;
@@ -38,7 +38,7 @@ public class LogicEngine {
 	public LogicEngine(int width, int height){
 		floorWidth = width;
 		floorHeight = height;
-		floor = new Object[floorWidth][floorHeight];
+		floor = new GamePiece[floorWidth][floorHeight];
 		listOfMonsters = new Monster[floorWidth][floorHeight];
 		createAllObjects();
 		storeMonsters();
@@ -74,14 +74,14 @@ public class LogicEngine {
 	/**
 	 * @param x the x position of the object
 	 * @param y the y position of the object
-	 * @return the object at the position x and y
+	 * @return the GamePiece at the position x and y
 	 */
-	public Object getObject(int x, int y){
+	public GamePiece getObject(int x, int y){
 
 	      return floor[x][y];
 	}
 	
-	public Object[][] getFloor(){
+    public GamePiece[][] getFloor(){
 		return floor;
 	}
 	
@@ -99,6 +99,9 @@ public class LogicEngine {
     public void move(int x,int y,int xOrig, int yOrig){
 	floor[x][y]= floor[xOrig][yOrig];
 	floor[xOrig][yOrig]=null;
+	int[]position={x,y};
+	if( floor[x][y].getTypeOfPiece()=="player")
+	    thePlayer.setPlayerPosition(position);
     }
 
 	
@@ -124,7 +127,7 @@ public class LogicEngine {
 		
 		
 		//player isn't movable, start attack for player
-	    if(floor[x][y] instanceof Monster){
+	    if(floor[x][y].getTypeOfPiece()=="monster"&&floor[xOrig][yOrig].getTypeOfPiece()=="player"){
 		//		if(floor[xOrig][yOrig]instanceof Player){
 		//	    thePlayer.attacking(listOfMonsters[x][y]);
 				return false;
@@ -132,9 +135,9 @@ public class LogicEngine {
 				//	return false;
 				//	}
 		}
-				
+	    
 		//monster isn't movable, start attack for monster
-		if(floor[x][y] instanceof Player && floor[xOrig][yOrig] instanceof Monster){
+	    if(floor[x][y].getTypeOfPiece()=="player"&&floor[xOrig][yOrig].getTypeOfPiece()=="monster"){
 		    // listOfMonsters[xOrig][yOrig].attacking(thePlayer);
 			return false;
 		}
