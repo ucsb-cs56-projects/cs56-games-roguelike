@@ -69,14 +69,27 @@ public class RogueController extends JFrame implements KeyListener
 		logicHandler.move(x,y,origX,origY);
 	    }
 	    else{
-		// see if it is becase of a monster. If so, 
+		// see if it is becase of a monster. If so,
+		if( logicHandler.getObject(origX,origY).getTypeOfPiece()=="player" && logicHandler.getObject(x,y).getTypeOfPiece()=="monster")
+		    {
+			logicHandler.playerAttacking(x,y);
+			logicHandler.move(x,y,origX,origY);
+		    }
+		if( logicHandler.getObject(origX,origY).getTypeOfPiece()=="monster" && logicHandler.getObject(x,y).getTypeOfPiece()=="player")
+                    {
+                        logicHandler.monsterAttacking(origX,origY);
+			logicHandler.move(x,y,origX,origY);
+			
+                    }
+		
+		
 		// do whatever monster thing perhaps needed to happen
 		// and was previously done inside the "check" movable...
 		
 		if(logicHandler.monsterIsDead(x,y)){
-		    canvas.clear(x,y);
-	    }
-		canvas.moveHeroAnimated(x,y,logicHandler.getPlayer().getHitPoints(),logicHandler.getPlayer().getScore());
+		    canvas.clear(x,y);    
+		    canvas.moveHeroAnimated(x,y,logicHandler.getPlayer().getHitPoints(),logicHandler.getPlayer().getScore());
+		}
 	    }
 	}
     /**

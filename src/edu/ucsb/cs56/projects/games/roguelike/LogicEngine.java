@@ -103,8 +103,21 @@ public class LogicEngine {
 	if( floor[x][y].getTypeOfPiece()=="player")
 	    thePlayer.setPlayerPosition(position);
     }
+    /**
+     *@param x is the x position of the monster that is being attacked
+     *@param y is the y position of the monster that is being attacked
+     */
 
-	
+    public void playerAttacking(int x,int y){
+	thePlayer.attacking(listOfMonsters[x][y]);
+    }
+    /**
+     *@param x is the x position of the monster that is attacking
+     *@param y is the y position of the monster that is attacking
+     */
+    public void monsterAttacking(int x,int y){
+	listOfMonsters[x][y].attacking(thePlayer);
+    }
 	/**
 	 * x and y are the position thats being tested
 	 * xOrig and yOrig are the position of the object now
