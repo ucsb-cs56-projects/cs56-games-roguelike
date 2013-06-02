@@ -65,7 +65,18 @@ public class RogueController extends JFrame implements KeyListener
 	    y = origY;		
 	}
 	canvas.moveHeroAnimated(x, y,logicHandler.getPlayer().getHitPoints(),logicHandler.getPlayer().getScore());
-	
+//	if ( logicHandler.movable(x,y,origX, origY)) {
+   //         logicHandler.move(x,y,origX,origY);
+  //      } 
+   //     else{
+    //        logicHandler.attack(x, y, origX, origX);
+   //         if(logicHandler.monsterIsDead(x,y)){
+   //         canvas.clear(x,y);
+   //             }
+    //        x = origX;
+   //	    y = origY;	 
+    //    }         
+   //  canvas.moveHeroAnimated(x, y,logicHandler.getPlayer().getHitPoints(),logicHandler.getPlayer().getScore());	
     }
     /**
 	 * Handles movement of all monsters by checking if it can move there first through the logic engine
@@ -93,8 +104,10 @@ public class RogueController extends JFrame implements KeyListener
 	        		  yPos = yOrig + direction[1];
 	        		  
 	        		  if(logicHandler.movable(xPos, yPos,xOrig,yOrig)){
+				      logicHandler.move(xPos, yPos,xOrig,yOrig);
 				      canvas.moveMonster(xPos, yPos);
 	        		  }else{
+	        		  	logicHandler.attack(xPos, yPos,xOrig,yOrig);
 				      if(xPos>=0 && xPos<=80 && yPos>=0 && yPos<=24){
 	        			  //display the you were attacked flag if the collision was with a player
 	        			  if(logicHandler.getObject(xPos, yPos) instanceof Player){
