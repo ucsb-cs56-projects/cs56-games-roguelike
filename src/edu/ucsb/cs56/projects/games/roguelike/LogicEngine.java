@@ -96,7 +96,16 @@ public class LogicEngine {
 	public int[] getPlayerPosition(){
 		return thePlayer.getPlayerPosition();
 	}
-	
+	 /**
+	  * move GamePiece from (xOrig,yOrig) to (x,y)
+	  * 	 x and y are the position thats being tested
+	 * xOrig and yOrig are the position of the object now
+	 * @param x is the new x position
+	 * @param y is the new y position
+	 * @param xOrig is the x position of the object right now
+	 * @param yOrig is the y position of the object right now
+	 *
+	 */
 
 	public void move(int x,int y,int xOrig,int yOrig){
                 floor[x][y] = floor[xOrig][yOrig];
@@ -108,6 +117,15 @@ public class LogicEngine {
         	thePlayer.setPlayerPosition(position);
                 }
         }
+	/**
+	 * x and y are the position thats being tested
+	 * xOrig and yOrig are the position of the object now
+	 * @param x is the x position of the position being tested
+	 * @param y is the y position of the position being tested
+	 * @param xOrig is the x position of the object right now
+	 * @param yOrig is the y position of the object right now
+	 * attacks if the 2 coordinates hold different GamePieces
+	 */
         public void attack(int x,int y,int xOrig,int yOrig){
                 if(floor[x][y] instanceof Monster && floor[xOrig][yOrig] instanceof Player){	                
 			  thePlayer.attacking(listOfMonsters[x][y]);
