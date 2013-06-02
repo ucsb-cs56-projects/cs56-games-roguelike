@@ -98,7 +98,24 @@ public class LogicEngine {
 	}
 	
 
-	
+	public void move(int x,int y,int xOrig,int yOrig){
+                floor[x][y] = floor[xOrig][yOrig];
+		floor[xOrig][yOrig] = null;
+
+		int[] position = {x,y};
+                if(floor[x][y] instanceof Player)
+                {
+        	thePlayer.setPlayerPosition(position);
+                }
+        }
+        public void attack(int x,int y,int xOrig,int yOrig){
+                if(floor[x][y] instanceof Monster && floor[xOrig][yOrig] instanceof Player){	                
+			  thePlayer.attacking(listOfMonsters[x][y]);
+                }
+                    
+                if(floor[x][y] instanceof Player && floor[xOrig][yOrig] instanceof Monster){
+                    listOfMonsters[xOrig][yOrig].attacking(thePlayer);}
+        }
 	/**
 	 * x and y are the position thats being tested
 	 * xOrig and yOrig are the position of the object now
