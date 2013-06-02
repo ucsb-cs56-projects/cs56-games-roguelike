@@ -76,7 +76,7 @@ public class LogicEngine {
 	 * @param y the y position of the object
 	 * @return the object at the position x and y
 	 */
-	public Object getObject(int x, int y){
+	public GamePiece getObject(int x, int y){
 
 	      return floor[x][y];
 	}
