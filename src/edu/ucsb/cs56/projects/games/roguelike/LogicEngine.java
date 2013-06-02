@@ -143,7 +143,7 @@ public class LogicEngine {
 		//player isn't movable, start attack for player
 	    if(floor[x][y] instanceof Monster){	
 		if(floor[xOrig][yOrig] instanceof Player){
-			    thePlayer.attacking(listOfMonsters[x][y]);
+			    //thePlayer.attacking(listOfMonsters[x][y]);
 				return false;	
 			}else{	
 				return false;	
@@ -152,20 +152,20 @@ public class LogicEngine {
 				
 		//monster isn't movable, start attack for monster
 	    if(floor[x][y] instanceof Player && floor[xOrig][yOrig] instanceof Monster){
-		    listOfMonsters[xOrig][yOrig].attacking(thePlayer);
+		    //listOfMonsters[xOrig][yOrig].attacking(thePlayer);
 			return false;
 		}
 		
 
 		// monster or player is movable	
 
-		floor[x][y] = floor[xOrig][yOrig];
-		floor[xOrig][yOrig] = null;
+	//	floor[x][y] = floor[xOrig][yOrig];
+	//	floor[xOrig][yOrig] = null;
 
-		int[] position = {x,y};
-        if(floor[x][y] instanceof Player){
-        	thePlayer.setPlayerPosition(position);
-        }
+	//	int[] position = {x,y};
+       // if(floor[x][y] instanceof Player){
+        //	thePlayer.setPlayerPosition(position);
+        //}
 		return true;
 	}
 	
