@@ -597,7 +597,11 @@ private LookupOp setColors(Color bgColor, Color fgColor) {
 		write(""+score+ " ",36,23,RoguePanel.white,RoguePanel.black);
 	}
 	
-	
+	public void drawItem(int xPosition, int yPosition){
+		
+		write("i",xPosition,yPosition,RoguePanel.white,RoguePanel.black);
+		
+	}
 
 	/**
 	 *moves the monster to position xPosition,yPosition
