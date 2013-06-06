@@ -17,6 +17,7 @@ public class Player implements GamePiece{
     	private int[] playerPosition;
     	private int score;
 	private String typeOfPiece;
+    private char icon;
     /**
      * creates a player with 100 hitPoints and 20 attack
      */
@@ -25,6 +26,7 @@ public class Player implements GamePiece{
 	this.attack = 20;
 	this.score= 0;
 	this.setTypeOfPiece("player");
+	this.setIcon('@');
     }
     
     /**
@@ -84,15 +86,32 @@ public class Player implements GamePiece{
 	mon.setHitPoints(mon.getHitPoints()-this.attack);
 	}
     }
-public String getTypeOfPiece(){
+    /** this gets the type of piece of the object
+     */
+    public String getTypeOfPiece(){
 	return this.typeOfPiece;
-}
+    }
+    /**
+       this sets the type of piece of the object
+       @param newTypeOfPiece it is the new type of piece it will be.
+    */
 
-public void setTypeOfPiece(String newTypeOfPiece){
+    public void setTypeOfPiece(String newTypeOfPiece){
 	this.typeOfPiece=newTypeOfPiece;
-}
+    }
 	
-	
+    /** 
+     *This is the getter to figure out what piece icon it is. 
+     */ 
+    public char getIcon(){
+	return this.icon;
+    }
+    /** 
+     *This is the setter for the Icon it will be 
+     *@param NewIcon is the icon of piece that will be in the game 
+     */ public void setIcon(char NewIcon){
+	 this.icon=NewIcon;
+     }	
 	
     
     

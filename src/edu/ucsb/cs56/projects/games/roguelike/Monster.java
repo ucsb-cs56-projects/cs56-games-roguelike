@@ -16,7 +16,7 @@ public class Monster implements GamePiece{
 	private int[] position = new int[2];
         private int pointValue=5;
 	private String typeOfPiece;
-
+    private char icon;
 	/**
 	 * creates a monster with 20 hitPoints and 10 attack and  no random movement
 	 * 
@@ -26,6 +26,7 @@ public class Monster implements GamePiece{
 	    this.attack=10;
 	    this.typeOfMovement=0;
 	    this.setTypeOfPiece("monster");
+	    this.setIcon('M');
 	}
 	/**
 	 * creates a player with 20 hitPoints and 10 attack
@@ -36,6 +37,7 @@ public class Monster implements GamePiece{
 	    this.attack=10;
 	    this.typeOfMovement=typeOfMovement;
 	    this.setTypeOfPiece("monster");
+	    this.setIcon('M');
 	}
 	/**
 	 * creates a player with 20 hitPoints and 10 attack
@@ -48,6 +50,7 @@ public class Monster implements GamePiece{
 		this.attack = attack;
 		this.typeOfMovement = typeOfMovement;
 		this.setTypeOfPiece("monster");
+		this.setIcon('M');
 	}
     /**
      *creates a monster with the makers preference of status
@@ -62,6 +65,7 @@ public class Monster implements GamePiece{
 		this.typeOfMovement = typeOfMovement;
 		this.pointValue=points;
 		this.setTypeOfPiece("monster");
+		this.setIcon('M');
     }
     /**
      * @return the monster's hitPoints
@@ -108,15 +112,32 @@ public class Monster implements GamePiece{
 	this.pointValue=pointValue;
 	
     }
+    /**
+       this gets the type of piece of the monster
+    */
 	public String getTypeOfPiece(){
 		return this.typeOfPiece;
 	}
-	
+    /**
+       this sets the type of piece of the monster
+    */
 	public void setTypeOfPiece(String newTypeOfPiece){
 		this.typeOfPiece=newTypeOfPiece;
 	}
-	
-	
+    
+    /** 
+     *This is the getter to figure out what piece icon it is. 
+     */ 
+    public char getIcon(){
+	return this.icon;
+    }
+    /** 
+     *This is the setter for the Icon it will be 
+     *@param NewIcon is the icon of piece that will be in the game 
+     */ public void setIcon(char NewIcon){
+	 this.icon=NewIcon;
+
+     }	
 	
     
 	/**
@@ -126,6 +147,7 @@ public class Monster implements GamePiece{
     public void attacking(Player mainChar){
 		mainChar.setHitPoints(mainChar.getHitPoints()-this.attack);
 	}
+
 	
 	public void setMonsterPosition(int x, int y){
 		this.position[0] = x;

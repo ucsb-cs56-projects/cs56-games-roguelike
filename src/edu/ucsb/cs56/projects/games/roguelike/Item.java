@@ -15,20 +15,23 @@ public class Item implements GamePiece{
     private int pointValue=10;
     private boolean used;
     private String typeOfPiece="";
+    private char icon;
 
     /**
        creates a default item with effect value of 10
        and has not been used.
-       and it is an item game piece
+       and it is an item game piece 
+       it has icon I
     */
     public Item(){
 	this.effect=10;
 	this.used=false;
 	this.setTypeOfPiece("item");
+	this.setIcon('I');
     }
     /**
        creates an item with an effect value of the user's choice
-       and has not been used and is an item game piece
+       and has not been used and is an item game piece with icon I
        @param NewEffect this will be how much the item will effect the user.
     */
 
@@ -36,17 +39,19 @@ public class Item implements GamePiece{
 	this.effect=NewEffect;
 	this.used=false;
 	this.setTypeOfPiece("item");
+	this.setIcon('I');
     }
     /** 
 	creates an item with the default effect value of 10
 	and the computer/player decides on whether it has been used
-	and is an item game piece
+	and is an item game piece with icon I
 	@param tells whether the item has been used
     */
     public Item(boolean CanUse){
 	this.used=CanUse;
 	this.effect=10;
 	this.setTypeOfPiece("item");
+	this.setIcon('I');
     }
     
     /** 
@@ -89,7 +94,18 @@ public class Item implements GamePiece{
     public void setTypeOfPiece(String newTypeOfPiece){
 	this.typeOfPiece=newTypeOfPiece;
     }
-
-
+    /** 
+     *This is the getter to figure out what piece icon it is. 
+     */ 
+    public char getIcon(){
+	return this.icon;
+    }
+    /** 
+     *This is the setter for the Icon it will be 
+     *@param NewIcon is the icon of piece that will be in the game 
+     */ public void setIcon(char NewIcon){
+	 this.icon=NewIcon;
+     }
+    
 
 }

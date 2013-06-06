@@ -8,40 +8,29 @@ package edu.ucsb.cs56.projects.games.roguelike;
  */
 
 public interface GamePiece {
-    
-    //private String typeOfPiece="";
-    
-    
-    /**
-     * Creates a game piece that is nothing. This would mean it is a free space
-     *that another peice could go on.
-     */
-    // public GamePiece(){
-	//typeOfPiece="nothing";
-    // }
-    /**
-     *Creates a game piece that the user/game creates
-     *@param newTypeOfPiece This is the type of the piece(monster or player or other new features will be added later)
-     *
-     */
-    //public GamePiece(String newTypeOfPiece){
-	//typeOfPiece = newTypeOfPiece;
- //   }
+
     /**
      *This is the getter to figure out what piece it is.
      */
-    public String getTypeOfPiece();//{
-	//return this.typeOfPiece;
-    //}
+    public String getTypeOfPiece();
     
     /**
      *This is the setter for the TypeOfPiece it will be
      *@param newTypeOfPiece is the type of piece that will be in the game
      */
-	public void setTypeOfPiece(String newTypeOfPiece);//{
-	//this.typeOfPiece=newTypeOfPiece;
-	//}
+    public void setTypeOfPiece(String newTypeOfPiece);    
     
+    
+    /**
+     *This is the getter to figure out what piece icon it is.
+     */
+    public char getIcon();
+    
+    /**
+     *This is the setter for the Icon it will be
+     *@param NewIcon is the icon of piece that will be in the game
+     */
+    public void setIcon(char NewIcon);    
     
     
 }
