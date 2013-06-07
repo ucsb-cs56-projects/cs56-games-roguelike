@@ -11,6 +11,7 @@ import javax.swing.JFrame;
  * 	but for the sake of having something that runs,
  * 	RogueController both creates a RoguePanel and allows the user to manipulate it.
  * @author Clayven Anderson and Jonathan Tan
+ *@author Hans Marasigan
  * @author Minh Le
  */
 public class RogueController extends JFrame implements KeyListener
