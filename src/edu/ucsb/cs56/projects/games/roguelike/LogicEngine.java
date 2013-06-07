@@ -10,6 +10,7 @@ import java.util.Random;
 public class LogicEngine {
     //list of all the monsters
     private Monster[][] listOfMonsters;
+    private Item[][] listOfItems;
     //the player the user uses
     private Player thePlayer;
     //all the cells that all object in the game can move in
@@ -40,6 +41,7 @@ public class LogicEngine {
 		floorHeight = height;
 		floor = new GamePiece[floorWidth][floorHeight];
 		listOfMonsters = new Monster[floorWidth][floorHeight];
+		listOfItems = new Item[floorWidth][floorHeight];
 		createAllObjects();
 		storeMonsters();
 		int[] position = {40,12};
@@ -250,7 +252,7 @@ public class LogicEngine {
 		 Random numGenerator = new Random();
 		 
 		 int x = 0;
-		 while(x < 10){
+		 while(x < 7){
 			 int xPos = numGenerator.nextInt(79);
 			 int yPos = numGenerator.nextInt(23);
 			 if(floor[xPos][yPos]==null){
@@ -264,7 +266,7 @@ public class LogicEngine {
 				     new Troll(numGenerator.nextInt(2)+1);
 				 x++;
 			     }
-			     else if (x<=6){
+			     else if (x<=5){
 				 floor[xPos][yPos] = 
 				     new Golem(numGenerator.nextInt(2)+1);
 				 x++;
@@ -275,25 +277,24 @@ public class LogicEngine {
 				 x++;
 			     }
 			 }
-			 
-			 
-
-		 
 		 }
+		 
 	}	
 	public void createMonster(){
 		 Random numGenerator = new Random();
 		 
-		 while(true){
-			 int xPos = numGenerator.nextInt(70);
-			 int yPos = numGenerator.nextInt(20);
-			 if(floor[xPos][yPos]==null){
-			     floor[xPos][yPos] = new Monster(numGenerator.nextInt(2)+1);
-			     listOfMonsters[xPos][yPos] = (Monster) floor[xPos][yPos];		      
-			     listOfMonsters[xPos][yPos].setMonsterPosition(xPos,yPos);
-			     break;
-			 }
-		 }
+		 
+		 int xPos = numGenerator.nextInt(70);
+		 int yPos = numGenerator.nextInt(20);
+		 int monsterRandom=numGenerator.nextInt(100);
+		 if(floor[xPos][yPos]==null){
+		     
+		     floor[xPos][yPos] = new Monster(numGenerator.nextInt(2)+1);
+		     // listOfMonsters[xPos][yPos] = (Monster) floor[xPos][yPos];
+		     // listOfMonsters[xPos][yPos].setMonsterPosition(xPos,yPos);
+		     }
+		     
+		 
 	}
 	
 }
