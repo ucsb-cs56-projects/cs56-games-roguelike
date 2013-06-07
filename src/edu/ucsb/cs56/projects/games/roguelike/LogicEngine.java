@@ -259,15 +259,15 @@ public class LogicEngine {
 				 floor[xPos][yPos] = new Monster(numGenerator.nextInt(2)+1);
 				 x++;
 			     }
-			     if (x<4){
+			     else if (x<4){
 				 floor[xPos][yPos] = new Troll(numGenerator.nextInt(2)+1);
 				 x++;
 			     }
-			     if (x<6){
+			     else if (x<6){
 				 floor[xPos][yPos] = new Golem(numGenerator.nextInt(2)+1);
 				 x++;
 			     }
-			     if (x<8)
+			     else
 				 floor[xPos][yPos] = new Bat(numGenerator.nextInt(2)+1);
 				 x++;
 			 }
