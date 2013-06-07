@@ -112,7 +112,7 @@ public class LogicEngine {
 		floor[xOrig][yOrig] = null;
 
 		int[] position = {x,y};
-                if(floor[x][y] instanceof Player)
+                if(floor[x][y].getTypeOfPiece() == "player")
                 {
         	thePlayer.setPlayerPosition(position);
                 }
@@ -127,11 +127,11 @@ public class LogicEngine {
 	 * attacks if the 2 coordinates hold different GamePieces
 	 */
         public void attack(int x,int y,int xOrig,int yOrig){
-                if(floor[x][y] instanceof Monster && floor[xOrig][yOrig] instanceof Player){	                
+	    if(floor[x][y] instanceof Monster && floor[xOrig][yOrig].getTypeOfPiece()== "player"){	                
 			  thePlayer.attacking(listOfMonsters[x][y]);
                 }
                     
-                if(floor[x][y] instanceof Player && floor[xOrig][yOrig] instanceof Monster){
+	    if(floor[x][y].getTypeOfPiece()=="player" && floor[xOrig][yOrig] instanceof Monster){
                     listOfMonsters[xOrig][yOrig].attacking(thePlayer);}
         }
 	/**
