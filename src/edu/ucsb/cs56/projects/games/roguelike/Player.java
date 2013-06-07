@@ -43,6 +43,13 @@ public class Player implements GamePiece{
     public int getScore(){
 	return this.score;
     }
+	/** 
+	sets that player's attack
+	@param atk this is the amount of points you want to set the player with
+	*/
+	public void setAttack(int atk){
+		this.attack=atk;
+}
     
     /**
      * @return the player's attack
