@@ -607,9 +607,9 @@ private LookupOp setColors(Color bgColor, Color fgColor) {
 	 *moves the monster to position xPosition,yPosition
 	 * Prints the x and y coordinates of the character.
 	 */
-	public void moveMonster(int xPosition, int yPosition){
+    public void moveMonster(int xPosition, int yPosition, GamePiece piece){
 		
-		write("M",xPosition,yPosition,RoguePanel.white,RoguePanel.black);
+	write(piece.getIcon(),xPosition,yPosition,RoguePanel.white,RoguePanel.black);
 		
 	}
 	
