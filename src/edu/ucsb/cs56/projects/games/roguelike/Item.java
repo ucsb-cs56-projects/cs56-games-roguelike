@@ -106,6 +106,11 @@ public class Item implements GamePiece{
      */ public void setIcon(char NewIcon){
 	 this.icon=NewIcon;
      }
-    
-
+    /**
+       this method uses the effect value in someway.
+       in this method it just adds points to the player.
+    */
+    public void UseEffect(Player p){
+	p.setScore(this.getEffect()+p.getScore());	
+    }
 }
