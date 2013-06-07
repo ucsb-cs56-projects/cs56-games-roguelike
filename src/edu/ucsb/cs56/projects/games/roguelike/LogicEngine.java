@@ -225,7 +225,6 @@ public class LogicEngine {
 	          for (int y = 0; y < floorHeight; y++) {  
 	        	  if(floor[x][y] instanceof Monster){	
 			      listOfMonsters[x][y] = (Monster) floor[x][y];
-			      //listOfMonsters[x][y] =Monster floor[x][y];
 	        		  listOfMonsters[x][y].setMonsterPosition(x,y);
 	        	  }else{
 	        		  listOfMonsters[x][y] = null; 
@@ -251,35 +250,40 @@ public class LogicEngine {
 		 Random numGenerator = new Random();
 		 
 		 int x = 0;
-		 while(x < 8){
+		 while(x < 10){
 			 int xPos = numGenerator.nextInt(79);
 			 int yPos = numGenerator.nextInt(23);
 			 if(floor[xPos][yPos]==null){
-			     if (x<2){
-				 floor[xPos][yPos] = new Monster(numGenerator.nextInt(2)+1);
+			     if (x<=2){
+				 floor[xPos][yPos] = 
+				     new Monster(numGenerator.nextInt(2)+1);
 				 x++;
 			     }
-			     else if (x<4){
-				 floor[xPos][yPos] = new Troll(numGenerator.nextInt(2)+1);
+			     else if (x<=4){
+				 floor[xPos][yPos] = 
+				     new Troll(numGenerator.nextInt(2)+1);
 				 x++;
 			     }
-			     else if (x<6){
-				 floor[xPos][yPos] = new Golem(numGenerator.nextInt(2)+1);
+			     else if (x<=6){
+				 floor[xPos][yPos] = 
+				     new Golem(numGenerator.nextInt(2)+1);
 				 x++;
 			     }
-			     else
-				 floor[xPos][yPos] = new Bat(numGenerator.nextInt(2)+1);
+			     else{
+				 floor[xPos][yPos] = 
+				     new Bat(numGenerator.nextInt(2)+1);
 				 x++;
+			     }
 			 }
-		 }
+			 
+			 
 
 		 
-	}
-	
+		 }
+	}	
 	public void createMonster(){
 		 Random numGenerator = new Random();
 		 
-		 int x = 0;
 		 while(true){
 			 int xPos = numGenerator.nextInt(70);
 			 int yPos = numGenerator.nextInt(20);
