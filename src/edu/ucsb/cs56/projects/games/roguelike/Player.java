@@ -2,23 +2,30 @@ package edu.ucsb.cs56.projects.games.roguelike;
 
 
 /**
- * A Player character class which the user uses
+ * A Player class that represents the character the player uses.
  * @author Minh Le 
- *
+ * @author Hans Marasigan & Richard Nguyen
+ * @version cs56 S13
  */
-public class Player {
+
+public class Player implements GamePiece {
 	//character hit points and attack
-    private int hitPoints;
-    private int attack;
-    private int[] playerPosition;
-    private int score;
+	private int hitPoints;
+	private int attack;
+    	private int[] playerPosition;
+    	private int score;
+	private String typeOfPiece;
+    private char icon;
+
     /**
      * creates a player with 100 hitPoints and 20 attack
      */
     public Player(){
-	this.hitPoints = 50;
+	this.hitPoints = 100;
 	this.attack = 20;
 	this.score= 0;
+	this.setTypeOfPiece("player");
+	this.setIcon('@');
     }
     
     /**
@@ -35,6 +42,14 @@ public class Player {
     public int getScore(){
 	return this.score;
     }
+
+	/** 
+	sets that player's attack
+	@param atk this is the amount of points you want to set the player with
+	*/
+	public void setAttack(int atk){
+		this.attack=atk;
+}
     
     /**
      * @return the player's attack
@@ -78,7 +93,31 @@ public class Player {
 	mon.setHitPoints(mon.getHitPoints()-this.attack);
 	}
     }
+
+    /** this gets the type of piece of the object
+     */
+    public String getTypeOfPiece(){
+	return this.typeOfPiece;
+    }
+    /**
+       this sets the type of piece of the object
+       @param newTypeOfPiece it is the new type of piece it will be.
+    */
+
+    public void setTypeOfPiece(String newTypeOfPiece){
+	this.typeOfPiece=newTypeOfPiece;
+    }
 	
-    
-    
+    /** 
+     *This is the getter to figure out what piece icon it is. 
+     */ 
+    public char getIcon(){
+	return this.icon;
+    }
+    /** 
+     *This is the setter for the Icon it will be 
+     *@param NewIcon is the icon of piece that will be in the game 
+     */ public void setIcon(char NewIcon){
+	 this.icon=NewIcon;
+     }	
 }

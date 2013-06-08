@@ -8,16 +8,19 @@ import java.util.Random;
  */
 /**
  *This is a monster called a golem that is very healthy with a ton of attack.
+ Golems have icon G
  */
 
 public class Golem extends Monster{ 
+    private char icon;
 
     /**
      *creates a Golem with 50 hitPoints and 20 attack with no random movement
      *
      */
     public Golem(){
-	super(50,20,0,20);    
+	super(50,20,0,20);
+	this.setIcon('G');
     }
     /**
      * creates a Golem with 50 HP and 20 attack
@@ -25,6 +28,7 @@ public class Golem extends Monster{
      */
     public Golem(int typeOfMovement){
 	super(50,20,typeOfMovement,20);
+	this.setIcon('G');
     }
     
     /**
@@ -35,6 +39,7 @@ public class Golem extends Monster{
      */
     public Golem(int hitPoints, int attack, int typeOfMovement){
 	super(hitPoints,attack,typeOfMovement,20);
+	this.setIcon('G');
     }
     /**
      *creates a Golem to the parameters given to it
@@ -45,6 +50,21 @@ public class Golem extends Monster{
      */
         public Golem(int hp,int att,int typeOfMove, int points){
 	super(hp,att,typeOfMove,points);
+	this.setIcon('G');
 
     }
+    /** 
+     *This is the getter to figure out what piece icon it is. Golem = G
+     */ 
+    @Override public char getIcon(){
+	return this.icon;
+    }
+    /** 
+     *This is the setter for the Icon it will be. Golem = G
+     *@param NewIcon is the icon of piece that will be in the game 
+     */ 
+    @Override public void setIcon(char NewIcon){
+	 this.icon=NewIcon;
+     }
+
 }

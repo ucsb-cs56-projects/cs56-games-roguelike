@@ -8,27 +8,36 @@ import java.util.Random;
  *@author Hans Marasigan & Richard Nguyen
  *@version cs56 s13
  */
-public class Monster {
+public class Monster implements GamePiece{
 	private int hitPoints;
 	private int attack;
 	private int direction = 0;
 	private int typeOfMovement;
 	private int[] position = new int[2];
         private int pointValue=5;
-
+	private String typeOfPiece;
+    private char icon;
 	/**
 	 * creates a monster with 20 hitPoints and 10 attack and  no random movement
 	 * 
 	 */
 	public Monster(){
-		this(20,10,0);
+	    this.hitPoints=20;
+	    this.attack=10;
+	    this.typeOfMovement=0;
+	    this.setTypeOfPiece("monster");
+	    this.setIcon('M');
 	}
 	/**
 	 * creates a player with 20 hitPoints and 10 attack
 	 * @param randomMovement whether or not the monster will move randomly or not
 	 */
 	public Monster(int typeOfMovement){
-		this(20,10,typeOfMovement);
+	    this.hitPoints = 20;
+	    this.attack=10;
+	    this.typeOfMovement=typeOfMovement;
+	    this.setTypeOfPiece("monster");
+	    this.setIcon('M');
 	}
 	/**
 	 * creates a player with 20 hitPoints and 10 attack
@@ -40,6 +49,8 @@ public class Monster {
 		this.hitPoints = hitPoints;
 		this.attack = attack;
 		this.typeOfMovement = typeOfMovement;
+		this.setTypeOfPiece("monster");
+		this.setIcon('M');
 	}
     /**
      *creates a monster with the makers preference of status
@@ -53,6 +64,8 @@ public class Monster {
 		this.attack = att;
 		this.typeOfMovement = typeOfMovement;
 		this.pointValue=points;
+		this.setTypeOfPiece("monster");
+		this.setIcon('M');
     }
     /**
      * @return the monster's hitPoints
@@ -95,11 +108,37 @@ public class Monster {
      * sets the pointValue of the Monster
      * @param pointValue number of points for killing the bat.
      */
-    
     public void setPointValue(int pointValue){
 	this.pointValue=pointValue;
 	
     }
+    /**
+       this gets the type of piece of the monster
+    */
+	public String getTypeOfPiece(){
+		return this.typeOfPiece;
+	}
+    /**
+       this sets the type of piece of the monster
+    */
+	public void setTypeOfPiece(String newTypeOfPiece){
+		this.typeOfPiece=newTypeOfPiece;
+	}
+    
+    /** 
+     *This is the getter to figure out what piece icon it is. 
+     */ 
+    public char getIcon(){
+	return this.icon;
+    }
+    /** 
+     *This is the setter for the Icon it will be 
+     *@param NewIcon is the icon of piece that will be in the game 
+     */ public void setIcon(char NewIcon){
+	 this.icon=NewIcon;
+
+     }	
+	
     
 	/**
 	 * a method for attacking the player
@@ -108,6 +147,7 @@ public class Monster {
     public void attacking(Player mainChar){
 		mainChar.setHitPoints(mainChar.getHitPoints()-this.attack);
 	}
+
 	
 	public void setMonsterPosition(int x, int y){
 		this.position[0] = x;
@@ -198,15 +238,8 @@ public class Monster {
 								direction = 0;
 							}
 
-						}
-						
-						
+						}		
 		}		
-						
-
-
-		
-
 		
 		switch (direction){
 		case 0	    :	vector[0]=1; break;
@@ -215,10 +248,7 @@ public class Monster {
 		case 3		:	vector[1]=1; break;
 		default		:	break;
 		}
-		
 
 		return vector;
 	}
-	
-
 }

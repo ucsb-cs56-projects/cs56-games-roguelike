@@ -10,10 +10,11 @@ import java.util.Random;
 public class LogicEngine {
     //list of all the monsters
     private Monster[][] listOfMonsters;
+    private Item[][] listOfItems;
     //the player the user uses
     private Player thePlayer;
     //all the cells that all object in the game can move in
-    private Object[][] floor;
+    private GamePiece[][] floor;
     private int floorWidth;
     private int floorHeight;
     private int[] playerPosition;
@@ -38,8 +39,9 @@ public class LogicEngine {
 	public LogicEngine(int width, int height){
 		floorWidth = width;
 		floorHeight = height;
-		floor = new Object[floorWidth][floorHeight];
+		floor = new GamePiece[floorWidth][floorHeight];
 		listOfMonsters = new Monster[floorWidth][floorHeight];
+		listOfItems = new Item[floorWidth][floorHeight];
 		createAllObjects();
 		storeMonsters();
 		int[] position = {40,12};
@@ -76,12 +78,12 @@ public class LogicEngine {
 	 * @param y the y position of the object
 	 * @return the object at the position x and y
 	 */
-	public Object getObject(int x, int y){
+	public GamePiece getObject(int x, int y){
 
 	      return floor[x][y];
 	}
 	
-	public Object[][] getFloor(){
+	public GamePiece[][] getFloor(){
 		return floor;
 	}
 	
@@ -96,9 +98,44 @@ public class LogicEngine {
 	public int[] getPlayerPosition(){
 		return thePlayer.getPlayerPosition();
 	}
-	
+	 /**
+	  * move GamePiece from (xOrig,yOrig) to (x,y)
+	  * 	 x and y are the position thats being tested
+	 * xOrig and yOrig are the position of the object now
+	 * @param x is the new x position
+	 * @param y is the new y position
+	 * @param xOrig is the x position of the object right now
+	 * @param yOrig is the y position of the object right now
+	 *
+	 */
 
-	
+	public void move(int x,int y,int xOrig,int yOrig){
+                floor[x][y] = floor[xOrig][yOrig];
+		floor[xOrig][yOrig] = null;
+
+		int[] position = {x,y};
+                if(floor[x][y] instanceof Player)
+                {
+        	thePlayer.setPlayerPosition(position);
+                }
+        }
+	/**
+	 * x and y are the position thats being tested
+	 * xOrig and yOrig are the position of the object now
+	 * @param x is the x position of the position being tested
+	 * @param y is the y position of the position being tested
+	 * @param xOrig is the x position of the object right now
+	 * @param yOrig is the y position of the object right now
+	 * attacks if the 2 coordinates hold different GamePieces
+	 */
+        public void attack(int x,int y,int xOrig,int yOrig){
+	    if(floor[x][y] instanceof Monster && floor[xOrig][yOrig] instanceof Player){	                
+			  thePlayer.attacking(listOfMonsters[x][y]);
+                }
+                    
+	    if(floor[x][y]instanceof Player && floor[xOrig][yOrig] instanceof Monster){
+                    listOfMonsters[xOrig][yOrig].attacking(thePlayer);}
+        }
 	/**
 	 * x and y are the position thats being tested
 	 * xOrig and yOrig are the position of the object now
@@ -122,33 +159,22 @@ public class LogicEngine {
         }
         
 		
-		
+			
 		//player isn't movable, start attack for player
-	    if(floor[x][y] instanceof Monster){
-			if(floor[xOrig][yOrig]instanceof Player){
-			    thePlayer.attacking(listOfMonsters[x][y]);
-				return false;
-			}else{
-				return false;
+	    if(floor[x][y] instanceof Monster){	
+		if(floor[xOrig][yOrig] instanceof Player){
+							return false;	
+			}else{	
+				return false;	
 			}
 		}
 				
 		//monster isn't movable, start attack for monster
-		if(floor[x][y] instanceof Player && floor[xOrig][yOrig] instanceof Monster){
-		    listOfMonsters[xOrig][yOrig].attacking(thePlayer);
-			return false;
+	    if(floor[x][y] instanceof Player && floor[xOrig][yOrig] instanceof Monster){
+		    			return false;
 		}
 		
 
-		// monster or player is movable	
-
-		floor[x][y] = floor[xOrig][yOrig];
-		floor[xOrig][yOrig] = null;
-
-		int[] position = {x,y};
-        if(floor[x][y] instanceof Player){
-        	thePlayer.setPlayerPosition(position);
-        }
 		return true;
 	}
 	
@@ -190,7 +216,6 @@ public class LogicEngine {
 	          for (int y = 0; y < floorHeight; y++) {  
 	        	  if(floor[x][y] instanceof Monster){	
 			      listOfMonsters[x][y] = (Monster) floor[x][y];
-			      //listOfMonsters[x][y] =Monster floor[x][y];
 	        		  listOfMonsters[x][y].setMonsterPosition(x,y);
 	        	  }else{
 	        		  listOfMonsters[x][y] = null; 
@@ -216,45 +241,49 @@ public class LogicEngine {
 		 Random numGenerator = new Random();
 		 
 		 int x = 0;
-		 while(x < 8){
+		 while(x < 7){
 			 int xPos = numGenerator.nextInt(79);
 			 int yPos = numGenerator.nextInt(23);
 			 if(floor[xPos][yPos]==null){
-			     if (x<2){
-				 floor[xPos][yPos] = new Monster(numGenerator.nextInt(2)+1);
+			     if (x<=2){
+				 floor[xPos][yPos] = 
+				     new Monster(numGenerator.nextInt(2)+1);
 				 x++;
 			     }
-			     if (x<4){
-				 floor[xPos][yPos] = new Troll(numGenerator.nextInt(2)+1);
+			     else if (x<=4){
+				 floor[xPos][yPos] = 
+				     new Troll(numGenerator.nextInt(2)+1);
 				 x++;
 			     }
-			     if (x<6){
-				 floor[xPos][yPos] = new Golem(numGenerator.nextInt(2)+1);
+			     else if (x<=5){
+				 floor[xPos][yPos] = 
+				     new Golem(numGenerator.nextInt(2)+1);
 				 x++;
 			     }
-			     if (x<8)
-				 floor[xPos][yPos] = new Bat(numGenerator.nextInt(2)+1);
+			     else{
+				 floor[xPos][yPos] = 
+				     new Bat(numGenerator.nextInt(2)+1);
 				 x++;
+			     }
 			 }
 		 }
-
 		 
-	}
-	
+	}	
 	public void createMonster(){
 		 Random numGenerator = new Random();
 		 
-		 int x = 0;
-		 while(true){
-			 int xPos = numGenerator.nextInt(70);
-			 int yPos = numGenerator.nextInt(20);
-			 if(floor[xPos][yPos]==null){
-			     floor[xPos][yPos] = new Monster(numGenerator.nextInt(2)+1);
-			     listOfMonsters[xPos][yPos] = (Monster) floor[xPos][yPos];		      
-			     listOfMonsters[xPos][yPos].setMonsterPosition(xPos,yPos);
-			     break;
-			 }
-		 }
+		 
+		 int xPos = numGenerator.nextInt(70);
+		 int yPos = numGenerator.nextInt(20);
+		 int monsterRandom=numGenerator.nextInt(100);
+		 if(floor[xPos][yPos]==null){
+		     
+		     floor[xPos][yPos] = new Monster(numGenerator.nextInt(2)+1);
+		     listOfMonsters[xPos][yPos] = (Monster) floor[xPos][yPos];
+		     listOfMonsters[xPos][yPos].setMonsterPosition(xPos,yPos);
+		     }
+		     
+		 
 	}
 	
 }

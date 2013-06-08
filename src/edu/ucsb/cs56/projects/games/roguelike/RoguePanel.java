@@ -597,15 +597,19 @@ private LookupOp setColors(Color bgColor, Color fgColor) {
 		write(""+score+ " ",36,23,RoguePanel.white,RoguePanel.black);
 	}
 	
-	
+	// public void drawItem(int xPosition, int yPosition){
+		
+	// 	write("i",xPosition,yPosition,RoguePanel.white,RoguePanel.black);
+		
+	// }
 
 	/**
 	 *moves the monster to position xPosition,yPosition
 	 * Prints the x and y coordinates of the character.
 	 */
-	public void moveMonster(int xPosition, int yPosition){
+    public void moveMonster(int xPosition, int yPosition, GamePiece piece){
 		
-		write("M",xPosition,yPosition,RoguePanel.white,RoguePanel.black);
+	write(piece.getIcon(),xPosition,yPosition,RoguePanel.white,RoguePanel.black);
 		
 	}
 	
@@ -640,7 +644,7 @@ private LookupOp setColors(Color bgColor, Color fgColor) {
 		write("YOU WIN",40,12,RoguePanel.white,RoguePanel.black);
 	}
 	
-	public void emptySpace(int xPosition, int yPosition){
+    public void emptySpace(int xPosition, int yPosition){
 		write("_",xPosition,yPosition,RoguePanel.white,RoguePanel.black);
 	}
 	

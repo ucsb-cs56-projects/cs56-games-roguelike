@@ -8,37 +8,41 @@ import java.util.Random;
  */
 
 /**
- *This class represents a class of monster called a Bat which is a weak melee monster.
+ *This class represents a class of monster called a Bat which is a weak melee monster. Bat icon is B
  */
 
 public class Bat extends Monster{ 
-
+    private char icon;
     /**
      *creates a Bat with 10 hitPoints and 10 attack with no random movement
-     *
+     *with icon B
      */
     public Bat(){
-	super(10,10,0,10);    
+	super(10,10,0,10);
+	this.setIcon('B');
+	
     }
     /**
-     * creates a Bat with 10 HP and 10 attack
+     * creates a Bat with 10 HP and 10 attack with icon B
      * @ param randomMovement whether or not the bat will move randomly
      */
     public Bat(int typeOfMovement){
 	super(10,10,typeOfMovement,10);
+	this.setIcon('B');
     }
     
     /**
-     * creates a Bat with hit points, attack, and random movement
+     * creates a Bat with hit points, attack, and random movement with icon B
      * @param hitPoints the Bat's hitPoints
      * @param attack the Bat's attack
      * @param typeOfMovement whether or not the Bat will move randomly or not
      */
     public Bat(int hitPoints, int attack, int typeOfMovement){
 	super(hitPoints,attack,typeOfMovement,10);
+	this.setIcon('B');
     }
     /**
-     *creates a Bat to the parameters given to it
+     *creates a Bat to the parameters given to it, with icon B
      * @param hp the Bat's hitPoints
      * @param att the Bat's attack
      * @param typeOfMove whether or not the Bat will move randomly or not
@@ -46,5 +50,21 @@ public class Bat extends Monster{
      */
     public Bat(int hp,int att,int typeOfMove, int points){
 	super(hp,att,typeOfMove,points);
+	this.setIcon('B');
+    }
+
+    /** 
+     *This is the getter to figure out what piece icon it is. 
+     */ 
+    @Override public char getIcon(){
+	return this.icon;
+    }
+    /** 
+     *This is the setter for the Icon it will be 
+     *@param NewIcon is the icon of piece that will be in the game 
+     */ 
+    @Override public void setIcon(char NewIcon){
+	    this.icon=NewIcon;
+
     }
 }

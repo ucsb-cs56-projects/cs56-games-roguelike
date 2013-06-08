@@ -11,6 +11,7 @@ import javax.swing.JFrame;
  * 	but for the sake of having something that runs,
  * 	RogueController both creates a RoguePanel and allows the user to manipulate it.
  * @author Clayven Anderson and Jonathan Tan
+ *@author Hans Marasigan
  * @author Minh Le
  */
 public class RogueController extends JFrame implements KeyListener
@@ -47,27 +48,38 @@ public class RogueController extends JFrame implements KeyListener
 		logicHandler = new LogicEngine();
 		addKeyListener(this);
 	}
-
-	/**
-	 * Handles movement of player by checking if it can move there first through the logic engine
-	 * if it can move, invoke the canvas to animate it
-	 * if it can't, it checks if its because of out of bounds or a monster
-	 * if its a monster the player will attack it and its its dead the canvas will animate the removal of the monster
-	 */
-	public void moveHero(){
-		if(!logicHandler.movable(x,y,origX, origY)){
-			
-				if(logicHandler.monsterIsDead(x,y)){
-					canvas.clear(x,y);
-				}
-
-			x = origX;
-			y = origY;		
-		}
-		canvas.moveHeroAnimated(x, y,logicHandler.getPlayer().getHitPoints(),logicHandler.getPlayer().getScore());
-	}
-	
-	/**
+    
+    /**
+     * Handles movement of player by checking if it can move there first through the logic engine
+     * if it can move, invoke the canvas to animate it
+     * if it can't, it checks if its because of out of bounds or a monster
+     * if its a monster the player will attack it and its its dead the canvas will animate the removal of the monster
+     */
+    public void moveHero(){
+//	if(!logicHandler.movable(x,y,origX, origY)){
+	    
+	//    if(logicHandler.monsterIsDead(x,y)){
+	//	canvas.clear(x,y);
+	 //   }
+	    
+	  //  x = origX;
+	 //   y = origY;		
+//	}
+//	canvas.moveHeroAnimated(x, y,logicHandler.getPlayer().getHitPoints(),logicHandler.getPlayer().getScore());
+	if ( logicHandler.movable(x,y,origX, origY)) {
+            logicHandler.move(x,y,origX,origY);
+        } 
+        else{
+            logicHandler.attack(x, y, origX, origY);
+            if(logicHandler.monsterIsDead(x,y)){
+            canvas.clear(x,y);
+                }
+            x = origX;
+   	    y = origY;	 
+        }         
+     canvas.moveHeroAnimated(x, y,logicHandler.getPlayer().getHitPoints(),logicHandler.getPlayer().getScore());	
+    }
+    /**
 	 * Handles movement of all monsters by checking if it can move there first through the logic engine
 	 * if it can move, invoke the canvas to animate it
 	 * if it can't, it checks if its because of out of bounds or a monster or a player
@@ -83,8 +95,8 @@ public class RogueController extends JFrame implements KeyListener
 
 		/* loops through all the monsters
 		xOrig,yOrig is the position the monster is at right now */
-	     for (int xOrig = 0; xOrig < gridWidth; xOrig++) {	  
-	          for (int yOrig = 0; yOrig < gridHeight; yOrig++) {
+		for (int xOrig = 0; xOrig < gridWidth; xOrig++) {	  
+		    for (int yOrig = 0; yOrig < gridHeight; yOrig++) {
 	        	  
 	        	  if(mon[xOrig][yOrig]!=null){
 	        		  // gets the direction of movement of the monster at xOrig, yOrig
@@ -93,140 +105,137 @@ public class RogueController extends JFrame implements KeyListener
 	        		  yPos = yOrig + direction[1];
 	        		  
 	        		  if(logicHandler.movable(xPos, yPos,xOrig,yOrig)){
-	        			  
-	        			  canvas.moveMonster(xPos, yPos);
+				      logicHandler.move(xPos, yPos,xOrig,yOrig);
+				      canvas.moveMonster(xPos, yPos,logicHandler.getObject(xPos,yPos));
 	        		  }else{
-	        			  if(xPos>=0 && xPos<=80 && yPos>=0 && yPos<=24){
+	        		      logicHandler.attack(xPos, yPos,xOrig,yOrig);
+				      if(xPos>0 && xPos<=78 && yPos>0 && yPos<=20){
 	        			  //display the you were attacked flag if the collision was with a player
 	        			  if(logicHandler.getObject(xPos, yPos) instanceof Player){
-	        				  canvas.monsterAttack();
-	        				  canvas.moveHeroAnimated(x, y,logicHandler.getPlayer().getHitPoints(),logicHandler.getPlayer().getScore());
+					      canvas.monsterAttack();
+					      canvas.moveHeroAnimated(x, y,logicHandler.getPlayer().getHitPoints(),logicHandler.getPlayer().getScore());
 	        			  }
-	        			  canvas.moveMonster(xOrig, yOrig);
-
-	        			  }
+	        			  canvas.moveMonster(xOrig, yOrig,logicHandler.getObject(xOrig,yOrig));
+					  
+				      }
 	        		  }
 	        	  }
-	          }
-	     }
-	     //update the monster list in logic handler
-	    logicHandler.storeMonsters();
-	    fillEmptySpace();
+		    }
+		}
+		//update the monster list in logic handler
+		logicHandler.storeMonsters();
+		fillEmptySpace();
 	}
-	
+    
+    
 	public void fillEmptySpace(){
-		Object floor[][];
-		floor = logicHandler.getFloor();
-	     for (int x= 0; x < canvas.getGridWidth()-1; x++) {	  
-	          for (int y = 0; y < canvas.getGridHeight()-1; y++) {
-	        	  if(floor[x][y]== null){
-	        		  canvas.emptySpace(x,y);
-	        	  }
-	          }
+	    Object floor[][];
+	    floor = logicHandler.getFloor();
+	    for (int x= 0; x < canvas.getGridWidth()-1; x++) {	  
+		for (int y = 0; y < canvas.getGridHeight()-1; y++) {
+		    if(floor[x][y]== null){
+			canvas.emptySpace(x,y);
+		    }
+		}
 		
-	     }
+	    }
+	}
+    
+    /**
+     * Checks to see if player is dead, and store score into txt file for HighScores
+     * 
+     */
+    public void checkPlayerStatus(){
+	int[] array= new int[5];
+	int a  = 0;
+	if( logicHandler.getGameOver() == true){
+	    canvas.clear();
+	    // display the HighScore after game is over by reading from Score.txt...
+	    try{ 
+		File myFile = new File( "Score.txt");
+		FileReader fileReader = new FileReader("Score.txt");
+		BufferedReader reader = new BufferedReader(fileReader);
+		String line = null; 
+		while((line = reader.readLine())!= null){
+		    array[a]= Integer.parseInt(line);
+		    a++;
+		}
+	    }catch (Exception ex){
+		ex.printStackTrace();
+	    }
+	    canvas.displayLosingScreen(logicHandler.getPlayer().getScore(),array); 
+	}
+	// display the score and highScores after game is over and write the new highScore into Score.txt 
+	if(logicHandler.playerIsDead()&& logicHandler.getGameOver() == false){
+	    try{ 
+		File myFile = new File( "Score.txt");
+		FileReader fileReader = new FileReader("Score.txt");
+		BufferedReader reader = new BufferedReader(fileReader);
+		String line = null; 
+		while((line = reader.readLine())!= null){
+		    array[a]= Integer.parseInt(line);
+		    a++;
+		}
+	    }catch (Exception ex){
+		ex.printStackTrace();
+	    }
+	    // updating the Score.txt file after getting new highScore
+	    int temp=0;
+	    int temp2 = 0;
+	    for(int count = 0;count <5;count++){
+		if(array[count] < logicHandler.getPlayer().getScore()){
+		    temp = array[count];
+		    array[count] = logicHandler.getPlayer().getScore();
+		    if( count != 4){
+			for( int c = count+1; count < 5; count++){
+			    temp2 = array[c];
+			    array[c] = temp;
+			    temp = temp2;
+			}
+		    }
+		    break;
+		}
+	    }
+	    
+	    try{
+		FileWriter writer = new FileWriter("Score.txt");
+		for( int b = 0 ; b< 5;b++){
+		    writer.write(""+array[b]+ "\n");
+		}
+		writer.close();
+	    }catch(IOException ex){
+		ex.printStackTrace();
+	    }
+	    canvas.clear();
+	    canvas.displayLosingScreen(logicHandler.getPlayer().getScore(),array);
+	    logicHandler.setGameOver(true);
 	}
 	
-	/**
-	 * Checks to see if player is dead, and store score into txt file for HighScores
-	 * 
-	 */
-	public void checkPlayerStatus(){
-	    int[] array= new int[5];
-	    int a  = 0;
-	    if( logicHandler.getGameOver() == true){
-	    	canvas.clear();
-		// display the HighScore after game is over by reading from Score.txt...
-		try{ 
-		    File myFile = new File( "Score.txt");
-		    FileReader fileReader = new FileReader("Score.txt");
-		    BufferedReader reader = new BufferedReader(fileReader);
-		    String line = null; 
-		    while((line = reader.readLine())!= null){
-			array[a]= Integer.parseInt(line);
-			a++;
-		    }
-		}catch (Exception ex){
-		    ex.printStackTrace();
-			}
-	    	canvas.displayLosingScreen(logicHandler.getPlayer().getScore(),array); 
-	     }
-	    // display the score and highScores after game is over and write the new highScore into Score.txt 
-	    if(logicHandler.playerIsDead()&& logicHandler.getGameOver() == false){
-		try{ 
-		    File myFile = new File( "Score.txt");
-		    FileReader fileReader = new FileReader("Score.txt");
-		    BufferedReader reader = new BufferedReader(fileReader);
-		    String line = null; 
-		    while((line = reader.readLine())!= null){
-			array[a]= Integer.parseInt(line);
-			a++;
-		    }
-		}catch (Exception ex){
-		    ex.printStackTrace();
-		}
-		// updating the Score.txt file after getting new highScore
-		int temp=0;
-		int temp2 = 0;
-		for(int count = 0;count <5;count++){
-		    if(array[count] < logicHandler.getPlayer().getScore()){
-			temp = array[count];
-			array[count] = logicHandler.getPlayer().getScore();
-			if( count != 4){
-			    for( int c = count+1; count < 5; count++){
-				temp2 = array[c];
-				array[c] = temp;
-				temp = temp2;
-			    }
-			}
-			break;
-		    }
-		}
-		//canvas.displayLosingScreen(logicHandler.getPlayer().getScore(),array);
-		try{
-		    FileWriter writer = new FileWriter("Score.txt");
-		    for( int b = 0 ; b< 5;b++){
-			writer.write(""+array[b]+ "\n");
-		    }
-		    writer.close();
-		}catch(IOException ex){
-		    ex.printStackTrace();
-		}
-		canvas.clear();
-		canvas.displayLosingScreen(logicHandler.getPlayer().getScore(),array);
-		logicHandler.setGameOver(true);
-	    }
-	    // if( logicHandler.getGameOver() == true){
-	    // 	canvas.clear();
-	    // 	//canvas.displayLosingScreen(logicHandler.getPlayer().getScore(),array); 
-	    //  }
-	    
-	    
-	}
+	
+	
+    }
     
 	/**
 	 * Check to see if all monsters are dead and creates more monsters!!! OMG!!
 	 */
-	public void checkAllMonsterStatus(){
-		int gridWidth, gridHeight;
-		Monster mon[][] = logicHandler.getMonsters();
-		gridHeight = canvas.getGridHeight();
-		gridWidth = canvas.getGridWidth();
-		
-	     for (int xOrig = 0; xOrig < gridWidth; xOrig++) {	  
-	          for (int yOrig = 0; yOrig < gridHeight; yOrig++) {
-	        	  if(mon[xOrig][yOrig]!=null){
-	        		  return;
-	        	  }
-	          }
-	     }
-	     for(int a =0 ; a < 10 ;a++){
-		 logicHandler.createMonster();}
-	     //    canvas.clear();
-	     //	canvas.displayWinningScreen();
-	     
-		
+    public void checkAllMonsterStatus(){
+	int gridWidth, gridHeight;
+	Monster mon[][] = logicHandler.getMonsters();
+	gridHeight = canvas.getGridHeight();
+	gridWidth = canvas.getGridWidth();
+	
+	for (int xOrig = 0; xOrig < gridWidth; xOrig++) {	  
+	    for (int yOrig = 0; yOrig < gridHeight; yOrig++) {
+		if(mon[xOrig][yOrig]!=null){
+		    return;
+		}
+	    }
 	}
+	for(int a =0 ; a < 10 ;a++){
+	    logicHandler.createMonster();}
+	
+	
+    }
 	
 
 	
