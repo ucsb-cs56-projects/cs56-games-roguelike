@@ -388,6 +388,7 @@ public class RoguePanel extends JPanel
 
       g.drawImage(offscreenBuffer,0,0,this);
       
+      /*
       if(inGame){
 	  //draw shadows that cover undiscovered areas
 	  for(int x = 0; x < gridWidth; x++){
@@ -399,7 +400,7 @@ public class RoguePanel extends JPanel
 	      }//for
 	  }//for
       }//if
-
+      */
   }
   
  private void loadGlyphs() {
@@ -613,13 +614,14 @@ private LookupOp setColors(Color bgColor, Color fgColor) {
 		write("X:",10,23,RoguePanel.white,RoguePanel.black);
 		write("Y:",14,23,RoguePanel.white,RoguePanel.black);
 		write("Hp:",20,23,RoguePanel.white,RoguePanel.black);
-		write("Score:",30,23,RoguePanel.white,RoguePanel.black);
+		write("Level:",30,23,RoguePanel.white,RoguePanel.black);
+		write("Score:",40,23,RoguePanel.white,RoguePanel.black);
 	}
     
 	/**
 	 * moves the player to position xPosition,yPosition and updates its hp using write
 	 */
-    public void moveHeroAnimated(int xPosition, int yPosition, int hp,int score){
+    public void moveHeroAnimated(int xPosition, int yPosition, int hp, int level, int score){
 		
 		drawHUD();
 		
@@ -632,7 +634,8 @@ private LookupOp setColors(Color bgColor, Color fgColor) {
 		write(""+xPosition,12,23,RoguePanel.white,RoguePanel.black);
 		write(""+yPosition,16,23,RoguePanel.white,RoguePanel.black);
 		write(""+hp+ " ",22,23,RoguePanel.white,RoguePanel.black);
-		write(""+score+ " ",36,23,RoguePanel.white,RoguePanel.black);
+		write(""+level+ " ",36,23,RoguePanel.white,RoguePanel.black);
+		write(""+score+ " ",46,23,RoguePanel.white,RoguePanel.black);
 	}
 	
 	// public void drawItem(int xPosition, int yPosition){

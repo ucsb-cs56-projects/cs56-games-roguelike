@@ -75,10 +75,16 @@ public class Monster implements GamePiece{
 	return this.hitPoints;
     }
     /**
+     * sets the hitPoints of the monster
+     * @param newHp is the new hp for the monster
+     */
+    public void setHitPoints(int newHp){
+	this.hitPoints = newHp;
+    }
+    /**
      *sets the attack of the monster
      *@param attack the attack points of the monster
-     */
-    
+     */  
     public void setAttack(int attack){
 	this.attack=attack;
     }
@@ -89,14 +95,7 @@ public class Monster implements GamePiece{
     public int getAttack(){
 		return this.attack;
     }
-    
-    /** 
-     * sets the hitPoints of the monster
-     * @param newHp is the new hp for the monster
-     */
-    public void setHitPoints(int newHp){
-	this.hitPoints = newHp;
-    }
+
     /**
      * get the point value of the Monster
      */
@@ -139,6 +138,19 @@ public class Monster implements GamePiece{
 
      }	
 	
+    /**
+       a method that boosts stats on Monster for each level
+       i.e. the higher the level, the tougher the enemy
+       @param level the current level the player is on
+    */
+    public void levelBonus(int level){
+	this.hitPoints = this.hitPoints + ( (level*5) - 5 );   //HP of monster is increased by 5 for each level
+	if(level%3 == 0)
+	    this.attack = this.attack + ( (level*5) - 5 );    //Attack power of monster increases by 5 every 3 levels
+
+	//More bonuses goes here
+
+    }
     
 	/**
 	 * a method for attacking the player
