@@ -3,8 +3,6 @@ package edu.ucsb.cs56.projects.games.roguelike;
 import java.util.Random;
 
 /**
- *@author Clayven Anderson
- *@author Hans Marasigan & Richard Nguyen
  *@author Rick Lee
  *@version cs56 Winter 14
  */

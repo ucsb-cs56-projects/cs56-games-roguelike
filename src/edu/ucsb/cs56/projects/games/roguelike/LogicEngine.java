@@ -1,6 +1,7 @@
 package edu.ucsb.cs56.projects.games.roguelike;
 
 import java.util.Random;
+//import java.lang.reflect.*;
 
 /**
  * LogicEngine takes care of game states
@@ -19,6 +20,13 @@ public class LogicEngine {
     private int floorHeight;
     private int[] playerPosition;
     private boolean gameOver ;
+
+    //List of one of each monsters.
+    //Add to this list when adding extra monsters (Put the class name as a String type)
+    //private final String[] monsterPieces = new String[] 
+    //{"Monster","Troll","Golem", "Bat","Snake","Zombie","Pirate"};
+
+    private final int numOfMonsters = 7;//How many monsters on the board when creating them
 	
 
 	
@@ -239,34 +247,72 @@ public class LogicEngine {
 		 floor[40][12] = thePlayer;
 		 
 		 Random numGenerator = new Random();
-		 
+	 		 
 		 int x = 0;
-		 while(x < 7){
-			 int xPos = numGenerator.nextInt(79);
-			 int yPos = numGenerator.nextInt(23);
-			 if(floor[xPos][yPos]==null){
-			     if (x<=2){
-				 floor[xPos][yPos] = 
-				     new Monster(numGenerator.nextInt(2)+1);
-				 x++;
-			     }
-			     else if (x<=4){
-				 floor[xPos][yPos] = 
-				     new Troll(numGenerator.nextInt(2)+1);
-				 x++;
-			     }
-			     else if (x<=5){
-				 floor[xPos][yPos] = 
-				     new Golem(numGenerator.nextInt(2)+1);
-				 x++;
-			     }
-			     else{
-				 floor[xPos][yPos] = 
-				     new Bat(numGenerator.nextInt(2)+1);
-				 x++;
-			     }
+		 while(x < numOfMonsters){
+		     int xPos = numGenerator.nextInt(79);
+		     int yPos = numGenerator.nextInt(23);
+		     if(floor[xPos][yPos]==null){
+			 if (x<=0){
+			     floor[xPos][yPos] = 
+				 new Monster(numGenerator.nextInt(2)+1);
+			     x++;
 			 }
-		 }
+			 else if (x<=1){
+			     floor[xPos][yPos] = 
+				 new Troll(numGenerator.nextInt(2)+1);
+			     x++;
+			 }
+			 else if (x<=2){
+			     floor[xPos][yPos] = 
+				 new Golem(numGenerator.nextInt(2)+1);
+			     x++;
+			 }
+			 else if (x<=3){
+			     floor[xPos][yPos] = 
+				 new Snake(numGenerator.nextInt(2)+1);
+			     x++;
+			 }
+			 else if(x<=4){
+			     floor[xPos][yPos] = 
+				 new Zombie(numGenerator.nextInt(2)+1);
+			     x++;
+			 }
+			 else if(x<=5){
+			     floor[xPos][yPos] = 
+				 new Pirate(numGenerator.nextInt(2)+1);
+			     x++;
+			 }
+			 else{
+			     floor[xPos][yPos] = 
+				 new Bat(numGenerator.nextInt(2)+1);
+			     x++;
+			 }
+		     }//if(floor[xPos][yPos]==null)
+		 }//while
+
+
+
+
+
+		 //DOES NOT WORK : plan to systemize creation of monsters instead of manually adding cases
+		 /*
+	        for(int i = 0; i < numOfMonsters; i++){
+		   int xPos = numGenerator.nextInt(79);
+		   int yPos = numGenerator.nextInt(23);
+		   //randomly generates a number which determines what type monster will be created
+		   int n = (int)(Math.random()*monsterPieces.length);
+		   
+		   if(floor[xPos][yPos]==null){
+		   
+		      String className = monsterPieces[n];
+		      Class c1 = Class.forName(className);
+		      Constructor con = c1.getConstructor(int.class);
+		      floor[xPos][yPos] = 
+		      (GamePiece)con.newInstance(numGenerator.nextInt(2)+1);		   
+		   }//if
+		}//for
+		 */
 		 
 	}	
 	public void createMonster(){
