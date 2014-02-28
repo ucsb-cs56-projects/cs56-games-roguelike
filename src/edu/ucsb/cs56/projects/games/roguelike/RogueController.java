@@ -107,8 +107,8 @@ public class RogueController extends JFrame implements KeyListener
 	        	  if(mon[xOrig][yOrig]!=null){
 	        		  // gets the direction of movement of the monster at xOrig, yOrig
 	        		  direction = mon[xOrig][yOrig].getDirection(logicHandler.getPlayerPosition());
-	        		  xPos= xOrig + direction[0];
-	        		  yPos = yOrig + direction[1];
+				  xPos = xOrig + direction[0];			      
+				  yPos = yOrig + direction[1];
 	        		  
 	        		  if(logicHandler.movable(xPos, yPos,xOrig,yOrig)){
 				      logicHandler.move(xPos, yPos,xOrig,yOrig);
@@ -140,7 +140,7 @@ public class RogueController extends JFrame implements KeyListener
 	    for (int x= 0; x < canvas.getGridWidth()-1; x++) {	  
 		for (int y = 0; y < canvas.getGridHeight()-1; y++) {
 		    if(floor[x][y]== null){
-			canvas.emptySpace(x,y);
+			canvas.emptySpace(x,y,logicHandler.getLevel());
 		    }
 		}
 		
@@ -266,7 +266,6 @@ public class RogueController extends JFrame implements KeyListener
 	    }
 	}
 	//If all monsters are defeated, created new monsters and increase the level
-	System.out.println("All monsters defeated. Next level. Creating new monsters.");
  	logicHandler.setLevel(logicHandler.getLevel()+1);
 	logicHandler.setMaxNumOfMonsters(logicHandler.getMaxNumOfMonsters()+1);
 	logicHandler.createMonster();
@@ -302,9 +301,7 @@ public class RogueController extends JFrame implements KeyListener
 		moveHero();
 		moveMonster();
 		trackDiscovery();
-		if(randomNumber.nextInt(100)==0){
-			logicHandler.createMonster();
-		}
+
 		checkPlayerStatus();
 		checkAllMonsterStatus();
 		canvas.recordShadows(discoveredArea);

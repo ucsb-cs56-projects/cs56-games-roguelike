@@ -36,6 +36,11 @@ public class RoguePanel extends JPanel
   public static Color yellow = new Color(0xFFFF00);
   public static Color magenta = new Color(0xFF00FF);
   public static Color gray = new Color(0x808080);
+  public static Color brown = new Color(0x663300);
+    //Array of colors that change the color of the ground with each level
+    public static Color[] groundColor = new Color[] 
+	{white,yellow,green,cyan,blue,magenta,brown,gray};
+    
   
   //attributes for handling things such as the Background and Foreground colors
   //as well as character placement
@@ -628,7 +633,7 @@ private LookupOp setColors(Color bgColor, Color fgColor) {
 		try{
 			write("@",xPosition,yPosition,RoguePanel.white,RoguePanel.black);
 		}catch(Exception ex){
-			write("HERE BE DRAGONS",0,22,RoguePanel.white,RoguePanel.black);
+			write("HERE BE DRAGONS",0,22,RoguePanel.red,RoguePanel.black);
 		}
 		
 		write(""+xPosition,12,23,RoguePanel.white,RoguePanel.black);
@@ -650,7 +655,7 @@ private LookupOp setColors(Color bgColor, Color fgColor) {
 	 */
     public void moveMonster(int xPosition, int yPosition, GamePiece piece){
 		
-	write(piece.getIcon(),xPosition,yPosition,RoguePanel.white,RoguePanel.black);
+	write(piece.getIcon(),xPosition,yPosition,RoguePanel.red,RoguePanel.black);
 		
 	}
 	
@@ -658,7 +663,7 @@ private LookupOp setColors(Color bgColor, Color fgColor) {
 	 * display the you were hit flag
 	 */
 	public void monsterAttack(){
-		write("You were hit",60,23,RoguePanel.white,RoguePanel.black);
+		write("You were hit",60,23,RoguePanel.yellow,RoguePanel.black);
 		
 	}
 	
@@ -666,7 +671,7 @@ private LookupOp setColors(Color bgColor, Color fgColor) {
 	 * displays the losing screen with player's score and HighScores
 	 */
     public void displayLosingScreen(int score,int[] array){
-		write("YOU LOSE",40,12,RoguePanel.white,RoguePanel.black);
+		write("YOU LOSE",40,12,RoguePanel.red,RoguePanel.black);
 		write("Score:"+score,40,14,RoguePanel.white,RoguePanel.black);
 		write("High Scores", 40,16,RoguePanel.white,RoguePanel.black);
 		int b = 17;
@@ -682,11 +687,11 @@ private LookupOp setColors(Color bgColor, Color fgColor) {
 	 * displays the winning screen
 	 */
 	public void displayWinningScreen(){
-		write("YOU WIN",40,12,RoguePanel.white,RoguePanel.black);
+		write("YOU WIN",40,12,RoguePanel.green,RoguePanel.black);
 	}
 	
-    public void emptySpace(int xPosition, int yPosition){
-		write("_",xPosition,yPosition,RoguePanel.white,RoguePanel.black);
+    public void emptySpace(int xPosition, int yPosition, int colorNum){
+		write("_",xPosition,yPosition,groundColor[colorNum%groundColor.length],RoguePanel.black);
 	}
 
     /**
