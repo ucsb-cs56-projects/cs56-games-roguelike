@@ -21,3 +21,8 @@ The LogicEngine.java constructor created the list:
 ```java
 	listOfMonsters = new Monster[floorWidth][floorHeight];
 ```
+Monsters are created in the createMonsters() method in LogicEngine.java:
+
+
+
+
