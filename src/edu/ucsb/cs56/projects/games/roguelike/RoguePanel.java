@@ -393,7 +393,7 @@ public class RoguePanel extends JPanel
 
       g.drawImage(offscreenBuffer,0,0,this);
       
-      /*
+      
       if(inGame){
 	  //draw shadows that cover undiscovered areas
 	  for(int x = 0; x < gridWidth; x++){
@@ -405,7 +405,7 @@ public class RoguePanel extends JPanel
 	      }//for
 	  }//for
       }//if
-      */
+      
   }
   
  private void loadGlyphs() {
@@ -666,6 +666,13 @@ private LookupOp setColors(Color bgColor, Color fgColor) {
 		write("You were hit",60,23,RoguePanel.yellow,RoguePanel.black);
 		
 	}
+
+    /**
+     * display that the player has advanced to the next level
+     */
+    public void nextLevel(){
+	write("NEXT LEVEL!",60,23,RoguePanel.yellow,RoguePanel.black);
+    }
 	
 	/**
 	 * displays the losing screen with player's score and HighScores
