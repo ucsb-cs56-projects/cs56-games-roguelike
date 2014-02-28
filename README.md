@@ -21,17 +21,18 @@ The LogicEngine.java constructor created the list:
 ```java
 	listOfMonsters = new Monster[floorWidth][floorHeight];
 ```
+```
 Monsters are created in the createMonsters() method in LogicEngine.java
 	called by checkAllMonsterStatus() in RogueController.java
+```
 
-
-
+```
 RogueController.java is the MAIN
 	branches:
 		LogicEngine.java
 			Deals with the state of the game and the movements of monsters and player
 		RoguePanel.java
 			Draw everything that appears on screen
-
+```
 
 
