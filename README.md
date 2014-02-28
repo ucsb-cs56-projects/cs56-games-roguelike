@@ -14,6 +14,6 @@ program internals
 
 
 The list of monsters is maintained in LogicEngine.java as a private variable:
-```
+```java
 private Monster[][] listOfMonsters;
 ```
