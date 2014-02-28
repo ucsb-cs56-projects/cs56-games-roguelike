@@ -14,19 +14,19 @@ public class Snake extends Monster{
     private char icon;
 
     /**
-     *creates a snake with 5 hitPoints and 15 attack with no random movement
+     *creates a snake with 5 hitPoints and 3 attack with no random movement
      *with icon S
      */
     public Snake(){
-	super(5,15,0,10);    
+	super(5,3,0,15);    
 	this.setIcon('S');
     }
     /**
-     * creates a snake with 5 HP and 15 attack with icon S
+     * creates a snake with 5 HP and 3 attack with icon S
      * @param randomMovement whether or not the monster will move randomly
      */
     public Snake(int typeOfMovement){
-	super(5,15,typeOfMovement,10);
+	super(5,3,typeOfMovement,15);
 	this.setIcon('S');
     }
     
@@ -37,7 +37,7 @@ public class Snake extends Monster{
      * @param randomMovement whether or not the Snake will move randomly or not
      */
     public Snake(int hitPoints, int attack, int typeOfMovement){
-	super(hitPoints, attack, typeOfMovement,10);
+	super(hitPoints, attack, typeOfMovement,15);
 	this.setIcon('S');
     }
     /**

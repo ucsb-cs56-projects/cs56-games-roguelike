@@ -146,7 +146,7 @@ public class Monster implements GamePiece{
     public void levelBonus(int level){
 	this.hitPoints = this.hitPoints + ( (level*5) - 5 );   //HP of monster is increased by 5 for each level
 	if(level%3 == 0)
-	    this.attack = this.attack + ( (level*5) - 5 );    //Attack power of monster increases by 5 every 3 levels
+	    this.attack = this.attack + ( (level) - 1 );    //Attack power of monster increases by 1 every 3 levels
 
 	//More bonuses goes here
 
@@ -157,7 +157,7 @@ public class Monster implements GamePiece{
 	 * @param mainChar the player being attacked
 	 */
     public void attacking(Player mainChar){
-		mainChar.setHitPoints(mainChar.getHitPoints()-this.attack);
+	//mainChar.setHitPoints(mainChar.getHitPoints()-this.attack);
 	}
 
 	

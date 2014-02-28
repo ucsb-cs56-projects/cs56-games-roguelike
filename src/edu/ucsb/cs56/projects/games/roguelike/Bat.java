@@ -16,20 +16,20 @@ import java.util.Random;
 public class Bat extends Monster{ 
     private char icon;
     /**
-     *creates a Bat with 10 hitPoints and 10 attack with no random movement
+     *creates a Bat with 5 hitPoints and 1 attack with no random movement
      *with icon B
      */
     public Bat(){
-	super(10,10,0,10);
+	super(5,1,0,10);
 	this.setIcon('B');
 	
     }
     /**
-     * creates a Bat with 10 HP and 10 attack with icon B
+     * creates a Bat with 5 HP and 1 attack with icon B
      * @ param randomMovement whether or not the bat will move randomly
      */
     public Bat(int typeOfMovement){
-	super(10,10,typeOfMovement,10);
+	super(5,1,typeOfMovement,10);
 	this.setIcon('B');
     }
     

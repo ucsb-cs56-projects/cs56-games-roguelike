@@ -14,19 +14,19 @@ public class Pirate extends Monster{
     private char icon;
 
     /**
-     *creates a Pirate with 20 hitPoints and 15 attack with no random movement
+     *creates a Pirate with 15 hitPoints and 5 attack with no random movement
      *with icon P
      */
     public Pirate(){
-	super(20,15,0,20);    
+	super(15,5,0,20);    
 	this.setIcon('P');
     }
     /**
-     * creates a pirate with 20 HP and 15 attack with icon P
+     * creates a pirate with 15 HP and 5 attack with icon P
      * @param randomMovement whether or not the monster will move randomly
      */
     public Pirate(int typeOfMovement){
-	super(20,15,typeOfMovement,20);
+	super(15,5,typeOfMovement,20);
 	this.setIcon('P');
     }
     

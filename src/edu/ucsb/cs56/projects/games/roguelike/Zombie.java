@@ -14,19 +14,19 @@ public class Zombie extends Monster{
     private char icon;
 
     /**
-     *creates a zombie with 20 hitPoints and 5 attack with no random movement
+     *creates a zombie with 15 hitPoints and 2 attack with no random movement
      *with icon Z
      */
     public Zombie(){
-	super(20,5,0,15);    
+	super(15,2,0,15);    
 	this.setIcon('Z');
     }
     /**
-     * creates a Zombie with 20 HP and 5 attack with icon Z
+     * creates a Zombie with 15 HP and 2 attack with icon Z
      * @param randomMovement whether or not the monster will move randomly
      */
     public Zombie(int typeOfMovement){
-	super(20,5,typeOfMovement,15);
+	super(15,2,typeOfMovement,15);
 	this.setIcon('Z');
     }
     
