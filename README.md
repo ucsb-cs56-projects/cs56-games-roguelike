@@ -17,3 +17,23 @@ The list of monsters is maintained in LogicEngine.java as a private variable:
 ```java
 private Monster[][] listOfMonsters;
 ```
+The LogicEngine.java constructor created the list:
+```java
+	listOfMonsters = new Monster[floorWidth][floorHeight];
+```
+
+Monsters are created in the createMonsters() method in LogicEngine.java
+checkAllMonsterStatus() in RogueController.java calls this method
+
+
+
+RogueController.java is the MAIN
+```
+	branches:
+		LogicEngine.java
+			Deals with the state of the game and the movements of monsters and player
+		RoguePanel.java
+			Draw everything that appears on screen
+```
+
+
