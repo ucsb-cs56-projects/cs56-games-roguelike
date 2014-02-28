@@ -157,7 +157,7 @@ public class Monster implements GamePiece{
 	 * @param mainChar the player being attacked
 	 */
     public void attacking(Player mainChar){
-	//mainChar.setHitPoints(mainChar.getHitPoints()-this.attack);
+	mainChar.setHitPoints(mainChar.getHitPoints()-this.attack);
 	}
 
 	

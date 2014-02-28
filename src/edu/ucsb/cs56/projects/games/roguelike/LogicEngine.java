@@ -60,8 +60,8 @@ public class LogicEngine {
 		gameOver= false;
 
 		//The -1 is to remove the initial monster creation incrementation
-		maxNumOfMonsters = 7-1;
-		level = 1-1;
+		maxNumOfMonsters = 7;
+		level = 1;
 	}
     
     /**

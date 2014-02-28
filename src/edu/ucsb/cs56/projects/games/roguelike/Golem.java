@@ -17,19 +17,19 @@ public class Golem extends Monster{
     private char icon;
 
     /**
-     *creates a Golem with 25 hitPoints and 10 attack with no random movement
+     *creates a Golem with 25 hitPoints and 5 attack with no random movement
      *
      */
     public Golem(){
-	super(25,10,0,30);
+	super(25,5,0,30);
 	this.setIcon('G');
     }
     /**
-     * creates a Golem with 25 HP and 10 attack
+     * creates a Golem with 25 HP and 5 attack
      * @ param randomMovement whether or not the Golem will move randomly
      */
     public Golem(int typeOfMovement){
-	super(25,10,typeOfMovement,30);
+	super(25,5,typeOfMovement,30);
 	this.setIcon('G');
     }
     

@@ -140,7 +140,7 @@ public class RogueController extends JFrame implements KeyListener
 	    for (int x= 0; x < canvas.getGridWidth()-1; x++) {	  
 		for (int y = 0; y < canvas.getGridHeight()-1; y++) {
 		    if(floor[x][y]== null){
-			canvas.emptySpace(x,y,logicHandler.getLevel()-1);
+			canvas.emptySpace(x,y,logicHandler.getLevel());
 		    }
 		}
 		
@@ -271,7 +271,6 @@ public class RogueController extends JFrame implements KeyListener
 	discoveredArea = new int[ canvas.getGridWidth() ][ canvas.getGridHeight()-1 ];//resets exploration
 	logicHandler.createMonster();//creates monsters
 	
-	
     }
 	
 
@@ -301,10 +300,11 @@ public class RogueController extends JFrame implements KeyListener
 		canvas.write(key.getKeyChar(),7,23,RoguePanel.white,RoguePanel.black);
 		moveHero();
 		moveMonster();
-		trackDiscovery();
 
 		checkPlayerStatus();
 		checkAllMonsterStatus();
+		trackDiscovery();
+
 		canvas.recordShadows(discoveredArea);
 		if(logicHandler.getGameOver()==false)
 		    canvas.setInGame(true);
@@ -334,6 +334,9 @@ public class RogueController extends JFrame implements KeyListener
 		RogueController mainControl = new RogueController();
 		mainControl.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainControl.setVisible(true);
+
+		//Initially fills the map with monsters
+		mainControl.logicHandler.createMonster();
 
 
 		//TEMPORARY MAIN SCREEN

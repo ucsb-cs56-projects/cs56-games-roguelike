@@ -39,7 +39,7 @@ public class RoguePanel extends JPanel
   public static Color brown = new Color(0x663300);
     //Array of colors that change the color of the ground with each level
     public static Color[] groundColor = new Color[] 
-	{white,yellow,green,cyan,blue,magenta,brown,gray};
+	{gray,white,yellow,green,cyan,blue,magenta,brown}; //first level starts at index 1
     
   
   //attributes for handling things such as the Background and Foreground colors
