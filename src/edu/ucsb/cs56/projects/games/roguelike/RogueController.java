@@ -140,7 +140,7 @@ public class RogueController extends JFrame implements KeyListener
 	    for (int x= 0; x < canvas.getGridWidth()-1; x++) {	  
 		for (int y = 0; y < canvas.getGridHeight()-1; y++) {
 		    if(floor[x][y]== null){
-			canvas.emptySpace(x,y,logicHandler.getLevel());
+			canvas.emptySpace(x,y,logicHandler.getLevel()-1);
 		    }
 		}
 		
@@ -265,13 +265,12 @@ public class RogueController extends JFrame implements KeyListener
 		}
 	    }
 	}
-
-	//If all monsters are defeated, created new monsters and go to the next level
+	//If all monsters are defeated, created new monsters and increase the level
  	logicHandler.setLevel(logicHandler.getLevel()+1);//Increments level
-	logicHandler.setMaxNumOfMonsters(logicHandler.getMaxNumOfMonsters()+1);//Increase monsters
-	discoveredArea = new int[ canvas.getGridWidth() ][ canvas.getGridHeight()-1 ];//Resets the explored areas
-	canvas.nextLevel();//write words on the screen
-	logicHandler.createMonster();//spawn monsters
+	logicHandler.setMaxNumOfMonsters(logicHandler.getMaxNumOfMonsters()+1);//Increases monster count
+	discoveredArea = new int[ canvas.getGridWidth() ][ canvas.getGridHeight()-1 ];//resets exploration
+	logicHandler.createMonster();//creates monsters
+	
 	
     }
 	
@@ -338,7 +337,7 @@ public class RogueController extends JFrame implements KeyListener
 
 
 		//TEMPORARY MAIN SCREEN
-		mainControl.canvas.write("MOVE WITH W A S D. Eat all the monsters to win",9,12,RoguePanel.white,RoguePanel.black);
+		mainControl.canvas.write("MOVE WITH W A S D. Survive the waves. Eat monsters to earn points.",9,12,RoguePanel.white,RoguePanel.black);
 
 		
 		
