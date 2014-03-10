@@ -1,9 +1,9 @@
 package edu.ucsb.cs56.projects.games.roguelike;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 import java.util.Random;
 import java.io.*;
-import javax.swing.JFrame;
+import javax.swing.*;
+
 
 /**
  * RogueController - Handles user input and gamestate.
@@ -11,8 +11,9 @@ import javax.swing.JFrame;
  * 	but for the sake of having something that runs,
  * 	RogueController both creates a RoguePanel and allows the user to manipulate it.
  * @author Clayven Anderson and Jonathan Tan
- *@author Hans Marasigan
+ * @author Hans Marasigan
  * @author Minh Le
+ * @author Rick Lee
  */
 public class RogueController extends JFrame implements KeyListener
 {
@@ -31,10 +32,14 @@ public class RogueController extends JFrame implements KeyListener
 
 	//Canvas - The RoguePanel instance everything is drawn to.
 	private RoguePanel canvas;
-
+    
 	
 	// handles all game state from attack and damage to remove of monsters and player
 	private LogicEngine logicHandler;
+
+    //Matrix indicating which grid space has been discovered yet
+    //1 = discovered, any other value = not discovered
+    private int[][] discoveredArea;
 	
 	/**
 	 * No parameters.
@@ -46,8 +51,9 @@ public class RogueController extends JFrame implements KeyListener
 		add(canvas);
 		pack();
 		logicHandler = new LogicEngine();
-		addKeyListener(this);
-	}
+    		addKeyListener(this);
+		discoveredArea = new int[ canvas.getGridWidth() ][ canvas.getGridHeight()-1 ];
+    	}
     
     /**
      * Handles movement of player by checking if it can move there first through the logic engine
@@ -77,7 +83,7 @@ public class RogueController extends JFrame implements KeyListener
             x = origX;
    	    y = origY;	 
         }         
-     canvas.moveHeroAnimated(x, y,logicHandler.getPlayer().getHitPoints(),logicHandler.getPlayer().getScore());	
+	canvas.moveHeroAnimated(x, y,logicHandler.getPlayer().getHitPoints(),logicHandler.getLevel(),logicHandler.getPlayer().getScore());	
     }
     /**
 	 * Handles movement of all monsters by checking if it can move there first through the logic engine
@@ -101,8 +107,8 @@ public class RogueController extends JFrame implements KeyListener
 	        	  if(mon[xOrig][yOrig]!=null){
 	        		  // gets the direction of movement of the monster at xOrig, yOrig
 	        		  direction = mon[xOrig][yOrig].getDirection(logicHandler.getPlayerPosition());
-	        		  xPos= xOrig + direction[0];
-	        		  yPos = yOrig + direction[1];
+				  xPos = xOrig + direction[0];			      
+				  yPos = yOrig + direction[1];
 	        		  
 	        		  if(logicHandler.movable(xPos, yPos,xOrig,yOrig)){
 				      logicHandler.move(xPos, yPos,xOrig,yOrig);
@@ -113,7 +119,7 @@ public class RogueController extends JFrame implements KeyListener
 	        			  //display the you were attacked flag if the collision was with a player
 	        			  if(logicHandler.getObject(xPos, yPos) instanceof Player){
 					      canvas.monsterAttack();
-					      canvas.moveHeroAnimated(x, y,logicHandler.getPlayer().getHitPoints(),logicHandler.getPlayer().getScore());
+					      canvas.moveHeroAnimated(x, y,logicHandler.getPlayer().getHitPoints(),logicHandler.getLevel(),logicHandler.getPlayer().getScore());
 	        			  }
 	        			  canvas.moveMonster(xOrig, yOrig,logicHandler.getObject(xOrig,yOrig));
 					  
@@ -134,12 +140,40 @@ public class RogueController extends JFrame implements KeyListener
 	    for (int x= 0; x < canvas.getGridWidth()-1; x++) {	  
 		for (int y = 0; y < canvas.getGridHeight()-1; y++) {
 		    if(floor[x][y]== null){
-			canvas.emptySpace(x,y);
+			canvas.emptySpace(x,y,logicHandler.getLevel());
 		    }
 		}
 		
 	    }
 	}
+
+
+    /**
+       Records the areas where the player has revealed
+    */
+    public void trackDiscovery(){
+	//records the current x,y, position
+	discoveredArea[logicHandler.getPlayerPosition()[0]][logicHandler.getPlayerPosition()[1]] = 1;
+	//records all areas 2 spaces around the current position
+	for(int i = -2; i <= 2; i++){
+	    for(int j = -2; j <= 2; j++){
+		//Ensures it will not access out of bounds array exception
+		if( ! (logicHandler.getPlayerPosition()[0]+i < 0 ||
+		       logicHandler.getPlayerPosition()[0]+i >= canvas.getGridWidth()-1 ||
+		       logicHandler.getPlayerPosition()[1]+j < 0 ||
+		       logicHandler.getPlayerPosition()[1]+j >= canvas.getGridHeight()-1   ) ){
+		    //If the specified area has not been discovered (i.e. != 1)
+		    if(discoveredArea[logicHandler.getPlayerPosition()[0]+i][logicHandler.getPlayerPosition()[1]+j] != 1){
+			discoveredArea[logicHandler.getPlayerPosition()[0]+i][logicHandler.getPlayerPosition()[1]+j] = 1;
+		    }
+		}
+	    }
+	}
+
+    }
+
+
+
     
     /**
      * Checks to see if player is dead, and store score into txt file for HighScores
@@ -231,9 +265,11 @@ public class RogueController extends JFrame implements KeyListener
 		}
 	    }
 	}
-	for(int a =0 ; a < 10 ;a++){
-	    logicHandler.createMonster();}
-	
+	//If all monsters are defeated, created new monsters and increase the level
+ 	logicHandler.setLevel(logicHandler.getLevel()+1);//Increments level
+	logicHandler.setMaxNumOfMonsters(logicHandler.getMaxNumOfMonsters()+1);//Increases monster count
+	discoveredArea = new int[ canvas.getGridWidth() ][ canvas.getGridHeight()-1 ];//resets exploration
+	logicHandler.createMonster();//creates monsters
 	
     }
 	
@@ -246,9 +282,8 @@ public class RogueController extends JFrame implements KeyListener
 	 * @param key Keystroke event fired by keyboard.
 	 */
 	public void keyPressed(KeyEvent key){	
-		
-	    
-	    
+
+
 		//WASD moves
 		origX = x; 
 		origY = y;
@@ -265,11 +300,16 @@ public class RogueController extends JFrame implements KeyListener
 		canvas.write(key.getKeyChar(),7,23,RoguePanel.white,RoguePanel.black);
 		moveHero();
 		moveMonster();
-		if(randomNumber.nextInt(100)==0){
-			logicHandler.createMonster();
-		}
+
 		checkPlayerStatus();
 		checkAllMonsterStatus();
+		trackDiscovery();
+
+		canvas.recordShadows(discoveredArea);
+		if(logicHandler.getGameOver()==false)
+		    canvas.setInGame(true);
+		else
+		    canvas.setInGame(false);
 		canvas.repaint();
 	}
 	
@@ -288,14 +328,20 @@ public class RogueController extends JFrame implements KeyListener
 	public void keyTyped(KeyEvent key){
 		
 	}
-	
+
+
 	public static void main(String[] args){
 		RogueController mainControl = new RogueController();
 		mainControl.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainControl.setVisible(true);
-		
+
+		//Initially fills the map with monsters
+		mainControl.logicHandler.createMonster();
+
+
 		//TEMPORARY MAIN SCREEN
-		mainControl.canvas.write("MOVE WITH W A S D. Eat all the monsters to win",9,12,RoguePanel.white,RoguePanel.black);
+		mainControl.canvas.write("MOVE WITH W A S D. Survive the waves. Eat monsters to earn points.",9,12,RoguePanel.white,RoguePanel.black);
+
 		
 		
 	}//Main Delimit

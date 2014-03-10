@@ -3,8 +3,10 @@ package edu.ucsb.cs56.projects.games.roguelike;
 import java.util.Random;
 
 /**
+ *@author Clayven Anderson
  *@author Hans Marasigan & Richard Nguyen
- *@version cs56 Spring 13
+ *@author Rick Lee
+ *@version cs56 Winter 14
  */
 /**
  *This is a monster called a golem that is very healthy with a ton of attack.
@@ -15,19 +17,19 @@ public class Golem extends Monster{
     private char icon;
 
     /**
-     *creates a Golem with 50 hitPoints and 20 attack with no random movement
+     *creates a Golem with 25 hitPoints and 5 attack with no random movement
      *
      */
     public Golem(){
-	super(50,20,0,20);
+	super(25,5,0,30);
 	this.setIcon('G');
     }
     /**
-     * creates a Golem with 50 HP and 20 attack
+     * creates a Golem with 25 HP and 5 attack
      * @ param randomMovement whether or not the Golem will move randomly
      */
     public Golem(int typeOfMovement){
-	super(50,20,typeOfMovement,20);
+	super(25,5,typeOfMovement,30);
 	this.setIcon('G');
     }
     
@@ -38,7 +40,7 @@ public class Golem extends Monster{
      * @param randomMovement whether or not the Golem will move randomly or not
      */
     public Golem(int hitPoints, int attack, int typeOfMovement){
-	super(hitPoints,attack,typeOfMovement,20);
+	super(hitPoints,attack,typeOfMovement,30);
 	this.setIcon('G');
     }
     /**

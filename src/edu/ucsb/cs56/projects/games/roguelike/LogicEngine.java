@@ -1,11 +1,13 @@
 package edu.ucsb.cs56.projects.games.roguelike;
 
 import java.util.Random;
+//import java.lang.reflect.*;
 
 /**
  * LogicEngine takes care of game states
  * @author Minh Le
  * @author Hans Marasigan & Richard Nguyen
+ * @author Rick Lee
  */
 public class LogicEngine {
     //list of all the monsters
@@ -18,7 +20,16 @@ public class LogicEngine {
     private int floorWidth;
     private int floorHeight;
     private int[] playerPosition;
-    private boolean gameOver ;
+    private boolean gameOver;
+    private int level;//current level of the game
+
+    //List of one of each monsters.
+    //Add to this list when adding extra monsters (Put the class name as a String type)
+    //Currently also needs to add cases to the createMonster() function
+    private final String[] monsterPieces = new String[] 
+	{"Monster","Troll","Golem", "Bat","Snake","Zombie","Pirate"};
+
+    private int maxNumOfMonsters;//How many monsters on the board when creating them
 	
 
 	
@@ -46,7 +57,11 @@ public class LogicEngine {
 		storeMonsters();
 		int[] position = {40,12};
 		thePlayer.setPlayerPosition(position);
-		gameOver= false; 
+		gameOver= false;
+
+		//The -1 is to remove the initial monster creation incrementation
+		maxNumOfMonsters = 7;
+		level = 1;
 	}
     
     /**
@@ -98,6 +113,33 @@ public class LogicEngine {
 	public int[] getPlayerPosition(){
 		return thePlayer.getPlayerPosition();
 	}
+
+    /**
+       @return the level
+    */
+    public int getLevel(){
+	return level;
+    }
+    /**
+       @param level the level to set to
+    */
+    public void setLevel(int level){
+	this.level = level;
+    }
+
+    /**
+       @return the max number of monsters
+    */
+    public int getMaxNumOfMonsters(){
+	return maxNumOfMonsters;
+    }
+    /**
+       @param new max number of monsters
+    */
+    public void setMaxNumOfMonsters(int max){
+	this.maxNumOfMonsters = max;
+    }
+
 	 /**
 	  * move GamePiece from (xOrig,yOrig) to (x,y)
 	  * 	 x and y are the position thats being tested
@@ -238,51 +280,97 @@ public class LogicEngine {
 		 thePlayer = new Player();
 		 floor[40][12] = thePlayer;
 		 
-		 Random numGenerator = new Random();
-		 
-		 int x = 0;
-		 while(x < 7){
-			 int xPos = numGenerator.nextInt(79);
-			 int yPos = numGenerator.nextInt(23);
-			 if(floor[xPos][yPos]==null){
-			     if (x<=2){
-				 floor[xPos][yPos] = 
-				     new Monster(numGenerator.nextInt(2)+1);
-				 x++;
-			     }
-			     else if (x<=4){
-				 floor[xPos][yPos] = 
-				     new Troll(numGenerator.nextInt(2)+1);
-				 x++;
-			     }
-			     else if (x<=5){
-				 floor[xPos][yPos] = 
-				     new Golem(numGenerator.nextInt(2)+1);
-				 x++;
-			     }
-			     else{
-				 floor[xPos][yPos] = 
-				     new Bat(numGenerator.nextInt(2)+1);
-				 x++;
-			     }
-			 }
-		 }
-		 
+		 //directly calls the method below that creates monsters
+		 this.createMonster();
+
 	}	
+    /**
+     * creates monsters at random, some monsters appearing multiple times and some not appearing at all
+     */
 	public void createMonster(){
-		 Random numGenerator = new Random();
+	         Random numGenerator = new Random();
 		 
+		 int i = 0;
+		 while(i < maxNumOfMonsters){
+		     int xPos = numGenerator.nextInt(79);
+		     int yPos = numGenerator.nextInt(23);
+		     
+		     int n = (int)(Math.random()*monsterPieces.length);
+		     
+		     if(floor[xPos][yPos]==null){
+
+			 switch(n){
+			 case 0 : floor[xPos][yPos] = new Monster(numGenerator.nextInt(2)+1);
+			          listOfMonsters[xPos][yPos] = (Monster) floor[xPos][yPos];
+				  listOfMonsters[xPos][yPos].levelBonus(level);
+				  listOfMonsters[xPos][yPos].setMonsterPosition(xPos,yPos);
+			          break;
+			 case 1 : floor[xPos][yPos] = new Troll(numGenerator.nextInt(2)+1);    
+				  listOfMonsters[xPos][yPos] = (Troll) floor[xPos][yPos];
+				  listOfMonsters[xPos][yPos].levelBonus(level);
+				  listOfMonsters[xPos][yPos].setMonsterPosition(xPos,yPos);
+			          break;
+			 case 2 : floor[xPos][yPos] = new Golem(numGenerator.nextInt(2)+1);
+				  listOfMonsters[xPos][yPos] = (Golem) floor[xPos][yPos];
+				  listOfMonsters[xPos][yPos].levelBonus(level);
+				  listOfMonsters[xPos][yPos].setMonsterPosition(xPos,yPos);
+				  break;
+			 case 3 : floor[xPos][yPos] = new Bat(numGenerator.nextInt(2)+1);
+				  listOfMonsters[xPos][yPos] = (Bat) floor[xPos][yPos];
+				  listOfMonsters[xPos][yPos].levelBonus(level);
+				  listOfMonsters[xPos][yPos].setMonsterPosition(xPos,yPos);
+			          break;
+			 case 4 : floor[xPos][yPos] = new Snake(numGenerator.nextInt(2)+1);
+				  listOfMonsters[xPos][yPos] = (Snake) floor[xPos][yPos];
+				  listOfMonsters[xPos][yPos].levelBonus(level);
+				  listOfMonsters[xPos][yPos].setMonsterPosition(xPos,yPos);
+			          break;
+			 case 5 : floor[xPos][yPos] = new Zombie(numGenerator.nextInt(2)+1);
+			     	  listOfMonsters[xPos][yPos] = (Zombie) floor[xPos][yPos];
+				  listOfMonsters[xPos][yPos].levelBonus(level);
+				  listOfMonsters[xPos][yPos].setMonsterPosition(xPos,yPos);
+			          break;
+			 case 6 : floor[xPos][yPos] = new Pirate(numGenerator.nextInt(2)+1);
+				  listOfMonsters[xPos][yPos] = (Pirate) floor[xPos][yPos];
+				  listOfMonsters[xPos][yPos].levelBonus(level);
+				  listOfMonsters[xPos][yPos].setMonsterPosition(xPos,yPos);
+			          break;
+
+			 //Add new monsters here. Copy the case and change just the class names
+
+
+
+			 default : floor[xPos][yPos] = null;
+			           i--;
+			           break;
+
+			 }//switch
+			 i++;
+		     }//if(floor[xPos][yPos]==null)
+		 }//while
+		 		     
+
+
+
 		 
-		 int xPos = numGenerator.nextInt(70);
-		 int yPos = numGenerator.nextInt(20);
-		 int monsterRandom=numGenerator.nextInt(100);
-		 if(floor[xPos][yPos]==null){
-		     
-		     floor[xPos][yPos] = new Monster(numGenerator.nextInt(2)+1);
-		     listOfMonsters[xPos][yPos] = (Monster) floor[xPos][yPos];
-		     listOfMonsters[xPos][yPos].setMonsterPosition(xPos,yPos);
-		     }
-		     
+		 //DOES NOT WORK : plan to systemize creation of monsters instead of manually adding cases
+		 /*
+	        for(int i = 0; i < maxNumOfMonsters; i++){
+		   int xPos = numGenerator.nextInt(79);
+		   int yPos = numGenerator.nextInt(23);
+		   //randomly generates a number which determines what type monster will be created
+		   int n = (int)(Math.random()*monsterPieces.length);
+		   
+		   if(floor[xPos][yPos]==null){
+		   
+		      String className = monsterPieces[n];
+		      Class c1 = Class.forName(className);
+		      Constructor con = c1.getConstructor(int.class);
+		      floor[xPos][yPos] = 
+		      (GamePiece)con.newInstance(numGenerator.nextInt(2)+1);		   
+		   }//if
+		}//for
+		 */
 		 
 	}
 	

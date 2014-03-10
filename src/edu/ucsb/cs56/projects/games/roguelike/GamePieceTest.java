@@ -59,6 +59,34 @@ public class GamePieceTest{
 	assertEquals("monster",t.getTypeOfPiece());
 	assertEquals('T',t.getIcon());
     }
+
+    /** this test that the Snake constructor works and is a Monster type with
+	icon S
+    */
+    @Test public void test_defaultSnakeType_Constructor(){
+	Snake s = new Snake();
+	assertEquals("monster",s.getTypeOfPiece());
+	assertEquals('S',s.getIcon());
+    }
+
+    /** this test that the Zombie constructor works and is a Monster type with
+	icon Z
+    */
+    @Test public void test_defaultZombieType_Constructor(){
+	Zombie z = new Zombie();
+	assertEquals("monster",z.getTypeOfPiece());
+	assertEquals('Z',z.getIcon());
+    }
+
+    /** this test that the Pirate constructor works and is a Monster type with
+	icon P
+    */
+    @Test public void test_defaultPirateType_Constructor(){
+	Pirate p = new Pirate();
+	assertEquals("monster",p.getTypeOfPiece());
+	assertEquals('P',p.getIcon());
+    }
+
     
     /**tests the monsters 3arg Constructor to see if it is still a Monster Type
      with icon M
@@ -93,6 +121,34 @@ public class GamePieceTest{
 	Troll m=new Troll(1,2,0);
 	assertEquals("monster",m.getTypeOfPiece());
     }
+
+    /**test the Snake 3arg Constructor to see if it is still a Monster Type
+       with icon S
+     */
+    @Test public void test_3ArgConstructorSnake(){
+	Snake s = new Snake(1,2,0);
+	assertEquals("monster",s.getTypeOfPiece());
+	assertEquals('S',s.getIcon());
+    }
+
+    /**test the Zombie 3arg Constructor to see if it is still a Monster Type
+       with icon Z
+     */
+    @Test public void test_3ArgConstructorZombie(){
+	Zombie z = new Zombie(1,2,0);
+	assertEquals("monster",z.getTypeOfPiece());
+	assertEquals('Z',z.getIcon());
+    }
+
+    /**test the Pirate 3arg Constructor to see if it is still a Monster Type
+       with icon P
+     */
+    @Test public void test_3ArgConstructorPirate(){
+	Pirate p = new Pirate(1,2,0);
+	assertEquals("monster",p.getTypeOfPiece());
+	assertEquals('P',p.getIcon());
+    }
+
     
     /**tests the Monster 4arg Constructor to see if it is still a Monster Type
      with icon M
@@ -122,7 +178,7 @@ public class GamePieceTest{
 	assertEquals('G',b.getIcon());
     }
     
-    /**tests the Monster 4arg Constructor to see if it is still a Monster Type
+    /**tests the Troll 4arg Constructor to see if it is still a Monster Type
      with icon T
      */
     @Test public void test_4argConstructorTrollType(){
@@ -131,5 +187,30 @@ public class GamePieceTest{
 	assertEquals('T',b.getIcon());
     }
 
+    /**test the Snake 4arg Constructor to see if it is still a Monster Type
+       with icon S
+    */
+    @Test public void test_4argConstructorSnakeType(){
+	Snake s = new Snake(1,2,0,3);
+	assertEquals("monster",s.getTypeOfPiece());
+	assertEquals('S',s.getIcon());
+    }
 
+    /**test the Zombie 4arg Constructor to see if it is still a Monster Type
+       with icon Z
+    */
+    @Test public void test_4argConstructorZombieType(){
+        Zombie z = new Zombie(1,2,0,3);
+	assertEquals("monster",z.getTypeOfPiece());
+	assertEquals('Z',z.getIcon());
+    }
+    
+    /**test the Pirate 4arg Constructor to see if it is still a Monster Type
+       with icon P
+    */
+    @Test public void test_4argConstructorPirateType(){
+        Pirate p = new Pirate(1,2,0,3);
+	assertEquals("monster",p.getTypeOfPiece());
+	assertEquals('P',p.getIcon());
+    }
 }

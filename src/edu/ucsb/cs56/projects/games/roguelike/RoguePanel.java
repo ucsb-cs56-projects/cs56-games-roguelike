@@ -10,12 +10,14 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
+import javax.swing.JButton;
 
 
 /**
  * Basic Grid of Ascii character used to represent a "floor" of the "dungeon"
  * @author Clayven Anderson and Trystan Spangler(provided tutorial on roguelike grids and some code)
  * @author Jonathan Tan
+ * @author Rick Lee
  *
  */
 
@@ -34,6 +36,11 @@ public class RoguePanel extends JPanel
   public static Color yellow = new Color(0xFFFF00);
   public static Color magenta = new Color(0xFF00FF);
   public static Color gray = new Color(0x808080);
+  public static Color brown = new Color(0x663300);
+    //Array of colors that change the color of the ground with each level
+    public static Color[] groundColor = new Color[] 
+	{gray,white,yellow,green,cyan,blue,magenta,brown}; //first level starts at index 1
+    
   
   //attributes for handling things such as the Background and Foreground colors
   //as well as character placement
@@ -56,6 +63,9 @@ public class RoguePanel extends JPanel
   private Color[][] oldBackgroundColors;
   private Color[][] oldForegroundColors;
  
+    private int[][] discoveredArea;
+    private boolean inGame;//whether the player is playing the game for shadows to be drawn
+
   
  // char [][] floor = new char [40][40];
   
@@ -281,6 +291,21 @@ public class RoguePanel extends JPanel
   {
     this.oldForegroundColors = oldForegroundColors;
   }
+    /**
+       @return the inGame
+    */
+    public boolean getInGame(){
+	return inGame;
+    }
+    /**
+       @return b the boolean to set
+    */
+    public void setInGame(boolean b){
+	inGame = b;
+    }
+
+
+
   
   /**
    * Creates a grid of size 80 x 24 chars
@@ -320,7 +345,10 @@ public class RoguePanel extends JPanel
     oldForegroundColors = new Color[gridWidth][gridHeight];
 
     glyphs = new BufferedImage[256];
-    
+
+    discoveredArea = new int[gridWidth][gridHeight-1];
+    inGame = false;
+
     loadGlyphs();
     
     RoguePanel.this.clear();
@@ -356,12 +384,28 @@ public class RoguePanel extends JPanel
               offscreenGraphics.drawImage(img, x * charWidth, y * charHeight, null);
               
               oldBackgroundColors[x][y] = backgroundColors[x][y];
-            oldForegroundColors[x][y] = foregroundColors[x][y];
-            oldChars[x][y] = chars[x][y];
+	      oldForegroundColors[x][y] = foregroundColors[x][y];
+	      oldChars[x][y] = chars[x][y];
+
           }
       }
-      
+     
+
       g.drawImage(offscreenBuffer,0,0,this);
+      
+      
+      if(inGame){
+	  //draw shadows that cover undiscovered areas
+	  for(int x = 0; x < gridWidth; x++){
+	      for(int y = 0; y < gridHeight-1; y++){
+		  if(discoveredArea[x][y] != 1){
+		      g.setColor(backgroundColors[x][y]);
+		      g.fillRect(x*charWidth,y*charHeight,charWidth,charHeight);
+		  }//if
+	      }//for
+	  }//for
+      }//if
+      
   }
   
  private void loadGlyphs() {
@@ -475,7 +519,7 @@ private LookupOp setColors(Color bgColor, Color fgColor) {
         }
         return this;
     }
-    
+
     /**
      * Write a character to the cursor's position.
      * This updates the cursor's position.
@@ -575,26 +619,28 @@ private LookupOp setColors(Color bgColor, Color fgColor) {
 		write("X:",10,23,RoguePanel.white,RoguePanel.black);
 		write("Y:",14,23,RoguePanel.white,RoguePanel.black);
 		write("Hp:",20,23,RoguePanel.white,RoguePanel.black);
-		write("Score:",30,23,RoguePanel.white,RoguePanel.black);
+		write("Level:",30,23,RoguePanel.white,RoguePanel.black);
+		write("Score:",40,23,RoguePanel.white,RoguePanel.black);
 	}
     
 	/**
 	 * moves the player to position xPosition,yPosition and updates its hp using write
 	 */
-    public void moveHeroAnimated(int xPosition, int yPosition, int hp,int score){
+    public void moveHeroAnimated(int xPosition, int yPosition, int hp, int level, int score){
 		
 		drawHUD();
 		
 		try{
 			write("@",xPosition,yPosition,RoguePanel.white,RoguePanel.black);
 		}catch(Exception ex){
-			write("HERE BE DRAGONS",0,22,RoguePanel.white,RoguePanel.black);
+			write("HERE BE DRAGONS",0,22,RoguePanel.red,RoguePanel.black);
 		}
 		
 		write(""+xPosition,12,23,RoguePanel.white,RoguePanel.black);
 		write(""+yPosition,16,23,RoguePanel.white,RoguePanel.black);
 		write(""+hp+ " ",22,23,RoguePanel.white,RoguePanel.black);
-		write(""+score+ " ",36,23,RoguePanel.white,RoguePanel.black);
+		write(""+level+ " ",36,23,RoguePanel.white,RoguePanel.black);
+		write(""+score+ " ",46,23,RoguePanel.white,RoguePanel.black);
 	}
 	
 	// public void drawItem(int xPosition, int yPosition){
@@ -609,7 +655,7 @@ private LookupOp setColors(Color bgColor, Color fgColor) {
 	 */
     public void moveMonster(int xPosition, int yPosition, GamePiece piece){
 		
-	write(piece.getIcon(),xPosition,yPosition,RoguePanel.white,RoguePanel.black);
+	write(piece.getIcon(),xPosition,yPosition,RoguePanel.red,RoguePanel.black);
 		
 	}
 	
@@ -617,15 +663,22 @@ private LookupOp setColors(Color bgColor, Color fgColor) {
 	 * display the you were hit flag
 	 */
 	public void monsterAttack(){
-		write("You were hit",60,23,RoguePanel.white,RoguePanel.black);
+		write("You were hit",60,23,RoguePanel.yellow,RoguePanel.black);
 		
 	}
+
+    /**
+     * display that the player has advanced to the next level
+     */
+    public void nextLevel(){
+	write("NEXT LEVEL!",60,23,RoguePanel.yellow,RoguePanel.black);
+    }
 	
 	/**
 	 * displays the losing screen with player's score and HighScores
 	 */
     public void displayLosingScreen(int score,int[] array){
-		write("YOU LOSE",40,12,RoguePanel.white,RoguePanel.black);
+		write("YOU LOSE",40,12,RoguePanel.red,RoguePanel.black);
 		write("Score:"+score,40,14,RoguePanel.white,RoguePanel.black);
 		write("High Scores", 40,16,RoguePanel.white,RoguePanel.black);
 		int b = 17;
@@ -641,13 +694,18 @@ private LookupOp setColors(Color bgColor, Color fgColor) {
 	 * displays the winning screen
 	 */
 	public void displayWinningScreen(){
-		write("YOU WIN",40,12,RoguePanel.white,RoguePanel.black);
+		write("YOU WIN",40,12,RoguePanel.green,RoguePanel.black);
 	}
 	
-    public void emptySpace(int xPosition, int yPosition){
-		write("_",xPosition,yPosition,RoguePanel.white,RoguePanel.black);
+    public void emptySpace(int xPosition, int yPosition, int colorNum){
+		write("_",xPosition,yPosition,groundColor[colorNum%groundColor.length],RoguePanel.black);
 	}
-	
 
+    /**
+       Covers the areas where the player has not discovered yet
+    */
+    public void recordShadows(int[][] shadow){
+	discoveredArea = shadow;
+    }
   
 }

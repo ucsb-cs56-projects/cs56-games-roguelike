@@ -14,19 +14,19 @@ public class Troll extends Monster{
     private char icon;
 
     /**
-     *creates a troll with 15 hitPoints and 10 attack with no random movement
+     *creates a troll with 10 hitPoints and 3 attack with no random movement
      *with icon T
      */
     public Troll(){
-	super(15,10,0,15);    
+	super(10,3,0,15);    
 	this.setIcon('T');
     }
     /**
-     * creates a troll with 15 HP and 10 attack with icon T
+     * creates a troll with 10 HP and 3 attack with icon T
      * @ param randomMovement whether or not the monster will move randomly
      */
     public Troll(int typeOfMovement){
-	super(15,10,typeOfMovement,15);
+	super(10,3,typeOfMovement,15);
 	this.setIcon('T');
     }
     

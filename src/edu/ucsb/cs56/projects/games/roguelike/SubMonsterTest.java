@@ -7,9 +7,12 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
 /** test class for my subclasses
-    @author Hans Marasigan & Richard Nguyen
-    @version cs56 S13
-    @see Troll,Golem,Bat
+
+    @author Clayven Anderson
+    @author Hans Marasigan & Richard Nguyen\
+    @author Rick Lee
+    @version cs56 W14
+    @see Troll,Golem,Bat,Snake,Zombie,Pirate
 */
 
 public class SubMonsterTest{
@@ -50,6 +53,36 @@ public class SubMonsterTest{
 	assertEquals(20,g.getAttack());
 	assertEquals(20,g.getPointValue());
     }
+
+    /**
+       tests for a Snake with 5 hp 15 att and 10 points
+    */
+    @Test public void test_defaultConstructor_and_GettersSnake(){
+	Snake s = new Snake();
+	assertEquals(5,s.getHitPoints());
+	assertEquals(15,s.getAttack());
+	assertEquals(10,s.getPointValue());
+    }
+
+    /**
+       tests for a Zombie with 20 hp 5 att and 15 points
+    */
+    @Test public void test_defaultConstructor_and_GettersZombie(){
+        Zombie z = new Zombie();
+        assertEquals(20,z.getHitPoints());
+        assertEquals(5,z.getAttack());
+        assertEquals(15,z.getPointValue());
+    }
+    /**
+       tests for a Pirate with 20 hp 15 att and 20 points
+    */
+    @Test public void test_defaultConstructor_and_GettersPirate(){
+        Pirate p = new Pirate();
+        assertEquals(20,p.getHitPoints());
+        assertEquals(15,p.getAttack());
+        assertEquals(20,p.getPointValue());
+    }
+
     
     /**
        tests for a bat with 20 hp 24 att and 10points
@@ -83,7 +116,38 @@ public class SubMonsterTest{
 	assertEquals(40,g.getAttack());
 	assertEquals(20,g.getPointValue());
     }
-    
+
+    /**
+       tests for Snake with 10 hp 20 att and 15 points
+    */
+    @Test public void test_3ArgConstructorSnake(){
+	Snake s = new Snake(10,20,0);
+	assertEquals(10,s.getHitPoints());
+	assertEquals(20,s.getAttack());
+	assertEquals(10,s.getPointValue());
+    }
+
+    /**
+       tests for Zombie with 25 hp 10 att and 10 points
+    */
+    @Test public void test_3ArgConstructorZombie(){
+        Zombie z = new Zombie(25,10,0);
+        assertEquals(25,z.getHitPoints());
+        assertEquals(10,z.getAttack());
+        assertEquals(15,z.getPointValue());
+    }
+
+    /**
+       tests for Pirate with 25 hp 10 att and 25 points
+    */
+    @Test public void test_3ArgConstructorPirate(){
+        Pirate p = new Pirate(25,10,0);
+        assertEquals(25,p.getHitPoints());
+        assertEquals(10,p.getAttack());
+        assertEquals(20,p.getPointValue());
+    }
+
+
     /**
 	 
        tests for a bat with 20 hp 30 att and 40points
@@ -118,7 +182,37 @@ public class SubMonsterTest{
 	assertEquals(30,g.getPointValue());
     }
     
-    
+    /**
+       tests for Snake with 10 hp 20 att and 10 points
+    */
+    @Test public void test_4argConstructorSnake(){
+	Snake s = new Snake(10,20,0,10);
+	assertEquals(10,s.getHitPoints());
+	assertEquals(20,s.getAttack());
+	assertEquals(10,s.getPointValue());
+    }
+
+    /**
+       tests for Zombie with 25 hp 10 att and 20 points
+    */
+    @Test public void test_4argConstructorZombie(){
+        Zombie z = new Zombie(25,10,0,20);
+        assertEquals(25,z.getHitPoints());
+        assertEquals(10,z.getAttack());
+        assertEquals(20,z.getPointValue());
+    }
+
+    /**
+       tests for Pirate with 25 hp 25 att and 30 points
+    */
+    @Test public void test_4argConstructorPirate(){
+        Pirate p = new Pirate(25,25,0,30);
+        assertEquals(25,p.getHitPoints());
+        assertEquals(25,p.getAttack());
+        assertEquals(30,p.getPointValue());
+    }
+
+
     /**
      *
      *tests for a Monster with 10 hp 20 att and 30points
@@ -192,5 +286,43 @@ public class SubMonsterTest{
         assertEquals(3,g.getPointValue());
     }
 
+    /**
+       tests for a Snake with 3 hp 7 att and 12 points
+    */
+    @Test public void test_SnakeSetter(){
+	Snake s = new Snake();
+	s.setHitPoints(3);
+	assertEquals(3,s.getHitPoints());
+	s.setAttack(7);
+	assertEquals(7,s.getAttack());
+	s.setPointValue(12);
+	assertEquals(12,s.getPointValue());
+    }
+
+    /**
+       tests for a Zombie with 16 hp 4 att and 11 points
+    */
+    @Test public void test_ZombieSetter(){
+        Zombie z = new Zombie();
+        z.setHitPoints(16);
+        assertEquals(16,z.getHitPoints());
+        z.setAttack(4);
+        assertEquals(4,z.getAttack());
+        z.setPointValue(11);
+        assertEquals(11,z.getPointValue());
+    }
+
+    /**
+       tests for a Pirate with 22 hp 19 att and 16 points
+    */
+    @Test public void test_PirateSetter(){
+        Pirate p = new Pirate();
+        p.setHitPoints(22);
+        assertEquals(22,p.getHitPoints());
+        p.setAttack(19);
+        assertEquals(19,p.getAttack());
+        p.setPointValue(16);
+        assertEquals(16,p.getPointValue());
+    }
 
 }
