@@ -16,7 +16,7 @@ This project currently functions where the user is a player in the game and the 
 
 
 
-program internals
+Program Internals
 =================
 
 
@@ -40,7 +40,7 @@ RogueController.java is the MAIN
 How to run the project
 ======================
 
-Navigate to the directory with the build.xml
-```
-ant run
-```
+Navigate to the directory with the build.xml.
+
+Type ```ant run```
+
