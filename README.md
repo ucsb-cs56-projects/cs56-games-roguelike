@@ -5,7 +5,14 @@ W14 ready! (Andrew Berls)
 
 ASCII roguelike game
 
+(OUTDATED PICTURE!!!)
 ![](http://i.imgur.com/E8qA2Pt.jpg)
+
+High-level Description
+======================
+
+
+This project currently functions where the user is a player in the game and the player needs to survive waves of enemies. The player gains points and progresses the level by defeating monsters. Every level increases the difficulty of the monsters.
 
 
 
@@ -28,12 +35,12 @@ checkAllMonsterStatus() in RogueController.java calls this method
 
 
 RogueController.java is the MAIN
-```
-	branches:
-		LogicEngine.java
-			Deals with the state of the game and the movements of monsters and player
-		RoguePanel.java
-			Draw everything that appears on screen
-```
 
 
+How to run the project
+======================
+
+Navigate to the directory with the build.xml
+```
+ant run
+```
