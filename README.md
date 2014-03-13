@@ -29,7 +29,7 @@ checkAllMonsterStatus() in RogueController.java calls this method
 
 RogueController.java is the MAIN
 ```
-	branches:
+	Objects:
 		LogicEngine.java
 			Deals with the state of the game and the movements of monsters and player
 		RoguePanel.java
