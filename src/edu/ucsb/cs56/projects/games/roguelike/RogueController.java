@@ -152,24 +152,28 @@ public class RogueController extends JFrame implements KeyListener
        Records the areas where the player has revealed
     */
     public void trackDiscovery(){
+	
+	//x and y coordinates of player
+	int playerX = logicHandler.getPlayerPosition()[0];
+	int playerY = logicHandler.getPlayerPosition()[1];
+
 	//records the current x,y, position
-	discoveredArea[logicHandler.getPlayerPosition()[0]][logicHandler.getPlayerPosition()[1]] = 1;
+	discoveredArea[playerX][playerY] = 1;
 	//records all areas 2 spaces around the current position
 	for(int i = -2; i <= 2; i++){
 	    for(int j = -2; j <= 2; j++){
 		//Ensures it will not access out of bounds array exception
-		if( ! (logicHandler.getPlayerPosition()[0]+i < 0 ||
-		       logicHandler.getPlayerPosition()[0]+i >= canvas.getGridWidth()-1 ||
-		       logicHandler.getPlayerPosition()[1]+j < 0 ||
-		       logicHandler.getPlayerPosition()[1]+j >= canvas.getGridHeight()-1   ) ){
-		    //If the specified area has not been discovered (i.e. != 1)
-		    if(discoveredArea[logicHandler.getPlayerPosition()[0]+i][logicHandler.getPlayerPosition()[1]+j] != 1){
-			discoveredArea[logicHandler.getPlayerPosition()[0]+i][logicHandler.getPlayerPosition()[1]+j] = 1;
-		    }
-		}
-	    }
-	}
-
+		if( ! (playerX+i < 0 ||
+		       playerX+i >= canvas.getGridWidth()-1 ||
+		       playerY+j < 0 ||
+		       playerY+j >= canvas.getGridHeight()-1   ) ){
+		            //If the specified area has not been discovered (i.e. != 1)
+		            if(discoveredArea[playerX+i][playerY+j] != 1){
+				discoveredArea[playerX+i][playerY+j] = 1;
+			    }
+		}//if
+	    }//for(j)
+	}//for(i)
     }
 
 
