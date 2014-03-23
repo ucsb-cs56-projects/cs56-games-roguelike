@@ -1,9 +1,12 @@
 cs56-games-roguelike
 ====================
 
-W14 ready! (Andrew Berls)
+This is an ASCII roguelike game.  If you are not familiar with the "Roguelike" genre, the Wikipedia entry can give you some background:
 
-ASCII roguelike game
+http://en.wikipedia.org/wiki/Roguelike
+
+
+CURATION TODO: Update this picture
 
 (OUTDATED PICTURE!!!)
 ![](http://i.imgur.com/E8qA2Pt.jpg)
@@ -11,12 +14,7 @@ ASCII roguelike game
 High-level Description
 ======================
 
-
 This project currently functions where the user is a player in the game and the player needs to survive waves of enemies. The player gains points and progresses the level by defeating monsters. Every level increases the difficulty of the monsters. At the start of each level, most of the area is be pitch black and needs to be "discovered" by the user.
-
-
-
-
 
 
 Program Internals
