@@ -143,7 +143,7 @@ public class Monster implements GamePiece{
        i.e. the higher the level, the tougher the enemy
        @param level the current level the player is on
     */
-    public void levelBonus(int level){
+    public void setLevelBonus(int level){
 	this.hitPoints = this.hitPoints + ( (level*5) - 5 );   //HP of monster is increased by 5 for each level
 	if(level%3 == 0)
 	    this.attack = this.attack + ( (level) - 1 );    //Attack power of monster increases by 1 every 3 levels
