@@ -5,6 +5,11 @@ This is an ASCII roguelike game.  If you are not familiar with the "Roguelike" g
 
 http://en.wikipedia.org/wiki/Roguelike
 
+project history
+===============
+```
+ W14 | andrewberls 4pm | rick-lee | ASCII roguelike game
+```
 
 CURATION TODO: Update this picture
 
