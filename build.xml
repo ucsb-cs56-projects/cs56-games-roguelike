@@ -19,7 +19,7 @@
    <property environment="env"/> <!-- load the environment variables -->
 
    <property name="fullPkg" value="edu.ucsb.cs56.projects.games.roguelike" />
-   <property name="pkgDirectory" value="/edu/ucsb/cs56/projects/games/" />
+   <property name="pkgDirectory" value="/edu/ucsb/cs56/projects/games/roguelike" />
    <property name="projectRepo" value="cs56-games-roguelike" />
 
    <property name="mainClass" value="RogueController" />
@@ -101,9 +101,9 @@
     </junit>
   </target>
 
-  <target name="jar" depends="compile">
+  <target name="jar" depends="compile" description="generate jar file in dist directory">
     <mkdir dir="dist" />
-    <jar destfile="dist/${pkgDirectory}.jar" basedir="build" >
+    <jar destfile="dist/${pkgDirectory}.jar" basedir="build/${pkgDirectory}" >
       <manifest>
 <attribute name="Main-Class" value="${mainClass}" />
       </manifest>
