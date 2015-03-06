@@ -9,17 +9,15 @@ project history
 ===============
 ```
  W14 | andrewberls 4pm | rick-lee | ASCII roguelike game
+ W15 | dcwang 6pm | ASCII roguelike game
 ```
 
-CURATION TODO: Update this picture
-
-(OUTDATED PICTURE!!!)
-![](http://i.imgur.com/E8qA2Pt.jpg)
+![](https://lh5.googleusercontent.com/-KnFV8pd3O04/VPkVDthIfdI/AAAAAAAAAFU/izxmYe3mRZM/w720-h425-no/photo_name)
 
 High-level Description
 ======================
 
-This project currently functions where the user is a player in the game and the player needs to survive waves of enemies. The player gains points and progresses the level by defeating monsters. Every level increases the difficulty of the monsters. At the start of each level, most of the area is be pitch black and needs to be "discovered" by the user.
+This project currently functions where the user is a player trying to survive waves of enemies. The player gains points and progresses the level by defeating monsters. Advancing level increases the difficulty of the monsters. At the start of each level, most of the area is be pitch black and needs to be "discovered" by the player.
 
 
 Program Internals
