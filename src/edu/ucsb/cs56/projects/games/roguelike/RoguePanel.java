@@ -678,9 +678,10 @@ private LookupOp setColors(Color bgColor, Color fgColor) {
 	 * displays the losing screen with player's score and HighScores
 	 */
     public void displayLosingScreen(int score,int[] array){
-		write("YOU LOSE",40,12,RoguePanel.red,RoguePanel.black);
-		write("Score:"+score,40,14,RoguePanel.white,RoguePanel.black);
-		write("High Scores", 40,16,RoguePanel.white,RoguePanel.black);
+	write("To play again: close this window and press play on the main menu.", 7,10,RoguePanel.green,RoguePanel.black);
+		write("YOU LOSE",35,6,RoguePanel.red,RoguePanel.black);
+		write("Score:"+score,35,14,RoguePanel.white,RoguePanel.black);
+		write("High Scores", 35,16,RoguePanel.white,RoguePanel.black);
 		int b = 17;
 		int rank = 1;
 		for( int a: array){

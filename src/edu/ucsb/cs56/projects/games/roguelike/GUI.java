@@ -1,4 +1,4 @@
-// package edu.ucsb.cs56.projects.games.roguelike;
+package edu.ucsb.cs56.projects.games.roguelike;
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -28,13 +28,18 @@ public class GUI
 	final JFrame guiFrame = new JFrame("Roguelike"); // frame window title will be Roguelike
         
 
-	Dimension buttonDimension = new Dimension(200,100); // used to set button size
+	Dimension buttonDimension = new Dimension(250,125); // used to set button size
        
 	JButton playButton = new JButton("Play"); //new button with text "Play"
 	playButton.setPreferredSize(buttonDimension); //sets button size
 	playButton.setBackground(Color.BLACK); // sets button background color
 	playButton.setForeground(Color.WHITE); // sets button text color
-	//	playButton.addActionListener(
+	playButton.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent e)
+		{
+		    openGameWindow();
+		}
+	    });
 
 	JButton instrButton = new JButton("Instructions");
 	instrButton.setPreferredSize(buttonDimension);
@@ -87,7 +92,7 @@ public class GUI
      */
     public void openInstructionsWindow()
     {
-	String content = String.format("The player, represented by @, begins each level by starting in the middle of the map, with all but his surrounding tiles enshrouded in darkness. The player 'discovers' the rest of the map by navigating using WASD. Monsters also move around in random patterns. Note that the game is turn-based in that monsters move once every time the player moves. The player attacks by moving directly adjacent to a monster, and then pressing the arrow key that would move the player onto the same tile as the monster if it were not there. The player can be attacked, and hp lowered, by a monster when the monster does the same thing to him. As soon as all the monsters of a level are killed, the player is automatically teleported to the next level. Reaching higher levels increases the strength of the monsters. When the player reaches 0 hp, he dies permanently.");
+	String content = String.format("The player, represented by @, begins each level by starting in the middle of the map, with all but his surrounding tiles enshrouded in darkness. The player 'discovers' the rest of the map by navigating using WASD. There will be monsters that move around in random patterns. Note that the game is turn-based in that these monsters move whenever the player moves. The player attacks by moving directly adjacent to a monster, and then pressing the arrow key that would move the player onto the same tile as the monster if it were not there. The player can be attacked, and hp lowered, by a monster when the monster does the same thing to him. As soon as all the monsters of a level are killed, the player is automatically teleported to the next level. Reaching higher levels increases the strength of the monsters. When the player reaches 0 hp, he dies permanently.");
 
 	Font font = new Font("Times New Roman", Font.PLAIN, 14);
 	
@@ -111,10 +116,19 @@ public class GUI
 
     public void openHighScoresWindow()
     {
+	/* RoguePanel losingScreenPanel = new RoguePanel();
+	losingScreenPanel.setVisible(true);
+	losingScreenPanel.displayLosingScreen(); */
+	RogueController.goToLosingScreen();
+	/* mainControl.logicHandler.setGameOver(true);
+        mainControl.checkPlayerStatus(); */
 
+    }
 
-
-
+    public void openGameWindow()
+    {
+	String[] args = {};
+	RogueController.main(args);
     }
 
 }
