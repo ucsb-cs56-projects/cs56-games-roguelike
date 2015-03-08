@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.GridLayout;
 import java.awt.Dimension;
 import java.awt.Color;
+import java.awt.Font;
 
 /**
  * GUI - used to make the main menu interface
@@ -39,7 +40,7 @@ public class GUI
 	instrButton.setPreferredSize(buttonDimension);
 	instrButton.setBackground(Color.BLACK);
 	instrButton.setForeground(Color.WHITE);
-	instrButton.addActionListener(new ActionListener(){
+	instrButton.addActionListener(new ActionListener(){ // make anonymous innerclass to call openInstructionsWindow, which does what it says
 		public void actionPerformed(ActionEvent e)
 		{
 		    openInstructionsWindow();
@@ -50,15 +51,21 @@ public class GUI
 	hiscoreButton.setPreferredSize(buttonDimension);
 	hiscoreButton.setBackground(Color.BLACK);
 	hiscoreButton.setForeground(Color.WHITE);
+	hiscoreButton.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent e)
+		{
+		    openHighScoresWindow();
+		}
+	    });
 
 	JButton quitButton = new JButton("Quit");
 	quitButton.setPreferredSize(buttonDimension);
 	quitButton.setBackground(Color.BLACK);
 	quitButton.setForeground(Color.WHITE);
-	quitButton.addActionListener(new ActionListener(){ // make anonymous inner class to close window when quit button is clicked
+	quitButton.addActionListener(new ActionListener(){ // make anonymous inner class to quit program when quit button is clicked
 		public void actionPerformed(ActionEvent e)
 		{
-		    guiFrame.dispose();
+		    System.exit(0);
 		}
 	});
 
@@ -80,15 +87,34 @@ public class GUI
      */
     public void openInstructionsWindow()
     {
-	String instructions = "";
+	String content = String.format("The player, represented by @, begins each level by starting in the middle of the map, with all but his surrounding tiles enshrouded in darkness. The player 'discovers' the rest of the map by navigating using WASD. Monsters also move around in random patterns. Note that the game is turn-based in that monsters move once every time the player moves. The player attacks by moving directly adjacent to a monster, and then pressing the arrow key that would move the player onto the same tile as the monster if it were not there. The player can be attacked, and hp lowered, by a monster when the monster does the same thing to him. As soon as all the monsters of a level are killed, the player is automatically teleported to the next level. Reaching higher levels increases the strength of the monsters. When the player reaches 0 hp, he dies permanently.");
 
+	Font font = new Font("Times New Roman", Font.PLAIN, 14);
+	
+	JTextArea instructions = new JTextArea(content, 20, 40);
+	instructions.setFont(font);
+	instructions.setForeground(Color.WHITE);
+	instructions.setBackground(Color.BLACK);
+	instructions.setEditable(false);
+	instructions.setLineWrap(true);
+	instructions.setWrapStyleWord(true);
 
-
+	JScrollPane scrollPane = new JScrollPane(instructions);
+	
 	JFrame instrFrame  = new JFrame("Instructions");
+	
+	instrFrame.add(scrollPane);
+	instrFrame.pack();
         instrFrame.setVisible(true);
-	//instrFrame.setDefaultCloseOperation(instrFrame.EXIT_ON_CLOSE);
 	instrFrame.setLocationRelativeTo(null);
+    }
+
+    public void openHighScoresWindow()
+    {
+
+
 
 
     }
+
 }
