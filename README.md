@@ -95,8 +95,8 @@ Items have NOT been implemented into the game yet. There are some files already 
 
 Improvements
 ============
-*Add items to the game
-*Make "rooms" and "corridors" part of the map
+*Add items to the game 
+*Make "rooms" and "corridors" part of the map 
 
 
 How to run the project
