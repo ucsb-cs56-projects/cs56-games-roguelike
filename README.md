@@ -9,7 +9,7 @@ project history
 ===============
 ```
  W14 | andrewberls 4pm | rick-lee | ASCII roguelike game
- W15 | dcwang 6pm | ASCII roguelike game
+ W15 | dcoffill 6pm | dcwang | ASCII roguelike game
 ```
 ![](http://s14.postimg.org/5iewlbpyp/oie_GJB9p_Oxedgs_Z.png)
 
@@ -95,10 +95,8 @@ Items have NOT been implemented into the game yet. There are some files already 
 
 Improvements
 ============
-Add items to the game
-Add a GUI interface
-Create a replay button for convenience
-Make "rooms" and "corridors" part of the map
+*Add items to the game
+*Make "rooms" and "corridors" part of the map
 
 
 How to run the project
