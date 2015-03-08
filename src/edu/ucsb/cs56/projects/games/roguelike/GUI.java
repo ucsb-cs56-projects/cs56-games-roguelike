@@ -24,7 +24,7 @@ public class GUI
      */
     public GUI()
     {
-	JFrame guiFrame = new JFrame("Roguelike"); // frame window title will be Roguelike
+	final JFrame guiFrame = new JFrame("Roguelike"); // frame window title will be Roguelike
         
 
 	Dimension buttonDimension = new Dimension(200,100); // used to set button size
@@ -39,6 +39,12 @@ public class GUI
 	instrButton.setPreferredSize(buttonDimension);
 	instrButton.setBackground(Color.BLACK);
 	instrButton.setForeground(Color.WHITE);
+	instrButton.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent e)
+		{
+		    openInstructionsWindow();
+		}
+	    });
 
 	JButton hiscoreButton = new JButton("View Highscores");
 	hiscoreButton.setPreferredSize(buttonDimension);
@@ -49,6 +55,12 @@ public class GUI
 	quitButton.setPreferredSize(buttonDimension);
 	quitButton.setBackground(Color.BLACK);
 	quitButton.setForeground(Color.WHITE);
+	quitButton.addActionListener(new ActionListener(){ // make anonymous inner class to close window when quit button is clicked
+		public void actionPerformed(ActionEvent e)
+		{
+		    guiFrame.dispose();
+		}
+	});
 
 	guiFrame.add(playButton);
 	guiFrame.add(instrButton);
@@ -61,5 +73,22 @@ public class GUI
 	guiFrame.pack();
 	guiFrame.setLocationRelativeTo(null); // makes GUI appear in screen's center
 	guiFrame.setVisible(true);
+    }
+
+    /**
+     * Opens a new window with game instructions displayed
+     */
+    public void openInstructionsWindow()
+    {
+	String instructions = "";
+
+
+
+	JFrame instrFrame  = new JFrame("Instructions");
+        instrFrame.setVisible(true);
+	//instrFrame.setDefaultCloseOperation(instrFrame.EXIT_ON_CLOSE);
+	instrFrame.setLocationRelativeTo(null);
+
+
     }
 }
