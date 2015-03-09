@@ -5,7 +5,7 @@ This is an ASCII roguelike game.  If you are not familiar with the "Roguelike" g
 
 http://en.wikipedia.org/wiki/Roguelike
 
-project history
+Project History
 ===============
 ```
  W14 | andrewberls 4pm | rick-lee | ASCII roguelike game
@@ -46,6 +46,8 @@ RogueController.java is the MAIN class.
 ```LogicEngine``` calculates all the movement and game logic of the player and monsters. It creates objects: ```Player``` and ```Monster``` with all Monster subclasses.
 
 The current level of the game is managed by the int variable ```level``` in ```LogicEngine```
+
+GUI.java is the class that creates the main menu interface.
 
 
 
@@ -93,7 +95,7 @@ Items have NOT been implemented into the game yet. There are some files already 
 
 
 
-Improvements
+Future Improvements
 ============
 * Add items to the game 
 * Make "rooms" and "corridors" part of the map 

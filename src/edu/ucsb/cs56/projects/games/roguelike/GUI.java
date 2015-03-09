@@ -14,9 +14,11 @@ import java.awt.Font;
 public class GUI
 {
 
+    /*
+     * All the main does is call the no-arg constructor of the GUI class
+     */
     public static void main(String[] args)
-    {
-	
+    {	
 	new GUI(); //call class constructor to make the GUI
     }
 
@@ -27,13 +29,9 @@ public class GUI
     {
 	final JFrame guiFrame = new JFrame("Roguelike"); // frame window title will be Roguelike
         
-
-	Dimension buttonDimension = new Dimension(250,125); // used to set button size
        
 	JButton playButton = new JButton("Play"); //new button with text "Play"
-	playButton.setPreferredSize(buttonDimension); //sets button size
-	playButton.setBackground(Color.BLACK); // sets button background color
-	playButton.setForeground(Color.WHITE); // sets button text color
+        setButtonCharacteristics(playButton);
 	playButton.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent e)
 		{
@@ -42,9 +40,7 @@ public class GUI
 	    });
 
 	JButton instrButton = new JButton("Instructions");
-	instrButton.setPreferredSize(buttonDimension);
-	instrButton.setBackground(Color.BLACK);
-	instrButton.setForeground(Color.WHITE);
+        setButtonCharacteristics(instrButton);
 	instrButton.addActionListener(new ActionListener(){ // make anonymous innerclass to call openInstructionsWindow, which does what it says
 		public void actionPerformed(ActionEvent e)
 		{
@@ -53,9 +49,7 @@ public class GUI
 	    });
 
 	JButton hiscoreButton = new JButton("View Highscores");
-	hiscoreButton.setPreferredSize(buttonDimension);
-	hiscoreButton.setBackground(Color.BLACK);
-	hiscoreButton.setForeground(Color.WHITE);
+        setButtonCharacteristics(hiscoreButton);
 	hiscoreButton.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent e)
 		{
@@ -64,9 +58,7 @@ public class GUI
 	    });
 
 	JButton quitButton = new JButton("Quit");
-	quitButton.setPreferredSize(buttonDimension);
-	quitButton.setBackground(Color.BLACK);
-	quitButton.setForeground(Color.WHITE);
+        setButtonCharacteristics(quitButton);
 	quitButton.addActionListener(new ActionListener(){ // make anonymous inner class to quit program when quit button is clicked
 		public void actionPerformed(ActionEvent e)
 		{
@@ -81,7 +73,6 @@ public class GUI
 
 	guiFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
 	guiFrame.getContentPane().setLayout(new GridLayout(4,1)); // grid layout with 4 vertically stacked components
-
 	guiFrame.pack();
 	guiFrame.setLocationRelativeTo(null); // makes GUI appear in screen's center
 	guiFrame.setVisible(true);
@@ -113,17 +104,18 @@ public class GUI
         instrFrame.setVisible(true);
 	instrFrame.setLocationRelativeTo(null);
     }
+    /*
+     * This function calls a static method in the RogueController class that opens the losing screen (which contains high scores)
+     */
 
     public void openHighScoresWindow()
     {
-	/* RoguePanel losingScreenPanel = new RoguePanel();
-	losingScreenPanel.setVisible(true);
-	losingScreenPanel.displayLosingScreen(); */
 	RogueController.goToLosingScreen();
-	/* mainControl.logicHandler.setGameOver(true);
-        mainControl.checkPlayerStatus(); */
-
     }
+
+    /*
+     * Starts up the game
+     */
 
     public void openGameWindow()
     {
@@ -131,4 +123,11 @@ public class GUI
 	RogueController.main(args);
     }
 
+    public void setButtonCharacteristics(JButton b)
+    {
+	Dimension buttonDimension = new Dimension(250,125); // used to set button size
+	b.setPreferredSize(buttonDimension); //sets button size
+	b.setBackground(Color.BLACK); // sets button background color
+	b.setForeground(Color.WHITE); // sets button text color
+    }
 }
