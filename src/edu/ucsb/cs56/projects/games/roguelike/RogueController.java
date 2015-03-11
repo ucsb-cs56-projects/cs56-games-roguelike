@@ -78,7 +78,11 @@ public class RogueController extends JFrame implements KeyListener
         else{
             logicHandler.attack(x, y, origX, origY);
             if(logicHandler.monsterIsDead(x,y)){
-            canvas.clear(x,y);
+
+		if(logicHandler.getObject(x,y) instanceof Item)
+		    canvas.drawItem(x,y, logicHandler.getItem(x,y));
+		else 
+		    canvas.clear(x,y);
                 }
             x = origX;
    	    y = origY;	 
@@ -350,7 +354,7 @@ public class RogueController extends JFrame implements KeyListener
 		mainControl.logicHandler.createMonster();
 
 
-		//TEMPORARY MAIN SCREEN
+		//Screen that shows after game is opened
 			mainControl.canvas.write("MOVE WITH W A S D. Survive the waves. Eat monsters to earn points.",9,12,RoguePanel.white,RoguePanel.black);
 
 		
