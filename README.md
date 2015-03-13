@@ -5,21 +5,34 @@ This is an ASCII roguelike game.  If you are not familiar with the "Roguelike" g
 
 http://en.wikipedia.org/wiki/Roguelike
 
-project history
+Project History
 ===============
 ```
  W14 | andrewberls 4pm | rick-lee | ASCII roguelike game
+ W15 | dcoffill 6pm | dcwang | ASCII roguelike game
 ```
+![](http://s14.postimg.org/5iewlbpyp/oie_GJB9p_Oxedgs_Z.png)
 
-CURATION TODO: Update this picture
-
-(OUTDATED PICTURE!!!)
-![](http://i.imgur.com/E8qA2Pt.jpg)
+![](https://lh5.googleusercontent.com/-KnFV8pd3O04/VPkVDthIfdI/AAAAAAAAAFU/izxmYe3mRZM/w720-h425-no/photo_name)
 
 High-level Description
 ======================
 
-This project currently functions where the user is a player in the game and the player needs to survive waves of enemies. The player gains points and progresses the level by defeating monsters. Every level increases the difficulty of the monsters. At the start of each level, most of the area is be pitch black and needs to be "discovered" by the user.
+This project currently functions where the user is a player trying to survive waves of enemies. The player gains points and progresses the level by defeating monsters. Advancing level increases the difficulty of the monsters. At the start of each level, most of the area is be pitch black and needs to be "discovered" by the player.
+
+Features and Gameplay Guide
+===========================
+This Roguelike game is a single player dungeon game. It incorporates many features outlined by the "Berlin Interpretation", a rubric for judging the similarity of a Roguelike game to the original Rogue game. Berlin Interpretation features in our game include a birds-eye-view of the map, player and monster representation by ASCII characters, random environment genration, permadeath, turn-based gameplay, grid-based map, hack'n'slash style, and exploration/discovery. Unlike the original Rogue game, this version does not have multiple rooms connected by corridors. The map of this game can be viewed as one rectangular room. 
+  
+The player is represented on the screen by the @ character. There are currently 7 types of monsters in the game: Bat, Golem, Monster, Pirate, Snake, Troll, and Zombie. On the screen, the monsters are represented by their intial (i.e. Bats show up as B, Golems as G, etc.). There is a pre-set maximum number of monsters in each level, and there can be multiple instances of one type of monster.  
+
+The player begins each level by starting in the middle of the map, with all but his surrounding tiles enshrouded in darkness. The player "discovers" the rest of the map by navigating using WASD. Monsters also move around in random patterns. Note that the game is turn-based in that monsters move once every time the player moves. The player attacks by moving directly adjacent to a monster, and then pressing the arrow key that would move the player onto the same tile as the monster if it were not there. The player can be attacked, and hp lowered, by a monster when the monster does the same thing to him. 
+
+When a monster dies, there is a 20% chance of it dropping a health potion (icon H, gives 20 hp), 20% chance of dropping beef (icon +, increases player's attack power), and 15% chance of dropping poison (icon !, gives -20 hp).To consume an item, simply move onto it. 
+
+As soon as all the monsters of a level are killed, the player is automatically teleported to the next level. Reaching higher levels increases the strength of the monsters. When the player reaches 0 hp, he dies permanently, and his score, along with the current highscores, will be displayed. The game can be replayed by closing the game window and performing the "ant run" command again.
+  
+A good strategy for killing monsters while avoiding taking damage is to take advantage of the way monsters move. Monsters move one turn at a time in the same manner as the player. The player should only spend time adjacent to the monster if he is attacking it; otherwise he risks taking unnecesary damage.
 
 
 Program Internals
@@ -35,6 +48,8 @@ RogueController.java is the MAIN class.
 ```LogicEngine``` calculates all the movement and game logic of the player and monsters. It creates objects: ```Player``` and ```Monster``` with all Monster subclasses.
 
 The current level of the game is managed by the int variable ```level``` in ```LogicEngine```
+
+GUI.java is the class that creates the main menu interface.
 
 
 
@@ -82,7 +97,10 @@ Items have NOT been implemented into the game yet. There are some files already 
 
 
 
-
+Future Improvements
+============
+* Add items to the game 
+* Make "rooms" and "corridors" part of the map 
 
 
 How to run the project
