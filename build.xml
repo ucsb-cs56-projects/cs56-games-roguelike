@@ -22,7 +22,7 @@
    <property name="pkgDirectory" value="/edu/ucsb/cs56/projects/games/" />
    <property name="projectRepo" value="cs56-games-roguelike" />
 
-   <property name="mainClass" value="RogueController" />
+   <property name="mainClass" value="GUI" />
 
    <!-- javadoc properties -->
    <property name="webRoot" value="${env.HOME}/public_html/cs56/13S/${env.USER}" />
@@ -101,9 +101,9 @@
     </junit>
   </target>
 
-  <target name="jar" depends="compile">
+  <target name="jar" depends="compile" description="generate jar file in dist directory">
     <mkdir dir="dist" />
-    <jar destfile="dist/${pkgDirectory}.jar" basedir="build" >
+    <jar destfile="dist${pkgDirectory}roguelike.jar" basedir="build${pkgDirectory}/roguelike" >
       <manifest>
 <attribute name="Main-Class" value="${mainClass}" />
       </manifest>
