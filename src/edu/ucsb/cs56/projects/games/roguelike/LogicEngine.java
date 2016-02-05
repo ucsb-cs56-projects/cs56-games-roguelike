@@ -97,6 +97,11 @@ public class LogicEngine {
 
 	      return floor[x][y];
 	}
+
+    public Item getItem(int x, int y)
+    {
+	return listOfItems[x][y];
+    }
 	
 	public GamePiece[][] getFloor(){
 		return floor;
@@ -152,7 +157,13 @@ public class LogicEngine {
 	 */
 
 	public void move(int x,int y,int xOrig,int yOrig){
-                floor[x][y] = floor[xOrig][yOrig];
+            
+	    if(floor[x][y] instanceof Item)
+	    {
+		consumeItem(x,y);
+	    }
+
+	    floor[x][y] = floor[xOrig][yOrig];
 		floor[xOrig][yOrig] = null;
 
 		int[] position = {x,y};
@@ -160,6 +171,7 @@ public class LogicEngine {
                 {
         	thePlayer.setPlayerPosition(position);
                 }
+	        
         }
 	/**
 	 * x and y are the position thats being tested
@@ -222,6 +234,7 @@ public class LogicEngine {
 	
 	/**
 	 * check if the monster at position x,y has 0 or less hp
+	 * there is a chance of the monster dropping an item when it dies
 	 * @param x is the x position of the position being tested
 	 * @param y is the y position of the position being tested
 	 * @return if monster is dead at x and y return true else false
@@ -229,9 +242,24 @@ public class LogicEngine {
 	public boolean monsterIsDead(int x,int y){
 		
 		if(listOfMonsters[x][y]!=null && listOfMonsters[x][y].getHitPoints()<=0){			
-				floor[x][y] = null;
-				listOfMonsters[x][y] = null;
-				return true;
+
+		    double random = Math.random();
+
+		    if(0 <= random && random <=.2){ // 20% chance to drop Health Potion
+			createItem(x,y,new HealthPotion());
+		    }
+		    else if(.2<random && random <=.4){ // 20% chance to drop Beef
+			createItem(x,y, new Beef());
+		    }
+		    else if(.4<random && random <=.55){ // 20% chance to drop Pioson
+			createItem(x,y, new Poison());
+		    }
+		    else
+			floor[x][y] = null;
+		    
+
+		     listOfMonsters[x][y] = null;
+		     return true;
 		}
 		return false;
 	}
@@ -283,7 +311,23 @@ public class LogicEngine {
 		 //directly calls the method below that creates monsters
 		 this.createMonster();
 
-	}	
+	}
+    /**
+     * creates specified item at specified location
+     * @param x coordinate, y coordinate, item reference
+     */
+    public void createItem(int x, int y, Item i){
+	floor[x][y]= i;
+	listOfItems[x][y] = i;
+    }
+	
+    public void consumeItem(int x, int y){
+	listOfItems[x][y].UseEffect(thePlayer);
+	listOfItems[x][y] = null;
+	floor[x][y] = null;
+    }
+
+    
     /**
      * creates monsters at random, some monsters appearing multiple times and some not appearing at all
      */

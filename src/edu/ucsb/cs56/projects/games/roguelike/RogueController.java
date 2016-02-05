@@ -31,11 +31,11 @@ public class RogueController extends JFrame implements KeyListener
 	private int origY;
 
 	//Canvas - The RoguePanel instance everything is drawn to.
-	private RoguePanel canvas;
+	public RoguePanel canvas;
     
 	
 	// handles all game state from attack and damage to remove of monsters and player
-	private LogicEngine logicHandler;
+	public LogicEngine logicHandler;
 
     //Matrix indicating which grid space has been discovered yet
     //1 = discovered, any other value = not discovered
@@ -78,7 +78,11 @@ public class RogueController extends JFrame implements KeyListener
         else{
             logicHandler.attack(x, y, origX, origY);
             if(logicHandler.monsterIsDead(x,y)){
-            canvas.clear(x,y);
+
+		if(logicHandler.getObject(x,y) instanceof Item)
+		    canvas.drawItem(x,y, logicHandler.getItem(x,y));
+		else 
+		    canvas.clear(x,y);
                 }
             x = origX;
    	    y = origY;	 
@@ -333,18 +337,25 @@ public class RogueController extends JFrame implements KeyListener
 		
 	}
 
+        public static void goToLosingScreen(){
+	    RogueController mainControl = new RogueController();
+	    mainControl.setVisible(true);
+	    mainControl.setLocationRelativeTo(null);
+	    mainControl.logicHandler.setGameOver(true);
+	    mainControl.checkPlayerStatus();
+	}
+
 
 	public static void main(String[] args){
 		RogueController mainControl = new RogueController();
-		mainControl.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainControl.setVisible(true);
-
+		mainControl.setLocationRelativeTo(null); // center the window
 		//Initially fills the map with monsters
 		mainControl.logicHandler.createMonster();
 
 
-		//TEMPORARY MAIN SCREEN
-		mainControl.canvas.write("MOVE WITH W A S D. Survive the waves. Eat monsters to earn points.",9,12,RoguePanel.white,RoguePanel.black);
+		//Screen that shows after game is opened
+			mainControl.canvas.write("MOVE WITH W A S D. Survive the waves. Eat monsters to earn points.",9,12,RoguePanel.white,RoguePanel.black);
 
 		
 		
