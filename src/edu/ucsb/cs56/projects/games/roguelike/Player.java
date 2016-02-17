@@ -47,9 +47,11 @@ public class Player implements GamePiece {
 	sets that player's attack
 	@param atk this is the amount of points you want to set the player with
 	*/
-	public void setAttack(int atk){
-		this.attack=atk;
-}
+    public void setAttack(int atk){
+	if(atk >= 100){this.attack=100;}
+	else	    
+	    this.attack=atk;
+    }
     
     /**
      * @return the player's attack
@@ -72,7 +74,9 @@ public class Player implements GamePiece {
      * @param newHp the hitPoints that is to be set
      */
     public void setHitPoints(int newHp){
-	this.hitPoints = newHp;
+	if(newHp >= 100) {this.hitPoints=100;}
+	else
+	    this.hitPoints = newHp;
     }
      
     /**
