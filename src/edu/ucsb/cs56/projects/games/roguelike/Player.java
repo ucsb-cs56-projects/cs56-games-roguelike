@@ -15,7 +15,7 @@ public class Player implements GamePiece {
     	private int[] playerPosition;
     	private int score;
 	private String typeOfPiece;
-    private char icon;
+     private char icon;
 
     /**
      * creates a player with 100 hitPoints and 20 attack
