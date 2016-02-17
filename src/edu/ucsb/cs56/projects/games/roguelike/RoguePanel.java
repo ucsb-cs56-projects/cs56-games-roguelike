@@ -619,14 +619,15 @@ private LookupOp setColors(Color bgColor, Color fgColor) {
 		write("X:",10,23,RoguePanel.white,RoguePanel.black);
 		write("Y:",14,23,RoguePanel.white,RoguePanel.black);
 		write("Hp:",20,23,RoguePanel.white,RoguePanel.black);
-		write("Level:",30,23,RoguePanel.white,RoguePanel.black);
-		write("Score:",40,23,RoguePanel.white,RoguePanel.black);
+    write("Ap:",27,23,RoguePanel.white,RoguePanel.black);
+		write("Level:",33,23,RoguePanel.white,RoguePanel.black);
+		write("Score:",43,23,RoguePanel.white,RoguePanel.black);
 	}
     
 	/**
 	 * moves the player to position xPosition,yPosition and updates its hp using write
 	 */
-    public void moveHeroAnimated(int xPosition, int yPosition, int hp, int level, int score){
+    public void moveHeroAnimated(int xPosition, int yPosition, int hp, int ap, int level, int score){
 		
 		drawHUD();
 		
@@ -639,8 +640,9 @@ private LookupOp setColors(Color bgColor, Color fgColor) {
 		write(""+xPosition,12,23,RoguePanel.white,RoguePanel.black);
 		write(""+yPosition,16,23,RoguePanel.white,RoguePanel.black);
 		write(""+hp+ " ",22,23,RoguePanel.white,RoguePanel.black);
-		write(""+level+ " ",36,23,RoguePanel.white,RoguePanel.black);
-		write(""+score+ " ",46,23,RoguePanel.white,RoguePanel.black);
+    write(""+ap+ " ",29,23,RoguePanel.white,RoguePanel.black);
+		write(""+level+ " ",39,23,RoguePanel.white,RoguePanel.black);
+		write(""+score+ " ",49,23,RoguePanel.white,RoguePanel.black);
 	}
 	
     public void drawItem(int xPosition, int yPosition, Item i){
