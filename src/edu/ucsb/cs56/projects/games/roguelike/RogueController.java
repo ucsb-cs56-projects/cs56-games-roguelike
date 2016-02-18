@@ -24,6 +24,10 @@ public class RogueController extends JFrame implements KeyListener
 	private int x=40;
 	private int y=12;
 
+  //startx and starty are the locations the player should spawn after a new level begins
+  public final int startx = x;
+  public final int starty = y;
+
 	private Random randomNumber = new Random();
 	
 	// origX and origY is the position the character is at before the it moves
@@ -278,6 +282,7 @@ public class RogueController extends JFrame implements KeyListener
 	logicHandler.setMaxNumOfMonsters(logicHandler.getMaxNumOfMonsters()+1);//Increases monster count
 	discoveredArea = new int[ canvas.getGridWidth() ][ canvas.getGridHeight()-1 ];//resets exploration
 	logicHandler.createMonster();//creates monsters
+  logicHandler.resetPlayerPosition();//moves the player back to the starting position
 	
     }
 	
@@ -308,6 +313,7 @@ public class RogueController extends JFrame implements KeyListener
 		canvas.write(key.getKeyChar(),7,23,RoguePanel.white,RoguePanel.black);
 		moveHero();
 		moveMonster();
+
 
 		checkPlayerStatus();
 		checkAllMonsterStatus();

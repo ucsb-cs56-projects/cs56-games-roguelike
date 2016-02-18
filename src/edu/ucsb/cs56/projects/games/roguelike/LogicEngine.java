@@ -327,6 +327,16 @@ public class LogicEngine {
 	floor[x][y] = null;
     }
 
+    /**
+     * after the level is completed, resets the player to the starting position
+     */
+
+    public void resetPlayerPosition(){
+      int[] resetPosition = {40,12};
+      thePlayer.setPlayerPosition(resetPosition);
+      floor[40][12] = thePlayer;
+      thePlayer.setPlayerPosition(resetPosition);
+    }
     
     /**
      * creates monsters at random, some monsters appearing multiple times and some not appearing at all
