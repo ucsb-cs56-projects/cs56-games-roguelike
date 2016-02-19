@@ -330,6 +330,15 @@ public class LogicEngine {
     public void deleteItem(int x, int y){
 	listOfItems[x][y] = null;
         floor[x][y] = null;
+    /**
+     * after the level is completed, resets the player to the starting position
+     * @param canvas needed to redraw the player in the RougePanel instance
+     */
+
+    public void resetPlayerPosition(){
+      int[] resetPosition = {40,12};
+      thePlayer.setPlayerPosition(resetPosition);
+      floor[40][12] = thePlayer;
     }
     
     /**
