@@ -332,7 +332,7 @@ public class LogicEngine {
      * @param canvas needed to redraw the player in the RougePanel instance
      */
 
-    public void resetPlayerPosition(RougePanel canvas){
+    public void resetPlayerPosition(){
       int[] resetPosition = {40,12};
       thePlayer.setPlayerPosition(resetPosition);
       floor[40][12] = thePlayer;
