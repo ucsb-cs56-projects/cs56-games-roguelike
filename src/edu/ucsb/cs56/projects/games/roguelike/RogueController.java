@@ -24,12 +24,15 @@ public class RogueController extends JFrame implements KeyListener
     private int x=40;
     private int y=12;
     
-    
+    private GamePiece[][]floor;
+   
     private Random randomNumber = new Random();
     
     // origX and origY is the position the character is at before the it moves
         private int origX;
 	private int origY;
+
+        private int currentLevel= 1;
 
 	//Canvas - The RoguePanel instance everything is drawn to.
 	public RoguePanel canvas;
@@ -74,6 +77,7 @@ public class RogueController extends JFrame implements KeyListener
 	//	}
 	//	canvas.moveHeroAnimated(x, y,logicHandler.getPlayer().getHitPoints(),logicHandler.getPlayer().getScore());
 	
+
 	//Draws all items even when the player tries to move outside the boundaries
 	drawAllItems();
 	if ( logicHandler.movable(x,y,origX, origY)) {
@@ -166,6 +170,22 @@ public class RogueController extends JFrame implements KeyListener
 	    }
 	}
     }
+    
+    public void clearAllItems(){
+	if (logicHandler.getLevel() != currentLevel){
+	    for (int x= 0; x < canvas.getGridWidth()-1; x++) {
+		for (int y = 0; y < canvas.getGridHeight()-1; y++) {
+		    if(logicHandler.getObject(x,y) instanceof Item){
+			logicHandler.deleteItem(x,y);
+		    }
+		}
+	    }
+	}
+	currentLevel++;
+    }
+    
+    
+    
     
     
     /**
@@ -294,7 +314,7 @@ public class RogueController extends JFrame implements KeyListener
 	logicHandler.setMaxNumOfMonsters(logicHandler.getMaxNumOfMonsters()+1);//Increases monster count
 	discoveredArea = new int[ canvas.getGridWidth() ][ canvas.getGridHeight()-1 ];//resets exploration
 	logicHandler.createMonster();//creates monsters
-	
+	clearAllItems();	
     }
 	
 
@@ -345,6 +365,7 @@ public class RogueController extends JFrame implements KeyListener
 		
 	}
 	
+
 	/**
 	 * Method required by the KeyListener interface.
 	 * Doesn't do anything yet.

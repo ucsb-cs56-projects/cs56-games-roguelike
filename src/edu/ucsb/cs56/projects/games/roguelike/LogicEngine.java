@@ -327,6 +327,10 @@ public class LogicEngine {
 	floor[x][y] = null;
     }
 
+    public void deleteItem(int x, int y){
+	listOfItems[x][y] = null;
+        floor[x][y] = null;
+    }
     
     /**
      * creates monsters at random, some monsters appearing multiple times and some not appearing at all
