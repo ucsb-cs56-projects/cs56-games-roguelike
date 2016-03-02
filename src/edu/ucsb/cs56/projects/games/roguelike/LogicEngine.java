@@ -251,10 +251,13 @@ public class LogicEngine {
 		    else if(.2<random && random <=.4){ // 20% chance to drop Beef
 			createItem(x,y, new Beef());
 		    }
-		    else if(.4<random && random <=.55){ // 20% chance to drop Pioson
+		    else if(.4<random && random <=.55){ // 15% chance to drop Pioson
 			createItem(x,y, new Poison());
 		    }
-		    else
+		    else if(.55<random && random <=.60){
+		    createItem(x,y, new Elixir()); // 5% chance of drop Elixir
+		    } 
+		    else // no item drop :(
 			floor[x][y] = null;
 		    
 

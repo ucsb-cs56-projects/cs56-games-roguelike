@@ -12,17 +12,19 @@ public class Player implements GamePiece {
 	//character hit points and attack
 	private int hitPoints;
 	private int attack;
+    private int speed;
     	private int[] playerPosition;
     	private int score;
 	private String typeOfPiece;
      private char icon;
 
     /**
-     * creates a player with 100 hitPoints and 20 attack
+     * creates a player with 100 hitPoints, 20 attack, and 1 speed
      */
     public Player(){
 	this.hitPoints = 100;
 	this.attack = 20;
+    this.speed = 1;
 	this.score= 0;
 	this.setTypeOfPiece("player");
 	this.setIcon('@');
@@ -35,6 +37,27 @@ public class Player implements GamePiece {
     public int getHitPoints(){
 	return this.hitPoints;
     }
+
+    /**
+    sets the player's speed
+    @param speed this is the new value of the player's speed, can only be from 1 to 5
+    */
+    public void setSpeed(int speed)
+    {
+        if(speed >= 5){ this.speed = 5; }
+        else if(speed <= 1){ this.speed = 1; }
+        else
+            this.speed = speed;
+    }
+
+    /**
+      * @return the player's speed
+      *
+    */
+    public int getSpeed(){
+        return this.speed;
+    }
+
      /**
       * @return the player's score
      * 
