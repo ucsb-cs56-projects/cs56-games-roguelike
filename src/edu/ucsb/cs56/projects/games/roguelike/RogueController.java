@@ -25,11 +25,15 @@ public class RogueController extends JFrame implements KeyListener
     private int y=12;
     
     private GamePiece[][]floor;
-   
-    private Random randomNumber = new Random();
-    
-    // origX and origY is the position the character is at before the it moves
-        private int origX;
+
+  //startx and starty are the locations the player should spawn after a new level begins
+  public final int startx = x;
+  public final int starty = y;
+
+	private Random randomNumber = new Random();
+	
+	// origX and origY is the position the character is at before the it moves
+	private int origX;
 	private int origY;
 
         private int currentLevel= 1;
@@ -95,7 +99,8 @@ public class RogueController extends JFrame implements KeyListener
             x = origX;
    	    y = origY;	 
         }         
-	canvas.moveHeroAnimated(x, y,logicHandler.getPlayer().getHitPoints(),logicHandler.getPlayer().getAttack(),logicHandler.getLevel(),logicHandler.getPlayer().getScore());	
+	canvas.moveHeroAnimated(x, y,logicHandler.getPlayer().getHitPoints(), logicHandler.getPlayer().getAttack(),
+							logicHandler.getPlayer().getSpeed(), logicHandler.getLevel(),logicHandler.getPlayer().getScore());	
     }
     /**
      * Handles movement of all monsters by checking if it can move there first through the logic engine
@@ -131,7 +136,8 @@ public class RogueController extends JFrame implements KeyListener
 	        			  //display the you were attacked flag if the collision was with a player
 	        			  if(logicHandler.getObject(xPos, yPos) instanceof Player){
 					      canvas.monsterAttack();
-					      canvas.moveHeroAnimated(x, y,logicHandler.getPlayer().getHitPoints(),logicHandler.getPlayer().getAttack(),logicHandler.getLevel(),logicHandler.getPlayer().getScore());
+					      canvas.moveHeroAnimated(x, y, logicHandler.getPlayer().getHitPoints(), logicHandler.getPlayer().getAttack(),
+					      						  logicHandler.getPlayer().getSpeed(), logicHandler.getLevel(),logicHandler.getPlayer().getScore());
 	        			  }
 	        			  canvas.moveMonster(xOrig, yOrig,logicHandler.getObject(xOrig,yOrig));
 					  
@@ -315,6 +321,11 @@ public class RogueController extends JFrame implements KeyListener
 	discoveredArea = new int[ canvas.getGridWidth() ][ canvas.getGridHeight()-1 ];//resets exploration
 	logicHandler.createMonster();//creates monsters
 	clearAllItems();	
+  logicHandler.resetPlayerPosition();//moves the player back to the starting position
+	canvas.moveHeroAnimated(startx, starty, logicHandler.getPlayer().getHitPoints(), logicHandler.getPlayer().getAttack(), 
+							logicHandler.getPlayer().getSpeed(), logicHandler.getLevel(), logicHandler.getPlayer().getScore());
+  this.x = startx;
+  this.y = starty;
     }
 	
 
@@ -332,10 +343,10 @@ public class RogueController extends JFrame implements KeyListener
 		origX = x; 
 		origY = y;
 		switch (key.getKeyChar()){
-		case 'w'	    :	 this.y--; break;
-		case 'a'	    :  	 this.x--; break;
-		case 'd'	    :	 this.x++; break;
-		case 's'		:	 this.y++; break;
+		case 'w'	    :	 this.y = this.y - logicHandler.getPlayer().getSpeed(); break;
+		case 'a'	    :  	 this.x = this.x - logicHandler.getPlayer().getSpeed(); break;
+		case 'd'	    :	 this.x = this.x + logicHandler.getPlayer().getSpeed(); break;
+		case 's'		:	 this.y = this.y + logicHandler.getPlayer().getSpeed(); break;
 		default			:	return;
 		}
 
@@ -344,6 +355,7 @@ public class RogueController extends JFrame implements KeyListener
 		canvas.write(key.getKeyChar(),7,23,RoguePanel.white,RoguePanel.black);
 		moveHero();
 		moveMonster();
+
 
 		checkPlayerStatus();
 		checkAllMonsterStatus();
