@@ -12,17 +12,19 @@ public class Player implements GamePiece {
 	//character hit points and attack
 	private int hitPoints;
 	private int attack;
+    private int speed;
     	private int[] playerPosition;
     	private int score;
 	private String typeOfPiece;
-    private char icon;
+     private char icon;
 
     /**
-     * creates a player with 100 hitPoints and 20 attack
+     * creates a player with 100 hitPoints, 20 attack, and 1 speed
      */
     public Player(){
 	this.hitPoints = 100;
 	this.attack = 20;
+    this.speed = 1;
 	this.score= 0;
 	this.setTypeOfPiece("player");
 	this.setIcon('@');
@@ -35,6 +37,27 @@ public class Player implements GamePiece {
     public int getHitPoints(){
 	return this.hitPoints;
     }
+
+    /**
+    sets the player's speed
+    @param speed this is the new value of the player's speed, can only be from 1 to 5
+    */
+    public void setSpeed(int speed)
+    {
+        if(speed >= 5){ this.speed = 5; }
+        else if(speed <= 1){ this.speed = 1; }
+        else
+            this.speed = speed;
+    }
+
+    /**
+      * @return the player's speed
+      *
+    */
+    public int getSpeed(){
+        return this.speed;
+    }
+
      /**
       * @return the player's score
      * 
@@ -47,9 +70,11 @@ public class Player implements GamePiece {
 	sets that player's attack
 	@param atk this is the amount of points you want to set the player with
 	*/
-	public void setAttack(int atk){
-		this.attack=atk;
-}
+    public void setAttack(int atk){
+	if(atk >= 100){this.attack=100;}
+	else	    
+	    this.attack=atk;
+    }
     
     /**
      * @return the player's attack
@@ -72,7 +97,9 @@ public class Player implements GamePiece {
      * @param newHp the hitPoints that is to be set
      */
     public void setHitPoints(int newHp){
-	this.hitPoints = newHp;
+	if(newHp >= 100) {this.hitPoints=100;}
+	else
+	    this.hitPoints = newHp;
     }
      
     /**

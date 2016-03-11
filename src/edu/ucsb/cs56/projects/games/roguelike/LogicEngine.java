@@ -251,10 +251,13 @@ public class LogicEngine {
 		    else if(.2<random && random <=.4){ // 20% chance to drop Beef
 			createItem(x,y, new Beef());
 		    }
-		    else if(.4<random && random <=.55){ // 20% chance to drop Pioson
+		    else if(.4<random && random <=.55){ // 15% chance to drop Pioson
 			createItem(x,y, new Poison());
 		    }
-		    else
+		    else if(.55<random && random <=.60){
+		    createItem(x,y, new Elixir()); // 5% chance of drop Elixir
+		    } 
+		    else // no item drop :(
 			floor[x][y] = null;
 		    
 
@@ -327,6 +330,20 @@ public class LogicEngine {
 	floor[x][y] = null;
     }
 
+    public void deleteItem(int x, int y){
+	listOfItems[x][y] = null;
+        floor[x][y] = null;
+    }
+    /**
+     * after the level is completed, resets the player to the starting position
+     * @param canvas needed to redraw the player in the RougePanel instance
+     */
+
+    public void resetPlayerPosition(){
+      int[] resetPosition = {40,12};
+      thePlayer.setPlayerPosition(resetPosition);
+      floor[40][12] = thePlayer;
+    }
     
     /**
      * creates monsters at random, some monsters appearing multiple times and some not appearing at all
