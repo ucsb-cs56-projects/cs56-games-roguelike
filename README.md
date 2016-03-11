@@ -110,3 +110,23 @@ Navigate to the directory with the build.xml.
 
 Type ```ant run```
 
+W16 Final Remarks
+========================
+Hello CS56 W17 students! You've been assigned a pretty cool project so smile. Some things you should know before starting to work on this project are:
+
+* Most of the stuff you need to know is above this Remark.
+* The code doesn't have many bugs anymore, but there are a lot of things that could be added to the game so that is more fun to play.
+* The few bugs that you need to fix are on the issues section of this repo.
+* The things that you could include in the game are:
+      * More superpowers to the character and monsters
+      * Some music per level (that would be sick!)
+      * A boss to defeat
+      * Rooms and Corridors
+      * A story line at the beginning of each level (like some text box maybe)
+* Make sure you understand how ```Roguepanel.java``` , ```LogicEngine.java```, and ```RogueController.java``` work. Your understanding of these three classes will be crucial to how well and fast you solve issues and add anything you want to the game ;)
+* Have fun with this project and put all your creativity on it!
+Good luck!
+
+Sincerely,
+
+Josue and Ish.
