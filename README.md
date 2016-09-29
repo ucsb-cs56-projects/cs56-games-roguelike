@@ -130,3 +130,10 @@ Good luck!
 Sincerely,
 
 Josue and Ish.
+
+
+Fall 16 Mentor Asssessment
+====
+The code for this project is reasonably well designed. However, it falls into some of the usual traps made by developers using OOP for the first time in a real capacity. The biggest one is that each item and monster is its own class. For instance, the Bat (extends Monster) class is just a collection of constructor overrides. That is to say, all its functionality exists in the Monster superclass, and you can create a Bat by creating a Monster with the specific stats of the Bat. Some possible refactors are static factory methods (Monster.createBat()) or storing each Monster 'class' in a file. 
+Another is that the Player class is wholely separate from the Monster class, despite them being reasonably similar. Instead, they could be one class, and the player controls a single specific instance of this GameEntity class.
+The last major problem is that drawing the game state to the screen is fairly coupled to the actual logic of the game. These should be split so that changes to existing game logic doesn't break rendering. 
