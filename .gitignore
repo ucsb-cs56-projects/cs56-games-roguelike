@@ -1,5 +1,7 @@
 *.class
 Score.txt
+build/
+*~
 
 # Package Files #
 *.jar
