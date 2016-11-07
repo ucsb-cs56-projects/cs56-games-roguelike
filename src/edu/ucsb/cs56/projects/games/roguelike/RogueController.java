@@ -399,12 +399,12 @@ public class RogueController extends JFrame implements KeyListener
 		RogueController mainControl = new RogueController();
 		mainControl.setVisible(true);
 		mainControl.setLocationRelativeTo(null); // center the window
+		
 		//Initially fills the map with monsters
 		mainControl.logicHandler.createMonster();
 
-
 		//Screen that shows after game is opened
-			mainControl.canvas.write("MOVE WITH W A S D. Survive the waves. Eat monsters to earn points.",9,12,RoguePanel.white,RoguePanel.black);
+		mainControl.canvas.write("MOVE WITH W A S D. Survive the waves. Eat monsters to earn points.",9,12,RoguePanel.white,RoguePanel.black);
 
 		
 		
