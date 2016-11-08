@@ -22,6 +22,7 @@ public class LogicEngine {
     private int[] playerPosition;
     private boolean gameOver;
     private int level;//current level of the game
+    private int elixirStepCounter;
 
     //List of one of each monsters.
     //Add to this list when adding extra monsters (Put the class name as a String type)
@@ -62,6 +63,7 @@ public class LogicEngine {
 		//The -1 is to remove the initial monster creation incrementation
 		maxNumOfMonsters = 7;
 		level = 1;
+		elixirStepCounter = 0;
 	}
     
     /**
@@ -158,20 +160,25 @@ public class LogicEngine {
 
 	public void move(int x,int y,int xOrig,int yOrig){
             
-	    if(floor[x][y] instanceof Item)
-	    {
+	    if(floor[x][y] instanceof Item) {
 		consumeItem(x,y);
 	    }
 
 	    floor[x][y] = floor[xOrig][yOrig];
-		floor[xOrig][yOrig] = null;
+	    floor[xOrig][yOrig] = null;
 
-		int[] position = {x,y};
-                if(floor[x][y] instanceof Player)
-                {
+	    int[] position = {x,y};
+            if(floor[x][y] instanceof Player) {
         	thePlayer.setPlayerPosition(position);
-                }
-	        
+            }
+
+	    if (thePlayer.getSpeed() > 1) {
+		elixirStepCounter++;
+		if (elixirStepCounter % 200 == 0) {
+		    thePlayer.setSpeed(thePlayer.getSpeed() - 1);
+		}
+	    }
+	    
         }
 	/**
 	 * x and y are the position thats being tested
