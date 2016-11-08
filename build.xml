@@ -26,7 +26,12 @@
 
    <!-- javadoc properties -->
    <property name="javadoc_absolute_path" location="javadoc"/>
-  <property name="public_javadoc_absolute_path" location="../cs56-games-roguelike/javadoc"/>
+  <property name="public_javadoc_absolute_path" location="../cs56-games-roguelike-javadoc/javadoc"/>
+
+  <path id="project.class.path"> 
+    <pathelement location="build"/>
+    <pathelement location="lib/junit-4.8.2.jar"/>
+  </path>
 
   <!-- END OF PROPERTIES -->
 
@@ -62,7 +67,9 @@
     <javadoc destdir="javadoc">
       <fileset dir="src/edu/ucsb/cs56/projects/games/roguelike/" >
 	      <include name="*.java"/>
-      </fileset>       
+      </fileset>
+      <classpath refid="project.class.path" />
+      <link href="https://docs.oracle.com/javase/8/docs/api/" /> 
     </javadoc>
     <echo>                                                                                       
       javadoc written to file://${javadoc_absolute_path}/index.html                              
