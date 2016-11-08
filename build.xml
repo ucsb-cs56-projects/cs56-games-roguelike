@@ -60,11 +60,9 @@
       <fileset dir="javadoc" />
     </delete>
     <javadoc destdir="javadoc">
-      <fileset dir="src" >
+      <fileset dir="src/edu/ucsb/cs56/projects/games/roguelike/" >
 	      <include name="*.java"/>
-      </fileset>
-      <classpath refid="project.class.path" />
-      <link href="https://docs.oracle.com/javase/8/docs/api/" />          
+      </fileset>       
     </javadoc>
     <echo>                                                                                       
       javadoc written to file://${javadoc_absolute_path}/index.html                              
