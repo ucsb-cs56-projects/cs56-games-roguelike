@@ -183,12 +183,15 @@ public class LogicEngine {
 	 * attacks if the 2 coordinates hold different GamePieces
 	 */
         public void attack(int x,int y,int xOrig,int yOrig){
-	    if(floor[x][y] instanceof Monster && floor[xOrig][yOrig] instanceof Player){	                
-			  thePlayer.attacking(listOfMonsters[x][y]);
-                }
+	    // if ((x > 1 && x < floorWidth - 1) && (y > 1 && y < floorHeight - 1)) {
+	   if(floor[x][y] instanceof Monster && floor[xOrig][yOrig] instanceof Player) {	                
+	      	thePlayer.attacking(listOfMonsters[x][y]);
+	        }
                     
 	    if(floor[x][y]instanceof Player && floor[xOrig][yOrig] instanceof Monster){
-                    listOfMonsters[xOrig][yOrig].attacking(thePlayer);}
+	      	listOfMonsters[xOrig][yOrig].attacking(thePlayer);
+		 }
+	    //	    }
         }
 	/**
 	 * x and y are the position thats being tested
@@ -204,23 +207,17 @@ public class LogicEngine {
 		return false;
 	    }
 		/* not movable, out of boundary*/
-	    if (x < 1 || x >= floorWidth-1){
+	    if (!inBounds(x, y))
 		return false;
-        }
-		
-	    if (y < 1 || y >= floorHeight-1){
-        	return false;
-        }
-        
-		
 			
 		//player isn't movable, start attack for player
 	    if(floor[x][y] instanceof Monster){	
-		if(floor[xOrig][yOrig] instanceof Player){
+		/*if(floor[xOrig][yOrig] instanceof Player){
 							return false;	
 			}else{	
 				return false;	
-			}
+				}*/
+		return false;
 		}
 				
 		//monster isn't movable, start attack for monster
@@ -231,6 +228,13 @@ public class LogicEngine {
 
 		return true;
 	}
+
+    public boolean inBounds(int x, int y) {
+	if ((x < 1 || x >= floorWidth - 1) || (y < 1 || y >= floorHeight - 1))
+	    return false;
+	else
+	    return true;
+    }
 	
 	/**
 	 * check if the monster at position x,y has 0 or less hp
