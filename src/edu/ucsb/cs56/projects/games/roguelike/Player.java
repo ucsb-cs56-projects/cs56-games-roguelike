@@ -4,7 +4,7 @@ package edu.ucsb.cs56.projects.games.roguelike;
 /**
  * A Player class that represents the character the player uses.
  * @author Minh Le 
- * @author Hans Marasigan & Richard Nguyen
+ * @author Hans Marasigan and Richard Nguyen
  * @version cs56 S13
  */
 

@@ -9,7 +9,7 @@ import static org.junit.Assert.assertFalse;
 /** test class for my subclasses
 
     @author Clayven Anderson
-    @author Hans Marasigan & Richard Nguyen\
+    @author Hans Marasigan and Richard Nguyen
     @author Rick Lee
     @version cs56 W14
     @see Troll

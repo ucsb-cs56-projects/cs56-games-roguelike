@@ -2,7 +2,13 @@ package edu.ucsb.cs56.projects.games.roguelike;
 
 import javax.sound.sampled.*;
 import java.io.File;
-import java.net.URL;
+
+/**
+ * This class stores music and methods to loop 
+ * or stop those songs
+ * @author Max de Visser and Artem Jivotovski
+ * @version cs56 F16
+*/
 
 public class Sound {
 	    

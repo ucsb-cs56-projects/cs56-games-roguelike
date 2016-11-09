@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * A Monster class to represents monster in the game
  * @author Minh Le 
- *@author Hans Marasigan & Richard Nguyen
+ *@author Hans Marasigan and Richard Nguyen
  *@version cs56 s13
  */
 public class Monster implements GamePiece{
@@ -98,6 +98,7 @@ public class Monster implements GamePiece{
 
     /**
      * get the point value of the Monster
+     * @return the point value of this monster
      */
     public int getPointValue(){
 	return this.pointValue;
@@ -166,7 +167,8 @@ public class Monster implements GamePiece{
 		this.position[1] = y;
 	}
 	/**
-	 *  chooses what direction the monster moves in
+	 * chooses what direction the monster moves in
+	 * @param playerPosition current position of the player
 	 * @return a vector that represents the direction
 	 */
 	

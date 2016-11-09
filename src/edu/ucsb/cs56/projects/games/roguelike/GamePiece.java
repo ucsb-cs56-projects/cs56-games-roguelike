@@ -3,14 +3,15 @@ package edu.ucsb.cs56.projects.games.roguelike;
 /**
  *This class represents the various pieces in game
  *it could be a monster, player, or nothing
- *@author Hans Marasigan & Richard Nguyen
+ *@author Hans Marasigan and Richard Nguyen
  *@version cs56 s13
  */
 
 public interface GamePiece {
 
     /**
-     *This is the getter to figure out what piece it is.
+     * This is the getter to figure out what piece it is.
+     * @return the type of this piece
      */
     public String getTypeOfPiece();
     
@@ -22,7 +23,8 @@ public interface GamePiece {
     
     
     /**
-     *This is the getter to figure out what piece icon it is.
+     * This is the getter to figure out what piece icon it is.
+     * @return the icon of this game piece
      */
     public char getIcon();
     

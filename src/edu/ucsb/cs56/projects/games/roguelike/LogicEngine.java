@@ -6,7 +6,7 @@ import java.util.Random;
 /**
  * LogicEngine takes care of game states
  * @author Minh Le
- * @author Hans Marasigan & Richard Nguyen
+ * @author Hans Marasigan and Richard Nguyen
  * @author Rick Lee
  */
 public class LogicEngine {
@@ -68,7 +68,7 @@ public class LogicEngine {
     
     /**
      * setter for boolean gameOver
-     *
+     * @param a boolean to set gameOver to true or false
      */
     public void setGameOver(boolean a){
 	this.gameOver = a;
@@ -76,7 +76,7 @@ public class LogicEngine {
     
     /**
      * getter for boolean gameOver
-     *
+     * @return the current value of the boolean gameOver
      */
     public boolean getGameOver(){
 	return gameOver;
@@ -328,7 +328,9 @@ public class LogicEngine {
 	}
     /**
      * creates specified item at specified location
-     * @param x coordinate, y coordinate, item reference
+     * @param x x coordinate for new item
+     * @param y y coordinate for new item
+     * @param i reference to new item
      */
     public void createItem(int x, int y, Item i){
 	floor[x][y]= i;
