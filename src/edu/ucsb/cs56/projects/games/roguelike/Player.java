@@ -24,7 +24,7 @@ public class Player implements GamePiece {
     public Player(){
 	this.hitPoints = 100;
 	this.attack = 20;
-	this.speed = 5;
+	this.speed = 1;
 	this.score= 0;
 	this.setTypeOfPiece("player");
 	this.setIcon('@');
