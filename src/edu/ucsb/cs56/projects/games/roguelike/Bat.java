@@ -26,7 +26,7 @@ public class Bat extends Monster{
     }
     /**
      * creates a Bat with 5 HP and 1 attack with icon B
-     * @ param randomMovement whether or not the bat will move randomly
+     * @param typeOfMovement whether or not the bat will move randomly
      */
     public Bat(int typeOfMovement){
 	super(5,1,typeOfMovement,10);

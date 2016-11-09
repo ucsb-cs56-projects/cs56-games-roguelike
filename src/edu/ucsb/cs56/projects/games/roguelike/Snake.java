@@ -23,7 +23,7 @@ public class Snake extends Monster{
     }
     /**
      * creates a snake with 5 HP and 3 attack with icon S
-     * @param randomMovement whether or not the monster will move randomly
+     * @param typeOfMovement whether or not the monster will move randomly
      */
     public Snake(int typeOfMovement){
 	super(5,3,typeOfMovement,15);
@@ -34,7 +34,7 @@ public class Snake extends Monster{
      * creates a snake with hit points, attack, and random movement with icon S
      * @param hitPoints the Snake's hitPoints
      * @param attack the Snake's attack
-     * @param randomMovement whether or not the Snake will move randomly or not
+     * @param typeOfMovement whether or not the Snake will move randomly or not
      */
     public Snake(int hitPoints, int attack, int typeOfMovement){
 	super(hitPoints, attack, typeOfMovement,15);
@@ -42,7 +42,7 @@ public class Snake extends Monster{
     }
     /**
      *creates a Snake to the parameters given to it
-     * @param hp the Snake's hitPoints
+     * @param hitPoints the Snake's hitPoints
      * @param att the Snake's attack
      * @param typeOfMove whether or not the Snake will move randomly or not
      * @param points the amount of points the Snake is worth

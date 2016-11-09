@@ -298,7 +298,7 @@ public class RoguePanel extends JPanel
 	return inGame;
     }
     /**
-       @return b the boolean to set
+       @param b the boolean to set
     */
     public void setInGame(boolean b){
 	inGame = b;

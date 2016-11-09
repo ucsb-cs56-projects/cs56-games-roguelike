@@ -26,7 +26,7 @@ public class Golem extends Monster{
     }
     /**
      * creates a Golem with 25 HP and 5 attack
-     * @ param randomMovement whether or not the Golem will move randomly
+     * @param typeOfMovement whether or not the Golem will move randomly
      */
     public Golem(int typeOfMovement){
 	super(25,5,typeOfMovement,30);
@@ -37,7 +37,7 @@ public class Golem extends Monster{
      * creates a Golem with hit points, attack, and random movement
      * @param hitPoints the Golem's hitPoints
      * @param attack the Golem's attack
-     * @param randomMovement whether or not the Golem will move randomly or not
+     * @param typeOfMovement whether or not the Golem will move randomly or not
      */
     public Golem(int hitPoints, int attack, int typeOfMovement){
 	super(hitPoints,attack,typeOfMovement,30);

@@ -23,7 +23,7 @@ public class Pirate extends Monster{
     }
     /**
      * creates a pirate with 15 HP and 4 attack with icon P
-     * @param randomMovement whether or not the monster will move randomly
+     * @param typeOfMovement whether or not the monster will move randomly
      */
     public Pirate(int typeOfMovement){
 	super(15,4,typeOfMovement,20);
@@ -34,7 +34,7 @@ public class Pirate extends Monster{
      * creates a pirate with hit points, attack, and random movement with icon P
      * @param hitPoints the Pirate's hitPoints
      * @param attack the Pirate's attack
-     * @param randomMovement whether or not the Pirate will move randomly or not
+     * @param typeOfMovement whether or not the Pirate will move randomly or not
      */
     public Pirate(int hitPoints, int attack, int typeOfMovement){
 	super(hitPoints, attack, typeOfMovement,20);
@@ -42,7 +42,7 @@ public class Pirate extends Monster{
     }
     /**
      *creates a Pirate to the parameters given to it
-     * @param hp the Pirate's hitPoints
+     * @param hitPoints the Pirate's hitPoints
      * @param att the Pirate's attack
      * @param typeOfMove whether or not the Pirate will move randomly or not
      * @param points the amount of points the Pirate is worth

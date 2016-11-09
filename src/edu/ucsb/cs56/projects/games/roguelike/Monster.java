@@ -30,7 +30,7 @@ public class Monster implements GamePiece{
 	}
 	/**
 	 * creates a player with 20 hitPoints and 10 attack
-	 * @param randomMovement whether or not the monster will move randomly or not
+	 * @param typeOfMovement whether or not the monster will move randomly or not
 	 */
 	public Monster(int typeOfMovement){
 	    this.hitPoints = 20;
@@ -43,7 +43,7 @@ public class Monster implements GamePiece{
 	 * creates a player with 20 hitPoints and 10 attack
 	 * @param hitPoints the monster's hitPoints
 	 * @param attack the monster's attack
-	 * @param randomMovement whether or not the monster will move randomly or not
+	 * @param typeOfMovement whether or not the monster will move randomly or not
 	 */
 	public Monster(int hitPoints, int attack, int typeOfMovement){
 		this.hitPoints = hitPoints;
@@ -54,10 +54,10 @@ public class Monster implements GamePiece{
 	}
     /**
      *creates a monster with the makers preference of status
-     *@param hp, hit points of the monster
-     *@param att, the attack power of the monster
+     *@param hp hit points of the monster
+     *@param att the attack power of the monster
      *@param typeOfMovement determines whether it is random or not
-     *@param points, determines how many points it is.
+     *@param points determines how many points it is.
      */
     public Monster (int hp, int att, int typeOfMovement,int points){
 		this.hitPoints = hp;

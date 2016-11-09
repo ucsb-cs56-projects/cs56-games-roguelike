@@ -23,7 +23,7 @@ public class Troll extends Monster{
     }
     /**
      * creates a troll with 10 HP and 3 attack with icon T
-     * @ param randomMovement whether or not the monster will move randomly
+     * @param typeOfMovement whether or not the monster will move randomly
      */
     public Troll(int typeOfMovement){
 	super(10,3,typeOfMovement,15);
@@ -34,7 +34,7 @@ public class Troll extends Monster{
      * creates a troll with hit points, attack, and random movement with icon T
      * @param hitPoints the Troll's hitPoints
      * @param attack the Trolls's attack
-     * @param randomMovement whether or not the Troll will move randomly or not
+     * @param typeOfMovement whether or not the Troll will move randomly or not
      */
     public Troll(int hitPoints, int attack, int typeOfMovement){
 	super(hitPoints, attack, typeOfMovement,15);
@@ -42,7 +42,7 @@ public class Troll extends Monster{
     }
     /**
      *creates a Troll to the parameters given to it
-     * @param hp the Troll's hitPoints
+     * @param hitPoints the Troll's hitPoints
      * @param att the Troll's attack
      * @param typeOfMove whether or not the Troll will move randomly or not
      * @param points the amount of points the Troll is worth

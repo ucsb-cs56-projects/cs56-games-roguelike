@@ -12,7 +12,12 @@ import static org.junit.Assert.assertFalse;
     @author Hans Marasigan & Richard Nguyen\
     @author Rick Lee
     @version cs56 W14
-    @see Troll,Golem,Bat,Snake,Zombie,Pirate
+    @see Troll
+    @see Golem
+    @see Bat
+    @see Snake
+    @see Zombie
+    @see Pirate
 */
 
 public class SubMonsterTest{

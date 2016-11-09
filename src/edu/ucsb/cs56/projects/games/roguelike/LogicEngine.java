@@ -141,7 +141,7 @@ public class LogicEngine {
 	return maxNumOfMonsters;
     }
     /**
-       @param new max number of monsters
+       @param max new max number of monsters
     */
     public void setMaxNumOfMonsters(int max){
 	this.maxNumOfMonsters = max;
@@ -347,7 +347,6 @@ public class LogicEngine {
     }
     /**
      * after the level is completed, resets the player to the starting position
-     * @param canvas needed to redraw the player in the RougePanel instance
      */
 
     public void resetPlayerPosition(){

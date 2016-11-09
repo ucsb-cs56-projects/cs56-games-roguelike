@@ -45,7 +45,7 @@ public class Item implements GamePiece{
 	creates an item with the default effect value of 10
 	and the computer/player decides on whether it has been used
 	and is an item game piece with icon I
-	@param tells whether the item has been used
+	@param CanUse tells whether the item has been used
     */
     public Item(boolean CanUse){
 	this.used=CanUse;
