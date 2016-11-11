@@ -1,5 +1,6 @@
 *.class
 Score.txt
+javadoc/
 build/
 *~
 
