@@ -3,7 +3,7 @@ package edu.ucsb.cs56.projects.games.roguelike;
 import java.util.Random;
 
 /**
- @author Ishjot Walia & Josue Montenegro
+ @author Ishjot Walia and Josue Montenegro
  @version cs56 Winter 16
  This class represents a class of Item called a Elixir which increases the Player's speed, allowing them to move 2 spaces instead of 1.
  This item is very rare.

@@ -3,10 +3,11 @@ package edu.ucsb.cs56.projects.games.roguelike;
 import java.util.Random;
 
 /**
- @author Hans Marasigan & Richard Nguyen
+ @author Hans Marasigan and Richard Nguyen
  @version cs56 Spring 13
- This class represents a class of Item called a Poison which takes away HP from the players Health Points (hit points)
- its in game icon is !
+ This class represents a class of Item called a Poison which takes 
+ away HP from the players Health Points (hit points)
+ Its in game icon is !
  */
 
 public class Poison extends Item{

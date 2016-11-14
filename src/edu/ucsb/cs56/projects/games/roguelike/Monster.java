@@ -5,7 +5,7 @@ import java.util.Random;
 /**
  * A Monster class to represents monster in the game
  * @author Minh Le 
- *@author Hans Marasigan & Richard Nguyen
+ *@author Hans Marasigan and Richard Nguyen
  *@version cs56 s13
  */
 public class Monster implements GamePiece{
@@ -30,7 +30,7 @@ public class Monster implements GamePiece{
 	}
 	/**
 	 * creates a player with 20 hitPoints and 10 attack
-	 * @param randomMovement whether or not the monster will move randomly or not
+	 * @param typeOfMovement whether or not the monster will move randomly or not
 	 */
 	public Monster(int typeOfMovement){
 	    this.hitPoints = 20;
@@ -43,7 +43,7 @@ public class Monster implements GamePiece{
 	 * creates a player with 20 hitPoints and 10 attack
 	 * @param hitPoints the monster's hitPoints
 	 * @param attack the monster's attack
-	 * @param randomMovement whether or not the monster will move randomly or not
+	 * @param typeOfMovement whether or not the monster will move randomly or not
 	 */
 	public Monster(int hitPoints, int attack, int typeOfMovement){
 		this.hitPoints = hitPoints;
@@ -54,10 +54,10 @@ public class Monster implements GamePiece{
 	}
     /**
      *creates a monster with the makers preference of status
-     *@param hp, hit points of the monster
-     *@param att, the attack power of the monster
+     *@param hp hit points of the monster
+     *@param att the attack power of the monster
      *@param typeOfMovement determines whether it is random or not
-     *@param points, determines how many points it is.
+     *@param points determines how many points it is.
      */
     public Monster (int hp, int att, int typeOfMovement,int points){
 		this.hitPoints = hp;
@@ -98,6 +98,7 @@ public class Monster implements GamePiece{
 
     /**
      * get the point value of the Monster
+     * @return the point value of this monster
      */
     public int getPointValue(){
 	return this.pointValue;
@@ -166,7 +167,8 @@ public class Monster implements GamePiece{
 		this.position[1] = y;
 	}
 	/**
-	 *  chooses what direction the monster moves in
+	 * chooses what direction the monster moves in
+	 * @param playerPosition current position of the player
 	 * @return a vector that represents the direction
 	 */
 	

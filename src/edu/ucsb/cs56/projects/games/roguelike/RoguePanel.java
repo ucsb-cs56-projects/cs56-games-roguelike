@@ -298,7 +298,7 @@ public class RoguePanel extends JPanel
 	return inGame;
     }
     /**
-       @return b the boolean to set
+       @param b the boolean to set
     */
     public void setInGame(boolean b){
 	inGame = b;
@@ -316,8 +316,8 @@ public class RoguePanel extends JPanel
   
   /**
    * Creates a grid of a specified width and height
-   * @param width
-   * @param height
+   * @param width width of new grid
+   * @param height height of new grid
    */
   public RoguePanel(int width, int height)
   {
@@ -474,6 +474,8 @@ private LookupOp setColors(Color bgColor, Color fgColor) {
     /**
      * Clear the character at int x,y to whatever the default background color is.
      * @return this for convenient chaining of method calls
+     * @param x the distance from the left of the position to be cleared
+     * @param y the distance from the top of the position to be cleared
      */
     public RoguePanel clear(int x, int y){
     	  return clear(' ', x, y, 1, 1, defaultForegroundColor, defaultBackgroundColor);
@@ -600,9 +602,12 @@ private LookupOp setColors(Color bgColor, Color fgColor) {
         return this;
     }
     
-	/**
-	 * Draw an "@" symbol at x,y using the RoguePanel's write(string,int,int,color,color) method.
-	 */
+ /**
+ * Draw an "@" symbol at x,y using the RoguePanel's 
+ * write(string,int,int,color,color) method.
+ * @param xPos x position of character to be drawn
+ * @param yPos y position of character to be drawn
+ */
 	
 	public void drawChar(int xPos, int yPos){
 		write("@",xPos,yPos,RoguePanel.white,RoguePanel.black);
@@ -625,27 +630,33 @@ private LookupOp setColors(Color bgColor, Color fgColor) {
 		write("Score:",53,23,RoguePanel.white,RoguePanel.black);
 	}
     
-	/**
-	 * moves the player to position xPosition,yPosition and updates its hp using write
-	 */
+/**
+ * moves the player to position xPosition,yPosition and updates its hp using write
+ * @param xPosition x position that the player will move to
+ * @param yPosition y position that the player will move to
+ * @param hp current hp of the player
+ * @param ap current attack power of the player
+ * @param speed current speed of the player
+ * @param level current level the player is on
+ * @param score current score of the player
+ */
     public void moveHeroAnimated(int xPosition, int yPosition, int hp, int ap, int speed, int level, int score){
 		
-		drawHUD();
-		
-		try{
-			write("@",xPosition,yPosition,RoguePanel.white,RoguePanel.black);
-		}catch(Exception ex){
-			write("HERE BE DRAGONS",0,22,RoguePanel.red,RoguePanel.black);
-		}
-		
-		write(""+xPosition,12,23,RoguePanel.white,RoguePanel.black);
-		write(""+yPosition,16,23,RoguePanel.white,RoguePanel.black);
-		write(""+hp+ " ",22,23,RoguePanel.white,RoguePanel.black);
-    write(""+ap+ " ",29,23,RoguePanel.white,RoguePanel.black);
-    write(""+speed+ " ",40,23,RoguePanel.white,RoguePanel.black);
-		write(""+level+ " ",49,23,RoguePanel.white,RoguePanel.black);
-		write(""+score+ " ",59,23,RoguePanel.white,RoguePanel.black);
+	drawHUD();
+	try{
+	    write("@",xPosition,yPosition,RoguePanel.white,RoguePanel.black);
+	}catch(Exception ex){
+	    write("HERE BE DRAGONS",0,22,RoguePanel.red,RoguePanel.black);
 	}
+		
+	write(""+xPosition,12,23,RoguePanel.white,RoguePanel.black);
+	write(""+yPosition,16,23,RoguePanel.white,RoguePanel.black);
+	write(""+hp+ " ",22,23,RoguePanel.white,RoguePanel.black);
+	write(""+ap+ " ",29,23,RoguePanel.white,RoguePanel.black);
+	write(""+speed+ " ",40,23,RoguePanel.white,RoguePanel.black);
+	write(""+level+ " ",49,23,RoguePanel.white,RoguePanel.black);
+	write(""+score+ " ",59,23,RoguePanel.white,RoguePanel.black);
+    }
 	
     public void drawItem(int xPosition, int yPosition, Item i){
 		
@@ -653,23 +664,26 @@ private LookupOp setColors(Color bgColor, Color fgColor) {
 		
 	 }
 
-	/**
-	 *moves the monster to position xPosition,yPosition
-	 * Prints the x and y coordinates of the character.
-	 */
+    /**
+     *moves the monster to position xPosition,yPosition
+     * Prints the x and y coordinates of the character.
+     * @param xPosition x position for monster to move to
+     * @param yPosition y position for monster to move to
+     * @param piece reference to the monster to be moved
+    */
     public void moveMonster(int xPosition, int yPosition, GamePiece piece){
 		
 	write(piece.getIcon(),xPosition,yPosition,RoguePanel.red,RoguePanel.black);
 		
 	}
 	
-	/**
-	 * display the you were hit flag
-	 */
-	public void monsterAttack(){
-		write("You were hit",60,23,RoguePanel.yellow,RoguePanel.black);
+    /**
+     * display the you were hit flag
+     */
+    public void monsterAttack(){
+	write("You were hit",60,23,RoguePanel.yellow,RoguePanel.black);
 		
-	}
+    }
 
     /**
      * display that the player has advanced to the next level
@@ -678,9 +692,11 @@ private LookupOp setColors(Color bgColor, Color fgColor) {
 	write("NEXT LEVEL!",60,23,RoguePanel.yellow,RoguePanel.black);
     }
 	
-	/**
-	 * displays the losing screen with player's score and HighScores
-	 */
+    /**
+     * displays the losing screen with player's score and HighScores
+     * @param score final score of the player
+     * @param array array of high scores
+     */
     public void displayLosingScreen(int score,int[] array){
 	write("To play again: close this window and press play on the main menu.", 7,10,RoguePanel.green,RoguePanel.black);
 		write("YOU LOSE",35,6,RoguePanel.red,RoguePanel.black);
@@ -694,20 +710,28 @@ private LookupOp setColors(Color bgColor, Color fgColor) {
 		    rank++;
 		}
     
-    }	
-	/**
-	 * displays the winning screen
-	 */
-	public void displayWinningScreen(){
-		write("YOU WIN",40,12,RoguePanel.green,RoguePanel.black);
-	}
-	
+    }
+    
+    /**
+     * displays the winning screen
+     */
+    public void displayWinningScreen(){
+	write("YOU WIN",40,12,RoguePanel.green,RoguePanel.black);
+    }
+
+    /**
+     * writes an empty space at the given position
+     * @param xPosition x position of empty space
+     * @param yPosition y position of empty space
+     * @param colorNum color of the current level
+     */
     public void emptySpace(int xPosition, int yPosition, int colorNum){
 		write("_",xPosition,yPosition,groundColor[colorNum%groundColor.length],RoguePanel.black);
 	}
 
     /**
        Covers the areas where the player has not discovered yet
+       @param shadow 2D array of places that the player has discovered
     */
     public void recordShadows(int[][] shadow){
 	discoveredArea = shadow;

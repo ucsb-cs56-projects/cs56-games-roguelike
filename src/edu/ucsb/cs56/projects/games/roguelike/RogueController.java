@@ -87,13 +87,15 @@ public class RogueController extends JFrame implements KeyListener
 	if ( logicHandler.movable(x,y,origX, origY)) {
 	    logicHandler.move(x,y,origX,origY);
         } 
-        else{
-            logicHandler.attack(x, y, origX, origY);
-            if(logicHandler.monsterIsDead(x,y)){
-		if(logicHandler.getObject(x,y) instanceof Item){
-		    canvas.drawItem(x,y, logicHandler.getItem(x,y));
-		}else {
-		    canvas.clear(x,y);
+        else { // Only case in which character is in bounds but can't move, is when there is a monster
+	    if (logicHandler.inBounds(x, y)) {
+		logicHandler.attack(x, y, origX, origY);
+		if(logicHandler.monsterIsDead(x,y)){
+		    if(logicHandler.getObject(x,y) instanceof Item){
+			canvas.drawItem(x,y, logicHandler.getItem(x,y));
+		    }else {
+			canvas.clear(x,y);
+		    }
 		}
 	    }
             x = origX;
@@ -399,12 +401,12 @@ public class RogueController extends JFrame implements KeyListener
 		RogueController mainControl = new RogueController();
 		mainControl.setVisible(true);
 		mainControl.setLocationRelativeTo(null); // center the window
+		
 		//Initially fills the map with monsters
 		mainControl.logicHandler.createMonster();
 
-
 		//Screen that shows after game is opened
-			mainControl.canvas.write("MOVE WITH W A S D. Survive the waves. Eat monsters to earn points.",9,12,RoguePanel.white,RoguePanel.black);
+		mainControl.canvas.write("MOVE WITH W A S D. Survive the waves. Eat monsters to earn points.",9,12,RoguePanel.white,RoguePanel.black);
 
 		
 		

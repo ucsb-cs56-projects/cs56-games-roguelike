@@ -23,7 +23,7 @@ public class Zombie extends Monster{
     }
     /**
      * creates a Zombie with 15 HP and 2 attack with icon Z
-     * @param randomMovement whether or not the monster will move randomly
+     * @param typeOfMovement whether or not the monster will move randomly
      */
     public Zombie(int typeOfMovement){
 	super(15,2,typeOfMovement,15);
@@ -34,7 +34,7 @@ public class Zombie extends Monster{
      * creates a zombie with hit points, attack, and random movement with icon Z
      * @param hitPoints the Zombie's hitPoints
      * @param attack the Zombie's attack
-     * @param randomMovement whether or not the Zombie will move randomly or not
+     * @param typeOfMovement whether or not the Zombie will move randomly or not
      */
     public Zombie(int hitPoints, int attack, int typeOfMovement){
 	super(hitPoints, attack, typeOfMovement,15);
@@ -42,7 +42,7 @@ public class Zombie extends Monster{
     }
     /**
      *creates a Zombie to the parameters given to it
-     * @param hp the Zombie's hitPoints
+     * @param hitPoints the Zombie's hitPoints
      * @param att the Zombie's attack
      * @param typeOfMove whether or not the Zombie will move randomly or not
      * @param points the amount of points the Zombie is worth

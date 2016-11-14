@@ -4,7 +4,7 @@ import java.util.Random;
 
 /**
 * An Item class to represent Items in the Dungeon.
-*@author Hans Marasigan & Richard Nguyen
+*@author Hans Marasigan and Richard Nguyen
 *@version cs56 s13
 */
 
@@ -45,7 +45,7 @@ public class Item implements GamePiece{
 	creates an item with the default effect value of 10
 	and the computer/player decides on whether it has been used
 	and is an item game piece with icon I
-	@param tells whether the item has been used
+	@param CanUse tells whether the item has been used
     */
     public Item(boolean CanUse){
 	this.used=CanUse;
@@ -55,11 +55,12 @@ public class Item implements GamePiece{
     }
     
     /** 
-	gets the item's effect value
+     * gets the item's effect value
+     * @return the effect of this item
     */
     public int getEffect(){
 	    return this.effect;
-	}
+    }
     /**
        sets the item's effect value
        @param NewEffect this is the value the computer/programmer can set
@@ -77,6 +78,7 @@ public class Item implements GamePiece{
     }
     /**
        this gets whether or not the item has been used 
+       @return true if this item has been used, false if not
     */
     public boolean getUse(){
 	return this.used;
@@ -109,6 +111,7 @@ public class Item implements GamePiece{
     /**
        this method uses the effect value in someway.
        in this method it just adds points to the player.
+       @param p the player to be affected by the item
     */
     public void UseEffect(Player p){
 	p.setScore(this.getEffect()+p.getScore());	

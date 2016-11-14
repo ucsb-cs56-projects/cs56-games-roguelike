@@ -7,7 +7,7 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
 /** test class for my super class 
-    @author Hans Marasigan & Richard Nguyen
+    @author Hans Marasigan and Richard Nguyen
     @version cs56 S13
     @see GamePiece
 */

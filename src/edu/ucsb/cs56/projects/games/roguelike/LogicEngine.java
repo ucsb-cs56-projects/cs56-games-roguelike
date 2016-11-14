@@ -6,7 +6,7 @@ import java.util.Random;
 /**
  * LogicEngine takes care of game states
  * @author Minh Le
- * @author Hans Marasigan & Richard Nguyen
+ * @author Hans Marasigan and Richard Nguyen
  * @author Rick Lee
  */
 public class LogicEngine {
@@ -22,6 +22,7 @@ public class LogicEngine {
     private int[] playerPosition;
     private boolean gameOver;
     private int level;//current level of the game
+    private int elixirStepCounter;
 
     //List of one of each monsters.
     //Add to this list when adding extra monsters (Put the class name as a String type)
@@ -62,11 +63,12 @@ public class LogicEngine {
 		//The -1 is to remove the initial monster creation incrementation
 		maxNumOfMonsters = 7;
 		level = 1;
+		elixirStepCounter = 0;
 	}
     
     /**
      * setter for boolean gameOver
-     *
+     * @param a boolean to set gameOver to true or false
      */
     public void setGameOver(boolean a){
 	this.gameOver = a;
@@ -74,7 +76,7 @@ public class LogicEngine {
     
     /**
      * getter for boolean gameOver
-     *
+     * @return the current value of the boolean gameOver
      */
     public boolean getGameOver(){
 	return gameOver;
@@ -139,7 +141,7 @@ public class LogicEngine {
 	return maxNumOfMonsters;
     }
     /**
-       @param new max number of monsters
+       @param max new max number of monsters
     */
     public void setMaxNumOfMonsters(int max){
 	this.maxNumOfMonsters = max;
@@ -158,20 +160,25 @@ public class LogicEngine {
 
 	public void move(int x,int y,int xOrig,int yOrig){
             
-	    if(floor[x][y] instanceof Item)
-	    {
+	    if(floor[x][y] instanceof Item) {
 		consumeItem(x,y);
 	    }
 
 	    floor[x][y] = floor[xOrig][yOrig];
-		floor[xOrig][yOrig] = null;
+	    floor[xOrig][yOrig] = null;
 
-		int[] position = {x,y};
-                if(floor[x][y] instanceof Player)
-                {
+	    int[] position = {x,y};
+            if(floor[x][y] instanceof Player) {
         	thePlayer.setPlayerPosition(position);
-                }
-	        
+            }
+
+	    if (thePlayer.getSpeed() > 1) {
+		elixirStepCounter++;
+		if (elixirStepCounter % 200 == 0) {
+		    thePlayer.setSpeed(thePlayer.getSpeed() - 1);
+		}
+	    }
+	    
         }
 	/**
 	 * x and y are the position thats being tested
@@ -183,12 +190,15 @@ public class LogicEngine {
 	 * attacks if the 2 coordinates hold different GamePieces
 	 */
         public void attack(int x,int y,int xOrig,int yOrig){
-	    if(floor[x][y] instanceof Monster && floor[xOrig][yOrig] instanceof Player){	                
-			  thePlayer.attacking(listOfMonsters[x][y]);
-                }
+	    // if ((x > 1 && x < floorWidth - 1) && (y > 1 && y < floorHeight - 1)) {
+	   if(floor[x][y] instanceof Monster && floor[xOrig][yOrig] instanceof Player) {	                
+	      	thePlayer.attacking(listOfMonsters[x][y]);
+	        }
                     
 	    if(floor[x][y]instanceof Player && floor[xOrig][yOrig] instanceof Monster){
-                    listOfMonsters[xOrig][yOrig].attacking(thePlayer);}
+	      	listOfMonsters[xOrig][yOrig].attacking(thePlayer);
+		 }
+	    //	    }
         }
 	/**
 	 * x and y are the position thats being tested
@@ -204,23 +214,17 @@ public class LogicEngine {
 		return false;
 	    }
 		/* not movable, out of boundary*/
-	    if (x < 1 || x >= floorWidth-1){
+	    if (!inBounds(x, y))
 		return false;
-        }
-		
-	    if (y < 1 || y >= floorHeight-1){
-        	return false;
-        }
-        
-		
 			
 		//player isn't movable, start attack for player
 	    if(floor[x][y] instanceof Monster){	
-		if(floor[xOrig][yOrig] instanceof Player){
+		/*if(floor[xOrig][yOrig] instanceof Player){
 							return false;	
 			}else{	
 				return false;	
-			}
+				}*/
+		return false;
 		}
 				
 		//monster isn't movable, start attack for monster
@@ -231,6 +235,13 @@ public class LogicEngine {
 
 		return true;
 	}
+
+    public boolean inBounds(int x, int y) {
+	if ((x < 1 || x >= floorWidth - 1) || (y < 1 || y >= floorHeight - 1))
+	    return false;
+	else
+	    return true;
+    }
 	
 	/**
 	 * check if the monster at position x,y has 0 or less hp
@@ -317,7 +328,9 @@ public class LogicEngine {
 	}
     /**
      * creates specified item at specified location
-     * @param x coordinate, y coordinate, item reference
+     * @param x x coordinate for new item
+     * @param y y coordinate for new item
+     * @param i reference to new item
      */
     public void createItem(int x, int y, Item i){
 	floor[x][y]= i;
@@ -336,7 +349,6 @@ public class LogicEngine {
     }
     /**
      * after the level is completed, resets the player to the starting position
-     * @param canvas needed to redraw the player in the RougePanel instance
      */
 
     public void resetPlayerPosition(){

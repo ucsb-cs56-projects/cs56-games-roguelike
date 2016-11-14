@@ -28,7 +28,7 @@ public class GUI
     public GUI()
     {
 	final JFrame guiFrame = new JFrame("Roguelike"); // frame window title will be Roguelike
-        
+        Sound.menuMusic.loop();
        
 	JButton playButton = new JButton("Play"); //new button with text "Play"
         setButtonCharacteristics(playButton);
@@ -119,6 +119,8 @@ public class GUI
 
     public void openGameWindow()
     {
+	Sound.menuMusic.stop();
+	Sound.gameMusic.loop();
 	String[] args = {};
 	RogueController.main(args);
     }
