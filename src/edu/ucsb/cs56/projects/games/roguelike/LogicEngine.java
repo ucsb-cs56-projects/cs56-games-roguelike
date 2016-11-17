@@ -371,43 +371,43 @@ public class LogicEngine {
 		     if(floor[xPos][yPos]==null){
 
 			 switch(n){
-			 case 0 : floor[xPos][yPos] = new Monster(numGenerator.nextInt(2)+1);
+			 case 0 : floor[xPos][yPos] = new Monster(numGenerator.nextInt(2)+1, Monster.MONSTER);
 			          listOfMonsters[xPos][yPos] = (Monster) floor[xPos][yPos];
 				  listOfMonsters[xPos][yPos].setLevelBonus(level);
 				  listOfMonsters[xPos][yPos].setMonsterPosition(xPos,yPos);
 			          break;
-			 case 1 : floor[xPos][yPos] = new Troll(numGenerator.nextInt(2)+1);    
-				  listOfMonsters[xPos][yPos] = (Troll) floor[xPos][yPos];
+			 case 1 : floor[xPos][yPos] = new Monster(numGenerator.nextInt(2)+1, Monster.TROLL);    
+				  listOfMonsters[xPos][yPos] = (Monster) floor[xPos][yPos];
 				  listOfMonsters[xPos][yPos].setLevelBonus(level);
 				  listOfMonsters[xPos][yPos].setMonsterPosition(xPos,yPos);
 			          break;
-			 case 2 : floor[xPos][yPos] = new Golem(numGenerator.nextInt(2)+1);
-				  listOfMonsters[xPos][yPos] = (Golem) floor[xPos][yPos];
+			 case 2 : floor[xPos][yPos] = new Monster(numGenerator.nextInt(2)+1, Monster.GOLEM);
+				  listOfMonsters[xPos][yPos] = (Monster) floor[xPos][yPos];
 				  listOfMonsters[xPos][yPos].setLevelBonus(level);
 				  listOfMonsters[xPos][yPos].setMonsterPosition(xPos,yPos);
 				  break;
-			 case 3 : floor[xPos][yPos] = new Bat(numGenerator.nextInt(2)+1);
-				  listOfMonsters[xPos][yPos] = (Bat) floor[xPos][yPos];
+			 case 3 : floor[xPos][yPos] = new Monster(numGenerator.nextInt(2)+1, Monster.BAT);
+				  listOfMonsters[xPos][yPos] = (Monster) floor[xPos][yPos];
 				  listOfMonsters[xPos][yPos].setLevelBonus(level);
 				  listOfMonsters[xPos][yPos].setMonsterPosition(xPos,yPos);
 			          break;
-			 case 4 : floor[xPos][yPos] = new Snake(numGenerator.nextInt(2)+1);
-				  listOfMonsters[xPos][yPos] = (Snake) floor[xPos][yPos];
+			 case 4 : floor[xPos][yPos] = new Monster(numGenerator.nextInt(2)+1, Monster.SNAKE);
+				  listOfMonsters[xPos][yPos] = (Monster) floor[xPos][yPos];
 				  listOfMonsters[xPos][yPos].setLevelBonus(level);
 				  listOfMonsters[xPos][yPos].setMonsterPosition(xPos,yPos);
 			          break;
-			 case 5 : floor[xPos][yPos] = new Zombie(numGenerator.nextInt(2)+1);
-			     	  listOfMonsters[xPos][yPos] = (Zombie) floor[xPos][yPos];
+			 case 5 : floor[xPos][yPos] = new Monster(numGenerator.nextInt(2)+1, Monster.ZOMBIE);
+			     	  listOfMonsters[xPos][yPos] = (Monster) floor[xPos][yPos];
 				  listOfMonsters[xPos][yPos].setLevelBonus(level);
 				  listOfMonsters[xPos][yPos].setMonsterPosition(xPos,yPos);
 			          break;
-			 case 6 : floor[xPos][yPos] = new Pirate(numGenerator.nextInt(2)+1);
-				  listOfMonsters[xPos][yPos] = (Pirate) floor[xPos][yPos];
+			 case 6 : floor[xPos][yPos] = new Monster(numGenerator.nextInt(2)+1, Monster.PIRATE);
+				  listOfMonsters[xPos][yPos] = (Monster) floor[xPos][yPos];
 				  listOfMonsters[xPos][yPos].setLevelBonus(level);
 				  listOfMonsters[xPos][yPos].setMonsterPosition(xPos,yPos);
 			          break;
 
-			 //Add new monsters here. Copy the case and change just the class names
+			 //Add new monsters here. Copy the case and change the parameter passed in
 
 
 

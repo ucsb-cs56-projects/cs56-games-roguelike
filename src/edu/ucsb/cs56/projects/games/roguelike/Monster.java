@@ -15,58 +15,44 @@ public class Monster implements GamePiece{
 	private int typeOfMovement;
 	private int[] position = new int[2];
         private int pointValue=5;
-	private String typeOfPiece;
     private char icon;
+
+    // Default attributes for monsters
+    public static final int[] BAT = {5,1,10,66};
+    public static final int[] GOLEM = {25,5,30,71};
+    public static final int[] MONSTER = {20,10,5,77};
+    public static final int[] PIRATE = {15,4,20,80};
+    public static final int[] SNAKE = {5,3,15,83};
+    public static final int[] TROLL = {10,3,15,84};
+    public static final int[] ZOMBIE = {15,2,15,90};
+    
 	/**
 	 * creates a monster with 20 hitPoints and 10 attack and  no random movement
 	 * 
 	 */
 	public Monster(){
-	    this.hitPoints=20;
-	    this.attack=10;
+	    this.setHitPoints(MONSTER[0]);
+	    this.setAttack(MONSTER[1]);
+	    this.setPointValue(MONSTER[2]);
+	    char[] iconArray = Character.toChars(MONSTER[3]);
+	    char iconChar = iconArray[0];
+	    this.setIcon(iconChar);
 	    this.typeOfMovement=0;
-	    this.setTypeOfPiece("monster");
-	    this.setIcon('M');
 	}
 	/**
 	 * creates a player with 20 hitPoints and 10 attack
 	 * @param typeOfMovement whether or not the monster will move randomly or not
 	 */
-	public Monster(int typeOfMovement){
-	    this.hitPoints = 20;
-	    this.attack=10;
-	    this.typeOfMovement=typeOfMovement;
-	    this.setTypeOfPiece("monster");
-	    this.setIcon('M');
+    public Monster(int typeOfMovement, int[] typeOfMonster){
+	this.setHitPoints(typeOfMonster[0]);
+	this.setAttack(typeOfMonster[1]);
+	this.setPointValue(typeOfMonster[2]);
+        char[] iconArray = Character.toChars(typeOfMonster[3]);
+	char iconChar = iconArray[0];
+	this.setIcon(iconChar);
+	this.typeOfMovement=typeOfMovement;
 	}
-	/**
-	 * creates a player with 20 hitPoints and 10 attack
-	 * @param hitPoints the monster's hitPoints
-	 * @param attack the monster's attack
-	 * @param typeOfMovement whether or not the monster will move randomly or not
-	 */
-	public Monster(int hitPoints, int attack, int typeOfMovement){
-		this.hitPoints = hitPoints;
-		this.attack = attack;
-		this.typeOfMovement = typeOfMovement;
-		this.setTypeOfPiece("monster");
-		this.setIcon('M');
-	}
-    /**
-     *creates a monster with the makers preference of status
-     *@param hp hit points of the monster
-     *@param att the attack power of the monster
-     *@param typeOfMovement determines whether it is random or not
-     *@param points determines how many points it is.
-     */
-    public Monster (int hp, int att, int typeOfMovement,int points){
-		this.hitPoints = hp;
-		this.attack = att;
-		this.typeOfMovement = typeOfMovement;
-		this.pointValue=points;
-		this.setTypeOfPiece("monster");
-		this.setIcon('M');
-    }
+
     /**
      * @return the monster's hitPoints
      * 
@@ -111,19 +97,7 @@ public class Monster implements GamePiece{
 	this.pointValue=pointValue;
 	
     }
-    /**
-       this gets the type of piece of the monster
-    */
-	public String getTypeOfPiece(){
-		return this.typeOfPiece;
-	}
-    /**
-       this sets the type of piece of the monster
-    */
-	public void setTypeOfPiece(String newTypeOfPiece){
-		this.typeOfPiece=newTypeOfPiece;
-	}
-    
+
     /** 
      *This is the getter to figure out what piece icon it is. 
      */ 
