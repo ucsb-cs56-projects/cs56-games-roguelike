@@ -17,7 +17,7 @@ public class Monster implements GamePiece{
         private int pointValue=5;
     private char icon;
 
-    // Default attributes for monsters
+    // Default attributes for monsters. To add a new monster, add a new array with the values for hitPoints, attack, pointValue, and icon
     public static final int[] BAT = {5,1,10,66};
     public static final int[] GOLEM = {25,5,30,71};
     public static final int[] MONSTER = {20,10,5,77};
@@ -40,18 +40,68 @@ public class Monster implements GamePiece{
 	    this.typeOfMovement=0;
 	}
 	/**
-	 * creates a player with 20 hitPoints and 10 attack
+	 * creates a monster with 20 hitPoints and 10 attack
 	 * @param typeOfMovement whether or not the monster will move randomly or not
+	 * @param typeOfMonster integer array containing monster's stats
 	 */
     public Monster(int typeOfMovement, int[] typeOfMonster){
-	this.setHitPoints(typeOfMonster[0]);
-	this.setAttack(typeOfMonster[1]);
-	this.setPointValue(typeOfMonster[2]);
-        char[] iconArray = Character.toChars(typeOfMonster[3]);
-	char iconChar = iconArray[0];
-	this.setIcon(iconChar);
-	this.typeOfMovement=typeOfMovement;
+	this(typeOfMovement, typeOfMonster[0], typeOfMonster[1],
+	     typeOfMonster[2], Character.toChars(typeOfMonster[3])[0]);
 	}
+    /**
+     * Creates a monster with the stats passed in
+     * @param typeOfMovement determines the monster's movement behavior
+     * @param hitPoints the monster's hitPoints
+     * @param attack the monster's attack
+     * @param pointValue how many points the monster is worth
+     * @param icon the icon which will represent the monster on screen
+     */
+
+    public Monster(int typeOfMovement, int hitPoints, int attack, int pointValue, char icon) {
+	this.setHitPoints(hitPoints);
+	this.setAttack(attack);
+	this.setPointValue(pointValue);
+	this.setIcon(icon);
+	this.typeOfMovement = typeOfMovement;
+    }
+
+    /** 
+     * Static factory method for generating a monster based on an input string
+     * @param typeOfMovement determines the monster's movement behavior
+     * @param monsterName a string containing the name of the monster you want to create
+     */
+
+    public static Monster createMonster(int typeOfMovement, String monsterName) {
+	monsterName = monsterName.toUpperCase();
+	Monster retMonster;
+	switch (monsterName) {
+	case "BAT" :
+	    retMonster = new Monster(typeOfMovement, BAT);
+	    break;
+	case "GOLEM" :
+	    retMonster = new Monster(typeOfMovement, GOLEM);
+	    break;
+	case "MONSTER" :
+	    retMonster = new Monster(typeOfMovement, MONSTER);
+	    break;
+	case "PIRATE" :
+	    retMonster = new Monster(typeOfMovement, PIRATE);
+	    break;
+	case "SNAKE" :
+	    retMonster = new Monster(typeOfMovement, SNAKE);
+	    break;
+	case "TROLL" :
+	    retMonster = new Monster(typeOfMovement, TROLL);
+	    break;
+	case "ZOMBIE" :
+	    retMonster = new Monster(typeOfMovement, ZOMBIE);
+	    break;
+	default :
+	    retMonster = new Monster(typeOfMovement, MONSTER);
+	}
+
+	return retMonster;
+    }
 
     /**
      * @return the monster's hitPoints

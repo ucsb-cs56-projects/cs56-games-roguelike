@@ -31,22 +31,6 @@ public class Elixir extends Item{
 	this.setIcon('S');
     }
     
-    /** 
-     This is the getter to figure out what piece icon it is. 
-     */ 
-    @Override 
-    public char getIcon(){
-	return this.icon;
-    }
-
-    /** 
-     *This is the setter for the Icon it will be 
-     *@param NewIcon is the icon of piece that will be in the game 
-     */ 
-    @Override public void setIcon(char NewIcon){
-	 this.icon=NewIcon;
-     }
-
         /**
       this method uses the effect value in someway.
       in this method it adds the speed value to the player.
