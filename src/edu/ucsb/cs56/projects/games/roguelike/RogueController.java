@@ -81,8 +81,14 @@ public class RogueController extends JFrame implements KeyListener
 	//	}
 	//	canvas.moveHeroAnimated(x, y,logicHandler.getPlayer().getHitPoints(),logicHandler.getPlayer().getScore());
 	
+	while (!logicHandler.isGround(x, y)) {
+	    if (x != origX)
+		x = (x > origX) ? x-1 : x+1;
+	    else if (y != origY)
+		y = (y > origY) ? y-1 : y+1;
+	}
 
-	//Draws all items even when the player tries to move outside the boundaries
+		//Draws all items even when the player tries to move outside the boundaries
 	drawAllItems();
 	if ( logicHandler.movable(x,y,origX, origY)) {
 	    logicHandler.move(x,y,origX,origY);

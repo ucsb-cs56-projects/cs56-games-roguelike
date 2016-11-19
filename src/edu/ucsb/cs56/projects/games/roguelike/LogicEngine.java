@@ -164,8 +164,10 @@ public class LogicEngine {
 		consumeItem(x,y);
 	    }
 
-	    floor[x][y] = floor[xOrig][yOrig];
-	    floor[xOrig][yOrig] = null;
+	    if (x != xOrig || y != yOrig) {
+		floor[x][y] = floor[xOrig][yOrig];
+		floor[xOrig][yOrig] = null;
+	    }
 
 	    int[] position = {x,y};
             if(floor[x][y] instanceof Player) {
@@ -237,10 +239,11 @@ public class LogicEngine {
 	}
 
     public boolean inBounds(int x, int y) {
-	if ((x < 1 || x >= floorWidth - 1) || (y < 1 || y >= floorHeight - 1))
-	    return false;
-	else
-	    return true;
+	return !((x < 1 || x >= floorWidth - 1) || (y < 1 || y >= floorHeight - 1));
+    }
+
+    public boolean isGround(int x, int y) {
+	return (inBounds(x,y));
     }
 	
 	/**
