@@ -4,7 +4,7 @@ package edu.ucsb.cs56.projects.games.roguelike;
 /**
  * A Player class that represents the character the player uses.
  * @author Minh Le 
- * @author Hans Marasigan & Richard Nguyen
+ * @author Hans Marasigan and Richard Nguyen
  * @version cs56 S13
  */
 
@@ -24,7 +24,7 @@ public class Player implements GamePiece {
     public Player(){
 	this.hitPoints = 100;
 	this.attack = 20;
-	this.speed = 3;
+	this.speed = 1;
 	this.score= 0;
 	this.setTypeOfPiece("player");
 	this.setIcon('@');

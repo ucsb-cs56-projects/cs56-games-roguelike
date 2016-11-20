@@ -646,7 +646,7 @@ private LookupOp setColors(Color bgColor, Color fgColor) {
 		write(""+level+ " ",49,23,RoguePanel.white,RoguePanel.black);
 		write(""+score+ " ",59,23,RoguePanel.white,RoguePanel.black);
 	}
-	
+    
     public void drawItem(int xPosition, int yPosition, Item i){
 		
 	     write(i.getIcon(),xPosition,yPosition,RoguePanel.white,RoguePanel.black);
@@ -704,6 +704,10 @@ private LookupOp setColors(Color bgColor, Color fgColor) {
 	
     public void emptySpace(int xPosition, int yPosition, int colorNum){
 		write("_",xPosition,yPosition,groundColor[colorNum%groundColor.length],RoguePanel.black);
+	}
+
+    public void drawWall(int xPosition, int yPosition, int colorNum){
+		write("0",xPosition,yPosition,groundColor[colorNum%groundColor.length],RoguePanel.black);
 	}
 
     /**

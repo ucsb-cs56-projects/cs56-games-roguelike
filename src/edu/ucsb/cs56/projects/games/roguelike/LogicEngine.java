@@ -159,8 +159,10 @@ public class LogicEngine {
 	 */
 
 	public void move(int x,int y,int xOrig,int yOrig){
-            
-	    if(floor[x][y] instanceof Item) {
+            if (floor[x][y] instanceof Wall)
+		return;
+	    
+	    if (floor[x][y] instanceof Item) {
 		consumeItem(x,y);
 	    }
 
@@ -193,6 +195,9 @@ public class LogicEngine {
 	 */
         public void attack(int x,int y,int xOrig,int yOrig){
 	    // if ((x > 1 && x < floorWidth - 1) && (y > 1 && y < floorHeight - 1)) {
+	    if (floor[x][y] instanceof Wall)
+		return;
+
 	   if(floor[x][y] instanceof Monster && floor[xOrig][yOrig] instanceof Player) {	                
 	      	thePlayer.attacking(listOfMonsters[x][y]);
 	        }
@@ -202,40 +207,27 @@ public class LogicEngine {
 		 }
 	    //	    }
         }
+
+    public boolean attackable(int x, int y, int xOrig, int yOrig) {
+	if (!isGround(x,y))
+	    return false;
+	if (floor[x][y] instanceof Monster)
+	    return true;
+	else if (floor[x][y] instanceof Player && floor[xOrig][yOrig] instanceof Monster)
+	    return true;
+	else
+	    return false;
+    }
+    
 	/**
 	 * x and y are the position thats being tested
 	 * xOrig and yOrig are the position of the object now
 	 * @param x is the x position of the position being tested
 	 * @param y is the y position of the position being tested
-	 * @param xOrig is the x position of the object right now
-	 * @param yOrig is the y position of the object right now
 	 * @return true if its movable, false if not
 	 */
-	public boolean movable(int x,int y,int xOrig, int yOrig){
-	    if(thePlayer.getHitPoints() <= 0){
-		return false;
-	    }
-		/* not movable, out of boundary*/
-	    if (!inBounds(x, y))
-		return false;
-			
-		//player isn't movable, start attack for player
-	    if(floor[x][y] instanceof Monster){	
-		/*if(floor[xOrig][yOrig] instanceof Player){
-							return false;	
-			}else{	
-				return false;	
-				}*/
-		return false;
-		}
-				
-		//monster isn't movable, start attack for monster
-	    if(floor[x][y] instanceof Player && floor[xOrig][yOrig] instanceof Monster){
-		    			return false;
-		}
-		
-
-		return true;
+	public boolean movable(int x,int y){
+	    return (isGround(x, y) && thePlayer.getHitPoints() > 0);
 	}
 
     public boolean inBounds(int x, int y) {
@@ -243,7 +235,12 @@ public class LogicEngine {
     }
 
     public boolean isGround(int x, int y) {
-	return (inBounds(x,y));
+	if (!inBounds(x,y))
+	    return false;
+	else if (floor[x][y] instanceof Wall)
+	    return false;
+	else
+	    return true;
     }
 	
 	/**
@@ -320,6 +317,12 @@ public class LogicEngine {
 	          for (int y = 0; y < floorHeight; y++) {
 	        	  floor[x][y] = null;
 	          }
+		 }
+
+		 for (int x = 10; x < 13; x++) {
+		     for (int y = 10; y < 11; y++) {
+			 floor[x][y] = new Wall();
+		     }
 		 }
 		 
 		 thePlayer = new Player();
