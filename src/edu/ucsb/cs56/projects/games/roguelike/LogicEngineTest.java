@@ -22,7 +22,7 @@ public class LogicEngineTest
 	
         LogicEngine engine = new LogicEngine();
 
-        assertEquals(false,engine.movable(5,3,40,12));
+        assertEquals(false,engine.movable(40,12));
     }   
     /**
        test to see if a monster can move to a spot with a player
@@ -34,7 +34,7 @@ public class LogicEngineTest
 	
         LogicEngine engine = new LogicEngine();
 
-        assertEquals(false,engine.movable(40,12,5,3));
+        assertEquals(false,engine.movable(5,3));
     }   
 	
     /**
@@ -47,7 +47,7 @@ public class LogicEngineTest
 	
         LogicEngine engine = new LogicEngine();
 
-        assertEquals(true,engine.movable(10,15,40,12));
+        assertEquals(true,engine.movable(40,12));
     }   
 
     /**
@@ -60,7 +60,7 @@ public class LogicEngineTest
 	
         LogicEngine engine = new LogicEngine();
 
-        assertEquals(false,engine.movable(0,3,40,12));
+        assertEquals(false,engine.movable(40,12));
     }   
     /**
        test to see if a monster/player can move to a spot that is out of bound
@@ -72,7 +72,7 @@ public class LogicEngineTest
 	
         LogicEngine engine = new LogicEngine();
 
-        assertEquals(false,engine.movable(79,3,40,12));
+        assertEquals(false,engine.movable(40,12));
     }   
     /**
        test to see if a monster/player can move to a spot that is out of bound
@@ -84,7 +84,7 @@ public class LogicEngineTest
 	
         LogicEngine engine = new LogicEngine();
 
-        assertEquals(false,engine.movable(6,0,40,12));
+        assertEquals(false,engine.movable(40,12));
     } 
     /**
        test to see if a monster/player can move to a spot that is out of bound
@@ -96,7 +96,7 @@ public class LogicEngineTest
 	
         LogicEngine engine = new LogicEngine();
 
-        assertEquals(false,engine.movable(6,23,40,12));
+        assertEquals(false,engine.movable(40,12));
     }   
 
     /**
