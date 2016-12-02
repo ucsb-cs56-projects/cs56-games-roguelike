@@ -131,6 +131,23 @@ Sincerely,
 
 Josue and Ish.
 
+F16 Final Remarks
+=======================
+This project is quite far along in terms of having an entertaining game. At this point the types of changes that you will make will be adding new features and refactoring old code. 
+
+Things to add to the game
+	* More maps. We implemented a single map that is reused for each level. It would be better if there was a different map for each new level. We left our simple implementation of this initialization in the code near the bottom of Logic Engine(it's ugly) so that you could see one way to do it. A potential improvement would be to serialize maps, so that they don't have to be reinitialized with a bunch of for loops each time we change levels.
+	* More music that is tied to each  level.
+	* A combat system, either jrpg (like a pokemon battle with just the menu) or within the overworld (like Zelda)
+	* Other than that, just check the issues for bugs and other things.
+
+We recommend first fixing the issue dealing with elixir being able to jump over walls and monsters, as it should show you the interaction between different classes to make the game run.
+
+Have fun!
+
+-Max and Artem
+
+
 
 Fall 16 Mentor Asssessment
 ====
