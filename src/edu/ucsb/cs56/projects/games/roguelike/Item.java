@@ -3,10 +3,10 @@ package edu.ucsb.cs56.projects.games.roguelike;
 import java.util.Random;
 
 /**
-* An Item class to represent Items in the Dungeon.
-*@author Hans Marasigan & Richard Nguyen
-*@version cs56 s13
-*/
+ * An Item class to represent Items in the Dungeon.
+ *@author Hans Marasigan & Richard Nguyen
+ *@version cs56 s13
+ */
 
 
 public class Item implements GamePiece{
@@ -58,8 +58,8 @@ public class Item implements GamePiece{
 	gets the item's effect value
     */
     public int getEffect(){
-	    return this.effect;
-	}
+	return this.effect;
+    }
     /**
        sets the item's effect value
        @param NewEffect this is the value the computer/programmer can set

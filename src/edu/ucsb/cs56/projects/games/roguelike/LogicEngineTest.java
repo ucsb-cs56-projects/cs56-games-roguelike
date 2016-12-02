@@ -16,8 +16,8 @@ public class LogicEngineTest
        test to see if a player can move to a spot with a monster
        @see LogicEngine#movable
 
-     */
-   @Test public void testMovable()
+    */
+    @Test public void testMovable()
     {
 	
         LogicEngine engine = new LogicEngine();
@@ -28,8 +28,8 @@ public class LogicEngineTest
        test to see if a monster can move to a spot with a player
        @see LogicEngine#movable
 
-     */
-   @Test public void testMovable2()
+    */
+    @Test public void testMovable2()
     {
 	
         LogicEngine engine = new LogicEngine();
@@ -41,8 +41,8 @@ public class LogicEngineTest
        test to see if a monster/player can move to a spot that is empty
        @see LogicEngine#movable
 
-     */
-   @Test public void testMovable3()
+    */
+    @Test public void testMovable3()
     {
 	
         LogicEngine engine = new LogicEngine();
@@ -54,8 +54,8 @@ public class LogicEngineTest
        test to see if a monster/player can move to a spot that is out of bound
        @see LogicEngine#movable
 
-     */
-   @Test public void testMovable4()
+    */
+    @Test public void testMovable4()
     {
 	
         LogicEngine engine = new LogicEngine();
@@ -66,8 +66,8 @@ public class LogicEngineTest
        test to see if a monster/player can move to a spot that is out of bound
        @see LogicEngine#movable
 
-     */
-   @Test public void testMovable5()
+    */
+    @Test public void testMovable5()
     {
 	
         LogicEngine engine = new LogicEngine();
@@ -78,20 +78,20 @@ public class LogicEngineTest
        test to see if a monster/player can move to a spot that is out of bound
        @see LogicEngine#movable
 
-     */
-   @Test public void testMovable6()
+    */
+    @Test public void testMovable6()
     {
 	
         LogicEngine engine = new LogicEngine();
 
         assertEquals(false,engine.movable(6,0,40,12));
     } 
-      /**
+    /**
        test to see if a monster/player can move to a spot that is out of bound
        @see LogicEngine#movable
 
-     */
-   @Test public void testMovable7()
+    */
+    @Test public void testMovable7()
     {
 	
         LogicEngine engine = new LogicEngine();
@@ -103,8 +103,8 @@ public class LogicEngineTest
        test for a dead player
        @see LogicEngine#playerIsDead()
 
-     */
-   @Test public void testPlayerStatus()
+    */
+    @Test public void testPlayerStatus()
     {
 	
         LogicEngine engine = new LogicEngine();
@@ -116,8 +116,8 @@ public class LogicEngineTest
        test for a player that isnt dead
        @see LogicEngine#playerIsDead()
 
-     */
-   @Test public void testPlayerStatus2()
+    */
+    @Test public void testPlayerStatus2()
     {
 	
         LogicEngine engine = new LogicEngine();
@@ -129,8 +129,8 @@ public class LogicEngineTest
        test for a monster that is dead
        @see LogicEngine#monsterIsDead
 
-     */
-   @Test public void testMonsterStatus()
+    */
+    @Test public void testMonsterStatus()
     {
 	
         LogicEngine engine = new LogicEngine();
@@ -143,8 +143,8 @@ public class LogicEngineTest
        test for a monster that isnt dead
        @see LogicEngine#monsterIsDead
 
-     */
-   @Test public void testMonsterStatus2()
+    */
+    @Test public void testMonsterStatus2()
     {
 	
         LogicEngine engine = new LogicEngine();

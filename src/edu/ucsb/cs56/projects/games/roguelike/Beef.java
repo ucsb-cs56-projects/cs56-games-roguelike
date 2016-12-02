@@ -38,7 +38,7 @@ public class Beef extends Item{
 	this.setIcon('+');
     }
     
-        /**
+    /**
        this method uses the effect value in someway.
        in this method it just adds attack points to the player
     */

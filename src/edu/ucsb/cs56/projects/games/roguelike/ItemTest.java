@@ -7,9 +7,9 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
 /** test class for my Item class
-@author Hans Marasigan & Richard Nguyen
-@version cs56 S13
-@see Item
+    @author Hans Marasigan & Richard Nguyen
+    @version cs56 S13
+    @see Item
 */
 
 public class ItemTest{
@@ -64,7 +64,7 @@ public class ItemTest{
 	assertEquals(true,i.getUse());
 	assertEquals("gameitem",i.getTypeOfPiece());
     }
-        /**
+    /**
        this tests the default constructor. 
        the effect should be 10 and used is false and it is an item
        and has icon H
@@ -115,7 +115,7 @@ public class ItemTest{
 	assertEquals(true,i.getUse());
 	assertEquals("gameitem",i.getTypeOfPiece());
     }
-	        /**
+    /**
        this tests the default constructor. 
        the effect should be 20 and used is false and it is an item
        and has icon !
@@ -166,7 +166,7 @@ public class ItemTest{
 	assertEquals(true,i.getUse());
 	assertEquals("gameitem",i.getTypeOfPiece());
     }
-	/**
+    /**
        this tests the default constructor. 
        the effect should be 20 and used is false and it is an item
        and has icon +
@@ -217,45 +217,45 @@ public class ItemTest{
 	assertEquals(true,i.getUse());
 	assertEquals("gameitem",i.getTypeOfPiece());
     }
-	/**
-		this tests how an Item affects a player
-	*/
-	@Test public void test_itemOnPlayer(){
-		Item i= new Item();
-		Player p=new Player();
-		i.UseEffect(p);
-		assertEquals(10,p.getScore());
-		}
+    /**
+       this tests how an Item affects a player
+    */
+    @Test public void test_itemOnPlayer(){
+	Item i= new Item();
+	Player p=new Player();
+	i.UseEffect(p);
+	assertEquals(10,p.getScore());
+    }
 	
-	/**
-		this tests how a HealthPotion affects a player
-	*/
-	@Test public void test_HealthPotionOnPlayer(){
-		HealthPotion i= new HealthPotion();
-		Player p=new Player();
-		i.UseEffect(p);
-		assertEquals(120,p.getHitPoints());
-		}
+    /**
+       this tests how a HealthPotion affects a player
+    */
+    @Test public void test_HealthPotionOnPlayer(){
+	HealthPotion i= new HealthPotion();
+	Player p=new Player();
+	i.UseEffect(p);
+	assertEquals(120,p.getHitPoints());
+    }
 
-	/**
-		this tests how a Poison affects a player
-	*/
-	@Test public void test_PoisonOnPlayer(){
-		Poison i= new Poison();
-		Player p=new Player();
-		i.UseEffect(p);
-		assertEquals(80,p.getHitPoints());
-		}
+    /**
+       this tests how a Poison affects a player
+    */
+    @Test public void test_PoisonOnPlayer(){
+	Poison i= new Poison();
+	Player p=new Player();
+	i.UseEffect(p);
+	assertEquals(80,p.getHitPoints());
+    }
 	
-	/**
-		this tests how a Beef affects a player
-	*/
-	@Test public void test_BeefOnPlayer(){
-		Beef i= new Beef();
-		Player p=new Player();
-		i.UseEffect(p);
-		assertEquals(40,p.getAttack());
-		}
+    /**
+       this tests how a Beef affects a player
+    */
+    @Test public void test_BeefOnPlayer(){
+	Beef i= new Beef();
+	Player p=new Player();
+	i.UseEffect(p);
+	assertEquals(40,p.getAttack());
+    }
 		
 		
 }

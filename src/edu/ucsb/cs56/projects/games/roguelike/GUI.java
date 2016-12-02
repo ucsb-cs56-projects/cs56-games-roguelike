@@ -64,7 +64,7 @@ public class GUI
 		{
 		    System.exit(0);
 		}
-	});
+	    });
 
 	guiFrame.add(playButton);
 	guiFrame.add(instrButton);

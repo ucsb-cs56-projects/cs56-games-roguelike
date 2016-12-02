@@ -9,12 +9,12 @@ import java.util.Random;
  *@version cs56 s13
  */
 public class Monster implements GamePiece{
-	private int hitPoints;
-	private int attack;
-	private int direction = 0;
-	private int typeOfMovement;
-	private int[] position = new int[2];
-        private int pointValue=5;
+    private int hitPoints;
+    private int attack;
+    private int direction = 0;
+    private int typeOfMovement;
+    private int[] position = new int[2];
+    private int pointValue=5;
     private char icon;
 
     // Default attributes for monsters. To add a new monster, add a new array with the values for hitPoints, attack, pointValue, and icon
@@ -26,28 +26,28 @@ public class Monster implements GamePiece{
     public static final int[] TROLL = {10,3,15,84};
     public static final int[] ZOMBIE = {15,2,15,90};
     
-	/**
-	 * creates a monster with 20 hitPoints and 10 attack and  no random movement
-	 * 
-	 */
-	public Monster(){
-	    this.setHitPoints(MONSTER[0]);
-	    this.setAttack(MONSTER[1]);
-	    this.setPointValue(MONSTER[2]);
-	    char[] iconArray = Character.toChars(MONSTER[3]);
-	    char iconChar = iconArray[0];
-	    this.setIcon(iconChar);
-	    this.typeOfMovement=0;
-	}
-	/**
-	 * creates a monster with 20 hitPoints and 10 attack
-	 * @param typeOfMovement whether or not the monster will move randomly or not
-	 * @param typeOfMonster integer array containing monster's stats
-	 */
+    /**
+     * creates a monster with 20 hitPoints and 10 attack and  no random movement
+     * 
+     */
+    public Monster(){
+	this.setHitPoints(MONSTER[0]);
+	this.setAttack(MONSTER[1]);
+	this.setPointValue(MONSTER[2]);
+	char[] iconArray = Character.toChars(MONSTER[3]);
+	char iconChar = iconArray[0];
+	this.setIcon(iconChar);
+	this.typeOfMovement=0;
+    }
+    /**
+     * creates a monster with 20 hitPoints and 10 attack
+     * @param typeOfMovement whether or not the monster will move randomly or not
+     * @param typeOfMonster integer array containing monster's stats
+     */
     public Monster(int typeOfMovement, int[] typeOfMonster){
 	this(typeOfMovement, typeOfMonster[0], typeOfMonster[1],
 	     typeOfMonster[2], Character.toChars(typeOfMonster[3])[0]);
-	}
+    }
     /**
      * Creates a monster with the stats passed in
      * @param typeOfMovement determines the monster's movement behavior
@@ -129,7 +129,7 @@ public class Monster implements GamePiece{
      * 
      */
     public int getAttack(){
-		return this.attack;
+	return this.attack;
     }
 
     /**
@@ -176,115 +176,115 @@ public class Monster implements GamePiece{
 
     }
     
-	/**
-	 * a method for attacking the player
-	 * @param mainChar the player being attacked
-	 */
+    /**
+     * a method for attacking the player
+     * @param mainChar the player being attacked
+     */
     public void attacking(Player mainChar){
 	mainChar.setHitPoints(mainChar.getHitPoints()-this.attack);
-	}
+    }
 
 	
-	public void setMonsterPosition(int x, int y){
-		this.position[0] = x;
-		this.position[1] = y;
-	}
-	/**
-	 *  chooses what direction the monster moves in
-	 * @return a vector that represents the direction
-	 */
+    public void setMonsterPosition(int x, int y){
+	this.position[0] = x;
+	this.position[1] = y;
+    }
+    /**
+     *  chooses what direction the monster moves in
+     * @return a vector that represents the direction
+     */
 	
-	public int[] getDirection(int[] playerPosition){
+    public int[] getDirection(int[] playerPosition){
 	
-		int[] vector= new int[2];
-		Random directionGenerator = new Random();
+	int[] vector= new int[2];
+	Random directionGenerator = new Random();
 		
 
-		switch(typeOfMovement){
-		case 0	:		direction++;
-						if(direction==4){
-							direction=0;
-						}
-						break;
+	switch(typeOfMovement){
+	case 0	:		direction++;
+	    if(direction==4){
+		direction=0;
+	    }
+	    break;
 						
-		case 1	:		direction = directionGenerator.nextInt(4);
-						break;
+	case 1	:		direction = directionGenerator.nextInt(4);
+	    break;
 						
-		case 2 	:		int randomer = directionGenerator.nextInt(3);
-						if((position[0] - playerPosition[0] == 0)){
-							if(position[1]-playerPosition[1] > 0){
-								if(randomer == 0){
-									direction = 1;
-								}else if(randomer == 1){
-									direction = 0;
-								}else if(randomer == 2){
-									direction = 2;
-								}
-							}else{
-								if(randomer == 0){
-									direction = 3;
-								}else if(randomer == 1){
-									direction = 0;
-								}else if(randomer == 2){
-									direction = 2;
-								}
-							}
-						}else if((position[1] - playerPosition[1] == 0)){
-							if(position[0]-playerPosition[0] > 0){
-								if(randomer == 0){
-									direction = 2;
-								}else if(randomer == 1){
-									direction = 1;
-								}else if(randomer == 2){
-									direction = 3;
-								}
-							}else{
-								if(randomer == 0){
-									direction = 0;
-								}else if(randomer == 1){
-									direction = 1;
-								}else if(randomer == 2){
-									direction = 3;
-								}
-							}
-						}else if((position[0] - playerPosition[0] > 0) && (position[1]-playerPosition[1] > 0)){
-							if(directionGenerator.nextInt(2) == 1){
-								direction = 1;
-							}else{
-								direction = 2;
-							}
-						}else if((position[0] - playerPosition[0] > 0) && (position[1]-playerPosition[1] < 0)){
-							if(directionGenerator.nextInt(2) == 1){
-								direction = 3;
-							}else{
-								direction = 2;
-							}
-
-						}else if((position[0] - playerPosition[0] < 0) && (position[1]-playerPosition[1] > 0)){
-							if(directionGenerator.nextInt(2) == 1){
-								direction = 1;
-							}else{
-								direction = 0;
-							}
-
-						}else if((position[0] - playerPosition[0] < 0) && (position[1]-playerPosition[1] < 0)){
-							if(directionGenerator.nextInt(2) == 1){
-								direction = 3;
-							}else{
-								direction = 0;
-							}
-
-						}		
-		}		
-		
-		switch (direction){
-		case 0	    :	vector[0]=1; break;
-		case 1	    :  	vector[1]=-1; break;
-		case 2	    :	vector[0]=-1; break;
-		case 3		:	vector[1]=1; break;
-		default		:	break;
+	case 2 	:		int randomer = directionGenerator.nextInt(3);
+	    if((position[0] - playerPosition[0] == 0)){
+		if(position[1]-playerPosition[1] > 0){
+		    if(randomer == 0){
+			direction = 1;
+		    }else if(randomer == 1){
+			direction = 0;
+		    }else if(randomer == 2){
+			direction = 2;
+		    }
+		}else{
+		    if(randomer == 0){
+			direction = 3;
+		    }else if(randomer == 1){
+			direction = 0;
+		    }else if(randomer == 2){
+			direction = 2;
+		    }
+		}
+	    }else if((position[1] - playerPosition[1] == 0)){
+		if(position[0]-playerPosition[0] > 0){
+		    if(randomer == 0){
+			direction = 2;
+		    }else if(randomer == 1){
+			direction = 1;
+		    }else if(randomer == 2){
+			direction = 3;
+		    }
+		}else{
+		    if(randomer == 0){
+			direction = 0;
+		    }else if(randomer == 1){
+			direction = 1;
+		    }else if(randomer == 2){
+			direction = 3;
+		    }
+		}
+	    }else if((position[0] - playerPosition[0] > 0) && (position[1]-playerPosition[1] > 0)){
+		if(directionGenerator.nextInt(2) == 1){
+		    direction = 1;
+		}else{
+		    direction = 2;
+		}
+	    }else if((position[0] - playerPosition[0] > 0) && (position[1]-playerPosition[1] < 0)){
+		if(directionGenerator.nextInt(2) == 1){
+		    direction = 3;
+		}else{
+		    direction = 2;
 		}
 
-		return vector;
+	    }else if((position[0] - playerPosition[0] < 0) && (position[1]-playerPosition[1] > 0)){
+		if(directionGenerator.nextInt(2) == 1){
+		    direction = 1;
+		}else{
+		    direction = 0;
+		}
+
+	    }else if((position[0] - playerPosition[0] < 0) && (position[1]-playerPosition[1] < 0)){
+		if(directionGenerator.nextInt(2) == 1){
+		    direction = 3;
+		}else{
+		    direction = 0;
+		}
+
+	    }		
+	}		
+		
+	switch (direction){
+	case 0	    :	vector[0]=1; break;
+	case 1	    :  	vector[1]=-1; break;
+	case 2	    :	vector[0]=-1; break;
+	case 3		:	vector[1]=1; break;
+	default		:	break;
 	}
+
+	return vector;
+    }
 }
