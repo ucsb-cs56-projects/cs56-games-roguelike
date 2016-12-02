@@ -9,14 +9,14 @@ package edu.ucsb.cs56.projects.games.roguelike;
  */
 
 public class Player implements GamePiece {
-	//character hit points and attack
-	private int hitPoints;
-	private int attack;
+    //character hit points and attack
+    private int hitPoints;
+    private int attack;
     private int speed;
-    	private int[] playerPosition;
-    	private int score;
-	private String typeOfPiece;
-     private char icon;
+    private int[] playerPosition;
+    private int score;
+    private String typeOfPiece;
+    private char icon;
 
     /**
      * creates a player with 100 hitPoints, 20 attack, and 1 speed
@@ -39,8 +39,8 @@ public class Player implements GamePiece {
     }
 
     /**
-    sets the player's speed
-    @param speed this is the new value of the player's speed, can only be from 1 to 5
+       sets the player's speed
+       @param speed this is the new value of the player's speed, can only be from 1 to 5
     */
     public void setSpeed(int speed)
     {
@@ -51,25 +51,25 @@ public class Player implements GamePiece {
     }
 
     /**
-      * @return the player's speed
-      *
-    */
+     * @return the player's speed
+     *
+     */
     public int getSpeed(){
         return this.speed;
     }
 
-     /**
-      * @return the player's score
+    /**
+     * @return the player's score
      * 
      */
     public int getScore(){
 	return this.score;
     }
 
-	/** 
+    /** 
 	sets that player's attack
 	@param atk this is the amount of points you want to set the player with
-	*/
+    */
     public void setAttack(int atk){
 	if(atk >= 100){this.attack=100;}
 	else	    
@@ -117,7 +117,7 @@ public class Player implements GamePiece {
     public void attacking(Monster mon){
 	if(hitPoints > 0){
 	    this.score+= mon.getPointValue();
-	mon.setHitPoints(mon.getHitPoints()-this.attack);
+	    mon.setHitPoints(mon.getHitPoints()-this.attack);
 	}
     }
 

@@ -27,19 +27,19 @@ public class SubMonsterTest{
        tests for a bat with 10 hp 10 att and 10points
        
     
-     */
+    */
     @Test public void test_defaultConstructor_and_GettersBat(){
 	Bat b=new Bat();
 	assertEquals(10,b.getHitPoints());
 	assertEquals(10,b.getAttack());
 	assertEquals(10,b.getPointValue());
-	}
+    }
    
     /**
-     tests for a Troll with 15 hp 10 att and 15points
+       tests for a Troll with 15 hp 10 att and 15points
      
      
-     */
+    */
     @Test public void test_defaultConstructor_and_GettersTroll(){
 	Troll t=new Troll();
 	assertEquals(15,t.getHitPoints());
@@ -50,8 +50,8 @@ public class SubMonsterTest{
     /**
      
      
-     tests for a Golem with 50 hp 20 att and 20points
-     */
+       tests for a Golem with 50 hp 20 att and 20points
+    */
     @Test public void test_defaultConstructor_and_GettersGolem(){
 	Golem g=new Golem();
 	assertEquals(50,g.getHitPoints());
@@ -91,7 +91,7 @@ public class SubMonsterTest{
     
     /**
        tests for a bat with 20 hp 24 att and 10points
-     */
+    */
     @Test public void test_3ArgConstructorBat(){
 	Bat b=new Bat(20,24,0);
 	assertEquals(20,b.getHitPoints());
@@ -102,7 +102,7 @@ public class SubMonsterTest{
     /**
        tests for a Troll with 20 hp 25 att and 10points
      
-     */
+    */
         
     @Test public void test_3ArgConstructorTroll(){
 	Troll t=new Troll(20,25,0);
@@ -162,13 +162,13 @@ public class SubMonsterTest{
 	assertEquals(20,b.getHitPoints());
 	assertEquals(30,b.getAttack());
 	assertEquals(40,b.getPointValue());
-	}
+    }
     
     
     /**
      
        tests for a Troll with 30 hp 20 att and 40points
-     */
+    */
     @Test public void test_4argConstructorTroll(){
 	Troll t=new Troll(30,20,0,40);
 	assertEquals(30,t.getHitPoints());
@@ -179,7 +179,7 @@ public class SubMonsterTest{
     /**
      
        tests for a Golem with 50 hp 40 att and 20points
-     */
+    */
     @Test public void test_4argConstructorGolem(){
 	Golem g=new Golem(50,40,0,30);
 	assertEquals(50,g.getHitPoints());
@@ -233,7 +233,7 @@ public class SubMonsterTest{
     /**
      
        tests for a monster with 1 hp 2 att and 3points
-     */
+    */
     @Test public void test_MonsterSetter(){
 	Monster m = new Monster();
 	m.setHitPoints(1);
@@ -244,7 +244,7 @@ public class SubMonsterTest{
 	assertEquals(3,m.getPointValue());
     }
     
-        /**
+    /**
      *
      *tests for a Bat with 1hp 2 att and 3points
      */
@@ -263,7 +263,7 @@ public class SubMonsterTest{
     /**
        
        tests for a Troll with 1 hp 2 att and 3points
-     */
+    */
     
     @Test public void test_TrollSetter(){
         Troll t = new Troll();
@@ -280,7 +280,7 @@ public class SubMonsterTest{
     /**
      
        tests for a Golem with 1 hp 2 att and 3points
-     */
+    */
     @Test public void test_GolemSetter(){
         Golem g = new Golem();
         g.setHitPoints(1);

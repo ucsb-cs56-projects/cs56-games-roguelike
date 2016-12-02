@@ -4,6 +4,7 @@ javadoc/
 build/
 javadoc/
 *~
+*#*
 
 # Package Files #
 *.jar

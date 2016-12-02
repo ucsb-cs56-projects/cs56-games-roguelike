@@ -16,8 +16,8 @@ import static org.junit.Assert.assertFalse;
 public class GamePieceTest{
     
     /** this tests that the monster constructor works and the type should be monster
-     with icon M
-     */
+	with icon M
+    */
     @Test public void test_defaultMonsterType_Constructor(){
 	Monster m=new Monster();
 	assertEquals("monster",m.getTypeOfPiece());
@@ -25,8 +25,8 @@ public class GamePieceTest{
     }
     
     /** this tests that the player constructor works and the type should be player
-     with icon @
-     */
+	with icon @
+    */
     @Test public void test_defaultPlayerType_Constructor(){
 	Player p=new Player();
 	assertEquals("player",p.getTypeOfPiece());
@@ -34,8 +34,8 @@ public class GamePieceTest{
     }
     
     /** this test that the Bat constructor works and is a Monster type
-     with icon B
-     */
+	with icon B
+    */
     @Test public void test_defaulBatType_Constructor(){
 	Bat b=new Bat();
 	assertEquals("monster",b.getTypeOfPiece());
@@ -43,8 +43,8 @@ public class GamePieceTest{
     }
     
     /** this test that the Golem constructor works and is a Monster type
-     with icon G
-     */
+	with icon G
+    */
     @Test public void test_defaultGolemType_Constructor(){
 	Golem g=new Golem();
 	assertEquals("monster",g.getTypeOfPiece());
@@ -52,8 +52,8 @@ public class GamePieceTest{
     }
     
     /** this test that the Troll constructor works and is a Monster type
-     with icon T
-     */
+	with icon T
+    */
     @Test public void test_defaultTrollType_Constructor(){
 	Troll t=new Troll();
 	assertEquals("monster",t.getTypeOfPiece());
@@ -89,8 +89,8 @@ public class GamePieceTest{
 
     
     /**tests the monsters 3arg Constructor to see if it is still a Monster Type
-     with icon M
-     */
+       with icon M
+    */
     @Test public void test_3ArgConstructorMonster(){
 	Monster m=new Monster(1,2,0);
 	assertEquals("monster",m.getTypeOfPiece());
@@ -99,7 +99,7 @@ public class GamePieceTest{
     
     /**tests the Bat 3arg Constructor to see if it is still a Monster Type
        with icon B
-     */
+    */
     @Test public void test_3ArgConstructorBat(){
 	Bat m=new Bat(1,2,0);
 	assertEquals("monster",m.getTypeOfPiece());
@@ -108,7 +108,7 @@ public class GamePieceTest{
     
     /**tests the Golem 3arg Constructor to see if it is still a Monster Type
        with icon G
-     */
+    */
     @Test public void test_3ArgConstructorGolem(){
 	Golem m=new Golem(1,2,0);
 	assertEquals("monster",m.getTypeOfPiece());
@@ -124,7 +124,7 @@ public class GamePieceTest{
 
     /**test the Snake 3arg Constructor to see if it is still a Monster Type
        with icon S
-     */
+    */
     @Test public void test_3ArgConstructorSnake(){
 	Snake s = new Snake(1,2,0);
 	assertEquals("monster",s.getTypeOfPiece());
@@ -133,7 +133,7 @@ public class GamePieceTest{
 
     /**test the Zombie 3arg Constructor to see if it is still a Monster Type
        with icon Z
-     */
+    */
     @Test public void test_3ArgConstructorZombie(){
 	Zombie z = new Zombie(1,2,0);
 	assertEquals("monster",z.getTypeOfPiece());
@@ -142,7 +142,7 @@ public class GamePieceTest{
 
     /**test the Pirate 3arg Constructor to see if it is still a Monster Type
        with icon P
-     */
+    */
     @Test public void test_3ArgConstructorPirate(){
 	Pirate p = new Pirate(1,2,0);
 	assertEquals("monster",p.getTypeOfPiece());
@@ -151,8 +151,8 @@ public class GamePieceTest{
 
     
     /**tests the Monster 4arg Constructor to see if it is still a Monster Type
-     with icon M
-     */
+       with icon M
+    */
     @Test public void test_4argConstructorMonsterType(){
 	Monster b=new Monster(1,2,0,3);
 	assertEquals("monster",b.getTypeOfPiece());
@@ -161,8 +161,8 @@ public class GamePieceTest{
     }
     
     /**tests the Bat 4arg Constructor to see if it is still a Monster Type
-     with icon B
-     */
+       with icon B
+    */
     @Test public void test_4argConstructorBatType(){
 	Bat b=new Bat(1,2,0,3);
 	assertEquals("monster",b.getTypeOfPiece());
@@ -171,7 +171,7 @@ public class GamePieceTest{
     
     /**tests the Golem 4arg Constructor to see if it is still a Monster Type
        with icon G
-     */
+    */
     @Test public void test_4argConstructorGolemType(){
 	Golem b=new Golem(1,2,0,3);
 	assertEquals("monster",b.getTypeOfPiece());
@@ -179,8 +179,8 @@ public class GamePieceTest{
     }
     
     /**tests the Troll 4arg Constructor to see if it is still a Monster Type
-     with icon T
-     */
+       with icon T
+    */
     @Test public void test_4argConstructorTrollType(){
 	Troll b=new Troll(1,2,0,3);
 	assertEquals("monster",b.getTypeOfPiece());
