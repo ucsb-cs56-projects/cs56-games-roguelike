@@ -363,11 +363,25 @@ public class RogueController extends JFrame implements KeyListener
 	origX = x; 
 	origY = y;
 	switch (key.getKeyChar()){
-	case 'w'	    :	 this.y = this.y - logicHandler.getPlayer().getSpeed(); break;
-	case 'a'	    :  	 this.x = this.x - logicHandler.getPlayer().getSpeed(); break;
-	case 'd'	    :	 this.x = this.x + logicHandler.getPlayer().getSpeed(); break;
-	case 's'		:	 this.y = this.y + logicHandler.getPlayer().getSpeed(); break;
-	default			:	return;
+		//moving in 4 directions
+		case 'w': case '8':	 this.y = this.y - logicHandler.getPlayer().getSpeed(); break;
+		case 'a': case '4':  this.x = this.x - logicHandler.getPlayer().getSpeed(); break;
+		case 'd': case '6':	 this.x = this.x + logicHandler.getPlayer().getSpeed(); break;
+		case 's': case '2':	 this.y = this.y + logicHandler.getPlayer().getSpeed(); break;
+		
+		
+		//moving diagonally
+		case '9'/*up*/	  :	 this.y = this.y - logicHandler.getPlayer().getSpeed(); 
+				/*right*/ 	 this.x = this.x + logicHandler.getPlayer().getSpeed(); break;
+		case '7'/*up*/	  :	 this.y = this.y - logicHandler.getPlayer().getSpeed(); 
+				/*left*/     this.x = this.x - logicHandler.getPlayer().getSpeed(); break;
+		case '1'/*down*/  :	 this.y = this.y + logicHandler.getPlayer().getSpeed();
+				/*left*/     this.x = this.x - logicHandler.getPlayer().getSpeed(); break;
+		case '3'/*down*/  :	 this.y = this.y + logicHandler.getPlayer().getSpeed();
+				/*right*/ 	 this.x = this.x + logicHandler.getPlayer().getSpeed(); break;
+		
+							 
+		default			  :	 return;
 	}
 
 	canvas.clear();
@@ -425,7 +439,7 @@ public class RogueController extends JFrame implements KeyListener
 	mainControl.logicHandler.createMonster();
 
 	//Screen that shows after game is opened
-	mainControl.canvas.write("MOVE WITH W A S D. Survive the waves. Eat monsters to earn points.",9,12,RoguePanel.white,RoguePanel.black);
+	mainControl.canvas.write("MOVE WITH W A S D or the numpad. Survive the waves. Eat monsters to earn points.",9,12,RoguePanel.white,RoguePanel.black);
 
 		
 		
