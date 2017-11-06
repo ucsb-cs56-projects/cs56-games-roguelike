@@ -92,12 +92,8 @@ public void moveHero(){
 		drawAllItems();
 		if (logicHandler.attackable(x, y, origX, origY)) {
 				logicHandler.attack(x, y, origX, origY);
-				//canvas.playerAttackDisplay();
+				canvas.playerAttackDisplay();
 				if (logicHandler.monsterIsDead(x,y)) {
-<<<<<<< HEAD
-						//canvas.monsterKilledDisplay();
-=======
->>>>>>> 48ff193263162c8245fff5de67ff7f0cbbb006ca
 						if (logicHandler.getObject(x,y) instanceof Item) {
 								canvas.drawItem(x,y, logicHandler.getItem(x,y));
 						} else {
