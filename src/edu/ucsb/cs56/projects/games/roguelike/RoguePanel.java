@@ -590,7 +590,7 @@ public class RoguePanel extends JPanel
         write("Input:",0,23,RoguePanel.white,RoguePanel.black);
         write("X:",10,23,RoguePanel.white,RoguePanel.black);
         write("Y:",14,23,RoguePanel.white,RoguePanel.black);
-        write("Hp:",20,23,RoguePanel.white,RoguePanel.black);
+        write("Hp:",18,23,RoguePanel.white,RoguePanel.black);
         write("Ap:",27,23,RoguePanel.white,RoguePanel.black);
         write("Speed:", 34,23,RoguePanel.white,RoguePanel.black);
         write("Level:",43,23,RoguePanel.white,RoguePanel.black);
@@ -612,11 +612,11 @@ public class RoguePanel extends JPanel
 
         write(""+xPosition,12,23,RoguePanel.white,RoguePanel.black);
         write(""+yPosition,16,23,RoguePanel.white,RoguePanel.black);
-        write(""+hp+ "/100 ",22,23,RoguePanel.white,RoguePanel.black);
-        write(""+ap+ " ",30,23,RoguePanel.white,RoguePanel.black);
-        write(""+speed+ " ",37,23,RoguePanel.white,RoguePanel.black);
-        write(""+level+ " ",46,23,RoguePanel.white,RoguePanel.black);
-        write(""+score+ " ",56,23,RoguePanel.white,RoguePanel.black);
+        write(""+hp+ "/100",22,23,RoguePanel.white,RoguePanel.black);
+        write(""+ap,28,23,RoguePanel.white,RoguePanel.black);
+        write(""+speed,40,23,RoguePanel.white,RoguePanel.black);
+        write(""+level,49,23,RoguePanel.white,RoguePanel.black);
+        write(""+score,59,23,RoguePanel.white,RoguePanel.black);
     }
 
     public void drawItem(int xPosition, int yPosition, Item i) {
