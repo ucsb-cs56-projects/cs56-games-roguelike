@@ -94,12 +94,12 @@ public void moveHero(){
 				logicHandler.attack(x, y, origX, origY);
 				canvas.playerAttackDisplay();
 				if (logicHandler.monsterIsDead(x,y)) {
-						canvas.monsterKilledDisplay();
 						if (logicHandler.getObject(x,y) instanceof Item) {
 								canvas.drawItem(x,y, logicHandler.getItem(x,y));
 						} else {
 								canvas.clear(x,y);
 						}
+					//	canvas.monsterKilledDisplay();
 				}
 				x = origX;
 				y = origY;
