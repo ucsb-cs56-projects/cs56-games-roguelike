@@ -592,8 +592,8 @@ public class RoguePanel extends JPanel
         write("Y:",14,23,RoguePanel.white,RoguePanel.black);
         write("Hp:",18,23,RoguePanel.white,RoguePanel.black);
         write("Ap:",29,23,RoguePanel.white,RoguePanel.black);
-        write("Speed:", 34,23,RoguePanel.white,RoguePanel.black);
-        write("Level:",42,23,RoguePanel.white,RoguePanel.black);
+        write("Speed:", 36,23,RoguePanel.white,RoguePanel.black);
+        write("Level:",44,23,RoguePanel.white,RoguePanel.black);
         write("Score:",52,23,RoguePanel.white,RoguePanel.black);
     }
 
@@ -612,10 +612,10 @@ public class RoguePanel extends JPanel
 
         write(""+xPosition,12,23,RoguePanel.white,RoguePanel.black);
         write(""+yPosition,16,23,RoguePanel.white,RoguePanel.black);
-        write(""+hp+ "/100",21,23,RoguePanel.white,RoguePanel.black);
+        write(""+hp+"/100",21,23,RoguePanel.white,RoguePanel.black);
         write(""+ap,32,23,RoguePanel.white,RoguePanel.black);
-        write(""+speed,40,23,RoguePanel.white,RoguePanel.black);
-        write(""+level,48,23,RoguePanel.white,RoguePanel.black);
+        write(""+speed,42,23,RoguePanel.white,RoguePanel.black);
+        write(""+level,50,23,RoguePanel.white,RoguePanel.black);
         write(""+score,58,23,RoguePanel.white,RoguePanel.black);
     }
 
