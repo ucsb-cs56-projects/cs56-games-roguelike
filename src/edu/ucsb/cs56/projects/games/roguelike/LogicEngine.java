@@ -23,6 +23,7 @@ public class LogicEngine {
     private boolean gameOver;
     private int level;//current level of the game
     private int elixirStepCounter;
+    private boolean itemConsumed=false;
 
     //List of one of each monsters.
     //Add to this list when adding extra monsters (Put the class name as a String type)
@@ -65,6 +66,37 @@ public class LogicEngine {
 		level = 1;
 		elixirStepCounter = 0;
 	}
+
+
+
+
+
+
+
+    public boolean getItemConsumed(){
+	return itemConsumed;
+    }
+
+
+
+    
+
+
+
+
+    
+    public void setItemConsumed(boolean b){
+	itemConsumed = b;
+    }
+
+
+
+    
+
+
+
+
+    
     
     /**
      * setter for boolean gameOver
@@ -159,11 +191,13 @@ public class LogicEngine {
 	 */
 
 	public void move(int x,int y,int xOrig,int yOrig){
+	    setItemConsumed(false); //If player tried to move off potion, they are no longer consuming
             if (floor[x][y] instanceof Wall)
 		return;
 	    
 	    if (floor[x][y] instanceof Item) {
 		consumeItem(x,y);
+		setItemConsumed(true); //If an item is consumed, it is noted, this will help with write function to let player know they consumed the item
 	    }
 
 	    if (x != xOrig || y != yOrig) {
@@ -499,6 +533,7 @@ public class LogicEngine {
 	listOfItems[x][y].UseEffect(thePlayer);
 	listOfItems[x][y] = null;
 	floor[x][y] = null;
+	// consumed item
     }
 
     public void deleteItem(int x, int y){

@@ -17,12 +17,13 @@ public class Player implements GamePiece {
     private int score;
     private String typeOfPiece;
     private char icon;
+    final static public int MAXHP = 100;// this is NEW
 
     /**
      * creates a player with 100 hitPoints, 20 attack, and 1 speed
      */
     public Player(){
-	this.hitPoints = 100;
+	this.hitPoints = MAXHP; //this is NEW
 	this.attack = 20;
 	this.speed = 1;
 	this.score= 0;
@@ -97,7 +98,7 @@ public class Player implements GamePiece {
      * @param newHp the hitPoints that is to be set
      */
     public void setHitPoints(int newHp){
-	if(newHp >= 100) {this.hitPoints=100;}
+	if(newHp >= MAXHP) {this.hitPoints=MAXHP;}
 	else
 	    this.hitPoints = newHp;
     }
