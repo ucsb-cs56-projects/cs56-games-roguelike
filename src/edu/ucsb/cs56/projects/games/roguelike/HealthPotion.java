@@ -18,7 +18,7 @@ public class HealthPotion extends Item {
    this is the default constructor for the health potion.
    its default value is 20; with icon H
  */
-    public HealthPotion(){
+    public HealthPotion() {
         super(20);
         this.setIcon('H');
     }
@@ -26,7 +26,7 @@ public class HealthPotion extends Item {
    this is an 1 arg consrtuctor that will set how much the potion will heal
    @param Health this will be the value the programmer or computer wants the potion to heal for.
  */
-    public HealthPotion(int Health){
+    public HealthPotion(int Health) {
         super(Health);
         this.setIcon('H');
     }
@@ -34,14 +34,14 @@ public class HealthPotion extends Item {
    this is an 1 arg consrtuctor that will set whether the item has been used or not
    @param use is the param to set the use of the item to true or false.
  */
-    public HealthPotion(boolean use){
+    public HealthPotion(boolean use) {
         super(use);
         this.setIcon('H');
     }
 
 
-    @Override public void UseEffect(Player p){
+    @Override public void UseEffect(Player p) {
         p.setHitPoints(this.getEffect()+p.getHitPoints());
     }
-    
+
 }

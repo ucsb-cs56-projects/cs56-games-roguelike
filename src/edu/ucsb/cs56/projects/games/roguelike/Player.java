@@ -21,7 +21,7 @@ public class Player implements GamePiece {
 /**
  * creates a player with 100 hitPoints, 20 attack, and 1 speed
  */
-    public Player(){
+    public Player() {
         this.hitPoints = 100;
         this.attack = 20;
         this.speed = 1;
@@ -34,7 +34,7 @@ public class Player implements GamePiece {
  * @return the player's hitPoints
  *
  */
-    public int getHitPoints(){
+    public int getHitPoints() {
         return this.hitPoints;
     }
 
@@ -53,7 +53,7 @@ public class Player implements GamePiece {
  * @return the player's speed
  *
  */
-    public int getSpeed(){
+    public int getSpeed() {
         return this.speed;
     }
 
@@ -83,11 +83,11 @@ public class Player implements GamePiece {
         return this.attack;
     }
 
-    public int[] getPlayerPosition(){
+    public int[] getPlayerPosition() {
         return playerPosition;
     }
 
-    public void setPlayerPosition(int[] playerPosition){
+    public void setPlayerPosition(int[] playerPosition) {
         this.playerPosition = playerPosition;
     }
 
@@ -95,7 +95,7 @@ public class Player implements GamePiece {
  * sets the player's hitPoints
  * @param newHp the hitPoints that is to be set
  */
-    public void setHitPoints(int newHp){
+    public void setHitPoints(int newHp) {
         if(newHp >= 100) {this.hitPoints=100; }
         else
                 this.hitPoints = newHp;
@@ -105,7 +105,7 @@ public class Player implements GamePiece {
  * sets the player's Score
  * @param newScore is the score  that is to be set
  */
-    public void setScore(int newScore){
+    public void setScore(int newScore) {
         this.score = newScore;
     }
 
@@ -113,7 +113,7 @@ public class Player implements GamePiece {
  * a method for attacking monsters and incrementing player's score
  * @param mon the monster being attacked
  */
-    public void attacking(Monster mon){
+    public void attacking(Monster mon) {
         if(hitPoints > 0) {
                 this.score+= mon.getPointValue();
                 mon.setHitPoints(mon.getHitPoints()-this.attack);
@@ -147,5 +147,5 @@ public class Player implements GamePiece {
     public void setIcon(char NewIcon) {
         this.icon=NewIcon;
     }
-    
+
 }
