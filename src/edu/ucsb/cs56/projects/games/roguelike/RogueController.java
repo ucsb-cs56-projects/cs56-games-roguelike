@@ -137,7 +137,7 @@ public class RogueController extends JFrame implements KeyListener
                         if(xPos>0 && xPos<=78 && yPos>0 && yPos<=20) {
                             //display the you were attacked flag if the collision was with a player
                             if(logicHandler.getObject(xPos, yPos) instanceof Player) {
-                                canvas.monsterAttack();
+                                canvas.monsterAttackDisplay();
                                 canvas.moveHeroAnimated(x, y, logicHandler.getPlayer().getHitPoints(),
                                                         logicHandler.getPlayer().getAttack(),
                                                         logicHandler.getPlayer().getSpeed(), logicHandler.getLevel()
