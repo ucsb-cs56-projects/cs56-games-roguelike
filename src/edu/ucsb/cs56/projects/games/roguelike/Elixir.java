@@ -17,7 +17,7 @@ public class Elixir extends Item {
    default consturctor for Elixir
    its default value is 1; with icon S
  */
-    public Elixir(){
+    public Elixir() {
         super(1);
         this.setIcon('S');
     }
@@ -26,7 +26,7 @@ public class Elixir extends Item {
  *  this is an 1 arg consrtuctor that will set whether the item has been used or not
  *  @param use is the param to set the use state of the item to true or false.
  */
-    public Elixir(boolean use){
+    public Elixir(boolean use) {
         super(use);
         this.setIcon('S');
     }
@@ -35,7 +35,7 @@ public class Elixir extends Item {
    this method uses the effect value in someway.
    in this method it adds the speed value to the player.
  */
-    @Override public void UseEffect(Player p){
+    @Override public void UseEffect(Player p) {
         p.setSpeed(p.getSpeed()+this.getEffect());
     }
 

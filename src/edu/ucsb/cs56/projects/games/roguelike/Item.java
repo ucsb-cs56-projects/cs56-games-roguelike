@@ -23,7 +23,7 @@ public class Item implements GamePiece {
    and it is an item game piece
    it has icon I
  */
-    public Item(){
+    public Item() {
         this.effect=10;
         this.used=false;
         this.setTypeOfPiece("item");
@@ -35,7 +35,7 @@ public class Item implements GamePiece {
    @param NewEffect this will be how much the item will effect the user.
  */
 
-    public Item(int NewEffect){
+    public Item(int NewEffect) {
         this.effect=NewEffect;
         this.used=false;
         this.setTypeOfPiece("item");
@@ -47,7 +47,7 @@ public class Item implements GamePiece {
    and is an item game piece with icon I
    @param CanUse tells whether the item has been used
  */
-    public Item(boolean CanUse){
+    public Item(boolean CanUse) {
         this.used=CanUse;
         this.effect=10;
         this.setTypeOfPiece("item");
@@ -58,14 +58,14 @@ public class Item implements GamePiece {
  * gets the item's effect value
  * @return the effect of this item
  */
-    public int getEffect(){
+    public int getEffect() {
         return this.effect;
     }
 /**
    sets the item's effect value
    @param NewEffect this is the value the computer/programmer can set
  */
-    public void setEffect(int NewEffect){
+    public void setEffect(int NewEffect) {
         this.effect=NewEffect;
     }
 /**
@@ -73,40 +73,40 @@ public class Item implements GamePiece {
    @param use this is a true or false statement that tells whether
    the item has been used.
  */
-    public void setUse(boolean use){
+    public void setUse(boolean use) {
         this.used=use;
     }
 /**
    this gets whether or not the item has been used
    @return true if this item has been used, false if not
  */
-    public boolean getUse(){
+    public boolean getUse() {
         return this.used;
     }
 /**
    this tells what kind of piece it is
  */
-    public String getTypeOfPiece(){
+    public String getTypeOfPiece() {
         return this.typeOfPiece;
     }
 /**
    this allows the computer/programmer to set what type of piece this will be
    @param newTypeOfPiece this will be the name of this piece
  */
-    public void setTypeOfPiece(String newTypeOfPiece){
+    public void setTypeOfPiece(String newTypeOfPiece) {
         this.typeOfPiece=newTypeOfPiece;
     }
 /**
    *This is the getter to figure out what piece icon it is.
  */
-    public char getIcon(){
+    public char getIcon() {
         return this.icon;
     }
 /**
    *This is the setter for the Icon it will be
    *@param NewIcon is the icon of piece that will be in the game
  */
-    public void setIcon(char NewIcon){
+    public void setIcon(char NewIcon) {
         this.icon=NewIcon;
     }
 /**
@@ -114,8 +114,8 @@ public class Item implements GamePiece {
    in this method it just adds points to the player.
    @param p the player to be affected by the item
  */
-    public void UseEffect(Player p){
+    public void UseEffect(Player p) {
         p.setScore(this.getEffect()+p.getScore());
     }
-    
+
 }
