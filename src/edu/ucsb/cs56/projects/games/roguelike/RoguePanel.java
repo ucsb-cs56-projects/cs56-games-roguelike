@@ -545,8 +545,8 @@ public class RoguePanel extends JPanel
      * @param background the background color or null to use the default
      * @return this for convenient chaining of method calls
      */
-      public RoguePanel write(String string, int x, int y, Color foreground, Color background) {
-        if (string == null)
+    public RoguePanel write(String string, int x, int y, Color foreground, Color background) {
+	if (string == null)
             throw new NullPointerException("string must not be null." );
         
         if (x + string.length() >= gridWidth)
@@ -579,7 +579,7 @@ public class RoguePanel extends JPanel
      * @param background the background color or null to use the default
      * @return this for convenient chaining of method calls
      */
-     public RoguePanel write(char character, int x, int y, Color foreground, Color background) {
+    public RoguePanel write(char character, int x, int y, Color foreground, Color background) {
         if (character < 0 || character >= glyphs.length)
             throw new IllegalArgumentException("character " + character + " must be within range [0," + glyphs.length + "]." );
 

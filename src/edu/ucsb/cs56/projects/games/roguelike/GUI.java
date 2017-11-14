@@ -13,7 +13,7 @@ import java.awt.Font;
  */
 public class GUI
 {
-    private boolean gameRunning = false; //This boolean is used to make sure only one game instance is running, if true, menu will shut down and false will return menu
+
     /*
      * All the main does is call the no-arg constructor of the GUI class
      */

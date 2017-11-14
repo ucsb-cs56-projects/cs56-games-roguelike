@@ -49,24 +49,6 @@ public class RogueController extends JFrame implements KeyListener
     //1 = discovered, any other value = not discovered
     private int[][] discoveredArea;
 
-    // private levelChanged = logicHandler.getLevel(); //im not sure what im doing here
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-	
     /**
      * No parameters.
      * Constructor initializes the RoguePanel canvas, logicEngine logicHandler and declares that it is listening for keys.
@@ -81,21 +63,6 @@ public class RogueController extends JFrame implements KeyListener
 	discoveredArea = new int[ canvas.getGridWidth() ][ canvas.getGridHeight()-1 ];
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
     
     /**
      * Handles movement of player by checking if it can move there first through the logic engine
@@ -144,21 +111,6 @@ public class RogueController extends JFrame implements KeyListener
 	canvas.moveHeroAnimated(x, y,logicHandler.getPlayer().getHitPoints(), logicHandler.getPlayer().getAttack(),logicHandler.getPlayer().getSpeed(), logicHandler.getLevel(), logicHandler.getPlayer().getScore());	
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
     /**
      * Handles movement of all monsters by checking if it can move there first through the logic engine
      * if it can move, invoke the canvas to animate it
@@ -200,11 +152,13 @@ public class RogueController extends JFrame implements KeyListener
 		    } else if (logicHandler.movable(xPos, yPos)) {
 			logicHandler.move(xPos, yPos,xOrig,yOrig);
 			canvas.moveMonster(xPos, yPos,logicHandler.getObject(xPos,yPos));
-		    }else if ((!logicHandler.movable(xPos,yPos))){
-			logicHandler.move(xOrig, yOrig,xOrig,yOrig);
-			canvas.moveMonster(xOrig, yOrig,logicHandler.getObject(xOrig,yOrig));
 			
-		    }
+			//This was a fix for monsters disappearing. Monster will remain in the same place if not movable
+		    }else{ 
+			    logicHandler.move(xOrig, yOrig,xOrig,yOrig);
+			    canvas.moveMonster(xOrig, yOrig,logicHandler.getObject(xOrig,yOrig));
+			
+			}
 		}
 	    }
 	}
@@ -214,23 +168,6 @@ public class RogueController extends JFrame implements KeyListener
 	fillEmptySpace();
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    
-    
     public void fillEmptySpace(){
 	Object floor[][];
 	floor = logicHandler.getFloor();
@@ -244,22 +181,6 @@ public class RogueController extends JFrame implements KeyListener
 	}
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
     /**
      * Draws all walls using RoguePanel
      */
@@ -271,22 +192,6 @@ public class RogueController extends JFrame implements KeyListener
 	    }
 	}
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
     
     /**                                                                              
      * Makes sure all items stay visible on the screen.
@@ -301,21 +206,6 @@ public class RogueController extends JFrame implements KeyListener
 	}
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    
     public void clearAllItems(){
 	if (logicHandler.getLevel() != currentLevel){
 	    for (int x= 0; x < canvas.getGridWidth()-1; x++) {
@@ -329,27 +219,7 @@ public class RogueController extends JFrame implements KeyListener
 	currentLevel++;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-    
-    
-    
-    
-    
-    /**
+/**
        Records the areas where the player has revealed
     */
     public void trackDiscovery(){
@@ -380,26 +250,7 @@ public class RogueController extends JFrame implements KeyListener
 	}//for(i)
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-    
-    /**
+/**
      * Checks to see if player is dead, and store score into txt file for HighScores
      * 
      */
@@ -501,25 +352,6 @@ public class RogueController extends JFrame implements KeyListener
 	this.x = startx;
 	this.y = starty;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-	
-
-	
 	
     /**
      * Method mandated by KeyListener interface.
@@ -533,29 +365,38 @@ public class RogueController extends JFrame implements KeyListener
 	origX = x; 
 	origY = y;
 	switch (key.getKeyChar()){
-	case 'w'	    :
-		this.y = this.y - logicHandler.getPlayer().getSpeed(); break;
-	case 'q'	    :
-		this.y = this.y - logicHandler.getPlayer().getSpeed();
-		this.x = this.x - logicHandler.getPlayer().getSpeed(); break;
-	    
-	case 'a'	    :
-		this.x = this.x - logicHandler.getPlayer().getSpeed(); break;
-	case 'e'	    :
-		this.y = this.y - logicHandler.getPlayer().getSpeed(); 
-		this.x = this.x + logicHandler.getPlayer().getSpeed();break;
-	case 'd'	    :
-	        this.x = this.x + logicHandler.getPlayer().getSpeed(); break;
-	case 'z'	    :
-		this.y = this.y + logicHandler.getPlayer().getSpeed();
-		this.x = this.x - logicHandler.getPlayer().getSpeed(); break;
-	case 's'	    :
-		this.y = this.y + logicHandler.getPlayer().getSpeed(); break;
-	case 'c'	    :
-		this.y = this.y + logicHandler.getPlayer().getSpeed();
-		this.x = this.x + logicHandler.getPlayer().getSpeed(); break;
-	case 'l'            :    break;        
-	default			:	return;
+	case 'w': //UP MOVEMENT
+	    this.y = this.y - logicHandler.getPlayer().getSpeed();
+	    break;
+	case 'q': //UP LEFT DIAGONAL MOVEMENT
+	    this.y = this.y - logicHandler.getPlayer().getSpeed();
+	    this.x = this.x - logicHandler.getPlayer().getSpeed();
+	    break;
+	case 'a': //LEFT MOVEMENT
+	    this.x = this.x - logicHandler.getPlayer().getSpeed();
+	    break;
+	case 'e': //UP RIGHT MOVEMENT
+	    this.y = this.y - logicHandler.getPlayer().getSpeed(); 
+	    this.x = this.x + logicHandler.getPlayer().getSpeed();
+	    break;
+	case 'd': //RIGHT MOVEMENT
+	    this.x = this.x + logicHandler.getPlayer().getSpeed();
+	    break;
+	case 'z': //DOWN LEFT MOVEMENT
+	    this.y = this.y + logicHandler.getPlayer().getSpeed();
+	    this.x = this.x - logicHandler.getPlayer().getSpeed();
+	    break;
+	case 's': //DOWN MOVEMENT
+	    this.y = this.y + logicHandler.getPlayer().getSpeed();
+	    break;
+	case 'c': //DOWN RIGHT MOVEMENT
+	    this.y = this.y + logicHandler.getPlayer().getSpeed();
+	    this.x = this.x + logicHandler.getPlayer().getSpeed();
+	    break;
+	case 'l': //LINGER BUTTON (Player waits in place)
+	    break;        
+	default	:
+	    return;
 	}
 
 	//Tell player they cannot run into a wall, else continue with game progress
@@ -565,15 +406,12 @@ public class RogueController extends JFrame implements KeyListener
 	    //restores player (x,y) player position if a wall is hit
 	    while (!logicHandler.isGround(x, y)) {
 		if (x != origX && y!=origY){
-		//x = (x > origX) ? x-1 : x+1;
-		x = origX;
-		y = origY;
+		    x = origX;
+		    y = origY;
+		}
+		else if (y != origY)y = origY;
+		else if (x!= origX) x = origX;
 	    }
-	    else if (y != origY)
-		//y = (y > origY) ? y-1 : y+1;
-		y = origY;
-	    else if (x!= origX) x = origX;
-	}
 	}else{
 	    canvas.clear();
 	    drawAllWalls();
@@ -581,10 +419,6 @@ public class RogueController extends JFrame implements KeyListener
 	    canvas.write(key.getKeyChar(),7,23,RoguePanel.white,RoguePanel.black);
 	    moveHero();
 	    moveMonster();
-
-
-
-
 	    checkPlayerStatus();
 	    checkAllMonsterStatus();
 	    trackDiscovery();

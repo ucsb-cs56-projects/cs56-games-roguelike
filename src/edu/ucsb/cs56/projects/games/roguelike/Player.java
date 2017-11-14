@@ -17,13 +17,13 @@ public class Player implements GamePiece {
     private int score;
     private String typeOfPiece;
     private char icon;
-    final static public int MAXHP = 100;// this is NEW
+    final static public int MAXHP = 100;
 
     /**
      * creates a player with 100 hitPoints, 20 attack, and 1 speed
      */
     public Player(){
-	this.hitPoints = MAXHP; //this is NEW
+	this.hitPoints = MAXHP; 
 	this.attack = 20;
 	this.speed = 1;
 	this.score= 0;
