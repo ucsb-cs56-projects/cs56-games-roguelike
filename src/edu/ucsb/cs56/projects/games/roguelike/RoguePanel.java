@@ -546,7 +546,7 @@ public class RoguePanel extends JPanel
      * @return this for convenient chaining of method calls
      */
     public RoguePanel write(String string, int x, int y, Color foreground, Color background) {
-        if (string == null)
+	if (string == null)
             throw new NullPointerException("string must not be null." );
         
         if (x + string.length() >= gridWidth)
@@ -620,8 +620,8 @@ public class RoguePanel extends JPanel
 	write("Input:",0,23,RoguePanel.white,RoguePanel.black);
 	write("X:",10,23,RoguePanel.white,RoguePanel.black);
 	write("Y:",14,23,RoguePanel.white,RoguePanel.black);
-	write("Hp:",20,23,RoguePanel.white,RoguePanel.black);
-	write("Ap:",27,23,RoguePanel.white,RoguePanel.black);
+	write("Hp:",18,23,RoguePanel.white,RoguePanel.black);
+	write("Ap:",28,23,RoguePanel.white,RoguePanel.black);
 	write("Speed:", 34,23,RoguePanel.white,RoguePanel.black);
 	write("Level:",43,23,RoguePanel.white,RoguePanel.black);
 	write("Score:",53,23,RoguePanel.white,RoguePanel.black);
@@ -640,10 +640,10 @@ public class RoguePanel extends JPanel
 	    write("HERE BE DRAGONS",0,22,RoguePanel.red,RoguePanel.black);
 	}
 		
-	write(""+xPosition,12,23,RoguePanel.white,RoguePanel.black);
-	write(""+yPosition,16,23,RoguePanel.white,RoguePanel.black);
-	write(""+hp+ " ",22,23,RoguePanel.white,RoguePanel.black);
-	write(""+ap+ " ",29,23,RoguePanel.white,RoguePanel.black);
+	write(""+xPosition,11,23,RoguePanel.white,RoguePanel.black);
+	write(""+yPosition,15,23,RoguePanel.white,RoguePanel.black);
+	write(hp+"/"+Player.MAXHP,20,23,RoguePanel.white,RoguePanel.black);
+	write(ap+ " ",31,23,RoguePanel.white,RoguePanel.black);
 	write(""+speed+ " ",40,23,RoguePanel.white,RoguePanel.black);
 	write(""+level+ " ",49,23,RoguePanel.white,RoguePanel.black);
 	write(""+score+ " ",59,23,RoguePanel.white,RoguePanel.black);
@@ -652,6 +652,8 @@ public class RoguePanel extends JPanel
     public void drawItem(int xPosition, int yPosition, Item i){
 		
 	write(i.getIcon(),xPosition,yPosition,RoguePanel.white,RoguePanel.black);
+	//Tells the player an item is found using write function
+	write("   Wow an Item!",60,23,RoguePanel.red,RoguePanel.black);
 		
     }
 
@@ -669,7 +671,7 @@ public class RoguePanel extends JPanel
      * display the you were hit flag
      */
     public void monsterAttack(){
-	write("You were hit",60,23,RoguePanel.yellow,RoguePanel.black);
+	write("   You were hit",60,23,RoguePanel.yellow,RoguePanel.black);
 		
     }
 

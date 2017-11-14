@@ -48,7 +48,7 @@ public class RogueController extends JFrame implements KeyListener
     //Matrix indicating which grid space has been discovered yet
     //1 = discovered, any other value = not discovered
     private int[][] discoveredArea;
-	
+
     /**
      * No parameters.
      * Constructor initializes the RoguePanel canvas, logicEngine logicHandler and declares that it is listening for keys.
@@ -62,12 +62,13 @@ public class RogueController extends JFrame implements KeyListener
 	addKeyListener(this);
 	discoveredArea = new int[ canvas.getGridWidth() ][ canvas.getGridHeight()-1 ];
     }
+
     
     /**
      * Handles movement of player by checking if it can move there first through the logic engine
      * if it can move, invoke the canvas to animate it
      * if it can't, it checks if its because of out of bounds or a monster
-     * if its a monster the player will attack it and its its dead the canvas will animate the removal of the monster
+     * if its a monster the player will attack it and if it's dead the canvas will animate the removal of the monster
      */
     public void moveHero(){
 	//	if(!logicHandler.movable(x,y,origX, origY)){
@@ -103,10 +104,13 @@ public class RogueController extends JFrame implements KeyListener
 	    y = origY;
 	} else if (logicHandler.movable(x, y)) {
 	    logicHandler.move(x, y, origX, origY);
+	    
+	    if (logicHandler.getItemConsumed()){ canvas.write("     Item Used  ", 61,23,RoguePanel.green,RoguePanel.black);}
 	}
-	canvas.moveHeroAnimated(x, y,logicHandler.getPlayer().getHitPoints(), logicHandler.getPlayer().getAttack(),
-				logicHandler.getPlayer().getSpeed(), logicHandler.getLevel(), logicHandler.getPlayer().getScore());	
+	
+	canvas.moveHeroAnimated(x, y,logicHandler.getPlayer().getHitPoints(), logicHandler.getPlayer().getAttack(),logicHandler.getPlayer().getSpeed(), logicHandler.getLevel(), logicHandler.getPlayer().getScore());	
     }
+
     /**
      * Handles movement of all monsters by checking if it can move there first through the logic engine
      * if it can move, invoke the canvas to animate it
@@ -148,7 +152,13 @@ public class RogueController extends JFrame implements KeyListener
 		    } else if (logicHandler.movable(xPos, yPos)) {
 			logicHandler.move(xPos, yPos,xOrig,yOrig);
 			canvas.moveMonster(xPos, yPos,logicHandler.getObject(xPos,yPos));
-		    }
+			
+			//This was a fix for monsters disappearing. Monster will remain in the same place if not movable
+		    }else{ 
+			    logicHandler.move(xOrig, yOrig,xOrig,yOrig);
+			    canvas.moveMonster(xOrig, yOrig,logicHandler.getObject(xOrig,yOrig));
+			
+			}
 		}
 	    }
 	}
@@ -157,8 +167,7 @@ public class RogueController extends JFrame implements KeyListener
 	logicHandler.storeMonsters();
 	fillEmptySpace();
     }
-    
-    
+
     public void fillEmptySpace(){
 	Object floor[][];
 	floor = logicHandler.getFloor();
@@ -196,7 +205,7 @@ public class RogueController extends JFrame implements KeyListener
 	    }
 	}
     }
-    
+
     public void clearAllItems(){
 	if (logicHandler.getLevel() != currentLevel){
 	    for (int x= 0; x < canvas.getGridWidth()-1; x++) {
@@ -209,15 +218,14 @@ public class RogueController extends JFrame implements KeyListener
 	}
 	currentLevel++;
     }
-    
-    
-    
-    
-    
-    /**
+
+/**
        Records the areas where the player has revealed
     */
     public void trackDiscovery(){
+
+	drawAllWalls(); //These Two Functions are called so that after the last monster is killed
+	fillEmptySpace(); //The next level will appear with the right color
 	
 	//x and y coordinates of player
 	int playerX = logicHandler.getPlayerPosition()[0];
@@ -242,10 +250,7 @@ public class RogueController extends JFrame implements KeyListener
 	}//for(i)
     }
 
-
-
-    
-    /**
+/**
      * Checks to see if player is dead, and store score into txt file for HighScores
      * 
      */
@@ -348,9 +353,6 @@ public class RogueController extends JFrame implements KeyListener
 	this.y = starty;
     }
 	
-
-	
-	
     /**
      * Method mandated by KeyListener interface.
      * Calls moveHero().
@@ -363,26 +365,66 @@ public class RogueController extends JFrame implements KeyListener
 	origX = x; 
 	origY = y;
 	switch (key.getKeyChar()){
-	case 'w'	    :	 this.y = this.y - logicHandler.getPlayer().getSpeed(); break;
-	case 'a'	    :  	 this.x = this.x - logicHandler.getPlayer().getSpeed(); break;
-	case 'd'	    :	 this.x = this.x + logicHandler.getPlayer().getSpeed(); break;
-	case 's'		:	 this.y = this.y + logicHandler.getPlayer().getSpeed(); break;
-	default			:	return;
+	case 'w': //UP MOVEMENT
+	    this.y = this.y - logicHandler.getPlayer().getSpeed();
+	    break;
+	case 'q': //UP LEFT DIAGONAL MOVEMENT
+	    this.y = this.y - logicHandler.getPlayer().getSpeed();
+	    this.x = this.x - logicHandler.getPlayer().getSpeed();
+	    break;
+	case 'a': //LEFT MOVEMENT
+	    this.x = this.x - logicHandler.getPlayer().getSpeed();
+	    break;
+	case 'e': //UP RIGHT MOVEMENT
+	    this.y = this.y - logicHandler.getPlayer().getSpeed(); 
+	    this.x = this.x + logicHandler.getPlayer().getSpeed();
+	    break;
+	case 'd': //RIGHT MOVEMENT
+	    this.x = this.x + logicHandler.getPlayer().getSpeed();
+	    break;
+	case 'z': //DOWN LEFT MOVEMENT
+	    this.y = this.y + logicHandler.getPlayer().getSpeed();
+	    this.x = this.x - logicHandler.getPlayer().getSpeed();
+	    break;
+	case 's': //DOWN MOVEMENT
+	    this.y = this.y + logicHandler.getPlayer().getSpeed();
+	    break;
+	case 'c': //DOWN RIGHT MOVEMENT
+	    this.y = this.y + logicHandler.getPlayer().getSpeed();
+	    this.x = this.x + logicHandler.getPlayer().getSpeed();
+	    break;
+	case 'l': //LINGER BUTTON (Player waits in place)
+	    break;        
+	default	:
+	    return;
 	}
 
-	canvas.clear();
-	drawAllWalls();
-	//Writes last received input.
-	canvas.write(key.getKeyChar(),7,23,RoguePanel.white,RoguePanel.black);
-	moveHero();
-	moveMonster();
+	//Tell player they cannot run into a wall, else continue with game progress
+	if(logicHandler.getObject(x,y) instanceof Wall){
+	    canvas.write("     Ouch a Wall  ", 61,23,RoguePanel.yellow,RoguePanel.red);
 
+	    //restores player (x,y) player position if a wall is hit
+	    while (!logicHandler.isGround(x, y)) {
+		if (x != origX && y!=origY){
+		    x = origX;
+		    y = origY;
+		}
+		else if (y != origY)y = origY;
+		else if (x!= origX) x = origX;
+	    }
+	}else{
+	    canvas.clear();
+	    drawAllWalls();
+	    //Writes last received input.
+	    canvas.write(key.getKeyChar(),7,23,RoguePanel.white,RoguePanel.black);
+	    moveHero();
+	    moveMonster();
+	    checkPlayerStatus();
+	    checkAllMonsterStatus();
+	    trackDiscovery();
 
-	checkPlayerStatus();
-	checkAllMonsterStatus();
-	trackDiscovery();
-
-	canvas.recordShadows(discoveredArea);
+	    canvas.recordShadows(discoveredArea);
+	}
 	if(logicHandler.getGameOver()==false)
 	    canvas.setInGame(true);
 	else
