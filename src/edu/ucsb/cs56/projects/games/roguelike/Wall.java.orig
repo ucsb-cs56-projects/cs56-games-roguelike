@@ -19,5 +19,5 @@ public class Wall implements GamePiece {
     public void setIcon(char NewIcon) {
         this.icon = NewIcon;
     }
-
+    
 }
