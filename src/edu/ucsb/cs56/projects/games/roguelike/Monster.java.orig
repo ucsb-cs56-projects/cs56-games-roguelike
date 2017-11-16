@@ -14,17 +14,17 @@ public class Monster implements GamePiece {
     private int direction = 0;
     private int typeOfMovement;
     private int[] position = new int[2];
-    private int pointValue = 5;
+    private int pointValue=5;
     private char icon;
 
     // Default attributes for monsters. To add a new monster, add a new array with the values for hitPoints, attack, pointValue, and icon
-    public static final int[] BAT = {5, 1, 10, 66};
-    public static final int[] GOLEM = {25, 5, 30, 71};
-    public static final int[] MONSTER = {20, 10, 5, 77};
-    public static final int[] PIRATE = {15, 4, 20, 80};
-    public static final int[] SNAKE = {5, 3, 15, 83};
-    public static final int[] TROLL = {10, 3, 15, 84};
-    public static final int[] ZOMBIE = {15, 2, 15, 90};
+    public static final int[] BAT = {5,1,10,66};
+    public static final int[] GOLEM = {25,5,30,71};
+    public static final int[] MONSTER = {20,10,5,77};
+    public static final int[] PIRATE = {15,4,20,80};
+    public static final int[] SNAKE = {5,3,15,83};
+    public static final int[] TROLL = {10,3,15,84};
+    public static final int[] ZOMBIE = {15,2,15,90};
 
     /**
      * creates a monster with 20 hitPoints and 10 attack and  no random movement
@@ -37,7 +37,7 @@ public class Monster implements GamePiece {
         char[] iconArray = Character.toChars(MONSTER[3]);
         char iconChar = iconArray[0];
         this.setIcon(iconChar);
-        this.typeOfMovement = 0;
+        this.typeOfMovement=0;
     }
     /**
      * creates a monster with 20 hitPoints and 10 attack
@@ -122,7 +122,7 @@ public class Monster implements GamePiece {
      *@param attack the attack points of the monster
      */
     public void setAttack(int attack) {
-        this.attack = attack;
+        this.attack=attack;
     }
     /**
      * @return the monster's attack
@@ -145,7 +145,7 @@ public class Monster implements GamePiece {
      * @param pointValue number of points for killing the bat.
      */
     public void setPointValue(int pointValue) {
-        this.pointValue = pointValue;
+        this.pointValue=pointValue;
 
     }
 
@@ -159,7 +159,7 @@ public class Monster implements GamePiece {
      *This is the setter for the Icon it will be
      *@param NewIcon is the icon of piece that will be in the game
      */ public void setIcon(char NewIcon) {
-        this.icon = NewIcon;
+        this.icon=NewIcon;
 
     }
 
@@ -169,8 +169,8 @@ public class Monster implements GamePiece {
        @param level the current level the player is on
     */
     public void setLevelBonus(int level) {
-        this.hitPoints = this.hitPoints + ( (level * 5) - 5 ); //HP of monster is increased by 5 for each level
-        if(level % 3 == 0)
+        this.hitPoints = this.hitPoints + ( (level*5) - 5 );   //HP of monster is increased by 5 for each level
+        if(level%3 == 0)
             this.attack = this.attack + ( (level) - 1 );    //Attack power of monster increases by 1 every 3 levels
 
         //More bonuses goes here
@@ -182,7 +182,7 @@ public class Monster implements GamePiece {
      * @param mainChar the player being attacked
      */
     public void attacking(Player mainChar) {
-        mainChar.setHitPoints(mainChar.getHitPoints() - this.attack);
+        mainChar.setHitPoints(mainChar.getHitPoints()-this.attack);
     }
 
 
@@ -197,15 +197,15 @@ public class Monster implements GamePiece {
 
     public int[] getDirection(int[] playerPosition) {
 
-        int[] vector = new int[2];
+        int[] vector= new int[2];
         Random directionGenerator = new Random();
 
 
         switch(typeOfMovement) {
         case 0	:
             direction++;
-            if(direction == 4) {
-                direction = 0;
+            if(direction==4) {
+                direction=0;
             }
             break;
 
@@ -216,7 +216,7 @@ public class Monster implements GamePiece {
         case 2 	:
             int randomer = directionGenerator.nextInt(3);
             if((position[0] - playerPosition[0] == 0)) {
-                if(position[1] - playerPosition[1] > 0) {
+                if(position[1]-playerPosition[1] > 0) {
                     if(randomer == 0) {
                         direction = 1;
                     } else if(randomer == 1) {
@@ -234,7 +234,7 @@ public class Monster implements GamePiece {
                     }
                 }
             } else if((position[1] - playerPosition[1] == 0)) {
-                if(position[0] - playerPosition[0] > 0) {
+                if(position[0]-playerPosition[0] > 0) {
                     if(randomer == 0) {
                         direction = 2;
                     } else if(randomer == 1) {
@@ -251,27 +251,27 @@ public class Monster implements GamePiece {
                         direction = 3;
                     }
                 }
-            } else if((position[0] - playerPosition[0] > 0) && (position[1] - playerPosition[1] > 0)) {
+            } else if((position[0] - playerPosition[0] > 0) && (position[1]-playerPosition[1] > 0)) {
                 if(directionGenerator.nextInt(2) == 1) {
                     direction = 1;
                 } else {
                     direction = 2;
                 }
-            } else if((position[0] - playerPosition[0] > 0) && (position[1] - playerPosition[1] < 0)) {
+            } else if((position[0] - playerPosition[0] > 0) && (position[1]-playerPosition[1] < 0)) {
                 if(directionGenerator.nextInt(2) == 1) {
                     direction = 3;
                 } else {
                     direction = 2;
                 }
 
-            } else if((position[0] - playerPosition[0] < 0) && (position[1] - playerPosition[1] > 0)) {
+            } else if((position[0] - playerPosition[0] < 0) && (position[1]-playerPosition[1] > 0)) {
                 if(directionGenerator.nextInt(2) == 1) {
                     direction = 1;
                 } else {
                     direction = 0;
                 }
 
-            } else if((position[0] - playerPosition[0] < 0) && (position[1] - playerPosition[1] < 0)) {
+            } else if((position[0] - playerPosition[0] < 0) && (position[1]-playerPosition[1] < 0)) {
                 if(directionGenerator.nextInt(2) == 1) {
                     direction = 3;
                 } else {
@@ -283,16 +283,16 @@ public class Monster implements GamePiece {
 
         switch (direction) {
         case 0	    :
-            vector[0] = 1;
+            vector[0]=1;
             break;
         case 1	    :
-            vector[1] = -1;
+            vector[1]=-1;
             break;
         case 2	    :
-            vector[0] = -1;
+            vector[0]=-1;
             break;
         case 3		:
-            vector[1] = 1;
+            vector[1]=1;
             break;
         default		:
             break;

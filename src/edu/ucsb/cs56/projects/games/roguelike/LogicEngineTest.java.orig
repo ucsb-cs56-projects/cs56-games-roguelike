@@ -9,7 +9,8 @@ import static org.junit.Assert.assertEquals;
  * @see LogicEngine
  */
 
-public class LogicEngineTest {
+public class LogicEngineTest
+{
 
     /**
        test to see if a player can move to a spot with a monster
@@ -20,7 +21,7 @@ public class LogicEngineTest {
 
         LogicEngine engine = new LogicEngine();
 
-        assertEquals(false, engine.movable(40, 12));
+        assertEquals(false,engine.movable(40,12));
     }
     /**
        test to see if a monster can move to a spot with a player
@@ -31,7 +32,7 @@ public class LogicEngineTest {
 
         LogicEngine engine = new LogicEngine();
 
-        assertEquals(false, engine.movable(5, 3));
+        assertEquals(false,engine.movable(5,3));
     }
 
     /**
@@ -43,7 +44,7 @@ public class LogicEngineTest {
 
         LogicEngine engine = new LogicEngine();
 
-        assertEquals(true, engine.movable(40, 12));
+        assertEquals(true,engine.movable(40,12));
     }
 
     /**
@@ -55,7 +56,7 @@ public class LogicEngineTest {
 
         LogicEngine engine = new LogicEngine();
 
-        assertEquals(false, engine.movable(40, 12));
+        assertEquals(false,engine.movable(40,12));
     }
     /**
        test to see if a monster/player can move to a spot that is out of bound
@@ -66,7 +67,7 @@ public class LogicEngineTest {
 
         LogicEngine engine = new LogicEngine();
 
-        assertEquals(false, engine.movable(40, 12));
+        assertEquals(false,engine.movable(40,12));
     }
     /**
        test to see if a monster/player can move to a spot that is out of bound
@@ -77,7 +78,7 @@ public class LogicEngineTest {
 
         LogicEngine engine = new LogicEngine();
 
-        assertEquals(false, engine.movable(40, 12));
+        assertEquals(false,engine.movable(40,12));
     }
     /**
        test to see if a monster/player can move to a spot that is out of bound
@@ -88,7 +89,7 @@ public class LogicEngineTest {
 
         LogicEngine engine = new LogicEngine();
 
-        assertEquals(false, engine.movable(40, 12));
+        assertEquals(false,engine.movable(40,12));
     }
 
     /**
@@ -99,8 +100,8 @@ public class LogicEngineTest {
     @Test public void testPlayerStatus() {
 
         LogicEngine engine = new LogicEngine();
-        engine.getPlayer().setHitPoints(0);
-        assertEquals(true, engine.playerIsDead());
+	engine.getPlayer().setHitPoints(0);
+        assertEquals(true,engine.playerIsDead());
     }
 
     /**
@@ -111,8 +112,8 @@ public class LogicEngineTest {
     @Test public void testPlayerStatus2() {
 
         LogicEngine engine = new LogicEngine();
-        engine.getPlayer().setHitPoints(20);
-        assertEquals(false, engine.playerIsDead());
+	engine.getPlayer().setHitPoints(20);
+        assertEquals(false,engine.playerIsDead());
     }
 
     /**
@@ -123,9 +124,9 @@ public class LogicEngineTest {
     @Test public void testMonsterStatus() {
 
         LogicEngine engine = new LogicEngine();
-        Monster[][] mList = engine.getMonsters();
-        mList[5][3].setHitPoints(0);
-        assertEquals(true, engine.monsterIsDead(5, 3));
+	Monster[][] mList = engine.getMonsters();
+	mList[5][3].setHitPoints(0);
+        assertEquals(true,engine.monsterIsDead(5,3));
     }
 
     /**
@@ -136,9 +137,9 @@ public class LogicEngineTest {
     @Test public void testMonsterStatus2() {
 
         LogicEngine engine = new LogicEngine();
-        Monster[][] mList = engine.getMonsters();
-        mList[5][3].setHitPoints(20);
-        assertEquals(false, engine.monsterIsDead(5, 3));
+	Monster[][] mList = engine.getMonsters();
+	mList[5][3].setHitPoints(20);
+        assertEquals(false,engine.monsterIsDead(5,3));
     }
 
 

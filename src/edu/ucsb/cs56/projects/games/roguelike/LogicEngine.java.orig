@@ -28,7 +28,7 @@ public class LogicEngine {
     //Add to this list when adding extra monsters (Put the class name as a String type)
     //Currently also needs to add cases to the createMonster() function
     private final String[] monsterPieces = new String[]
-    {"Monster", "Troll", "Golem", "Bat", "Snake", "Zombie", "Pirate"};
+    {"Monster","Troll","Golem", "Bat","Snake","Zombie","Pirate"};
 
     private int maxNumOfMonsters;//How many monsters on the board when creating them
 
@@ -40,7 +40,7 @@ public class LogicEngine {
      *
      */
     public LogicEngine() {
-        this(80, 24);
+        this(80,24);
     }
 
     /**
@@ -56,9 +56,9 @@ public class LogicEngine {
         listOfItems = new Item[floorWidth][floorHeight];
         createAllObjects();
         storeMonsters();
-        int[] position = {40, 12};
+        int[] position = {40,12};
         thePlayer.setPlayerPosition(position);
-        gameOver = false;
+        gameOver= false;
 
         //The -1 is to remove the initial monster creation incrementation
         maxNumOfMonsters = 7;
@@ -100,7 +100,8 @@ public class LogicEngine {
         return floor[x][y];
     }
 
-    public Item getItem(int x, int y) {
+    public Item getItem(int x, int y)
+    {
         return listOfItems[x][y];
     }
 
@@ -157,12 +158,12 @@ public class LogicEngine {
     *
     */
 
-    public void move(int x, int y, int xOrig, int yOrig) {
+    public void move(int x,int y,int xOrig,int yOrig) {
         if (floor[x][y] instanceof Wall)
             return;
 
         if (floor[x][y] instanceof Item) {
-            consumeItem(x, y);
+            consumeItem(x,y);
         }
 
         if (x != xOrig || y != yOrig) {
@@ -170,7 +171,7 @@ public class LogicEngine {
             floor[xOrig][yOrig] = null;
         }
 
-        int[] position = {x, y};
+        int[] position = {x,y};
         if(floor[x][y] instanceof Player) {
             thePlayer.setPlayerPosition(position);
         }
@@ -192,7 +193,7 @@ public class LogicEngine {
      * @param yOrig is the y position of the object right now
      * attacks if the 2 coordinates hold different GamePieces
      */
-    public void attack(int x, int y, int xOrig, int yOrig) {
+    public void attack(int x,int y,int xOrig,int yOrig) {
         // if ((x > 1 && x < floorWidth - 1) && (y > 1 && y < floorHeight - 1)) {
         if (floor[x][y] instanceof Wall)
             return;
@@ -217,7 +218,7 @@ public class LogicEngine {
      */
 
     public boolean attackable(int x, int y, int xOrig, int yOrig) {
-        if (!isGround(x, y))
+        if (!isGround(x,y))
             return false;
         if (floor[x][y] instanceof Monster)
             return true;
@@ -234,7 +235,7 @@ public class LogicEngine {
      * @param y is the y position of the position being tested
      * @return true if its movable, false if not
      */
-    public boolean movable(int x, int y) {
+    public boolean movable(int x,int y) {
         return (isGround(x, y) && thePlayer.getHitPoints() > 0);
     }
 
@@ -256,7 +257,7 @@ public class LogicEngine {
      * @return true if in bounds and not wall, false otherwise
      */
     public boolean isGround(int x, int y) {
-        if (!inBounds(x, y))
+        if (!inBounds(x,y))
             return false;
         else if (floor[x][y] instanceof Wall)
             return false;
@@ -271,21 +272,25 @@ public class LogicEngine {
      * @param y is the y position of the position being tested
      * @return if monster is dead at x and y return true else false
      */
-    public boolean monsterIsDead(int x, int y) {
+    public boolean monsterIsDead(int x,int y) {
 
-        if(listOfMonsters[x][y] != null && listOfMonsters[x][y].getHitPoints() <= 0) {
+        if(listOfMonsters[x][y]!=null && listOfMonsters[x][y].getHitPoints()<=0) {
 
             double random = Math.random();
 
-            if(0 <= random && random <= .2) { // 20% chance to drop Health Potion
-                createItem(x, y, new HealthPotion());
-            } else if(.2 < random && random <= .4) { // 20% chance to drop Beef
-                createItem(x, y, new Beef());
-            } else if(.4 < random && random <= .55) { // 15% chance to drop Pioson
-                createItem(x, y, new Poison());
-            } else if(.55 < random && random <= .60) {
-                createItem(x, y, new Elixir()); // 5% chance of drop Elixir
-            } else // no item drop :(
+            if(0 <= random && random <=.2) { // 20% chance to drop Health Potion
+                createItem(x,y,new HealthPotion());
+            }
+            else if(.2<random && random <=.4) { // 20% chance to drop Beef
+                createItem(x,y, new Beef());
+            }
+            else if(.4<random && random <=.55) { // 15% chance to drop Pioson
+                createItem(x,y, new Poison());
+            }
+            else if(.55<random && random <=.60) {
+                createItem(x,y, new Elixir()); // 5% chance of drop Elixir
+            }
+            else // no item drop :(
                 floor[x][y] = null;
 
 
@@ -300,7 +305,7 @@ public class LogicEngine {
      * @return if monster is dead at x and y return true else false
      */
     public boolean playerIsDead() {
-        if(thePlayer.getHitPoints() <= 0) {
+        if(thePlayer.getHitPoints()<=0) {
             return true;
         }
 
@@ -317,7 +322,7 @@ public class LogicEngine {
             for (int y = 0; y < floorHeight; y++) {
                 if(floor[x][y] instanceof Monster) {
                     listOfMonsters[x][y] = (Monster) floor[x][y];
-                    listOfMonsters[x][y].setMonsterPosition(x, y);
+                    listOfMonsters[x][y].setMonsterPosition(x,y);
                 } else {
                     listOfMonsters[x][y] = null;
                 }
@@ -352,12 +357,12 @@ public class LogicEngine {
         // Borders
         for (int col = 0; col < floorWidth; col++) {
             floor[col][0] = new Wall();
-            floor[col][floorHeight - 2] = new Wall();
+            floor[col][floorHeight-2] = new Wall();
         }
 
         for (int row = 0; row < floorHeight; row++) {
             floor[0][row] = new Wall();
-            floor[floorWidth - 2][row] = new Wall();
+            floor[floorWidth-2][row] = new Wall();
         }
 
         // Horizontal strips
@@ -486,7 +491,7 @@ public class LogicEngine {
      * @param i reference to new item
      */
     public void createItem(int x, int y, Item i) {
-        floor[x][y] = i;
+        floor[x][y]= i;
         listOfItems[x][y] = i;
     }
 
@@ -505,7 +510,7 @@ public class LogicEngine {
      */
 
     public void resetPlayerPosition() {
-        int[] resetPosition = {3, 2};
+        int[] resetPosition = {3,2};
         thePlayer.setPlayerPosition(resetPosition);
         floor[3][2] = thePlayer;
     }
@@ -521,52 +526,52 @@ public class LogicEngine {
             int xPos = numGenerator.nextInt(79);
             int yPos = numGenerator.nextInt(23);
 
-            int n = (int)(Math.random() * monsterPieces.length);
+            int n = (int)(Math.random()*monsterPieces.length);
 
-            if(floor[xPos][yPos] == null) {
+            if(floor[xPos][yPos]==null) {
 
                 switch(n) {
                 case 0 :
-                    floor[xPos][yPos] = new Monster(numGenerator.nextInt(2) + 1, Monster.MONSTER);
+                    floor[xPos][yPos] = new Monster(numGenerator.nextInt(2)+1, Monster.MONSTER);
                     listOfMonsters[xPos][yPos] = (Monster) floor[xPos][yPos];
                     listOfMonsters[xPos][yPos].setLevelBonus(level);
-                    listOfMonsters[xPos][yPos].setMonsterPosition(xPos, yPos);
+                    listOfMonsters[xPos][yPos].setMonsterPosition(xPos,yPos);
                     break;
                 case 1 :
-                    floor[xPos][yPos] = new Monster(numGenerator.nextInt(2) + 1, Monster.TROLL);
+                    floor[xPos][yPos] = new Monster(numGenerator.nextInt(2)+1, Monster.TROLL);
                     listOfMonsters[xPos][yPos] = (Monster) floor[xPos][yPos];
                     listOfMonsters[xPos][yPos].setLevelBonus(level);
-                    listOfMonsters[xPos][yPos].setMonsterPosition(xPos, yPos);
+                    listOfMonsters[xPos][yPos].setMonsterPosition(xPos,yPos);
                     break;
                 case 2 :
-                    floor[xPos][yPos] = new Monster(numGenerator.nextInt(2) + 1, Monster.GOLEM);
+                    floor[xPos][yPos] = new Monster(numGenerator.nextInt(2)+1, Monster.GOLEM);
                     listOfMonsters[xPos][yPos] = (Monster) floor[xPos][yPos];
                     listOfMonsters[xPos][yPos].setLevelBonus(level);
-                    listOfMonsters[xPos][yPos].setMonsterPosition(xPos, yPos);
+                    listOfMonsters[xPos][yPos].setMonsterPosition(xPos,yPos);
                     break;
                 case 3 :
-                    floor[xPos][yPos] = new Monster(numGenerator.nextInt(2) + 1, Monster.BAT);
+                    floor[xPos][yPos] = new Monster(numGenerator.nextInt(2)+1, Monster.BAT);
                     listOfMonsters[xPos][yPos] = (Monster) floor[xPos][yPos];
                     listOfMonsters[xPos][yPos].setLevelBonus(level);
-                    listOfMonsters[xPos][yPos].setMonsterPosition(xPos, yPos);
+                    listOfMonsters[xPos][yPos].setMonsterPosition(xPos,yPos);
                     break;
                 case 4 :
-                    floor[xPos][yPos] = new Monster(numGenerator.nextInt(2) + 1, Monster.SNAKE);
+                    floor[xPos][yPos] = new Monster(numGenerator.nextInt(2)+1, Monster.SNAKE);
                     listOfMonsters[xPos][yPos] = (Monster) floor[xPos][yPos];
                     listOfMonsters[xPos][yPos].setLevelBonus(level);
-                    listOfMonsters[xPos][yPos].setMonsterPosition(xPos, yPos);
+                    listOfMonsters[xPos][yPos].setMonsterPosition(xPos,yPos);
                     break;
                 case 5 :
-                    floor[xPos][yPos] = new Monster(numGenerator.nextInt(2) + 1, Monster.ZOMBIE);
+                    floor[xPos][yPos] = new Monster(numGenerator.nextInt(2)+1, Monster.ZOMBIE);
                     listOfMonsters[xPos][yPos] = (Monster) floor[xPos][yPos];
                     listOfMonsters[xPos][yPos].setLevelBonus(level);
-                    listOfMonsters[xPos][yPos].setMonsterPosition(xPos, yPos);
+                    listOfMonsters[xPos][yPos].setMonsterPosition(xPos,yPos);
                     break;
                 case 6 :
-                    floor[xPos][yPos] = new Monster(numGenerator.nextInt(2) + 1, Monster.PIRATE);
+                    floor[xPos][yPos] = new Monster(numGenerator.nextInt(2)+1, Monster.PIRATE);
                     listOfMonsters[xPos][yPos] = (Monster) floor[xPos][yPos];
                     listOfMonsters[xPos][yPos].setLevelBonus(level);
-                    listOfMonsters[xPos][yPos].setMonsterPosition(xPos, yPos);
+                    listOfMonsters[xPos][yPos].setMonsterPosition(xPos,yPos);
                     break;
 
                 //Add new monsters here. Copy the case and change the parameter passed in

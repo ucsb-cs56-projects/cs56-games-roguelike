@@ -21,7 +21,8 @@ import javax.swing.JButton;
  *
  */
 
-public class RoguePanel extends JPanel {
+public class RoguePanel extends JPanel
+{
 // private static final long serialVersionUID = L;
 
 
@@ -37,7 +38,7 @@ public class RoguePanel extends JPanel {
     public static Color gray = new Color(0x808080);
     public static Color brown = new Color(0x663300);
 //Array of colors that change the color of the ground with each level
-    public static Color[] groundColor = new Color[] {gray, white, yellow, green, cyan, blue, magenta, brown}; //first level starts at index 1
+    public static Color[] groundColor = new Color[] {gray,white,yellow,green,cyan,blue,magenta,brown};  //first level starts at index 1
 
 
 //attributes for handling things such as the Background and Foreground colors
@@ -281,7 +282,7 @@ public class RoguePanel extends JPanel {
      * Creates a grid of size 80 x 24 chars
      */
     public RoguePanel() {
-        this(80, 24);
+        this(80,24);
     }
 
     /**
@@ -315,7 +316,7 @@ public class RoguePanel extends JPanel {
 
         glyphs = new BufferedImage[256];
 
-        discoveredArea = new int[gridWidth][gridHeight - 1];
+        discoveredArea = new int[gridWidth][gridHeight-1];
         inGame = false;
 
         loadGlyphs();
@@ -360,16 +361,16 @@ public class RoguePanel extends JPanel {
         }
 
 
-        g.drawImage(offscreenBuffer, 0, 0, this);
+        g.drawImage(offscreenBuffer,0,0,this);
 
 
         if(inGame) {
             //draw shadows that cover undiscovered areas
             for(int x = 0; x < gridWidth; x++) {
-                for(int y = 0; y < gridHeight - 1; y++) {
+                for(int y = 0; y < gridHeight-1; y++) {
                     if(discoveredArea[x][y] != 1) {
                         g.setColor(backgroundColors[x][y]);
-                        g.fillRect(x * charWidth, y * charHeight, charWidth, charHeight);
+                        g.fillRect(x*charWidth,y*charHeight,charWidth,charHeight);
                     } //if
                 } //for
             } //for
@@ -564,7 +565,7 @@ public class RoguePanel extends JPanel {
         chars[x][y] = character;
         foregroundColors[x][y] = foreground;
         backgroundColors[x][y] = background;
-        if(character == '@') {
+        if(character=='@') {
             Xcoord = x + 1;
             Ycoord = y;
         }
@@ -576,7 +577,7 @@ public class RoguePanel extends JPanel {
      */
 
     public void drawChar(int xPos, int yPos) {
-        write("@", xPos, yPos, RoguePanel.white, RoguePanel.black);
+        write("@",xPos,yPos,RoguePanel.white,RoguePanel.black);
     }
 
     /**
@@ -586,14 +587,14 @@ public class RoguePanel extends JPanel {
 
 
     public void drawHUD() {
-        write("Input:", 0, 23, RoguePanel.white, RoguePanel.black);
-        write("X:", 10, 23, RoguePanel.white, RoguePanel.black);
-        write("Y:", 14, 23, RoguePanel.white, RoguePanel.black);
-        write("Hp:", 18, 23, RoguePanel.white, RoguePanel.black);
-        write("Ap:", 29, 23, RoguePanel.white, RoguePanel.black);
-        write("Speed:", 36, 23, RoguePanel.white, RoguePanel.black);
-        write("Lvl:", 44, 23, RoguePanel.white, RoguePanel.black);
-        write("Score:", 50, 23, RoguePanel.white, RoguePanel.black);
+        write("Input:",0,23,RoguePanel.white,RoguePanel.black);
+        write("X:",10,23,RoguePanel.white,RoguePanel.black);
+        write("Y:",14,23,RoguePanel.white,RoguePanel.black);
+        write("Hp:",18,23,RoguePanel.white,RoguePanel.black);
+        write("Ap:",29,23,RoguePanel.white,RoguePanel.black);
+        write("Speed:", 36,23,RoguePanel.white,RoguePanel.black);
+        write("Lvl:",44,23,RoguePanel.white,RoguePanel.black);
+        write("Score:",50,23,RoguePanel.white,RoguePanel.black);
     }
 
     /**
@@ -604,23 +605,23 @@ public class RoguePanel extends JPanel {
         drawHUD();
 
         try {
-            write("@", xPosition, yPosition, RoguePanel.white, RoguePanel.black);
+            write("@",xPosition,yPosition,RoguePanel.white,RoguePanel.black);
         } catch(Exception ex) {
-            write("HERE BE DRAGONS", 0, 22, RoguePanel.red, RoguePanel.black);
+            write("HERE BE DRAGONS",0,22,RoguePanel.red,RoguePanel.black);
         }
 
-        write("" + xPosition, 12, 23, RoguePanel.white, RoguePanel.black);
-        write("" + yPosition, 16, 23, RoguePanel.white, RoguePanel.black);
-        write("" + hp + "/100", 21, 23, RoguePanel.white, RoguePanel.black);
-        write("" + ap, 32, 23, RoguePanel.white, RoguePanel.black);
-        write("" + speed, 42, 23, RoguePanel.white, RoguePanel.black);
-        write("" + level, 48, 23, RoguePanel.white, RoguePanel.black);
-        write("" + score, 56, 23, RoguePanel.white, RoguePanel.black);
+        write(""+xPosition,12,23,RoguePanel.white,RoguePanel.black);
+        write(""+yPosition,16,23,RoguePanel.white,RoguePanel.black);
+        write(""+hp+"/100",21,23,RoguePanel.white,RoguePanel.black);
+        write(""+ap,32,23,RoguePanel.white,RoguePanel.black);
+        write(""+speed,42,23,RoguePanel.white,RoguePanel.black);
+        write(""+level,48,23,RoguePanel.white,RoguePanel.black);
+        write(""+score,56,23,RoguePanel.white,RoguePanel.black);
     }
 
     public void drawItem(int xPosition, int yPosition, Item i) {
 
-        write(i.getIcon(), xPosition, yPosition, RoguePanel.white, RoguePanel.black);
+        write(i.getIcon(),xPosition,yPosition,RoguePanel.white,RoguePanel.black);
 
     }
 
@@ -630,7 +631,7 @@ public class RoguePanel extends JPanel {
      */
     public void moveMonster(int xPosition, int yPosition, GamePiece piece) {
 
-        write(piece.getIcon(), xPosition, yPosition, RoguePanel.red, RoguePanel.black);
+        write(piece.getIcon(),xPosition,yPosition,RoguePanel.red,RoguePanel.black);
 
     }
 
@@ -638,28 +639,28 @@ public class RoguePanel extends JPanel {
      * display the you were hit flag
      */
     public void monsterAttackDisplay() {
-        write("You were hit", 60, 23, RoguePanel.yellow, RoguePanel.black);
+        write("You were hit",60,23,RoguePanel.yellow,RoguePanel.black);
     }
 
     /**
      * display for when the player uses an item
      */
     public void itemUsedDisplay(String item) {
-        write("You used " + item, 60, 23, RoguePanel.yellow, RoguePanel.black);
+        write("You used " + item,60,23,RoguePanel.yellow,RoguePanel.black);
     }
 
     /**
      * display for when the player hits a monster
      */
     public void playerAttackDisplay() {
-        write("You hit a monster", 60, 23, RoguePanel.yellow, RoguePanel.black);
+        write("You hit a monster",60,23,RoguePanel.yellow,RoguePanel.black);
     }
 
     /**
      * display for when the player kills a monster
      */
     public void monsterKilledDisplay()    {
-        write("You killed a monster", 60, 23, RoguePanel.yellow, RoguePanel.black);
+        write("You killed a monster",60,23,RoguePanel.yellow,RoguePanel.black);
     }
 
 
@@ -667,21 +668,21 @@ public class RoguePanel extends JPanel {
      * display that the player has advanced to the next level
      */
     public void nextLevel() {
-        write("NEXT LEVEL!", 60, 23, RoguePanel.yellow, RoguePanel.black);
+        write("NEXT LEVEL!",60,23,RoguePanel.yellow,RoguePanel.black);
     }
 
     /**
      * displays the losing screen with player's score and HighScores
      */
-    public void displayLosingScreen(int score, int[] array) {
-        write("To play again: close this window and press play on the main menu.", 7, 10, RoguePanel.green, RoguePanel.black);
-        write("YOU LOSE", 35, 6, RoguePanel.red, RoguePanel.black);
-        write("Score:" + score, 35, 14, RoguePanel.white, RoguePanel.black);
-        write("High Scores", 35, 16, RoguePanel.white, RoguePanel.black);
+    public void displayLosingScreen(int score,int[] array) {
+        write("To play again: close this window and press play on the main menu.", 7,10,RoguePanel.green,RoguePanel.black);
+        write("YOU LOSE",35,6,RoguePanel.red,RoguePanel.black);
+        write("Score:"+score,35,14,RoguePanel.white,RoguePanel.black);
+        write("High Scores", 35,16,RoguePanel.white,RoguePanel.black);
         int b = 17;
         int rank = 1;
         for( int a : array) {
-            write("" + rank + ":" + a, 40, b, RoguePanel.white, RoguePanel.black);
+            write("" + rank +":" + a, 40,b,RoguePanel.white,RoguePanel.black);
             b++;
             rank++;
         }
@@ -691,15 +692,15 @@ public class RoguePanel extends JPanel {
      * displays the winning screen
      */
     public void displayWinningScreen() {
-        write("YOU WIN", 40, 12, RoguePanel.green, RoguePanel.black);
+        write("YOU WIN",40,12,RoguePanel.green,RoguePanel.black);
     }
 
     public void emptySpace(int xPosition, int yPosition, int colorNum) {
-        write("_", xPosition, yPosition, groundColor[colorNum % groundColor.length], RoguePanel.black);
+        write("_",xPosition,yPosition,groundColor[colorNum%groundColor.length],RoguePanel.black);
     }
 
     public void drawWall(int xPosition, int yPosition, int colorNum) {
-        write("0", xPosition, yPosition, groundColor[colorNum % groundColor.length], RoguePanel.black);
+        write("0",xPosition,yPosition,groundColor[colorNum%groundColor.length],RoguePanel.black);
     }
 
     /**
