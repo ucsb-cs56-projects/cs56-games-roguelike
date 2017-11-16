@@ -5,18 +5,18 @@ public class Wall implements GamePiece {
     private char icon = '0';
 
     public String getTypeOfPiece() {
-        return this.typeOfPiece;
+	return this.typeOfPiece;
     }
 
     public void setTypeOfPiece(String newTypeOfPiece) {
-        this.typeOfPiece = newTypeOfPiece;
+	this.typeOfPiece = newTypeOfPiece;
     }
 
     public char getIcon() {
-        return this.icon;
+	return this.icon;
     }
 
     public void setIcon(char NewIcon) {
-        this.icon = NewIcon;
+	this.icon = NewIcon;
     }
 }
