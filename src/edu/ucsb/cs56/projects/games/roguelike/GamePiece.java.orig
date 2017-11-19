@@ -7,19 +7,19 @@ package edu.ucsb.cs56.projects.games.roguelike;
  *@version cs56 s13
  */
 
-public interface GamePiece {
-
+public interface GamePiece {    
+    
     /**
      * This is the getter to figure out what piece icon it is.
      * @return the icon of this game piece
      */
     public char getIcon();
-
+    
     /**
      *This is the setter for the Icon it will be
      *@param NewIcon is the icon of piece that will be in the game
      */
-    public void setIcon(char NewIcon);
-
-
+    public void setIcon(char NewIcon);    
+    
+    
 }
