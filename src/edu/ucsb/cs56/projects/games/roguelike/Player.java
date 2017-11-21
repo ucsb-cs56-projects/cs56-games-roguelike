@@ -17,6 +17,7 @@ public class Player implements GamePiece {
     private int score;
     private String typeOfPiece;
     private char icon;
+	private int sight;
     final static public int MAXHP = 100;
 
     /**
@@ -29,7 +30,12 @@ public class Player implements GamePiece {
         this.score = 0;
         this.setTypeOfPiece("player");
         this.setIcon('@');
+		this.sight = 4;
     }
+	
+	public int getSight(){
+		return this.sight;
+	}
 
     /**
      * @return the player's hitPoints
