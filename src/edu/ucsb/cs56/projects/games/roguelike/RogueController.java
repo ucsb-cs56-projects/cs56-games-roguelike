@@ -234,22 +234,130 @@ public class RogueController extends JFrame implements KeyListener {
 
         //records the current x,y, position
         discoveredArea[playerX][playerY] = 1;
-        //records all areas 2 spaces around the current position
-        for(int i = -2; i <= 2; i++) {
-            for(int j = -2; j <= 2; j++) {
-                //Ensures it will not access out of bounds array exception
-                if( ! (playerX + i < 0 ||
-                        playerX + i >= canvas.getGridWidth() - 1 ||
-                        playerY + j < 0 ||
-                        playerY + j >= canvas.getGridHeight() - 1   ) ) {
-                    //If the specified area has not been discovered (i.e. != 1)
-                    if(discoveredArea[playerX + i][playerY + j] != 1) {
-                        discoveredArea[playerX + i][playerY + j] = 1;
-                    }
-                }//if
-            }//for(j)
-        }//for(i)
+		
+		int radius = logicHandler.getPlayer().getSight();
+        
+		//checks all spaces in the players radius of sight
+        for(int i = -radius; i <= radius; i++) {
+            for(int j = -radius; j <= radius; j++) {
+				
+				int targetX = playerX + i;
+				int targetY = playerY + j;
+				
+				//check if there is a wall between the player's coordinates and the target coordinates
+				if (isObstacle(playerX, playerY, targetX, targetY)){
+					discoveredArea[targetX][targetY] = 1;
+				}
+            }
+        }	
+		
+		
     }
+
+	/**
+		returns the slope of the line between the specified coordinates
+		will return NEGATIVE_INFINITY or POSITIVE_INFINITY for vertical lines
+	*/
+	private double findSlope(int xi, int yi, int xf, int yf){
+		//the edge cases for vertical lines
+		if(xf-xi == 0){
+
+			if(yf-yi < 0){
+				return Double.NEGATIVE_INFINITY;
+			}
+			else {
+				return Double.POSITIVE_INFINITY;
+			}
+		}
+		
+		return (double)(yf-yi) / (xf - xi);
+	}
+	
+	/**
+		returns true if a coordinate is out of bounds
+	*/
+	private boolean outOfBounds(int x, int y){
+		return x<0 || x>=discoveredArea.length || y<0 || y>=discoveredArea[0].length;	
+	}
+	
+	/**
+		find the distance between two points
+	*/
+	private int distance(int x1, int y1, int x2, int y2){
+		return (int)(Math.sqrt(Math.pow(x1-x2, 2) + Math.pow(y1-y2, 2)));
+	}
+	
+	/**
+		returns true if there is a wall between the two pairs of coordinates
+	*/
+	public boolean isObstacle(int currentX, int currentY, int targetX, int targetY){
+		double slope = findSlope(currentX, currentY, targetX, targetY);
+		return isObstacle(currentX, currentY, targetX, targetY, slope);
+	}
+
+	
+	/**
+		recursively moves from the current coordinates to the target coordinates, 
+		checking if there is a wall in the way as it goes
+	*/
+	private boolean isObstacle(int currentX, int currentY, int targetX, int targetY, double slope){
+		if( outOfBounds(currentX, currentY)) {
+			return false;
+		}
+
+		
+		int playerX = logicHandler.getPlayerPosition()[0];
+        int playerY = logicHandler.getPlayerPosition()[1];
+		
+		//has gone outside the player's radius of sight
+		int distance = distance(currentX, currentY, playerX, playerY);
+		if(distance > logicHandler.getPlayer().getSight()){
+			return false;
+		}
+		
+		//reached the target
+		if(targetX == currentX && targetY == currentY){	
+			return true; 
+		}
+		
+		//if it hits a wall
+		if(logicHandler.getObject(currentX, currentY) instanceof Wall){
+			return false;
+		}
+		
+
+		
+		//if not reached the target or hit a wall, keep moving
+		
+		//calculate what to change the x coordinate by
+		int xChange=0;
+		if(targetX < currentX){
+			xChange = -1;
+		}
+		else if (targetX > currentX) {
+			xChange = 1;
+		}
+		
+		//calculatewhat to change the y coordinate by
+		int yChange=0;
+//		slope = findSlope(currentX, currentY, targetX, targetY);
+		if(Double.isInfinite(slope)){
+			if(Double.compare(slope, 0) < 0) 
+				yChange = -1;
+			else 
+				yChange = 1;	
+		}
+		else
+			yChange = (int)(slope * (currentX+xChange - playerX));
+		
+		//normalizing the change in y
+		if(yChange > 1)
+			yChange = 1;
+		if(yChange < -1)
+			yChange = -1;
+		
+		return isObstacle(currentX+xChange, currentY+yChange,targetX, targetY , slope);
+	}
 
     /**
          * Checks to see if player is dead, and store score into txt file for HighScores
