@@ -385,8 +385,8 @@ public class LogicEngine {
         for(int i = 0; i < 6; i++) {
             w = (int)(Math.random() * (floorWidth / 3))+5;
             h = (int)(Math.random() * (floorHeight / 3))+5;
-            x = (int)(Math.random() * floorWidth- w - 1) + 1;
-            y = (int)(Math.random() * floorHeight - h - 1) + 1;
+            x = (int)(Math.random() * (floorWidth * .95));
+            y = (int)(Math.random() * (floorHeight * .95));
 
             Room newRoom = new Room(x, y, w, h);
 
