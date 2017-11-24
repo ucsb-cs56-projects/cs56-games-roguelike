@@ -16,7 +16,7 @@ public class Room {
     public int centerY;
 
     // Constructor for creating new rooms
-    public Room(int x, int y, int w, int h, GamePiece[][] floor) {
+    public Room(int x, int y, int w, int h) {
         this.x1 = x;
         this.x2 = x + w;
         this.y1 = y;
@@ -25,13 +25,19 @@ public class Room {
         this.h = h;
         this.centerX = (int)((x1+x2)/2);
         this.centerY = (int)((y1+y2)/2);
-        for(int col = x1; col <= x2; col++) {
-            for(int row = y1; row <= y2; row++) {
-                if(col == x1 || col == x2 || row == y1 || row == y2) {
-                floor[col][row] = new Wall();
-                }
-            }
-        }
+    }
+
+    public int getX1() {
+      return x1;
+    }
+    public int getX2() {
+      return x2;
+    }
+    public int getY1() {
+      return y1;
+    }
+    public int getY2() {
+      return y2;
     }
 
     // return true if this room intersects with provided Room

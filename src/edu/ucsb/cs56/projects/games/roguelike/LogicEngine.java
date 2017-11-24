@@ -1,6 +1,7 @@
 package edu.ucsb.cs56.projects.games.roguelike;
 
 import java.util.Random;
+import java.util.ArrayList;
 //import java.lang.reflect.*;
 
 /**
@@ -356,19 +357,53 @@ public class LogicEngine {
     }
 
     /**
+      Fills Room borders with walls
+    */
+    public void createRoom(Room newRoom) {
+        for(int col = newRoom.getX1(); col <= newRoom.getX2(); col++) {
+            for(int row = newRoom.getY1(); row <= newRoom.getY2(); row++) {
+                if(col == newRoom.getX1() || col == newRoom.getX2() || row == newRoom.getY1() || row == newRoom.getY2()) {
+                    floor[col][row] = new Wall();
+                }
+            }
+        }
+    }
+
+    /**
        Fills empty spaces with wall objects
     */
     public void createWalls() {
-        int x;
-        int y;
         int w;
         int h;
-        for(int i = 0; i < 4; i++) {
-            x = (int)(Math.random() * floorWidth);
-            y = (int)(Math.random() * floorHeight);
-            w = (int)(Math.random() * (floorWidth/3))+5;
-            h = (int)(Math.random() * (floorHeight/3))+5;
-            new Room(x,y,w,h,floor);
+        int x;
+        int y;
+
+        // create array for room storage for easy access
+        ArrayList<Room> rooms = new ArrayList<Room>();
+
+        // create room with randomized values
+        for(int i = 0; i < 6; i++) {
+            w = (int)(Math.random() * (floorWidth / 3))+5;
+            h = (int)(Math.random() * (floorHeight / 3))+5;
+            x = (int)(Math.random() * floorWidth- w - 1) + 1;
+            y = (int)(Math.random() * floorHeight - h - 1) + 1;
+
+            Room newRoom = new Room(x, y, w, h);
+
+            boolean failed = false;
+            for(Room otherRoom : rooms) {
+                if(newRoom.intersects(otherRoom)) {
+                   failed = true;
+                   break;
+                }
+            }
+            if (!failed) {
+                // local function to carve out new room
+                createRoom(newRoom);
+
+                // push new room into rooms array
+                rooms.add(newRoom);
+            }
         }
         /*
         // Borders
