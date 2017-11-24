@@ -359,6 +359,18 @@ public class LogicEngine {
        Fills empty spaces with wall objects
     */
     public void createWalls() {
+        int x;
+        int y;
+        int w;
+        int h;
+        for(int i = 0; i < 4; i++) {
+            x = (int)(Math.random() * floorWidth);
+            y = (int)(Math.random() * floorHeight);
+            w = (int)(Math.random() * (floorWidth/3))+5;
+            h = (int)(Math.random() * (floorHeight/3))+5;
+            new Room(x,y,w,h,floor);
+        }
+        /*
         // Borders
         for (int col = 0; col < floorWidth; col++) {
             floor[col][0] = new Wall();
@@ -486,7 +498,7 @@ public class LogicEngine {
                 floor[col][row] = new Wall();
             }
         }
-
+        */
     }
 
     /**
