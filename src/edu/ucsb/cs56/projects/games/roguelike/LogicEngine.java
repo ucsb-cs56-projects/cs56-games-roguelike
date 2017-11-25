@@ -422,7 +422,7 @@ public class LogicEngine {
         ArrayList<Room> rooms = new ArrayList<Room>();
 
         // create room with randomized values
-        for(int i = 0; i < 8; i++) {
+        for(int i = 0; i < 5; i++) {
             //int range = (max - min) + 1;
             //return (int)(Math.random() * range) + min;
             w = (int)(Math.random() * (floorWidth / 3))+5;
