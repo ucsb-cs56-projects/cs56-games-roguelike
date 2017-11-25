@@ -363,8 +363,10 @@ public class LogicEngine {
         for(int col = newRoom.getX1(); col <= newRoom.getX2(); col++) {
             for(int row = newRoom.getY1(); row <= newRoom.getY2(); row++) {
                 if(col == newRoom.getX1() || col == newRoom.getX2() || row == newRoom.getY1() || row == newRoom.getY2()) {
-                    System.out.println("x1: " + Integer.toString(newRoom.getX1()) + " x2: " + Integer.toString(newRoom.getX2()) + " y1: " + Integer.toString(newRoom.getY1()) + " y2: " + Integer.toString(newRoom.getY2()) + " row, col " + Integer.toString(row) + ", " + Integer.toString(col) + " maxWidth, maxHeight " + Integer.toString(floorWidth) + ", " + Integer.toString(floorHeight));
-                    floor[col][row] = new Wall();
+                    //System.out.println("x1: " + Integer.toString(newRoom.getX1()) + " x2: " + Integer.toString(newRoom.getX2()) + " y1: " + Integer.toString(newRoom.getY1()) + " y2: " + Integer.toString(newRoom.getY2()) + " row, col " + Integer.toString(row) + ", " + Integer.toString(col) + " maxWidth, maxHeight " + Integer.toString(floorWidth) + ", " + Integer.toString(floorHeight));
+                    if(col < (int)(newRoom.getWidth()/2)-1 || col > (int)(newRoom.getWidth()/2)+1 || row < (int)(newRoom.getHeight()/2)-1 || row > (int)(newRoom.getHeight()/2)+1) {
+                        floor[col][row] = new Wall();
+                    }
                 }
             }
         }
@@ -466,7 +468,7 @@ public class LogicEngine {
             }
         }
 
-        /*
+
         // Borders
         for (int col = 0; col < floorWidth; col++) {
             floor[col][0] = new Wall();
@@ -477,7 +479,7 @@ public class LogicEngine {
             floor[0][row] = new Wall();
             floor[floorWidth - 2][row] = new Wall();
         }
-
+        /*
         // Horizontal strips
         for (int col = 1; col < 8; col++)
             floor[col][4] = new Wall();
