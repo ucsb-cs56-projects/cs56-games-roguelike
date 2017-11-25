@@ -453,7 +453,7 @@ public class RogueController extends JFrame implements KeyListener {
         logicHandler.setLevel(logicHandler.getLevel() + 1); //Increments level
         logicHandler.setMaxNumOfMonsters(logicHandler.getMaxNumOfMonsters() + 1); //Increases monster count
         discoveredArea = new int[ canvas.getGridWidth() ][ canvas.getGridHeight() - 1 ]; //resets exploration
-        logicHandler.createAllObjects();//creates monsters
+        logicHandler.createAllObjects();//clear board, make walls, player, and monsters
         clearAllItems();
         //logicHandler.resetPlayerPosition();//moves the player back to the starting position
         canvas.moveHeroAnimated(startx, starty, logicHandler.getPlayer().getHitPoints(), logicHandler.getPlayer().getAttack(),
