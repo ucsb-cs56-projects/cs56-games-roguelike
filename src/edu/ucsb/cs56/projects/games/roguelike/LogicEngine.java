@@ -370,6 +370,41 @@ public class LogicEngine {
         }
     }
 
+    public void hCorridor(int x1, int x2, int y) {
+        int corridorWidth = 3;
+
+        for(int col = Math.min(x1, x2); col < Math.max(x1, x2) + 1;  col++) {
+            // destory the walls to "carve" out corridor
+            for(int i = 1; i <= corridorWidth ; i++) {
+                floor[col][y+i] = null;
+            }
+
+            //add corridor walls
+            if(col != x1 && col != x2) {
+                floor[col][y] = new Wall();
+                floor[col][y + corridorWidth + 1] = new Wall();
+            }
+        }
+    }
+
+    // create vertical corridor to connect rooms
+    public void vCorridor(int y1, int y2, int x) {
+        int corridorWidth = 3;
+
+        for(int row = Math.min(y1, y2); row < Math.max(y1, y2) + 1;  row++) {
+            // destory the walls to "carve" out corridor
+            for(int i = 1; i <= corridorWidth ; i++) {
+                floor[x+i][row] = null;
+            }
+
+            //add corridor walls
+            if(row != y1 && row != y2) {
+                floor[x][row] = new Wall();
+                floor[x + corridorWidth + 1][row] = new Wall();
+            }
+        }
+    }
+
     /**
        Fills empty spaces with wall objects
     */
@@ -378,12 +413,14 @@ public class LogicEngine {
         int h;
         int x;
         int y;
+        int newCenterX;
+        int newCenterY;
 
         // create array for room storage for easy access
         ArrayList<Room> rooms = new ArrayList<Room>();
 
         // create room with randomized values
-        for(int i = 0; i < 6; i++) {
+        for(int i = 0; i < 8; i++) {
             w = (int)(Math.random() * (floorWidth / 3))+5;
             h = (int)(Math.random() * (floorHeight / 3))+5;
             x = (int)(Math.random() * (floorWidth - w - 1) + 1);
@@ -402,10 +439,31 @@ public class LogicEngine {
                 // local function to carve out new room
                 createRoom(newRoom);
 
-                // push new room into rooms array
-                rooms.add(newRoom);
+                newCenterX = newRoom.getCenterX();
+                newCenterY = newRoom.getCenterY();
+
+                if(rooms.size() != 0) {
+
+                    // store center of previous room
+                    int prevCenterX = rooms.get(rooms.size() - 1).getCenterX();
+                    int prevCenterY = rooms.get(rooms.size() - 1).getCenterY();
+
+                    // carve out corridors between rooms based on centers
+                    // randomly start with horizontal or vertical corridors
+                    if ((int)(Math.random()*2) + 1 == 1) {
+                        hCorridor(prevCenterX, newCenterX, prevCenterY);
+                        vCorridor(prevCenterY, newCenterY, newCenterX);
+                    } else {
+                        vCorridor(prevCenterY, newCenterY, prevCenterX);
+                        hCorridor(prevCenterX, newCenterX, newCenterY);
+                    }
+                }
+            }
+            if(!failed) {
+              rooms.add(newRoom);
             }
         }
+
         /*
         // Borders
         for (int col = 0; col < floorWidth; col++) {

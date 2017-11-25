@@ -28,18 +28,30 @@ public class Room {
     }
 
     public int getX1() {
-      return this.x1;
+        return this.x1;
     }
     public int getX2() {
-      return this.x2;
+        return this.x2;
     }
     public int getY1() {
-      return this.y1;
+        return this.y1;
     }
     public int getY2() {
-      return this.y2;
+        return this.y2;
     }
-
+    public int getWidth() {
+        return this.w;
+    }
+    public int getHeight() {
+        return this.h;
+    }
+    public int getCenterX() {
+        return this.centerX;
+    }
+    public int getCenterY() {
+        return this.centerY;
+    }
+    
     // return true if this room intersects with provided Room
     public boolean intersects(Room otherRoom) {
         return(this.x1 <= otherRoom.x2 && this.x2 >= otherRoom.x2 && this.y1 <= otherRoom.y2 && this.y2 >= otherRoom.y1);
