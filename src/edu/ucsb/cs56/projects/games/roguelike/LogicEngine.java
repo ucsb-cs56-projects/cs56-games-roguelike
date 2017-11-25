@@ -393,7 +393,7 @@ public class LogicEngine {
     public void vCorridor(int y1, int y2, int x) {
         int corridorWidth = 3;
 
-        for(int row = Math.min(y1, y2); row < Math.max(y1, y2) + 1;  row++) {
+        for(int row = (int)((y1 + y2)/2); row < Math.max(y1, y2) + 1;  row++) {
             // destory the walls to "carve" out corridor
             for(int i = 1; i <= corridorWidth ; i++) {
                 floor[x+i][row] = null;
