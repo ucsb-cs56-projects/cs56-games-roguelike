@@ -363,7 +363,7 @@ public class LogicEngine {
         for(int col = newRoom.getX1(); col <= newRoom.getX2(); col++) {
             for(int row = newRoom.getY1(); row <= newRoom.getY2(); row++) {
                 if(col == newRoom.getX1() || col == newRoom.getX2() || row == newRoom.getY1() || row == newRoom.getY2()) {
-                    System.out.println("x1: " + Integer.toString(newRoom.getX1()) + " x2: " + Integer.toString(newRoom.getX2()) + " y1: " + Integer.toString(newRoom.getY1()) + " y2: " + Integer.toString(newRoom.getY2()) + " row, col " + Integer.toString(row) + " " + Integer.toString(col));
+                    System.out.println("x1: " + Integer.toString(newRoom.getX1()) + " x2: " + Integer.toString(newRoom.getX2()) + " y1: " + Integer.toString(newRoom.getY1()) + " y2: " + Integer.toString(newRoom.getY2()) + " row, col " + Integer.toString(row) + ", " + Integer.toString(col) + " maxWidth, maxCol" + Integer.toString(floorWidth) + ", " + Integer.toString(floorHeight));
                     floor[col][row] = new Wall();
                 }
             }
@@ -386,8 +386,8 @@ public class LogicEngine {
         for(int i = 0; i < 6; i++) {
             w = (int)(Math.random() * (floorWidth / 3))+5;
             h = (int)(Math.random() * (floorHeight / 3))+5;
-            x = (int)(Math.random() * (floorWidth - w ) + w);
-            y = (int)(Math.random() * (floorHeight - h) + h);
+            x = (int)(Math.random() * (floorWidth - w - 1) + w);
+            y = (int)(Math.random() * (floorHeight - h - 1) + h);
 
             Room newRoom = new Room(x, y, w, h);
 
