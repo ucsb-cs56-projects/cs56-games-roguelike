@@ -360,13 +360,14 @@ public class LogicEngine {
       Fills Room borders with walls
     */
     public void createRoom(Room newRoom) {
-        /*for(int col = newRoom.getX1(); col <= newRoom.getX2(); col++) {
+        for(int col = newRoom.getX1(); col <= newRoom.getX2(); col++) {
             for(int row = newRoom.getY1(); row <= newRoom.getY2(); row++) {
                 if(col == newRoom.getX1() || col == newRoom.getX2() || row == newRoom.getY1() || row == newRoom.getY2()) {
+                    System.out.println("x1: " + Integer.toString(newRoom.getX1()) + " x2: " + Integer.toString(newRoom.getX2()) + " y1: " + Integer.toString(newRoom.getY1()) + " y2: " + Integer.toString(newRoom.getY2()) + " row, col " + Integer.toString(row) + " " + Integer.toString(col));
                     floor[col][row] = new Wall();
                 }
             }
-        }*/
+        }
     }
 
     /**
