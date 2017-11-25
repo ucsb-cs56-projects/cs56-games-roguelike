@@ -375,9 +375,9 @@ public class LogicEngine {
     public void hCorridor(int x1, int x2, int y) {
         int corridorWidth = 3;
 
-        for(int col = (int)((x1 + x2)/2); col < Math.max(x1, x2) + 1;  col++) {
+        for(int col = Math.min(x1,x2); col < Math.max(x1, x2) + 1;  col++) {
             // destory the walls to "carve" out corridor
-            for(int i = 1; i <= corridorWidth ; i++) {
+            for(int i = 0; i <= corridorWidth ; i++) {
                 floor[col][y+i] = null;
             }
 
@@ -393,9 +393,9 @@ public class LogicEngine {
     public void vCorridor(int y1, int y2, int x) {
         int corridorWidth = 3;
 
-        for(int row = (int)((y1 + y2)/2); row < Math.max(y1, y2) + 1;  row++) {
+        for(int row = Math.min(y1,y2); row < Math.max(y1, y2) + 1;  row++) {
             // destory the walls to "carve" out corridor
-            for(int i = 1; i <= corridorWidth ; i++) {
+            for(int i = 0; i <= corridorWidth ; i++) {
                 floor[x+i][row] = null;
             }
 
@@ -415,8 +415,8 @@ public class LogicEngine {
         int h;
         int x;
         int y;
-        int newCenterX;
-        int newCenterY;
+        int x1, x2, y1, y2;
+        int newCenterX, newCenterY;
 
         // create array for room storage for easy access
         ArrayList<Room> rooms = new ArrayList<Room>();
@@ -452,14 +452,32 @@ public class LogicEngine {
                     int prevCenterX = rooms.get(rooms.size() - 1).getCenterX();
                     int prevCenterY = rooms.get(rooms.size() - 1).getCenterY();
 
+                    if(prevCenterX > newCenterX) {
+                        x1 = newCenterX + (int)(newRoom.getWidth() / 2);
+                        x2 = prevCenterX - (int)(rooms.get(rooms.size() - 1).getWidth() / 2);
+                    } else {
+                        x1 = prevCenterX + (int)(rooms.get(rooms.size() - 1).getWidth() / 2);
+                        x2 = newCenterX - (int)(newRoom.getWidth() / 2);
+                    }
+
+                    if(prevCenterY > newCenterY) {
+                      y1 = newCenterY + (int)(newRoom.getHeight() / 2);
+                      y2 = prevCenterY - (int)(rooms.get(rooms.size() - 1).getHeight() / 2);
+                    } else {
+                      y1 = prevCenterY + (int)(rooms.get(rooms.size() - 1).getHeight() / 2);
+                      y2 = newCenterY - (int)(newRoom.getHeight() / 2);
+                    }
+
+
+
                     // carve out corridors between rooms based on centers
                     // randomly start with horizontal or vertical corridors
                     if ((int)(Math.random()*2) + 1 == 1) {
-                        hCorridor(prevCenterX, newCenterX, prevCenterY);
-                        vCorridor(prevCenterY, newCenterY, newCenterX);
+                        hCorridor(x1, x2, prevCenterY);
+                        vCorridor(y1, y2, newCenterX);
                     } else {
-                        vCorridor(prevCenterY, newCenterY, prevCenterX);
-                        hCorridor(prevCenterX, newCenterX, newCenterY);
+                        vCorridor(y1, y2, prevCenterX);
+                        hCorridor(x1, x2, newCenterY);
                     }
                 }
             }
