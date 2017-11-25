@@ -375,6 +375,9 @@ public class LogicEngine {
         }
     }
 
+    /**
+       create horizontal corridor to connect rooms
+    */
     public void hCorridor(int x1, int x2, int y) {
         int corridorWidth = 3;
 
@@ -392,7 +395,9 @@ public class LogicEngine {
         }
     }
 
-    // create vertical corridor to connect rooms
+    /**
+       create vertical corridor to connect rooms
+    */
     public void vCorridor(int y1, int y2, int x) {
         int corridorWidth = 3;
 
