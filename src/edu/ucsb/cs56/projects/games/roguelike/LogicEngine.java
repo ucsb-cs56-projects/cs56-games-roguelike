@@ -1,6 +1,7 @@
 package edu.ucsb.cs56.projects.games.roguelike;
 
 import java.util.Random;
+import java.util.ArrayList;
 //import java.lang.reflect.*;
 
 /**
@@ -356,9 +357,143 @@ public class LogicEngine {
     }
 
     /**
+      Fills Room borders with walls
+    */
+    public void createRoom(Room newRoom) {
+        for(int col = newRoom.getX1(); col <= newRoom.getX2(); col++) {
+            for(int row = newRoom.getY1(); row <= newRoom.getY2(); row++) {
+                if(col == newRoom.getX1() || col == newRoom.getX2() || row == newRoom.getY1() || row == newRoom.getY2()) {
+                    //System.out.println("x1: " + Integer.toString(newRoom.getX1()) + " x2: " + Integer.toString(newRoom.getX2()) + " y1: " + Integer.toString(newRoom.getY1()) + " y2: " + Integer.toString(newRoom.getY2()) + " row, col " + Integer.toString(row) + ", " + Integer.toString(col) + " maxWidth, maxHeight " + Integer.toString(floorWidth) + ", " + Integer.toString(floorHeight));
+                    if((col > newRoom.getCenterX()-2 && col < newRoom.getCenterX()+2) || (row < newRoom.getCenterY()+2 && row > newRoom.getCenterY()-2)) {
+                        floor[col][row] = null;
+                    }
+                    else {
+                        floor[col][row] = new Wall();
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+       create horizontal corridor to connect rooms
+    */
+    public void hCorridor(int x1, int x2, int y) {
+        int corridorWidth = 3;
+
+        for(int col = Math.min(x1,x2); col < Math.max(x1, x2) + 1;  col++) {
+            // destory the walls to "carve" out corridor
+            for(int i = 0; i <= corridorWidth ; i++) {
+                floor[col][y+i] = null;
+            }
+
+            //add corridor walls
+            if(col != x1 && col != x2) {
+                floor[col][y] = new Wall();
+                floor[col][y + corridorWidth + 1] = new Wall();
+            }
+        }
+    }
+
+    /**
+       create vertical corridor to connect rooms
+    */
+    public void vCorridor(int y1, int y2, int x) {
+        int corridorWidth = 3;
+
+        for(int row = Math.min(y1,y2); row < Math.max(y1, y2) + 1;  row++) {
+            // destory the walls to "carve" out corridor
+            for(int i = 0; i <= corridorWidth ; i++) {
+                floor[x+i][row] = null;
+            }
+
+            //add corridor walls
+            if(row != y1 && row != y2) {
+                floor[x][row] = new Wall();
+                floor[x + corridorWidth + 1][row] = new Wall();
+            }
+        }
+    }
+
+    /**
        Fills empty spaces with wall objects
     */
     public void createWalls() {
+        int w;
+        int h;
+        int x;
+        int y;
+        int x1, x2, y1, y2;
+        int newCenterX, newCenterY;
+
+        // create array for room storage for easy access
+        ArrayList<Room> rooms = new ArrayList<Room>();
+
+        // create room with randomized values
+        for(int i = 0; i < 5; i++) {
+            //int range = (max - min) + 1;
+            //return (int)(Math.random() * range) + min;
+            w = (int)(Math.random() * (floorWidth * (2/3)))+8;
+            h = (int)(Math.random() * (floorHeight * (2/3)))+8;
+            x = (int)(Math.random() * (floorWidth - w - 1) + 1);
+            y = (int)(Math.random() * (floorHeight - h - 1) + 1);
+
+            Room newRoom = new Room(x, y, w, h);
+
+            boolean failed = false;
+            for(Room otherRoom : rooms) {
+                if(newRoom.intersects(otherRoom)) {
+                   failed = true;
+                   break;
+                }
+            }
+            if (!failed) {
+                // local function to carve out new room
+                createRoom(newRoom);
+
+                newCenterX = newRoom.getCenterX();
+                newCenterY = newRoom.getCenterY();
+
+                if(rooms.size() != 0) {
+
+                    // store center of previous room
+                    int prevCenterX = rooms.get(rooms.size() - 1).getCenterX();
+                    int prevCenterY = rooms.get(rooms.size() - 1).getCenterY();
+
+                    if(prevCenterX > newCenterX) {
+                        x1 = newCenterX + (int)(newRoom.getWidth() / 2);
+                        x2 = prevCenterX - (int)(rooms.get(rooms.size() - 1).getWidth() / 2);
+                    } else {
+                        x1 = prevCenterX + (int)(rooms.get(rooms.size() - 1).getWidth() / 2);
+                        x2 = newCenterX - (int)(newRoom.getWidth() / 2);
+                    }
+
+                    if(prevCenterY > newCenterY) {
+                      y1 = newCenterY + (int)(newRoom.getHeight() / 2);
+                      y2 = prevCenterY - (int)(rooms.get(rooms.size() - 1).getHeight() / 2);
+                    } else {
+                      y1 = prevCenterY + (int)(rooms.get(rooms.size() - 1).getHeight() / 2);
+                      y2 = newCenterY - (int)(newRoom.getHeight() / 2);
+                    }
+
+
+
+                    // carve out corridors between rooms based on centers
+                    // randomly start with horizontal or vertical corridors
+                    if ((int)(Math.random()*2) + 1 == 1) {
+                        hCorridor(x1, x2, prevCenterY);
+                        vCorridor(y1, y2, newCenterX);
+                    } else {
+                        vCorridor(y1, y2, prevCenterX);
+                        hCorridor(x1, x2, newCenterY);
+                    }
+                }
+            }
+            if(!failed) {
+              rooms.add(newRoom);
+            }
+        }
+
         // Borders
         for (int col = 0; col < floorWidth; col++) {
             floor[col][0] = new Wall();
@@ -369,124 +504,6 @@ public class LogicEngine {
             floor[0][row] = new Wall();
             floor[floorWidth - 2][row] = new Wall();
         }
-
-        // Horizontal strips
-        for (int col = 1; col < 8; col++)
-            floor[col][4] = new Wall();
-
-        for (int col = 12; col < 26; col++)
-            floor[col][10] = new Wall();
-
-        for (int col = 12; col < 26; col++)
-            floor[col][11] = new Wall();
-
-        for (int col = 29; col < floorWidth; col++)
-            floor[col][10] = new Wall();
-
-        for (int col = 29; col < floorWidth; col++)
-            floor[col][11] = new Wall();
-
-        for (int col = 1; col < 33; col++)
-            floor[col][14] = new Wall();
-
-        for (int col = 1; col < 33; col++)
-            floor[col][15] = new Wall();
-
-        for (int col = 73; col < floorWidth; col++)
-            floor[col][16] = new Wall();
-
-        for (int col = 59; col < 66; col++)
-            floor[col][19] = new Wall();
-
-        // Vertical strips
-        for (int row = 6; row < 15; row++)
-            floor[7][row] = new Wall();
-
-        for (int row = 1; row < 5; row++)
-            floor[12][row] = new Wall();
-
-        for (int row = 1; row < 5; row++)
-            floor[13][row] = new Wall();
-
-        for (int row = 8; row < 11; row++)
-            floor[12][row] = new Wall();
-
-        for (int row = 8; row < 11; row++)
-            floor[13][row] = new Wall();
-
-        for (int row = 16; row < 18; row++)
-            floor[9][row] = new Wall();
-
-        for (int row = 19; row < floorHeight; row++)
-            floor[9][row] = new Wall();
-
-        for (int row = 18; row < floorHeight - 3; row++)
-            floor[67][row] = new Wall();
-
-        for (int row = 19; row < floorHeight; row++)
-            floor[65][row] = new Wall();
-
-        // Blocks
-        for (int col = 38; col < 43; col++) {
-            for (int row = 1; row < 5; row++) {
-                floor[col][row] = new Wall();
-            }
-        }
-
-        for (int col = 38; col < 43; col++) {
-            for (int row = 7; row < 10; row++) {
-                floor[col][row] = new Wall();
-            }
-        }
-
-        for (int col = 48; col < 57; col++) {
-            for (int row = 3; row < 8; row++) {
-                floor[col][row] = new Wall();
-            }
-        }
-
-        for (int col = 64; col < 73; col++) {
-            for (int row = 3; row < 8; row++) {
-                floor[col][row] = new Wall();
-            }
-        }
-
-        for (int col = 29; col < 55; col++) {
-            for (int row = 16; row < 18; row++) {
-                floor[col][row] = new Wall();
-            }
-        }
-
-        for (int col = 55; col < 71; col++) {
-            for (int row = 14; row < 18; row++) {
-                floor[col][row] = new Wall();
-            }
-        }
-
-        for (int col = 55; col < 60; col++) {
-            for (int row = 19; row < 21; row++) {
-                floor[col][row] = new Wall();
-            }
-        }
-
-        for (int col = 34; col < 48; col++) {
-            for (int row = 20; row < floorHeight - 2; row++) {
-                floor[col][row] = new Wall();
-            }
-        }
-
-        for (int col = 20; col < 22; col++) {
-            for (int row = 16; row < 20; row++) {
-                floor[col][row] = new Wall();
-            }
-        }
-
-        for (int col = 19; col < 33; col++) {
-            for (int row = 2; row < 4; row++) {
-                floor[col][row] = new Wall();
-            }
-        }
-
     }
 
     /**
