@@ -90,27 +90,59 @@ public class RogueController extends JFrame implements KeyListener {
 
         //Draws all items even when the player tries to move outside the boundaries
         drawAllItems();
-        if (logicHandler.attackable(x, y, origX, origY)) {
-            logicHandler.attack(x, y, origX, origY);
-            if (logicHandler.monsterIsDead(x, y)) {
-                if (logicHandler.getObject(x, y) instanceof Item) {
-                    canvas.drawItem(x, y, logicHandler.getItem(x, y));
-                } else {
-                    canvas.clear(x, y);
-                }
-            }
+		
+		boolean attacked = attackMonsters(origX, origY, x, y);
+        if (attacked) {	//if the player attacked a monster, then dont change its position
             x = origX;
             y = origY;
-        } else if (logicHandler.movable(x, y)) {
-            logicHandler.move(x, y, origX, origY);
-
-            if (logicHandler.getItemConsumed()) {
-                canvas.write("     Item Used  ", 61, 23, RoguePanel.green, RoguePanel.black);
-            }
-        }
+        } else{
+			
+			if(logicHandler.movable(x,y)){
+				logicHandler.move(x, y, origX, origY);
+			}
+			if (logicHandler.getItemConsumed()) {
+				canvas.write("     Item Used  ", 61, 23, RoguePanel.green, RoguePanel.black);
+			}
+		}
 
         canvas.moveHeroAnimated(x, y, logicHandler.getPlayer().getHitPoints(), logicHandler.getPlayer().getAttack(), logicHandler.getPlayer().getSpeed(), logicHandler.getLevel(), logicHandler.getPlayer().getScore());
     }
+	
+	
+	
+	/**
+		Attacks all monster between the player and the target
+		Returns true if a monster has been attacked
+	*/
+	private boolean attackMonsters(int playerX, int playerY, int targetX, int targetY){
+		int tempX=playerX, tempY=playerY;
+		boolean attacked=false;
+
+		while(tempX!=targetX || tempY!=targetY){
+			
+			//increment the temp positions to move closer to the target
+			tempX+= Integer.signum(targetX - tempX);
+			tempY+= Integer.signum(targetY - tempY);
+			
+			//checks every square between the player and the target
+			if(logicHandler.attackable(tempX, tempY)){
+				logicHandler.attack( tempX, tempY, playerX, playerY);
+				
+				//if the monster is killed, see if an item has been dropped
+				 if (logicHandler.monsterIsDead(tempX, tempY)) {
+					if (logicHandler.getObject(tempX, tempY) instanceof Item) {
+						canvas.drawItem(tempX, tempY, logicHandler.getItem(tempX, tempY));
+					} else {
+						canvas.clear(tempX, tempY);
+					}
+
+				 }
+				attacked = true;
+			}
+		}
+		
+		return attacked;
+	}
 
     /**
      * Handles movement of all monsters by checking if it can move there first through the logic engine
