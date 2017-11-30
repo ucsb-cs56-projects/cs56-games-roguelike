@@ -237,6 +237,10 @@ public class LogicEngine {
         else
             return false;
     }
+	
+	public boolean attackable(int monsterX, int monsterY){
+		return isGround(monsterX, monsterY) && floor[monsterX][monsterY] instanceof Monster;
+	}
 
     /**
      * x and y are the position thats being tested
