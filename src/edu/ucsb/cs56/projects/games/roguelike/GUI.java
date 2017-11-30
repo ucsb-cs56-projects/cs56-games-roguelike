@@ -8,7 +8,11 @@ import java.awt.Color;
 import java.awt.Font;
 
 /**
- * GUI - used to make the main menu interface
+ * GUI - Class used to create the menu interface. This class creates the frame and buttons and adds the actionListener events for different menu options. The Main Menu includes buttons for:
+ *       >Play
+ *       >Instructions
+ *       >View Highscores
+ *       >Quit
  * @author Derek Wang
  */
 public class GUI {
@@ -21,7 +25,7 @@ public class GUI {
     }
 
     /**
-     * This GUI class constructor makes the frame and the buttons
+     * This GUI class constructor makes the frame and the buttons for the menu screen.
      */
     public GUI() {
         final JFrame guiFrame = new JFrame("Roguelike"); // frame window title will be Roguelike
@@ -72,7 +76,7 @@ public class GUI {
     }
 
     /**
-     * Opens a new window with game instructions displayed
+     * Opens a new window with game instructions displayed.
      */
     public void openInstructionsWindow() {
         String content = String.format("The player, represented by @, begins each level by starting in the middle of the map, with all but his surrounding tiles enshrouded in darkness. The player 'discovers' the rest of the map by navigating using WASD. There will be monsters that move around in random patterns. Note that the game is turn-based in that these monsters move whenever the player moves. The player attacks by moving directly adjacent to a monster, and then pressing the arrow key that would move the player onto the same tile as the monster if it were not there. The player can be attacked by a monster when the monster does the same thing to him. When a monster dies, there is a 20%% chance of it dropping a health potion (icon H, gives 20 hp), 20%% chance of dropping beef (icon +, increases player's attack power), 5%% of dropping elixir(icon s, increases the value of speed), and 15%% chance of dropping poison (icon !, gives -20 hp). To consume an item, simply move onto it. Monsters can \"steal\" items by moving onto them, but cannot consume them. As soon as all the monsters of a level are killed, the player is automatically teleported to the next level. Reaching higher levels increases the strength of the monsters. When the player reaches 0 hp, he dies permanently.");
@@ -96,25 +100,27 @@ public class GUI {
         instrFrame.setVisible(true);
         instrFrame.setLocationRelativeTo(null);
     }
+
+    
     /*
      * This function calls a static method in the RogueController class that opens the losing screen (which contains high scores)
      */
-
     public void openHighScoresWindow() {
         RogueController.goToLosingScreen();
     }
 
     /*
-     * Starts up the game
+     * This function opens up the game window for the player to begin playing the game.
      */
-
     public void openGameWindow() {
         Sound.menuMusic.stop();
         Sound.gameMusic.loop();
         String[] args = {};
         RogueController.main(args);
     }
-
+    /**
+     * This function sets the size and color for the menu buttons
+     */
     public void setButtonCharacteristics(JButton b) {
         Dimension buttonDimension = new Dimension(250, 125); // used to set button size
         b.setPreferredSize(buttonDimension); //sets button size

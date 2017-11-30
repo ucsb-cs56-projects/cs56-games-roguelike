@@ -111,9 +111,9 @@ public class RogueController extends JFrame implements KeyListener {
 	
 	
 	/**
-		Attacks all monster between the player and the target
-		Returns true if a monster has been attacked
-	*/
+	 *	Attacks all monster between the player and the target.
+	 *	Returns true if a monster has been attacked.
+	 */
 	private boolean attackMonsters(int playerX, int playerY, int targetX, int targetY){
 		int tempX=playerX, tempY=playerY;
 		boolean attacked=false;
@@ -145,10 +145,10 @@ public class RogueController extends JFrame implements KeyListener {
 	}
 
     /**
-     * Handles movement of all monsters by checking if it can move there first through the logic engine
-     * if it can move, invoke the canvas to animate it
-     * if it can't, it checks if its because of out of bounds or a monster or a player
-     * if its a player, the monster will attack it and if its a monster it will eat it
+     * Handles movement of all monsters by checking if it can move there first through the logic engine.
+     * If it can move, invoke the canvas to animate it.
+     * If it can't, it checks if its because of out of bounds or a monster or a player.
+     * If its a player, the monster will attack it and if its a monster it will eat it.
      */
     public void moveMonster() {
         //xPos,yPos is the position the monster is going to move to
@@ -215,7 +215,7 @@ public class RogueController extends JFrame implements KeyListener {
     }
 
     /**
-     * Draws all walls using RoguePanel
+     * Draws all walls using RoguePanel.
      */
     public void drawAllWalls() {
         for (int x = 0; x < canvas.getGridWidth() - 1; x++) {
@@ -253,8 +253,8 @@ public class RogueController extends JFrame implements KeyListener {
     }
 
     /**
-           Records the areas where the player has revealed
-        */
+     * Records the areas where the player has revealed.
+     */
     public void trackDiscovery() {
 
         drawAllWalls(); //These Two Functions are called so that after the last monster is killed
@@ -287,9 +287,10 @@ public class RogueController extends JFrame implements KeyListener {
     }
 
 	/**
-		returns the slope of the line between the specified coordinates
-		will return NEGATIVE_INFINITY or POSITIVE_INFINITY for vertical lines
-	*/
+	 *  Returns the slope of the line between the specified coordinates.
+	 *  Will return NEGATIVE_INFINITY or POSITIVE_INFINITY for vertical lines.
+	 * @return slope between two (x,y) coordinate points
+	 */
 	private double findSlope(int xi, int yi, int xf, int yf){
 		//the edge cases for vertical lines
 		if(xf-xi == 0){
@@ -306,22 +307,29 @@ public class RogueController extends JFrame implements KeyListener {
 	}
 
 	/**
-		returns true if a coordinate is out of bounds
-	*/
+	 * Returns true if a coordinate is out of bounds.
+	 * @return The boolean value of whether coordinate is out of bounds.
+	 */
 	private boolean outOfBounds(int x, int y){
 		return x<0 || x>=discoveredArea.length || y<0 || y>=discoveredArea[0].length;
 	}
 
 	/**
-		find the distance between two points
-	*/
+	 * Finds the distance between two points.
+	 * @param x1 initial x coordinate point
+	 * @param y1 initial y coordinate point
+	 * @param x2 final x coordinate point
+	 * @param y2 final y coordinate point
+	 * @return A float value of the distance between two (x,y) coordinate points.
+	 */
 	private int distance(int x1, int y1, int x2, int y2){
 		return (int)(Math.sqrt(Math.pow(x1-x2, 2) + Math.pow(y1-y2, 2)));
 	}
 
 	/**
-		returns true if there is a wall between the two pairs of coordinates
-	*/
+	 * Returns true if there is a wall between the two pairs of coordinates.
+	 * @return A boolean value representing whether a wall exists between two points.
+	 */
 	public boolean isObstacle(int currentX, int currentY, int targetX, int targetY){
 		double slope = findSlope(currentX, currentY, targetX, targetY);
 		return isObstacle(currentX, currentY, targetX, targetY, slope);
@@ -329,9 +337,10 @@ public class RogueController extends JFrame implements KeyListener {
 
 
 	/**
-		recursively moves from the current coordinates to the target coordinates,
-		checking if there is a wall in the way as it goes
-	*/
+	 * Recursively moves from the current coordinates to the target coordinates,
+	 * checking if there is a wall in the way as it goes. Returns true if there is an obstacle. 
+	 * @param A boolean value indicating whether there was an obstacle in the way of desired x,y position.
+	 */
 	private boolean isObstacle(int currentX, int currentY, int targetX, int targetY, double slope){
 		if( outOfBounds(currentX, currentY)) {
 			return false;
@@ -392,9 +401,8 @@ public class RogueController extends JFrame implements KeyListener {
 	}
 
     /**
-         * Checks to see if player is dead, and store score into txt file for HighScores
-         *
-         */
+     * Checks to see if player is dead, and store score into txt file for HighScores.
+     */
     public void checkPlayerStatus() {
         int[] array = new int[5];
         int a  = 0;
@@ -466,7 +474,7 @@ public class RogueController extends JFrame implements KeyListener {
     }
 
     /**
-     * Check to see if all monsters are dead and creates more monsters!!! OMG!!
+     * Check to see if all monsters are dead and creates more monsters!!! OMG!! :)
      */
     public void checkAllMonsterStatus() {
         int gridWidth, gridHeight;
@@ -588,7 +596,9 @@ public class RogueController extends JFrame implements KeyListener {
     public void keyTyped(KeyEvent key) {
 
     }
-
+    /**
+     * Creates a new RogueController object and sets gameOver to be true, visibility to be true, and checks playerStatus.
+     */
     public static void goToLosingScreen() {
         RogueController mainControl = new RogueController();
         mainControl.setVisible(true);
@@ -597,7 +607,9 @@ public class RogueController extends JFrame implements KeyListener {
         mainControl.checkPlayerStatus();
     }
 
-
+    /**
+     * A main method included within the Rogue Controller to start the game from the main menu.
+     */
     public static void main(String[] args) {
         RogueController mainControl = new RogueController();
         mainControl.setVisible(true);
