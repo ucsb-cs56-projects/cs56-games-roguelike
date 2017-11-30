@@ -16,6 +16,7 @@ public class Item implements GamePiece {
     private boolean used;
     private String typeOfPiece = "";
     private char icon;
+    private boolean itemHasDisplayed=false;
 
     /**
      *  Creates a default item with effect value of 10 that has not been used.
@@ -119,4 +120,22 @@ public class Item implements GamePiece {
     public void UseEffect(Player p) {
         p.setScore(this.getEffect() + p.getScore());
     }
+
+    /**
+     *  Setter: This allows the computer/programmer to set boolean if item has displayed on HUD
+     *  @param b This will be the boolean to determine if item has displayed on HUD. true= displayed on HUD, false = has not displayed on HUD.
+     */
+    public void setItemHasDisplayed(boolean b) {
+        itemHasDisplayed = b;
+    }
+
+    /**
+     * Getter: Returns boolean itemHasDisplayed 
+     * @return boolean that tells user if item has displayed on HUD once 
+    */
+    boolean hasItemHUD_Displayed(){
+	return itemHasDisplayed; 
+    }
 }
+
+
