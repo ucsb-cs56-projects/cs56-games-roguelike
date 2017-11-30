@@ -101,7 +101,8 @@ public class RogueController extends JFrame implements KeyListener {
 				logicHandler.move(x, y, origX, origY);
 			}
 			if (logicHandler.getItemConsumed()) {
-				canvas.write("     Item Used  ", 61, 23, RoguePanel.green, RoguePanel.black);
+			    Sound.itemConsumedSound.play(); //Plays Item consumed noise
+			    canvas.write("     Item Used  ", 61, 23, RoguePanel.green, RoguePanel.black);
 			}
 		}
 
@@ -491,11 +492,13 @@ public class RogueController extends JFrame implements KeyListener {
         }
         //If all monsters are defeated, created new monsters and increase the level
         logicHandler.setLevel(logicHandler.getLevel() + 1); //Increments level
+	canvas.nextLevel(); // Displays to user that they are on next level
+	logicHandler.changeMusic(); //Changes the music to new level
         logicHandler.setMaxNumOfMonsters(logicHandler.getMaxNumOfMonsters() + 1); //Increases monster count
         discoveredArea = new int[ canvas.getGridWidth() ][ canvas.getGridHeight() - 1 ]; //resets exploration
         logicHandler.createAllObjects();//clear board, make walls, player, and monsters
         clearAllItems();
-        //logicHandler.resetPlayerPosition();//moves the player back to the starting position
+        logicHandler.resetPlayerPosition();//moves the player back to the starting position
         canvas.moveHeroAnimated(startx, starty, logicHandler.getPlayer().getHitPoints(), logicHandler.getPlayer().getAttack(),
                                 logicHandler.getPlayer().getSpeed(), logicHandler.getLevel(), logicHandler.getPlayer().getScore());
         this.x = startx;
@@ -567,16 +570,17 @@ public class RogueController extends JFrame implements KeyListener {
             canvas.write(key.getKeyChar(), 7, 23, RoguePanel.white, RoguePanel.black);
             moveHero();
             moveMonster();
+	   
             checkPlayerStatus();
             checkAllMonsterStatus();
-            trackDiscovery();
+	    trackDiscovery();
 
             canvas.recordShadows(discoveredArea);
         }
         if(logicHandler.getGameOver() == false)
             canvas.setInGame(true);
         else
-            canvas.setInGame(false);
+	canvas.setInGame(false);
         canvas.repaint();
     }
 
@@ -619,7 +623,8 @@ public class RogueController extends JFrame implements KeyListener {
         mainControl.logicHandler.createMonster();
 
         //Screen that shows after game is opened
-        mainControl.canvas.write("MOVE WITH W A S D. Survive the waves. Eat monsters to earn points.", 9, 12, RoguePanel.white, RoguePanel.black);
+        mainControl.canvas.write("MOVE WITH W A S D. MOVE DIAGONAL WITH Q E Z C. LINGER WITH L.", 9, 12, RoguePanel.white, RoguePanel.black);
+	mainControl.canvas.write(" Survive the waves. Eat or be eaten...",9,13, RoguePanel.red,RoguePanel.black);
 
 
 

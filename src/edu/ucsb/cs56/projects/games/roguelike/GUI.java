@@ -114,7 +114,7 @@ public class GUI {
      */
     public void openGameWindow() {
         Sound.menuMusic.stop();
-        Sound.gameMusic.loop();
+        Sound.gameMusic1.loop();
         String[] args = {};
         RogueController.main(args);
     }
