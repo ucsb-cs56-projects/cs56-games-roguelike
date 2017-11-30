@@ -101,7 +101,8 @@ public class RogueController extends JFrame implements KeyListener {
 				logicHandler.move(x, y, origX, origY);
 			}
 			if (logicHandler.getItemConsumed()) {
-				canvas.write("     Item Used  ", 61, 23, RoguePanel.green, RoguePanel.black);
+			    Sound.itemConsumedSound.play(); //Plays Item consumed noise
+			    canvas.write("     Item Used  ", 61, 23, RoguePanel.green, RoguePanel.black);
 			}
 		}
 

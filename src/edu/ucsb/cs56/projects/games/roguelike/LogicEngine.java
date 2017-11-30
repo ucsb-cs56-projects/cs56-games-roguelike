@@ -306,6 +306,7 @@ public class LogicEngine {
 
 
             listOfMonsters[x][y] = null;
+	    Sound.monsterDeathSound.play(); //Plays monsters death sound
             return true;
         }
         return false;
