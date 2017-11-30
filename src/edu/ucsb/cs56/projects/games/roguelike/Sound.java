@@ -14,7 +14,9 @@ public class Sound {
 
     private Clip clip;
 
-    public static Sound gameMusic = new Sound("./src/edu/ucsb/cs56/projects/games/roguelike/music/gameMusic.wav");
+    public static Sound gameMusic1 = new Sound("./src/edu/ucsb/cs56/projects/games/roguelike/music/gameMusic1.wav");
+    public static Sound gameMusic2 = new Sound("./src/edu/ucsb/cs56/projects/games/roguelike/music/gameMusic2.wav");
+    public static Sound gameMusic3 = new Sound("./src/edu/ucsb/cs56/projects/games/roguelike/music/gameMusic3.wav");
     public static Sound menuMusic = new Sound("./src/edu/ucsb/cs56/projects/games/roguelike/music/menuMusic.wav");
 
     public Sound (String fileName) {
