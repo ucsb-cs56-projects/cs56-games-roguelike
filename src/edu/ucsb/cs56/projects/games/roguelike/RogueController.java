@@ -3,6 +3,10 @@ import java.awt.event.*;
 import java.util.Random;
 import java.io.*;
 import javax.swing.*;
+import java.awt.Dimension;
+import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 /**
@@ -570,12 +574,10 @@ public class RogueController extends JFrame implements KeyListener {
             canvas.write(key.getKeyChar(), 7, 23, RoguePanel.white, RoguePanel.black);
             moveHero();
             moveMonster();
-	   
-            checkPlayerStatus();
             checkAllMonsterStatus();
 	    trackDiscovery();
-
             canvas.recordShadows(discoveredArea);
+	    checkPlayerStatus();
         }
         if(logicHandler.getGameOver() == false)
             canvas.setInGame(true);
@@ -605,11 +607,40 @@ public class RogueController extends JFrame implements KeyListener {
      */
     public static void goToLosingScreen() {
         RogueController mainControl = new RogueController();
+	//A button to go back to main menu
+	/*JButton mainMenuButton = new JButton("Back to Main Menu");
+	Dimension backToMainMenuDimension = new Dimension(125,125);
+	mainMenuButton.setPreferredSize(backToMainMenuDimension);
+	mainMenuButton.setBackground(Color.RED);
+	mainMenuButton.setForeground(Color.BLACK);
+	mainControl.add(mainMenuButton);*/
+	
         mainControl.setVisible(true);
         mainControl.setLocationRelativeTo(null);
         mainControl.logicHandler.setGameOver(true);
         mainControl.checkPlayerStatus();
+	MakeCloseOptionToMainMenu(mainControl);
     }
+
+   /**
+    * A method included within the Rogue Controller to force the window close button to open Main Menu
+    * @param j A Jframe object whose window close event is overided  
+    */
+    public static void MakeCloseOptionToMainMenu(JFrame j){
+	//override window close to go back to main menu instead of exiting
+	j.addWindowListener(new WindowAdapter() {
+		@Override
+		public void windowClosing(WindowEvent e) {
+		    String[] args={};
+		    GUI.main(args);
+		    //Make sure all in-game music is off and main menu music is on when exit is complete
+		    Sound.gameMusic1.stop();
+		    Sound.gameMusic2.stop();
+		    Sound.gameMusic3.stop();
+		    Sound.menuMusic.loop();
+		}
+	    });
+	}
 
     /**
      * A main method included within the Rogue Controller to start the game from the main menu.
@@ -625,6 +656,7 @@ public class RogueController extends JFrame implements KeyListener {
         //Screen that shows after game is opened
         mainControl.canvas.write("MOVE WITH W A S D. MOVE DIAGONAL WITH Q E Z C. LINGER WITH L.", 9, 12, RoguePanel.white, RoguePanel.black);
 	mainControl.canvas.write(" Survive the waves. Eat or be eaten...",9,13, RoguePanel.red,RoguePanel.black);
+	MakeCloseOptionToMainMenu(mainControl);
 
 
 
