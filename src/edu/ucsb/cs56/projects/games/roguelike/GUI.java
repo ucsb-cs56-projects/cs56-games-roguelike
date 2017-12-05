@@ -36,6 +36,7 @@ public class GUI {
         playButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 openGameWindow();
+		guiFrame.setVisible(false); //Takes away menu after game starts
             }
         });
 
@@ -43,6 +44,8 @@ public class GUI {
         setButtonCharacteristics(instrButton);
         instrButton.addActionListener(new ActionListener() { // make anonymous innerclass to call openInstructionsWindow, which does what it says
             public void actionPerformed(ActionEvent e) {
+		//Close Main Menu until close button is clicked
+		guiFrame.setVisible(false);
                 openInstructionsWindow();
             }
         });
@@ -51,6 +54,8 @@ public class GUI {
         setButtonCharacteristics(hiscoreButton);
         hiscoreButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+		//Close Main Menu until close button is clicked
+		guiFrame.setVisible(false);
                 openHighScoresWindow();
             }
         });
@@ -99,6 +104,7 @@ public class GUI {
         instrFrame.pack();
         instrFrame.setVisible(true);
         instrFrame.setLocationRelativeTo(null);
+	RogueController.MakeCloseOptionToMainMenu(instrFrame);
     }
 
     
