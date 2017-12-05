@@ -5,7 +5,7 @@ import java.util.ArrayList;
 //import java.lang.reflect.*;
 
 /**
- * LogicEngine takes care of game states
+ * The LogicEngine class updates game states.
  * @author Minh Le
  * @author Hans Marasigan and Richard Nguyen
  * @author Rick Lee
@@ -39,17 +39,16 @@ public class LogicEngine {
 
 
     /**
-     * creates the logic engine which takes care of game state, intialize with a floor that is 80 by 24
-     *
+     * Creates the logic engine which updates game state and initializes with a floor that is 80 by 24.
      */
     public LogicEngine() {
         this(80, 24);
     }
 
     /**
-     * creates the logic engine which takes care of game state
-     * @param width the width of the floor
-     * @param height the height of the floor
+     * Creates the logic engine which updates of game state. Floor is initialized with width and height parameters.
+     * @param width The width of the floor.
+     * @param height The height of the floor.
      */
     public LogicEngine(int width, int height) {
         floorWidth = width;
@@ -69,98 +68,124 @@ public class LogicEngine {
         level = 1;
         elixirStepCounter = 0;
     }
-
+    
+    /**
+     * Getter: Returns the boolean value if an item has been consumed or not.
+     * @return The current value of the boolean itemConsumed.
+     */
     public boolean getItemConsumed() {
         return itemConsumed;
     }
 
-
+    /**
+     * Setter: Sets the boolean value if an item has been consumed or not.
+     */
     public void setItemConsumed(boolean b) {
         itemConsumed = b;
     }
 
     /**
-     * setter for boolean gameOver
-     * @param a boolean to set gameOver to true or false
+     * Setter: Sets boolean value if the game is over or not.
+     * @param a Boolean to set gameOver to true or false
      */
     public void setGameOver(boolean a) {
         this.gameOver = a;
     }
 
     /**
-     * getter for boolean gameOver
-     * @return the current value of the boolean gameOver
+     * Getter: Returns boolean value if the game is voer or not.
+     * @return The current value of the boolean gameOver
      */
     public boolean getGameOver() {
         return gameOver;
     }
+    
     /**
-     * @return the list of monsters
-     *
+     * Getter: Returns the 2D array listing the monsters' positions.
+     * @return The current 2D array of monsters, listOfMonsters.
      */
     public Monster[][] getMonsters() {
         return listOfMonsters;
     }
 
     /**
+     * Getter: Returns the GamePiece object at position (x,y).
      * @param x the x position of the object
      * @param y the y position of the object
-     * @return the object at the position x and y
+     * @return The GamePiece object at the position x and y.
      */
     public GamePiece getObject(int x, int y) {
         return floor[x][y];
     }
-
+    
+    /**
+     *  Getter: Returns the 2D array with the locations for all items stored on the map.
+     * @return The 2D array of locations for items, listOfItems.
+     */
     public Item getItem(int x, int y) {
         return listOfItems[x][y];
     }
 
+    /**
+     * Getter: Returns the 2D array with the locations for all GamePieces stored on the map.
+     * @return The 2D array of GamePieces, floor.
+     */
     public GamePiece[][] getFloor() {
         return floor;
     }
 
     /**
-     * @return the player
-     *
+     * Getter: Returns the state of the current Player object.
+     * @return The current state of the Player object.
      */
     public Player getPlayer() {
         return thePlayer;
     }
 
+    /**
+     * Getter: Returns the current player position based on the player's current state.
+     * @return Current player position.
+     */
     public int[] getPlayerPosition() {
         return thePlayer.getPlayerPosition();
     }
 
     /**
-       @return the level
+       Getter: Returns the integer value of which level the player is currently at.
+       @return Current integer level in the game.
     */
     public int getLevel() {
         return level;
     }
+    
     /**
-       @param level the level to set to
+     * Setter: Sets the current level state to the specified integer value.
+     * @param level The value to set the level to.
     */
     public void setLevel(int level) {
         this.level = level;
     }
 
     /**
-       @return the max number of monsters
+       Getter: Returns the maximum number of monsters within a given level.
+       @return The max number of monsters.
     */
     public int getMaxNumOfMonsters() {
         return maxNumOfMonsters;
     }
+    
     /**
-       @param max new max number of monsters
+       Setter: Sets the maximum number of monsters that a level may have.
+       @param max The new value for max number of monsters.
     */
     public void setMaxNumOfMonsters(int max) {
         this.maxNumOfMonsters = max;
     }
 
     /**
-     * move GamePiece from (xOrig,yOrig) to (x,y)
-     * 	 x and y are the position thats being tested
-     * xOrig and yOrig are the position of the object now
+     * Moves GamePiece from (xOrig,yOrig) to (x,y). This function also tests to see if a move is possible by testing the desired position to check if it is valid. The GamePiece will remain at its original coordinates if invalid.
+     *  x and y are the position thats being tested
+     *  xOrig and yOrig are the position of the object now
      * @param x is the new x position
      * @param y is the new y position
      * @param xOrig is the x position of the object right now
@@ -196,7 +221,9 @@ public class LogicEngine {
         }
 
     }
+    
     /**
+     *This function also tests to see if an attack is possible by testing the desired position(x,y) to check if it is valid. The GamePiece will remain at its original coordinates(xOrig,yOrig) if invalid.
      * x and y are the position thats being tested
      * xOrig and yOrig are the position of the object now
      * @param x is the x position of the position being tested
@@ -228,7 +255,6 @@ public class LogicEngine {
      * @param yOrig vertical position of thing doing the checking
      * @return true if collision, false if not
      */
-
     public boolean attackable(int x, int y, int xOrig, int yOrig) {
         if (!isGround(x, y))
             return false;
@@ -245,6 +271,7 @@ public class LogicEngine {
 	}
 
     /**
+     * Determines if the player is still movable by testing whether it is alive and its desired position(x,y) is valid.
      * x and y are the position thats being tested
      * xOrig and yOrig are the position of the object now
      * @param x is the x position of the position being tested
@@ -256,18 +283,17 @@ public class LogicEngine {
     }
 
     /**
-     * Checks if variables x and y are within the map
+     * Checks if variables x and y are within the map.
      * @param x horizontal coordinate being checked
      * @param y vertical cooridnate being checked
      * @return true if in bounds, false if not
      */
-
     public boolean inBounds(int x, int y) {
         return !((x < 1 || x >= floorWidth - 1) || (y < 1 || y >= floorHeight - 1));
     }
 
     /**
-     * Checks if coordinates x and y are within bounds, and are not a wall
+     * Checks if coordinates x and y are within bounds, and are not a wall.
      * @param x horizontal coordinate being checked
      * @param y vertical coordinate being checked
      * @return true if in bounds and not wall, false otherwise
@@ -282,11 +308,11 @@ public class LogicEngine {
     }
 
     /**
-     * check if the monster at position x,y has 0 or less hp
-     * there is a chance of the monster dropping an item when it dies
-     * @param x is the x position of the position being tested
-     * @param y is the y position of the position being tested
-     * @return if monster is dead at x and y return true else false
+     * Checks if the monster at position x,y has 0 or less hp.
+     * There is a chance of the monster dropping an item when it dies
+     * @param x is the x position of the position being tested.
+     * @param y is the y position of the position being tested.
+     * @return If monster is dead at x and y return true else false.
      */
     public boolean monsterIsDead(int x, int y) {
 
@@ -314,8 +340,8 @@ public class LogicEngine {
     }
 
     /**
-     * check if the player has 0 or less hp
-     * @return if monster is dead at x and y return true else false
+     * Checks if the player has 0 or less hp.
+     * @return If monster is dead at x and y return true else false.
      */
     public boolean playerIsDead() {
         if(thePlayer.getHitPoints() <= 0) {
@@ -327,7 +353,7 @@ public class LogicEngine {
 
 
     /**
-     * update the monster list based on the objects in floor
+     * Updates the monster list based on the objects located on the floor.
      */
     public void storeMonsters() {
 
@@ -344,7 +370,7 @@ public class LogicEngine {
     }
 
     /**
-     * creates all the monsters and player in the game
+     * Creates and positions all the monsters and player in the game. Walls are also set up.
      */
     public void createAllObjects() {
 
@@ -364,7 +390,7 @@ public class LogicEngine {
     }
 
     /**
-      Fills Room borders with walls
+     * Fills Room borders with walls.
     */
     public void createRoom(Room newRoom) {
         for(int col = newRoom.getX1(); col <= newRoom.getX2(); col++) {
@@ -383,7 +409,7 @@ public class LogicEngine {
     }
 
     /**
-       create horizontal corridor to connect rooms
+     *   Creates horizontal corridor to connect rooms.
     */
     public void hCorridor(int x1, int x2, int y) {
         int corridorWidth = 3;
@@ -403,7 +429,7 @@ public class LogicEngine {
     }
 
     /**
-       create vertical corridor to connect rooms
+     *  Creates vertical corridor to connect rooms.
     */
     public void vCorridor(int y1, int y2, int x) {
         int corridorWidth = 3;
@@ -423,7 +449,7 @@ public class LogicEngine {
     }
 
     /**
-       Fills empty spaces with wall objects
+     *  Fills empty spaces with wall objects. Randomizes walls for a unique map.
     */
     public void createWalls() {
         int w;
@@ -514,7 +540,7 @@ public class LogicEngine {
     }
 
     /**
-     * creates specified item at specified location
+     * Creates specified item at specified location.
      * @param x x coordinate for new item
      * @param y y coordinate for new item
      * @param i reference to new item
@@ -524,6 +550,11 @@ public class LogicEngine {
         listOfItems[x][y] = i;
     }
 
+    /**
+     * Removes item at given (x,y) position and gives player effects of item.
+     * @param x x coordinate for item to be consumed
+     * @param y y coordinate for item to be consumed
+     */
     public void consumeItem(int x, int y) {
         listOfItems[x][y].UseEffect(thePlayer);
         listOfItems[x][y] = null;
@@ -531,14 +562,19 @@ public class LogicEngine {
         // consumed item
     }
 
+    /**
+     * Removes item at given (x,y) postion.
+     * @param x x coordinate for item to be consumed
+     * @param y y coordinate for item to be consumed
+     */
     public void deleteItem(int x, int y) {
         listOfItems[x][y] = null;
         floor[x][y] = null;
     }
+    
     /**
-     * after the level is completed, resets the player to the starting position
+     * Resets the player to the starting position. Used at the start of a new level.
      */
-
     public void resetPlayerPosition() {
         int[] resetPosition = {3, 2};
         thePlayer.setPlayerPosition(resetPosition);
@@ -569,7 +605,7 @@ public class LogicEngine {
     }
 
     /**
-     * creates monsters at random, some monsters appearing multiple times and some not appearing at all
+     * Creates monsters at random, some monsters appearing multiple times and some not appearing at all
      */
     public void createMonster() {
         Random numGenerator = new Random();

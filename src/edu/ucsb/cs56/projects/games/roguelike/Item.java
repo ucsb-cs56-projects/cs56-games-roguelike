@@ -18,35 +18,31 @@ public class Item implements GamePiece {
     private char icon;
 
     /**
-       creates a default item with effect value of 10
-       and has not been used.
-       and it is an item game piece
-       it has icon I
-    */
+     *  Creates a default item with effect value of 10 that has not been used.
+     *  This item is a Game piece that has an icon 'I'.
+     */
     public Item() {
         this.effect = 10;
         this.used = false;
         this.setTypeOfPiece("item");
         this.setIcon('I');
     }
+    
     /**
-       creates an item with an effect value of the user's choice
-       and has not been used and is an item game piece with icon I
-       @param NewEffect this will be how much the item will effect the user.
-    */
-
+     *  Creates an item with an effect value of the user's choice that has not been used and is an item game piece with icon 'I'
+     *  @param NewEffect This will be how much the item will effect the user.
+     */
     public Item(int NewEffect) {
         this.effect = NewEffect;
         this.used = false;
         this.setTypeOfPiece("item");
         this.setIcon('I');
     }
+    
     /**
-    creates an item with the default effect value of 10
-    and the computer/player decides on whether it has been used
-    and is an item game piece with icon I
-    @param CanUse tells whether the item has been used
-    */
+     *Creates an item with the default effect value of 10 where the computer/player decides on whether it has been used. This item is a GamePiece with icon 'I'.
+     *@param CanUse Tells whether the item has been used
+     */
     public Item(boolean CanUse) {
         this.used = CanUse;
         this.effect = 10;
@@ -55,63 +51,70 @@ public class Item implements GamePiece {
     }
 
     /**
-     * gets the item's effect value
-     * @return the effect of this item
-    */
+     * Getter: Gets the item's effect value.
+     * @return The effect of this item
+     */
     public int getEffect() {
         return this.effect;
     }
     /**
-       sets the item's effect value
-       @param NewEffect this is the value the computer/programmer can set
-    */
+     * Setter: Sets the item's effect value.
+     * @param NewEffect This is the value the computer/programmer can set.
+     */
     public void setEffect(int NewEffect) {
         this.effect = NewEffect;
     }
+    
     /**
-    this sets whether the item has been used or not
-    @param use this is a true or false statement that tells whether
-    the item has been used.
-    */
+     *Setter: This sets whether the item has been used or not.
+     *@param use This is a true or false statement that tells whether the item has been used.
+     */
     public void setUse(boolean use) {
         this.used = use;
     }
+    
     /**
-       this gets whether or not the item has been used
-       @return true if this item has been used, false if not
-    */
+     * Getter: This returns whether or not the item has been used.
+     * @return true If this item has been used, false if not
+     */
     public boolean getUse() {
         return this.used;
     }
+    
     /**
-    this tells what kind of piece it is
-    */
+     * Getter: This returns what kind of piece it is.
+     * @return Type of GamePiece
+     */
     public String getTypeOfPiece() {
         return this.typeOfPiece;
     }
+    
     /**
-       this allows the computer/programmer to set what type of piece this will be
-       @param newTypeOfPiece this will be the name of this piece
-    */
+     *  Setter: This allows the computer/programmer to set what type of piece this will be.
+     *  @param newTypeOfPiece This will be the name of this piece
+     */
     public void setTypeOfPiece(String newTypeOfPiece) {
         this.typeOfPiece = newTypeOfPiece;
     }
+    
     /**
-     *This is the getter to figure out what piece icon it is.
+     *Getter: Returns Game Piece icon character
+     * @return character representing GamePiece
      */
     public char getIcon() {
         return this.icon;
     }
+    
     /**
      *This is the setter for the Icon it will be
      *@param NewIcon is the icon of piece that will be in the game
      */ public void setIcon(char NewIcon) {
         this.icon = NewIcon;
     }
+    
     /**
-       this method uses the effect value in someway.
-       in this method it just adds points to the player.
-       @param p the player to be affected by the item
+     *  This method uses the effect value to affect the player in some way.
+     *  @param p the player to be affected by the item
     */
     public void UseEffect(Player p) {
         p.setScore(this.getEffect() + p.getScore());

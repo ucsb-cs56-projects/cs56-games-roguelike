@@ -12,9 +12,8 @@ import static org.junit.Assert.assertEquals;
 public class LogicEngineTest {
 
     /**
-       test to see if a player can move to a spot with a monster
-       @see LogicEngine#movable
-
+     *  Test to see if a player can move to a spot with a monster.
+     *  @see LogicEngine#movable
     */
     @Test public void testMovable() {
 
@@ -22,10 +21,10 @@ public class LogicEngineTest {
 
         assertEquals(false, engine.movable(40, 12));
     }
+    
     /**
-       test to see if a monster can move to a spot with a player
-       @see LogicEngine#movable
-
+     *  Test to see if a monster can move to a spot with a player.
+     *  @see LogicEngine#movable
     */
     @Test public void testMovable2() {
 
@@ -35,9 +34,8 @@ public class LogicEngineTest {
     }
 
     /**
-       test to see if a monster/player can move to a spot that is empty
-       @see LogicEngine#movable
-
+     *  Test to see if a monster/player can move to a spot that is empty.
+     *  @see LogicEngine#movable
     */
     @Test public void testMovable3() {
 
@@ -47,9 +45,8 @@ public class LogicEngineTest {
     }
 
     /**
-       test to see if a monster/player can move to a spot that is out of bound
-       @see LogicEngine#movable
-
+     *  Test to see if a monster/player can move to a spot that is out of bounds.
+     *  @see LogicEngine#movable
     */
     @Test public void testMovable4() {
 
@@ -58,9 +55,8 @@ public class LogicEngineTest {
         assertEquals(false, engine.movable(40, 12));
     }
     /**
-       test to see if a monster/player can move to a spot that is out of bound
-       @see LogicEngine#movable
-
+     *  Test to see if a monster/player can move to a spot that is out of bounds.
+     *  @see LogicEngine#movable
     */
     @Test public void testMovable5() {
 
@@ -69,9 +65,8 @@ public class LogicEngineTest {
         assertEquals(false, engine.movable(40, 12));
     }
     /**
-       test to see if a monster/player can move to a spot that is out of bound
-       @see LogicEngine#movable
-
+     *  Test to see if a monster/player can move to a spot that is out of bounds.
+     *  @see LogicEngine#movable
     */
     @Test public void testMovable6() {
 
@@ -80,9 +75,8 @@ public class LogicEngineTest {
         assertEquals(false, engine.movable(40, 12));
     }
     /**
-       test to see if a monster/player can move to a spot that is out of bound
-       @see LogicEngine#movable
-
+     *  Test to see if a monster/player can move to a spot that is out of bounds.
+     *  @see LogicEngine#movable
     */
     @Test public void testMovable7() {
 
@@ -92,9 +86,8 @@ public class LogicEngineTest {
     }
 
     /**
-       test for a dead player
-       @see LogicEngine#playerIsDead()
-
+     *  Test for a dead player
+     *  @see LogicEngine#playerIsDead()
     */
     @Test public void testPlayerStatus() {
 
@@ -104,9 +97,8 @@ public class LogicEngineTest {
     }
 
     /**
-       test for a player that isnt dead
-       @see LogicEngine#playerIsDead()
-
+     *  Test for a player that is not dead.
+     *  @see LogicEngine#playerIsDead()
     */
     @Test public void testPlayerStatus2() {
 
@@ -116,9 +108,8 @@ public class LogicEngineTest {
     }
 
     /**
-       test for a monster that is dead
-       @see LogicEngine#monsterIsDead
-
+     *  Test for a monster that is dead.
+     *  @see LogicEngine#monsterIsDead
     */
     @Test public void testMonsterStatus() {
 
@@ -129,9 +120,8 @@ public class LogicEngineTest {
     }
 
     /**
-       test for a monster that isnt dead
-       @see LogicEngine#monsterIsDead
-
+     *  Test for a monster that is not dead.
+     *  @see LogicEngine#monsterIsDead
     */
     @Test public void testMonsterStatus2() {
 

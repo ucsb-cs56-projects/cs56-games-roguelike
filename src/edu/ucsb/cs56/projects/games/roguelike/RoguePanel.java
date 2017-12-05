@@ -63,7 +63,7 @@ public class RoguePanel extends JPanel {
     private Color[][] oldForegroundColors;
 
     private int[][] discoveredArea;
-    private boolean inGame;//whether the player is playing the game for shadows to be drawn
+    private boolean inGame;//variable to describe whether the player is playing in the game currently. Used for shadows to be drawn
 
 
     // char [][] floor = new char [40][40];
@@ -71,44 +71,54 @@ public class RoguePanel extends JPanel {
 
 
     /**
+     * Getter: Returns 2D array of chars for map building.
      * @return the chars
      */
     public char[][] getChars() {
         return chars;
     }
+    
     /**
+     * Setter: Sets the char value within a 2D array of chars for map building.
      * @param chars the chars to set
      */
     public void setChars(char[][] chars) {
         this.chars = chars;
     }
+    
     /**
-     * @return the charHeight
+     * Getter: Returns the integer height of a character in pixels for map building.
+     * @return the integer value of charHeight
      */
     public int getCharHeight() {
         return charHeight;
     }
+    
     /**
-     * sets the height of a character. Measured in pixels.
+     * Setter: Sets the height of a character. Measured in pixels.
      * @param charHeight the charHeight to set
      */
     public void setCharHeight(int charHeight) {
         this.charHeight = charHeight;
     }
     /**
+       Getter: Returns the integer width of a character in pixels for map building.
      * @return the charWidth
      */
     public int getCharWidth() {
         return charWidth;
     }
+    
     /**
-     * sets the width of a character. Measured in pixels.
+     * Setter: Sets the width of a character. Measured in pixels.
      * @param charWidth the charWidth to set
      */
     public void setCharWidth(int charWidth) {
         this.charWidth = charWidth;
     }
+    
     /**
+     * Getter: Returns the height in characters of the map grid.
      * @return the gridHeight
      */
     public int getGridHeight() {
@@ -121,26 +131,32 @@ public class RoguePanel extends JPanel {
     public void setGridHeight(int gridHeight) {
         this.gridHeight = gridHeight;
     }
+    
     /**
+     * Getter: Returns the width in characters of the map grid.
      * @return the gridWidth
      */
     public int getGridWidth() {
         return gridWidth;
     }
+    
     /**
-     * set the width of the grid. Measured in characters.
+     * Setter: Sets the width of the grid. Measured in characters.
      * @param gridWidth the gridWidth to set
      */
     public void setGridWidth(int gridWidth) {
         this.gridWidth = gridWidth;
     }
+    
     /**
-     * @return the xcoord
+     * Getter: Returns the x coordinate of where a character is drawn.
+     * @return The x coordinate
      */
     public int getXcoord() {
         return Xcoord;
     }
-    /**Sets the X coordinate for where the character is draw, must be within the size or the frame
+    /**
+     * Setter: Sets the X coordinate for where the character is draw, must be within the size or the frame.
      * @param xcoord the xcoord to set
      */
     public void setXcoord(int xcoord) {
@@ -149,13 +165,14 @@ public class RoguePanel extends JPanel {
         Xcoord = xcoord;
     }
     /**
+     * Getter: Returns the y coordinate of where a character is drawn.
      * @return the ycoord
      */
     public int getYcoord() {
         return Ycoord;
     }
     /**
-     * Set the Y coordinate for where the character is to be drawn, must be within the size of the frame
+     * Setter: Sets the Y coordinate for where the character is to be drawn, must be within the size of the frame.
      * @param ycoord the ycoord to set
      */
     public void setYcoord(int ycoord) {
@@ -165,7 +182,7 @@ public class RoguePanel extends JPanel {
     }
 
     /**
-     * sets the coordinates of where we want to draw of character
+     * Setter: Sets the desired coordinates of where to draw the character.
      * @param x the x coordinate
      * @param y the y coordinate
      */
@@ -175,12 +192,14 @@ public class RoguePanel extends JPanel {
     }
 
     /**
+     * Getter: Returns the defaultBackgroundColor
      * @return the defaultBackgroundColor
      */
     public Color getDefaultBackgroundColor() {
         return defaultBackgroundColor;
     }
     /**
+     * Setter: Sets the default background color with an input Color object.
      * @param defaultBackgroundColor the defaultBackgroundColor to set
      */
     public void setDefaultBackgroundColor(Color defaultBackgroundColor) {
@@ -263,13 +282,16 @@ public class RoguePanel extends JPanel {
         this.oldForegroundColors = oldForegroundColors;
     }
     /**
-       @return the inGame
+     * Getter: Returns the value of whether the player is in the Game or not.
+     * @return Boolean value inGame set to true if game is still running, and false if it has ended.
     */
     public boolean getInGame() {
         return inGame;
     }
+    
     /**
-       @param b the boolean to set
+     * Setter: Sets the value of whether the player is in the Game or not.
+     * @param b Boolean value setting if game is still running, and false if it has ended.
     */
     public void setInGame(boolean b) {
         inGame = b;
@@ -638,7 +660,7 @@ public class RoguePanel extends JPanel {
     }
 
     /**
-     * display the you were hit flag
+     * Display the "You were hit" flag.
      */
     public void monsterAttack() {
         write("   You were hit", 60, 23, RoguePanel.yellow, RoguePanel.black);
@@ -647,14 +669,14 @@ public class RoguePanel extends JPanel {
     }
 
     /**
-     * display that the player has advanced to the next level
+     * Display that the player has advanced to the next level.
      */
     public void nextLevel() {
         write("NEXT LEVEL!  ", 63, 23, RoguePanel.yellow, RoguePanel.black);
     }
 
     /**
-     * displays the losing screen with player's score and HighScores
+     * Displays the losing screen with player's score and HighScores.
      */
     public void displayLosingScreen(int score, int[] array) {
         write("To play again: close this window and press play on the main menu.", 7, 10, RoguePanel.green, RoguePanel.black);
@@ -671,23 +693,35 @@ public class RoguePanel extends JPanel {
 
     }
     /**
-     * displays the winning screen
+     * Displays the winning screen
      */
     public void displayWinningScreen() {
         write("YOU WIN", 40, 12, RoguePanel.green, RoguePanel.black);
     }
 
+    /**
+     *  Draws the "empty space" as'_' in the game map.
+     * @param xPosition x coordinate to draw empty space
+     * @param yPosition y coordinate to draw empty space
+     * @param colorNum Integer value for color of ground   
+     */
     public void emptySpace(int xPosition, int yPosition, int colorNum) {
         write("_", xPosition, yPosition, groundColor[colorNum % groundColor.length], RoguePanel.black);
     }
 
+    /**
+     * Draws the "walls" as '0' in the game map.
+     * @param xPosition x coordinate to draw empty space
+     * @param yPosition y coordinate to draw empty space
+     * @param colorNum Integer value for color of ground   
+     */
     public void drawWall(int xPosition, int yPosition, int colorNum) {
         write("0", xPosition, yPosition, groundColor[colorNum % groundColor.length], RoguePanel.black);
     }
 
     /**
-       Covers the areas where the player has not discovered yet
-       @param shadow 2D array of places that the player has discovered
+     *  Covers the areas where the player has not discovered yet.
+     *  @param shadow 2D array of places that the player has discovered
     */
     public void recordShadows(int[][] shadow) {
         discoveredArea = shadow;
