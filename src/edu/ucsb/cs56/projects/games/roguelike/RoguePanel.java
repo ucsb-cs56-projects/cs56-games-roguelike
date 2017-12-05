@@ -594,7 +594,7 @@ public class RoguePanel extends JPanel {
         write("Ap:", 28, 23, RoguePanel.white, RoguePanel.black);
         write("Speed:", 34, 23, RoguePanel.white, RoguePanel.black);
         write("Level:", 43, 23, RoguePanel.white, RoguePanel.black);
-        write("Score:", 53, 23, RoguePanel.white, RoguePanel.black);
+        write("Score:", 51, 23, RoguePanel.white, RoguePanel.black);
     }
 
     /**
@@ -616,7 +616,7 @@ public class RoguePanel extends JPanel {
         write(ap + " ", 31, 23, RoguePanel.white, RoguePanel.black);
         write("" + speed + " ", 40, 23, RoguePanel.white, RoguePanel.black);
         write("" + level + " ", 49, 23, RoguePanel.white, RoguePanel.black);
-        write("" + score + " ", 59, 23, RoguePanel.white, RoguePanel.black);
+        write("" + score + " ", 57, 23, RoguePanel.white, RoguePanel.black);
     }
 
     public void drawItem(int xPosition, int yPosition, Item i) {
@@ -650,7 +650,7 @@ public class RoguePanel extends JPanel {
      * display that the player has advanced to the next level
      */
     public void nextLevel() {
-        write("NEXT LEVEL!", 60, 23, RoguePanel.yellow, RoguePanel.black);
+        write("NEXT LEVEL!  ", 63, 23, RoguePanel.yellow, RoguePanel.black);
     }
 
     /**

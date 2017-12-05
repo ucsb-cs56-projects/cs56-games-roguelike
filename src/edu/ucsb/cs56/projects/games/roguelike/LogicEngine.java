@@ -57,6 +57,7 @@ public class LogicEngine {
         floor = new GamePiece[floorWidth][floorHeight];
         listOfMonsters = new Monster[floorWidth][floorHeight];
         listOfItems = new Item[floorWidth][floorHeight];
+	thePlayer = new Player();
         createAllObjects();
         storeMonsters();
         int[] position = {40, 12};
@@ -355,7 +356,7 @@ public class LogicEngine {
 
         createWalls();
 
-        thePlayer = new Player();
+        //thePlayer = new Player();
         floor[3][2] = thePlayer; //was 40, 12
 
         //directly calls the method below that creates monsters
