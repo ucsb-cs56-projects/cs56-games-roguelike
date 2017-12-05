@@ -607,7 +607,8 @@ public class RogueController extends JFrame implements KeyListener {
         mainControl.logicHandler.createMonster();
 
         //Screen that shows after game is opened
-        mainControl.canvas.write("MOVE WITH W A S D. Survive the waves. Eat monsters to earn points.", 9, 12, RoguePanel.white, RoguePanel.black);
+        mainControl.canvas.write("MOVE WITH W A S D. MOVE DIAGONAL WITH Q E Z C. LINGER WITH L.", 9, 12, RoguePanel.white, RoguePanel.black);
+	mainControl.canvas.write(" Survive the waves. Eat or be eaten...",9,13, RoguePanel.red,RoguePanel.black);
 
 
 
