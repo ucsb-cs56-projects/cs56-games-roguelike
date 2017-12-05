@@ -642,6 +642,7 @@ public class RoguePanel extends JPanel {
      */
     public void monsterAttack() {
         write("   You were hit", 60, 23, RoguePanel.yellow, RoguePanel.black);
+	Sound.monsterHitSound.play(); // Plays hit sound when monster hit player
 
     }
 

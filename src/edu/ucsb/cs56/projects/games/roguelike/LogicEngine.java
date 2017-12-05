@@ -25,6 +25,7 @@ public class LogicEngine {
     private int level;//current level of the game
     private int elixirStepCounter;
     private boolean itemConsumed = false;
+    private int musicTrack=1; // initializes the case statement in function changeMusic()
 
     //List of one of each monsters.
     //Add to this list when adding extra monsters (Put the class name as a String type)
@@ -305,6 +306,7 @@ public class LogicEngine {
 
 
             listOfMonsters[x][y] = null;
+	    Sound.monsterDeathSound.play(); //Plays monsters death sound
             return true;
         }
         return false;
@@ -540,6 +542,29 @@ public class LogicEngine {
         int[] resetPosition = {3, 2};
         thePlayer.setPlayerPosition(resetPosition);
         floor[3][2] = thePlayer;
+    }
+    
+
+    public void changeMusic(){
+	//The Music change will start at gameMusic2.wav since gameMusic1.wav is 1st level
+	//This function loops through all 3 game music files
+	switch(musicTrack){
+	case 1:
+	    Sound.gameMusic1.stop();
+	    Sound.gameMusic2.loop();
+	    musicTrack++;
+	    break;
+	 case 2:
+	    Sound.gameMusic2.stop();
+	    Sound.gameMusic3.loop();
+	    musicTrack++;
+	    break;
+	 case 3:
+	    Sound.gameMusic3.stop();
+	    Sound.gameMusic1.loop();
+	    musicTrack=1; //loops back to top case 1
+	    break;
+	}
     }
 
     /**
