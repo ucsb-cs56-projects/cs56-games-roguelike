@@ -14,6 +14,7 @@ Project History
 ![](http://s14.postimg.org/5iewlbpyp/oie_GJB9p_Oxedgs_Z.png)
 
 ![](https://image.ibb.co/m1k9Sw/12_6_07_gameplay.pnghttps://ibb.co/i3H0Zb)
+
 (Updated Gameplay Screen as of 12/6/17)
 
 High-level Description
