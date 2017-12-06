@@ -15,7 +15,7 @@ Project History
 
 ![](https://lh5.googleusercontent.com/-KnFV8pd3O04/VPkVDthIfdI/AAAAAAAAAFU/izxmYe3mRZM/w720-h425-no/photo_name)
 
-![](https://ibb.co/i3H0Zb)
+![](https://image.ibb.co/m1k9Sw/12_6_07_gameplay.pnghttps://ibb.co/i3H0Zb)
 
 High-level Description
 ======================
