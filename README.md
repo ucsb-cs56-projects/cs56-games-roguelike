@@ -162,14 +162,16 @@ Hey new CS56 students, so most of the stuff you need to know about what the proj
 
 What features could be added include:
 * Add a level boss
-* Add music
 * Better Combat system
 * More items / improvements on current items such as effects
 
 What bugs exists include:
-* Jumping over walls with speed up
 * Game Doesn't work without CSIL connection
+* Elixer item stacks
 
 Opportunites for refactoring:
+* Wall Creation, the code is a bit messy, and could use better organization.
+* Monster Creation
+* LogicEngine and RogueController are too big and makes it hard to understand and change perhaps divide the classes into smaller ones.
 
 Any advice on working with the code, or for with legacy code in general:
