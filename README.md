@@ -175,3 +175,17 @@ Opportunites for refactoring:
 * LogicEngine and RogueController are too big and makes it hard to understand and change perhaps divide the classes into smaller ones.
 
 Any advice on working with the code, or for with legacy code in general:
+
+F17 Final Remarks(pt2)
+=======================
+Heres a few tips for the new CS56 Students working on this project:
+
+Understanding the code:
+* LogicEngine.java and RogueController.java are where the vast majority of the code is located. Unfortunately, these are also the files that need the most work done on them.
+* The code for these two files is very tightly coupled. You might need to switch back and forth between the 2 files to understand what's going on
+
+Things you could work on:
+* The code is in desperate need of refactoring. LogicEngine and RogueController practically need to be rebuilt from the ground up in order to decouple them.
+* Combat is currently lackluster. Anything to make the game more exciting to play would be a big improvement
+
+There arent too many bugs left in this code, but there are numerous improvements that can be made to the code and new features that can be added. With this in mind, good luck on this project!
