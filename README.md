@@ -13,7 +13,9 @@ Project History
 ```
 ![](http://s14.postimg.org/5iewlbpyp/oie_GJB9p_Oxedgs_Z.png)
 
-![](https://lh5.googleusercontent.com/-KnFV8pd3O04/VPkVDthIfdI/AAAAAAAAAFU/izxmYe3mRZM/w720-h425-no/photo_name)
+![](https://image.ibb.co/m1k9Sw/12_6_07_gameplay.pnghttps://ibb.co/i3H0Zb)
+
+(Updated Gameplay Screen as of 12/6/17)
 
 High-level Description
 ======================
@@ -22,11 +24,11 @@ This project currently functions where the user is a player trying to survive wa
 
 Features and Gameplay Guide
 ===========================
-This Roguelike game is a single player dungeon game. It incorporates many features outlined by the "Berlin Interpretation", a rubric for judging the similarity of a Roguelike game to the original Rogue game. Berlin Interpretation features in our game include a birds-eye-view of the map, player and monster representation by ASCII characters, random environment genration, permadeath, turn-based gameplay, grid-based map, hack'n'slash style, and exploration/discovery. Unlike the original Rogue game, this version does not have multiple rooms connected by corridors. The map of this game can be viewed as one rectangular room. 
+This Roguelike game is a single player dungeon game. It incorporates many features outlined by the "Berlin Interpretation", a rubric for judging the similarity of a Roguelike game to the original Rogue game. Berlin Interpretation features in our game include a birds-eye-view of the map, player and monster representation by ASCII characters, random environment genration, permadeath, turn-based gameplay, grid-based map, hack'n'slash style, and exploration/discovery.  
   
 The player is represented on the screen by the @ character. There are currently 7 types of monsters in the game: Bat, Golem, Monster, Pirate, Snake, Troll, and Zombie. On the screen, the monsters are represented by their intial (i.e. Bats show up as B, Golems as G, etc.). There is a pre-set maximum number of monsters in each level, and there can be multiple instances of one type of monster.  
 
-The player begins each level by starting in the middle of the map, with all but his surrounding tiles enshrouded in darkness. The player "discovers" the rest of the map by navigating using WASD. Monsters also move around in random patterns. Note that the game is turn-based in that monsters move once every time the player moves. The player attacks by moving directly adjacent to a monster, and then pressing the arrow key that would move the player onto the same tile as the monster if it were not there. The player can be attacked, and hp lowered, by a monster when the monster does the same thing to him. 
+The player begins each level by starting in the top left part of the map, with all but his surrounding tiles enshrouded in darkness. The player "discovers" the rest of the map by navigating using WASD,QEZC for diagonal movement, and L to linger in place. Monsters also move around in random patterns. Note that the game is turn-based in that monsters move once every time the player moves. The player attacks by moving directly adjacent to a monster, and then pressing the arrow key that would move the player onto the same tile as the monster if it were not there. The player can be attacked, and hp lowered, by a monster when the monster does the same thing to him. 
 
 When a monster dies, there is a 20% chance of it dropping a health potion (icon H, gives 20 hp), 20% chance of dropping beef (icon +, increases player's attack power), and 15% chance of dropping poison (icon !, gives -20 hp).To consume an item, simply move onto it. 
 
@@ -39,7 +41,7 @@ Program Internals
 =================
 
 
-RogueController.java is the MAIN class.
+RogueController.java has the MAIN class.
 
 ```RogueController``` deals with user input and calls methods accordingly. It creates two objects: ```RoguePanel``` and ```LogicEngine```
 
@@ -93,14 +95,16 @@ Monsters' increase in difficulty per level is set by ```setLevelBonus(int level)
 -Items
 ------
 
-Items have NOT been implemented into the game yet. There are some files already created : ```Beef.java``` , ```HealthPotion.java``` , ```Item.java``` , ```Poison.java```
+Items have  been implemented into the game. There are some files already created : ```Beef.java``` , ```HealthPotion.java``` , ```Item.java``` , ```Poison.java```
 
 
 
 Future Improvements
 ============
-* Add items to the game 
-* Make "rooms" and "corridors" part of the map 
+* Add more items to the game 
+* Add boss monsters
+* Add chests
+* REFACTOR Please :)
 
 
 How to run the project
@@ -146,6 +150,24 @@ We recommend first fixing the issue dealing with elixir being able to jump over 
 Have fun!
 
 -Max and Artem
+
+F17 Final Remarks
+========================
+This project is lit! I hope you enjoy all the changes that have been made so far and I hope you can take care of this little project. 
+
+* One thing I'd advise right away is to refactor the code. I'm taking the time to write the sentence again because it's important, REFACTOR THE CODE :). Specifically, the LogicEngine, RogueController, and RoguePanel classes are huge. Also, the floor could be the source of truth instead of having 3 different arrays for monsters, player, and floor.
+* Once you refactor, implementing all the cool features will be a lot easier. 
+* The things that you could include in the game are:
+      * Boss Monsters
+      * Chests
+      * Weapon System
+      * Options Menu
+      * Some story text as you go along to make the game have depth
+* The ```Roguepanel.java``` , ```LogicEngine.java```, and ```RogueController.java``` are the main pieces of code that make this game work. Understand them and please please refactor.
+
+*NOTE: Please Add JavaDoc Comments as you go, this will make it easier for the next classes to read
+*Also, if you do add story text, please make it interesting. The instructions in this game before were pretty boring so try to keep it spicy :)
+Enjoy my dudes :D
 
 
 
