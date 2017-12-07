@@ -24,16 +24,18 @@ This project currently functions where the user is a player trying to survive wa
 
 Features and Gameplay Guide
 ===========================
-This Roguelike game is a single player dungeon game. It incorporates many features outlined by the "Berlin Interpretation", a rubric for judging the similarity of a Roguelike game to the original Rogue game. Berlin Interpretation features in our game include a birds-eye-view of the map, player and monster representation by ASCII characters, random environment genration, permadeath, turn-based gameplay, grid-based map, hack'n'slash style, and exploration/discovery.  
-  
+
+This Roguelike game is a single player dungeon game. It incorporates many features outlined by the "Berlin Interpretation", a rubric for judging the similarity of a Roguelike game to the original Rogue game. Berlin Interpretation features in our game include a birds-eye-view of the map, player and monster representation by ASCII characters, random environment genration, permadeath, turn-based gameplay, grid-based map, hack'n'slash style, and exploration/discovery. Unlike the original Rogue game, this version does not have multiple rooms connected by corridors. The map of this game can be viewed as one rectangular room.
+
 The player is represented on the screen by the @ character. There are currently 7 types of monsters in the game: Bat, Golem, Monster, Pirate, Snake, Troll, and Zombie. On the screen, the monsters are represented by their intial (i.e. Bats show up as B, Golems as G, etc.). There is a pre-set maximum number of monsters in each level, and there can be multiple instances of one type of monster.  
 
-The player begins each level by starting in the top left part of the map, with all but his surrounding tiles enshrouded in darkness. The player "discovers" the rest of the map by navigating using WASD,QEZC for diagonal movement, and L to linger in place. Monsters also move around in random patterns. Note that the game is turn-based in that monsters move once every time the player moves. The player attacks by moving directly adjacent to a monster, and then pressing the arrow key that would move the player onto the same tile as the monster if it were not there. The player can be attacked, and hp lowered, by a monster when the monster does the same thing to him. 
+The player begins each level by starting in the middle of the map, with all but his surrounding tiles enshrouded in darkness. The player "discovers" the rest of the map by navigating using WASD. Monsters also move around in random patterns. Note that the game is turn-based in that monsters move once every time the player moves. The player attacks by moving directly adjacent to a monster, and then pressing the arrow key that would move the player onto the same tile as the monster if it were not there. The player can be attacked, and hp lowered, by a monster when the monster does the same thing to him.
 
-When a monster dies, there is a 20% chance of it dropping a health potion (icon H, gives 20 hp), 20% chance of dropping beef (icon +, increases player's attack power), and 15% chance of dropping poison (icon !, gives -20 hp).To consume an item, simply move onto it. 
+
+When a monster dies, there is a 20% chance of it dropping a health potion (icon H, gives 20 hp), 20% chance of dropping beef (icon +, increases player's attack power), and 15% chance of dropping poison (icon !, gives -20 hp).To consume an item, simply move onto it.
 
 As soon as all the monsters of a level are killed, the player is automatically teleported to the next level. Reaching higher levels increases the strength of the monsters. When the player reaches 0 hp, he dies permanently, and his score, along with the current highscores, will be displayed. The game can be replayed by closing the game window and performing the "ant run" command again.
-  
+
 A good strategy for killing monsters while avoiding taking damage is to take advantage of the way monsters move. Monsters move one turn at a time in the same manner as the player. The player should only spend time adjacent to the monster if he is attacking it; otherwise he risks taking unnecesary damage.
 
 
@@ -101,10 +103,14 @@ Items have  been implemented into the game. There are some files already created
 
 Future Improvements
 ============
+
+* Make "rooms" and "corridors" part of the map
+
 * Add more items to the game 
 * Add boss monsters
 * Add chests
 * REFACTOR Please :)
+
 
 
 How to run the project
@@ -137,7 +143,7 @@ Josue and Ish.
 
 F16 Final Remarks
 =======================
-This project is quite far along in terms of having an entertaining game. At this point the types of changes that you will make will be adding new features and refactoring old code. 
+This project is quite far along in terms of having an entertaining game. At this point the types of changes that you will make will be adding new features and refactoring old code.
 
 Things to add to the game
 	* More maps. We implemented a single map that is reused for each level. It would be better if there was a different map for each new level. We left our simple implementation of this initialization in the code near the bottom of Logic Engine(it's ugly) so that you could see one way to do it. A potential improvement would be to serialize maps, so that they don't have to be reinitialized with a bunch of for loops each time we change levels.
@@ -173,6 +179,40 @@ Enjoy my dudes :D
 
 Fall 16 Mentor Asssessment
 ====
-The code for this project is reasonably well designed. However, it falls into some of the usual traps made by developers using OOP for the first time in a real capacity. The biggest one is that each item and monster is its own class. For instance, the Bat (extends Monster) class is just a collection of constructor overrides. That is to say, all its functionality exists in the Monster superclass, and you can create a Bat by creating a Monster with the specific stats of the Bat. Some possible refactors are static factory methods (Monster.createBat()) or storing each Monster 'class' in a file. 
+The code for this project is reasonably well designed. However, it falls into some of the usual traps made by developers using OOP for the first time in a real capacity. The biggest one is that each item and monster is its own class. For instance, the Bat (extends Monster) class is just a collection of constructor overrides. That is to say, all its functionality exists in the Monster superclass, and you can create a Bat by creating a Monster with the specific stats of the Bat. Some possible refactors are static factory methods (Monster.createBat()) or storing each Monster 'class' in a file.
 Another is that the Player class is wholely separate from the Monster class, despite them being reasonably similar. Instead, they could be one class, and the player controls a single specific instance of this GameEntity class.
-The last major problem is that drawing the game state to the screen is fairly coupled to the actual logic of the game. These should be split so that changes to existing game logic doesn't break rendering. 
+The last major problem is that drawing the game state to the screen is fairly coupled to the actual logic of the game. These should be split so that changes to existing game logic doesn't break rendering.
+
+F17 Final Remarks
+=======================
+Hey new CS56 students, so most of the stuff you need to know about what the project is and does is listed above this remark, any new things that would be helpful are:
+* In order to edit the Map Generation, look at the code in Room.java and LogicEngine. Specifically look at createWalls, createRoom, hCorridor, vCorridor.
+
+What features could be added include:
+* Add a level boss
+* Better Combat system
+* More items / improvements on current items such as effects
+
+What bugs exists include:
+* Game Doesn't work without CSIL connection
+* Elixer item stacks
+
+Opportunites for refactoring:
+* Wall Creation, the code is a bit messy, and could use better organization.
+* Monster Creation
+* LogicEngine and RogueController are too big and makes it hard to understand and change perhaps divide the classes into smaller ones.
+
+
+F17 Final Remarks(pt2)
+=======================
+Heres a few tips for the new CS56 Students working on this project:
+
+Understanding the code:
+* LogicEngine.java and RogueController.java are where the vast majority of the code is located. Unfortunately, these are also the files that need the most work done on them.
+* The code for these two files is very tightly coupled. You might need to switch back and forth between the 2 files to understand what's going on
+
+Things you could work on:
+* The code is in desperate need of refactoring. LogicEngine and RogueController practically need to be rebuilt from the ground up in order to decouple them.
+* Combat is currently lackluster. Anything to make the game more exciting to play would be a big improvement
+
+There arent too many bugs left in this code, but there are numerous improvements that can be made to the code and new features that can be added. With this in mind, good luck on this project!

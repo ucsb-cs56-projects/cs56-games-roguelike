@@ -465,7 +465,7 @@ public class LogicEngine {
         // create room with randomized values
         for(int i = 0; i < 5; i++) {
             //int range = (max - min) + 1;
-            //return (int)(Math.random() * range) + min;
+            //(int)(Math.random() * range) + min;
             w = (int)(Math.random() * (floorWidth * (2/3)))+8;
             h = (int)(Math.random() * (floorHeight * (2/3)))+8;
             x = (int)(Math.random() * (floorWidth - w - 1) + 1);
