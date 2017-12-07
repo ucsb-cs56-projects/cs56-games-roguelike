@@ -174,7 +174,6 @@ Opportunites for refactoring:
 * Monster Creation
 * LogicEngine and RogueController are too big and makes it hard to understand and change perhaps divide the classes into smaller ones.
 
-Any advice on working with the code, or for with legacy code in general:
 
 F17 Final Remarks(pt2)
 =======================
