@@ -3,6 +3,10 @@ import java.awt.event.*;
 import java.util.Random;
 import java.io.*;
 import javax.swing.*;
+import java.awt.Dimension;
+import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 
 /**
@@ -90,33 +94,66 @@ public class RogueController extends JFrame implements KeyListener {
 
         //Draws all items even when the player tries to move outside the boundaries
         drawAllItems();
-        if (logicHandler.attackable(x, y, origX, origY)) {
-            logicHandler.attack(x, y, origX, origY);
-            if (logicHandler.monsterIsDead(x, y)) {
-                if (logicHandler.getObject(x, y) instanceof Item) {
-                    canvas.drawItem(x, y, logicHandler.getItem(x, y));
-                } else {
-                    canvas.clear(x, y);
-                }
-            }
+		
+		boolean attacked = attackMonsters(origX, origY, x, y);
+        if (attacked) {	//if the player attacked a monster, then dont change its position
             x = origX;
             y = origY;
-        } else if (logicHandler.movable(x, y)) {
-            logicHandler.move(x, y, origX, origY);
-
-            if (logicHandler.getItemConsumed()) {
-                canvas.write("     Item Used  ", 61, 23, RoguePanel.green, RoguePanel.black);
-            }
-        }
+        } else{
+			
+			if(logicHandler.movable(x,y)){
+				logicHandler.move(x, y, origX, origY);
+			}
+			if (logicHandler.getItemConsumed()) {
+			    Sound.itemConsumedSound.play(); //Plays Item consumed noise
+			    canvas.write("     Item Used  ", 61, 23, RoguePanel.green, RoguePanel.black);
+			}
+		}
 
         canvas.moveHeroAnimated(x, y, logicHandler.getPlayer().getHitPoints(), logicHandler.getPlayer().getAttack(), logicHandler.getPlayer().getSpeed(), logicHandler.getLevel(), logicHandler.getPlayer().getScore());
     }
+	
+	
+	
+	/**
+	 *	Attacks all monster between the player and the target.
+	 *	Returns true if a monster has been attacked.
+	 */
+	private boolean attackMonsters(int playerX, int playerY, int targetX, int targetY){
+		int tempX=playerX, tempY=playerY;
+		boolean attacked=false;
+
+		while(tempX!=targetX || tempY!=targetY){
+			
+			//increment the temp positions to move closer to the target
+			tempX+= Integer.signum(targetX - tempX);
+			tempY+= Integer.signum(targetY - tempY);
+			
+			//checks every square between the player and the target
+			if(logicHandler.attackable(tempX, tempY)){
+				logicHandler.attack( tempX, tempY, playerX, playerY);
+				
+				//if the monster is killed, see if an item has been dropped
+				 if (logicHandler.monsterIsDead(tempX, tempY)) {
+					if (logicHandler.getObject(tempX, tempY) instanceof Item) {
+						canvas.drawItem(tempX, tempY, logicHandler.getItem(tempX, tempY));
+					} else {
+						canvas.clear(tempX, tempY);
+					}
+
+				 }
+				attacked = true;
+			}
+		}
+		
+		return attacked;
+	}
 
     /**
-     * Handles movement of all monsters by checking if it can move there first through the logic engine
-     * if it can move, invoke the canvas to animate it
-     * if it can't, it checks if its because of out of bounds or a monster or a player
-     * if its a player, the monster will attack it and if its a monster it will eat it
+     * Handles movement of all monsters by checking if it can move there first through the logic engine.
+     * If it can move, invoke the canvas to animate it.
+     * If it can't, it checks if its because of out of bounds or a monster or a player.
+     * If its a player, the monster will attack it and if its a monster it will eat it.
      */
     public void moveMonster() {
         //xPos,yPos is the position the monster is going to move to
@@ -183,7 +220,7 @@ public class RogueController extends JFrame implements KeyListener {
     }
 
     /**
-     * Draws all walls using RoguePanel
+     * Draws all walls using RoguePanel.
      */
     public void drawAllWalls() {
         for (int x = 0; x < canvas.getGridWidth() - 1; x++) {
@@ -221,8 +258,8 @@ public class RogueController extends JFrame implements KeyListener {
     }
 
     /**
-           Records the areas where the player has revealed
-        */
+     * Records the areas where the player has revealed.
+     */
     public void trackDiscovery() {
 
         drawAllWalls(); //These Two Functions are called so that after the last monster is killed
@@ -255,9 +292,10 @@ public class RogueController extends JFrame implements KeyListener {
     }
 
 	/**
-		returns the slope of the line between the specified coordinates
-		will return NEGATIVE_INFINITY or POSITIVE_INFINITY for vertical lines
-	*/
+	 *  Returns the slope of the line between the specified coordinates.
+	 *  Will return NEGATIVE_INFINITY or POSITIVE_INFINITY for vertical lines.
+	 * @return slope between two (x,y) coordinate points
+	 */
 	private double findSlope(int xi, int yi, int xf, int yf){
 		//the edge cases for vertical lines
 		if(xf-xi == 0){
@@ -274,22 +312,29 @@ public class RogueController extends JFrame implements KeyListener {
 	}
 
 	/**
-		returns true if a coordinate is out of bounds
-	*/
+	 * Returns true if a coordinate is out of bounds.
+	 * @return The boolean value of whether coordinate is out of bounds.
+	 */
 	private boolean outOfBounds(int x, int y){
 		return x<0 || x>=discoveredArea.length || y<0 || y>=discoveredArea[0].length;
 	}
 
 	/**
-		find the distance between two points
-	*/
+	 * Finds the distance between two points.
+	 * @param x1 initial x coordinate point
+	 * @param y1 initial y coordinate point
+	 * @param x2 final x coordinate point
+	 * @param y2 final y coordinate point
+	 * @return A float value of the distance between two (x,y) coordinate points.
+	 */
 	private int distance(int x1, int y1, int x2, int y2){
 		return (int)(Math.sqrt(Math.pow(x1-x2, 2) + Math.pow(y1-y2, 2)));
 	}
 
 	/**
-		returns true if there is a wall between the two pairs of coordinates
-	*/
+	 * Returns true if there is a wall between the two pairs of coordinates.
+	 * @return A boolean value representing whether a wall exists between two points.
+	 */
 	public boolean isObstacle(int currentX, int currentY, int targetX, int targetY){
 		double slope = findSlope(currentX, currentY, targetX, targetY);
 		return isObstacle(currentX, currentY, targetX, targetY, slope);
@@ -297,9 +342,10 @@ public class RogueController extends JFrame implements KeyListener {
 
 
 	/**
-		recursively moves from the current coordinates to the target coordinates,
-		checking if there is a wall in the way as it goes
-	*/
+	 * Recursively moves from the current coordinates to the target coordinates,
+	 * checking if there is a wall in the way as it goes. Returns true if there is an obstacle. 
+	 * @param A boolean value indicating whether there was an obstacle in the way of desired x,y position.
+	 */
 	private boolean isObstacle(int currentX, int currentY, int targetX, int targetY, double slope){
 		if( outOfBounds(currentX, currentY)) {
 			return false;
@@ -360,9 +406,8 @@ public class RogueController extends JFrame implements KeyListener {
 	}
 
     /**
-         * Checks to see if player is dead, and store score into txt file for HighScores
-         *
-         */
+     * Checks to see if player is dead, and store score into txt file for HighScores.
+     */
     public void checkPlayerStatus() {
         int[] array = new int[5];
         int a  = 0;
@@ -434,7 +479,7 @@ public class RogueController extends JFrame implements KeyListener {
     }
 
     /**
-     * Check to see if all monsters are dead and creates more monsters!!! OMG!!
+     * Check to see if all monsters are dead and creates more monsters!!! OMG!! :)
      */
     public void checkAllMonsterStatus() {
         int gridWidth, gridHeight;
@@ -451,11 +496,13 @@ public class RogueController extends JFrame implements KeyListener {
         }
         //If all monsters are defeated, created new monsters and increase the level
         logicHandler.setLevel(logicHandler.getLevel() + 1); //Increments level
+	canvas.nextLevel(); // Displays to user that they are on next level
+	logicHandler.changeMusic(); //Changes the music to new level
         logicHandler.setMaxNumOfMonsters(logicHandler.getMaxNumOfMonsters() + 1); //Increases monster count
         discoveredArea = new int[ canvas.getGridWidth() ][ canvas.getGridHeight() - 1 ]; //resets exploration
         logicHandler.createAllObjects();//clear board, make walls, player, and monsters
         clearAllItems();
-        //logicHandler.resetPlayerPosition();//moves the player back to the starting position
+        logicHandler.resetPlayerPosition();//moves the player back to the starting position
         canvas.moveHeroAnimated(startx, starty, logicHandler.getPlayer().getHitPoints(), logicHandler.getPlayer().getAttack(),
                                 logicHandler.getPlayer().getSpeed(), logicHandler.getLevel(), logicHandler.getPlayer().getScore());
         this.x = startx;
@@ -527,16 +574,15 @@ public class RogueController extends JFrame implements KeyListener {
             canvas.write(key.getKeyChar(), 7, 23, RoguePanel.white, RoguePanel.black);
             moveHero();
             moveMonster();
-            checkPlayerStatus();
             checkAllMonsterStatus();
-            trackDiscovery();
-
+	    trackDiscovery();
             canvas.recordShadows(discoveredArea);
+	    checkPlayerStatus();
         }
         if(logicHandler.getGameOver() == false)
             canvas.setInGame(true);
         else
-            canvas.setInGame(false);
+	canvas.setInGame(false);
         canvas.repaint();
     }
 
@@ -556,16 +602,49 @@ public class RogueController extends JFrame implements KeyListener {
     public void keyTyped(KeyEvent key) {
 
     }
-
+    /**
+     * Creates a new RogueController object and sets gameOver to be true, visibility to be true, and checks playerStatus.
+     */
     public static void goToLosingScreen() {
         RogueController mainControl = new RogueController();
+	//A button to go back to main menu
+	/*JButton mainMenuButton = new JButton("Back to Main Menu");
+	Dimension backToMainMenuDimension = new Dimension(125,125);
+	mainMenuButton.setPreferredSize(backToMainMenuDimension);
+	mainMenuButton.setBackground(Color.RED);
+	mainMenuButton.setForeground(Color.BLACK);
+	mainControl.add(mainMenuButton);*/
+	
         mainControl.setVisible(true);
         mainControl.setLocationRelativeTo(null);
         mainControl.logicHandler.setGameOver(true);
         mainControl.checkPlayerStatus();
+	MakeCloseOptionToMainMenu(mainControl);
     }
 
+   /**
+    * A method included within the Rogue Controller to force the window close button to open Main Menu
+    * @param j A Jframe object whose window close event is overided  
+    */
+    public static void MakeCloseOptionToMainMenu(JFrame j){
+	//override window close to go back to main menu instead of exiting
+	j.addWindowListener(new WindowAdapter() {
+		@Override
+		public void windowClosing(WindowEvent e) {
+		    String[] args={};
+		    GUI.main(args);
+		    //Make sure all in-game music is off and main menu music is on when exit is complete
+		    Sound.gameMusic1.stop();
+		    Sound.gameMusic2.stop();
+		    Sound.gameMusic3.stop();
+		    Sound.menuMusic.loop();
+		}
+	    });
+	}
 
+    /**
+     * A main method included within the Rogue Controller to start the game from the main menu.
+     */
     public static void main(String[] args) {
         RogueController mainControl = new RogueController();
         mainControl.setVisible(true);
@@ -575,7 +654,9 @@ public class RogueController extends JFrame implements KeyListener {
         mainControl.logicHandler.createMonster();
 
         //Screen that shows after game is opened
-        mainControl.canvas.write("MOVE WITH W A S D. Survive the waves. Eat monsters to earn points.", 9, 12, RoguePanel.white, RoguePanel.black);
+        mainControl.canvas.write("MOVE WITH W A S D. MOVE DIAGONAL WITH Q E Z C. LINGER WITH L.", 9, 12, RoguePanel.white, RoguePanel.black);
+	mainControl.canvas.write(" Survive the waves. Eat or be eaten...",9,13, RoguePanel.red,RoguePanel.black);
+	MakeCloseOptionToMainMenu(mainControl);
 
 
 

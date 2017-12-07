@@ -27,8 +27,7 @@ public class Monster implements GamePiece {
     public static final int[] ZOMBIE = {15, 2, 15, 90};
 
     /**
-     * creates a monster with 20 hitPoints and 10 attack and  no random movement
-     *
+     * Creates a monster with 20 hitPoints and 10 attack and no random movement.
      */
     public Monster() {
         this.setHitPoints(MONSTER[0]);
@@ -40,16 +39,16 @@ public class Monster implements GamePiece {
         this.typeOfMovement = 0;
     }
     /**
-     * creates a monster with 20 hitPoints and 10 attack
-     * @param typeOfMovement whether or not the monster will move randomly or not
-     * @param typeOfMonster integer array containing monster's stats
+     * Creates a monster with 20 hitPoints and 10 attack.
+     * @param typeOfMovement whether or not the monster will move randomly or not.
+     * @param typeOfMonster integer array containing monster's stats.
      */
     public Monster(int typeOfMovement, int[] typeOfMonster) {
         this(typeOfMovement, typeOfMonster[0], typeOfMonster[1],
              typeOfMonster[2], Character.toChars(typeOfMonster[3])[0]);
     }
     /**
-     * Creates a monster with the stats passed in
+     * Creates a monster with the stats passed in.
      * @param typeOfMovement determines the monster's movement behavior
      * @param hitPoints the monster's hitPoints
      * @param attack the monster's attack
@@ -66,7 +65,7 @@ public class Monster implements GamePiece {
     }
 
     /**
-     * Static factory method for generating a monster based on an input string
+     * Static factory method for generating a monster based on an input string.
      * @param typeOfMovement determines the monster's movement behavior
      * @param monsterName a string containing the name of the monster you want to create
      */
@@ -105,20 +104,19 @@ public class Monster implements GamePiece {
 
     /**
      * @return the monster's hitPoints
-     *
      */
     public int getHitPoints() {
         return this.hitPoints;
     }
     /**
-     * sets the hitPoints of the monster
+     * Sets the hitPoints of the monster.
      * @param newHp is the new hp for the monster
      */
     public void setHitPoints(int newHp) {
         this.hitPoints = newHp;
     }
     /**
-     *sets the attack of the monster
+     *Sets the attack of the monster.
      *@param attack the attack points of the monster
      */
     public void setAttack(int attack) {
@@ -133,13 +131,14 @@ public class Monster implements GamePiece {
     }
 
     /**
-     * get the point value of the Monster
+     * Get the point value of the Monster.
      * @return the point value of this monster
      */
     public int getPointValue() {
         return this.pointValue;
 
     }
+
     /**
      * sets the pointValue of the Monster
      * @param pointValue number of points for killing the bat.
@@ -150,23 +149,25 @@ public class Monster implements GamePiece {
     }
 
     /**
-     *This is the getter to figure out what piece icon it is.
+     * This is the getter to figure out what piece icon it is.
      */
     public char getIcon() {
         return this.icon;
     }
+
     /**
-     *This is the setter for the Icon it will be
+     *This is the setter for the Icon it will be.
      *@param NewIcon is the icon of piece that will be in the game
-     */ public void setIcon(char NewIcon) {
+     */
+    public void setIcon(char NewIcon) {
         this.icon = NewIcon;
 
     }
 
     /**
-       a method that boosts stats on Monster for each level
-       i.e. the higher the level, the tougher the enemy
-       @param level the current level the player is on
+     *  A method that boosts stats on Monster for each level
+     *  i.e. the higher the level, the tougher the enemy
+     *  @param level the current level the player is on
     */
     public void setLevelBonus(int level) {
         this.hitPoints = this.hitPoints + ( (level * 5) - 5 ); //HP of monster is increased by 5 for each level
@@ -178,23 +179,27 @@ public class Monster implements GamePiece {
     }
 
     /**
-     * a method for attacking the player
+     * A method for attacking the player
      * @param mainChar the player being attacked
      */
     public void attacking(Player mainChar) {
         mainChar.setHitPoints(mainChar.getHitPoints() - this.attack);
     }
 
-
+    /**
+     * Setter: A method for setting the position of the monster
+     * @param x Desired monster x coordinate position
+     * @param y Desired monster y coordinate position
+     */
     public void setMonsterPosition(int x, int y) {
         this.position[0] = x;
         this.position[1] = y;
     }
+    
     /**
-     *  chooses what direction the monster moves in
+     * Chooses what direction the monster moves in.
      * @return a vector that represents the direction
-     */
-
+     */    
     public int[] getDirection(int[] playerPosition) {
 
         int[] vector = new int[2];

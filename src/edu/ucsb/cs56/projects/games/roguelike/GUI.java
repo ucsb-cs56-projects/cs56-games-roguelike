@@ -8,7 +8,11 @@ import java.awt.Color;
 import java.awt.Font;
 
 /**
- * GUI - used to make the main menu interface
+ * GUI - Class used to create the menu interface. This class creates the frame and buttons and adds the actionListener events for different menu options. The Main Menu includes buttons for:
+ *       >Play
+ *       >Instructions
+ *       >View Highscores
+ *       >Quit
  * @author Derek Wang
  */
 public class GUI {
@@ -21,7 +25,7 @@ public class GUI {
     }
 
     /**
-     * This GUI class constructor makes the frame and the buttons
+     * This GUI class constructor makes the frame and the buttons for the menu screen.
      */
     public GUI() {
         final JFrame guiFrame = new JFrame("Roguelike"); // frame window title will be Roguelike
@@ -32,6 +36,7 @@ public class GUI {
         playButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 openGameWindow();
+		guiFrame.setVisible(false); //Takes away menu after game starts
             }
         });
 
@@ -39,6 +44,8 @@ public class GUI {
         setButtonCharacteristics(instrButton);
         instrButton.addActionListener(new ActionListener() { // make anonymous innerclass to call openInstructionsWindow, which does what it says
             public void actionPerformed(ActionEvent e) {
+		//Close Main Menu until close button is clicked
+		guiFrame.setVisible(false);
                 openInstructionsWindow();
             }
         });
@@ -47,6 +54,8 @@ public class GUI {
         setButtonCharacteristics(hiscoreButton);
         hiscoreButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+		//Close Main Menu until close button is clicked
+		guiFrame.setVisible(false);
                 openHighScoresWindow();
             }
         });
@@ -72,16 +81,16 @@ public class GUI {
     }
 
     /**
-     * Opens a new window with game instructions displayed
+     * Opens a new window with game instructions displayed.
      */
     public void openInstructionsWindow() {
-        String content = String.format("The player, represented by @, begins each level by starting in the middle of the map, with all but his surrounding tiles enshrouded in darkness. The player 'discovers' the rest of the map by navigating using WASD. There will be monsters that move around in random patterns. Note that the game is turn-based in that these monsters move whenever the player moves. The player attacks by moving directly adjacent to a monster, and then pressing the arrow key that would move the player onto the same tile as the monster if it were not there. The player can be attacked by a monster when the monster does the same thing to him. When a monster dies, there is a 20%% chance of it dropping a health potion (icon H, gives 20 hp), 20%% chance of dropping beef (icon +, increases player's attack power), 5%% of dropping elixir(icon s, increases the value of speed), and 15%% chance of dropping poison (icon !, gives -20 hp). To consume an item, simply move onto it. Monsters can \"steal\" items by moving onto them, but cannot consume them. As soon as all the monsters of a level are killed, the player is automatically teleported to the next level. Reaching higher levels increases the strength of the monsters. When the player reaches 0 hp, he dies permanently.");
+        String content = String.format("Prepare yourself to be spooked out of existense.\n This Roguelike is like no other Roguelike.\n You are an @ symbol who has managed to find itself in the spookiest of dungeons. \nArmed with the ability to move in a desired direction, you will discover the true horrors that hide in the darkness.Muahahaha \n \nInstructions:\nUse WASD to move UP LEFT DOWN RIGHT \nUse QEZC to move UPLEFT UPRIGHT DOWNLEFT DOWNRIGHT \nUse L to shiver in fear and let a turn pass you by\n(Trust me, you\'re gonna press this button a lot muahahahha)\n \nNOTE: \n*Attack monsters by attempting to move directly on them. \n(IF THEY DON\'T KILL YOU FIRST o_O)\n \n*Monsters can steal items by moving on them. \n(OH BOY, this game is gonna make you rage!)\n\n*You will progress to next level if you can get over your fear and slay each monster in the dungeon.\n\n*Discover the darkness by exploring the dungeon on each level.\n(This isn\'t just any darkness, it\'s ADVANCED darkness!)\n\n*These monsters get more RIPPED, NASTY, and just utterly more DISGUSTING each level you progress.\n \nMonster Drops:\n-20%% [H] Health Potion(+20hp)\n-20%% [+] Beef(+Attack Power) \n-15%% [!] Poison(-20hp) \n-5%%  [S] Elixir(increases movement steps)\n");
 
-        Font font = new Font("Times New Roman", Font.PLAIN, 14);
+        Font font = new Font("Times New Roman", Font.PLAIN, 12);
 
         JTextArea instructions = new JTextArea(content, 20, 40);
         instructions.setFont(font);
-        instructions.setForeground(Color.WHITE);
+        instructions.setForeground(Color.RED);
         instructions.setBackground(Color.BLACK);
         instructions.setEditable(false);
         instructions.setLineWrap(true);
@@ -95,26 +104,29 @@ public class GUI {
         instrFrame.pack();
         instrFrame.setVisible(true);
         instrFrame.setLocationRelativeTo(null);
+	RogueController.MakeCloseOptionToMainMenu(instrFrame);
     }
+
+    
     /*
      * This function calls a static method in the RogueController class that opens the losing screen (which contains high scores)
      */
-
     public void openHighScoresWindow() {
         RogueController.goToLosingScreen();
     }
 
     /*
-     * Starts up the game
+     * This function opens up the game window for the player to begin playing the game.
      */
-
     public void openGameWindow() {
         Sound.menuMusic.stop();
-        Sound.gameMusic.loop();
+        Sound.gameMusic1.loop();
         String[] args = {};
         RogueController.main(args);
     }
-
+    /**
+     * This function sets the size and color for the menu buttons
+     */
     public void setButtonCharacteristics(JButton b) {
         Dimension buttonDimension = new Dimension(250, 125); // used to set button size
         b.setPreferredSize(buttonDimension); //sets button size

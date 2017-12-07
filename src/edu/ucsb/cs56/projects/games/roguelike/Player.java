@@ -21,7 +21,7 @@ public class Player implements GamePiece {
     final static public int MAXHP = 100;
 
     /**
-     * creates a player with 100 hitPoints, 20 attack, and 1 speed
+     * Creates a player with 100 hitPoints, 20 attack, and 1 speed.
      */
     public Player() {
         this.hitPoints = MAXHP;
@@ -32,23 +32,27 @@ public class Player implements GamePiece {
         this.setIcon('@');
 		this.sight = 4;
     }
-	
-	public int getSight(){
-		return this.sight;
-	}
+    
+    /**
+     * Getter: Returns sight of player.
+     * @return returns integer value of player sight
+     */
+    public int getSight(){
+	return this.sight;
+    }
 
     /**
+     * Getter: Returns the integer value of a player's hitpoints.
      * @return the player's hitPoints
-     *
      */
     public int getHitPoints() {
         return this.hitPoints;
     }
 
     /**
-       sets the player's speed
-       @param speed this is the new value of the player's speed, can only be from 1 to 5
-    */
+     * Setter: Sets the player's speed.
+     * @param speed This is the new value of the player's speed, can only be from 1 to 5
+     */
     public void setSpeed(int speed) {
         if(speed >= 5) {
             this.speed = 5;
@@ -59,25 +63,23 @@ public class Player implements GamePiece {
     }
 
     /**
-     * @return the player's speed
-     *
+     * @return The player's speed
      */
     public int getSpeed() {
         return this.speed;
     }
 
     /**
-     * @return the player's score
-     *
+     * @return The player's score
      */
     public int getScore() {
         return this.score;
     }
 
     /**
-    sets that player's attack
-    @param atk this is the amount of points you want to set the player with
-    */
+     *Setter: sets that player's attack
+     *@param atk this is the amount of points you want to set the player with
+     */
     public void setAttack(int atk) {
         if(atk >= 100) {
             this.attack = 100;
@@ -87,7 +89,6 @@ public class Player implements GamePiece {
 
     /**
      * @return the player's attack
-     *
      */
     public int getAttack() {
         return this.attack;
@@ -102,8 +103,8 @@ public class Player implements GamePiece {
     }
 
     /**
-     * sets the player's hitPoints
-     * @param newHp the hitPoints that is to be set
+     * Setter: Sets the player's hitPoints.
+     * @param newHp The hitPoints that is to be set
      */
     public void setHitPoints(int newHp) {
         if(newHp >= MAXHP) {
@@ -113,7 +114,7 @@ public class Player implements GamePiece {
     }
 
     /**
-     * sets the player's Score
+     * Setter: Sets the player's Score.
      * @param newScore is the score  that is to be set
      */
     public void setScore(int  newScore) {
@@ -121,8 +122,8 @@ public class Player implements GamePiece {
     }
 
     /**
-     * a method for attacking monsters and incrementing player's score
-     * @param mon the monster being attacked
+     * A method for attacking monsters and incrementing player's score.
+     * @param mon The monster being attacked
      */
     public void attacking(Monster mon) {
         if(hitPoints > 0) {
@@ -131,30 +132,34 @@ public class Player implements GamePiece {
         }
     }
 
-    /** this gets the type of piece of the object
+    /** 
+     * Getter: Returns the type of piece of the object.
+     * @return Type of GamePiece
      */
     public String getTypeOfPiece() {
         return this.typeOfPiece;
     }
+    
     /**
-       this sets the type of piece of the object
-       @param newTypeOfPiece it is the new type of piece it will be.
-    */
-
+     *  This sets the type of GamePiece of the object.
+     *  @param newTypeOfPiece Value of the new type of piece it will be.
+     */
     public void setTypeOfPiece(String newTypeOfPiece) {
         this.typeOfPiece = newTypeOfPiece;
     }
 
     /**
-     *This is the getter to figure out what piece icon it is.
+     * Getter: Returns icon character of specific of GamePiece.
+     * @return character representing icon
      */
     public char getIcon() {
         return this.icon;
     }
     /**
-     *This is the setter for the Icon it will be
-     *@param NewIcon is the icon of piece that will be in the game
-     */ public void setIcon(char NewIcon) {
+     * Setter: This is the setter for the Icon it will be.
+     * @param NewIcon Is the icon of piece that will be in the game
+     */
+    public void setIcon(char NewIcon) {
         this.icon = NewIcon;
     }
 }
