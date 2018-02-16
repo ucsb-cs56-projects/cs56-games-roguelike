@@ -11,10 +11,14 @@ import java.awt.Font;
  * GUI - Class used to create the menu interface. This class creates the frame and buttons and adds the actionListener events for different menu options. The Main Menu includes buttons for:
  *       >Play
  *       >Instructions
+ *       >Options
  *       >View Highscores
  *       >Quit
  * @author Derek Wang
  */
+
+
+//change to cardlayout?
 public class GUI {
 
     /*
@@ -50,6 +54,16 @@ public class GUI {
             }
         });
 
+	JButton optionButton = new JButton("Options");
+	setButtonCharacteristics(optionButton);
+	optionButton.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+		    guiFrame.setVisible(false);
+		    openOptionsWindow();
+		}
+	});
+		    
+
         JButton hiscoreButton = new JButton("View Highscores");
         setButtonCharacteristics(hiscoreButton);
         hiscoreButton.addActionListener(new ActionListener() {
@@ -70,11 +84,12 @@ public class GUI {
 
         guiFrame.add(playButton);
         guiFrame.add(instrButton);
+	guiFrame.add(optionButton);
         guiFrame.add(hiscoreButton);
         guiFrame.add(quitButton);
 
         guiFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        guiFrame.getContentPane().setLayout(new GridLayout(4, 1)); // grid layout with 4 vertically stacked components
+        guiFrame.getContentPane().setLayout(new GridLayout(5, 1)); // grid layout with 4 vertically stacked components
         guiFrame.pack();
         guiFrame.setLocationRelativeTo(null); // makes GUI appear in screen's center
         guiFrame.setVisible(true);
@@ -90,7 +105,7 @@ public class GUI {
 
         JTextArea instructions = new JTextArea(content, 20, 40);
         instructions.setFont(font);
-        instructions.setForeground(Color.RED);
+        instructions.setForeground(Color.CYAN);
         instructions.setBackground(Color.BLACK);
         instructions.setEditable(false);
         instructions.setLineWrap(true);
@@ -106,6 +121,14 @@ public class GUI {
         instrFrame.setLocationRelativeTo(null);
 	RogueController.MakeCloseOptionToMainMenu(instrFrame);
     }
+
+/*
+ *options window
+ *TODO: Add difficulty option
+ *TODO: Add Volume option
+ */
+public void openOptionsWindow() {
+}
 
     
     /*
