@@ -128,9 +128,11 @@ public class GUI {
  *TODO: Add difficulty option
  *TODO: Add Volume option
  */
+
+boolean mute = false;
+int difficulty = 1;
 public void openOptionsWindow() {
-    boolean mute = false;
-    int difficulty = 1;
+
     
     JTextArea optionsText = new JTextArea("Options Menu",20,40);
     
@@ -147,6 +149,7 @@ public void openOptionsWindow() {
 	muteButton.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 		    mute = !mute;
+		    muteButton.setText("Mute: " + mute);
 		}
 	});
 
@@ -157,6 +160,7 @@ public void openOptionsWindow() {
 		    difficulty++;
 		    if (difficulty > 3)
 			difficulty = 1;
+            difficultyButton.setText("Difficulty: " + difficulty);
 		}
 	});
 
