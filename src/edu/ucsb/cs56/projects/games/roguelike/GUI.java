@@ -6,6 +6,9 @@ import java.awt.GridLayout;
 import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.Font;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 
 /**
  * GUI - Class used to create the menu interface. This class creates the frame and buttons and adds the actionListener events for different menu options. The Main Menu includes buttons for:
@@ -186,8 +189,13 @@ public void openOptionsWindow() {
     /*
      * This function calls a static method in the RogueController class that opens the losing screen (which contains high scores)
      */
+    public static boolean highScoreWindow = false;
     public void openHighScoresWindow() {
+        highScoreWindow = true;
         RogueController.goToLosingScreen();
+        highScoreWindow = false;
+        //JFrame highScoreFrame = new JFrame("High Scores");
+        // display the HighScore after game is over by reading from Score.txt...
     }
 
     /*
