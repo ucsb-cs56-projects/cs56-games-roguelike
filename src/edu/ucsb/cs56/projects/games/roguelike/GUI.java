@@ -58,6 +58,7 @@ public class GUI {
 	setButtonCharacteristics(optionButton);
 	optionButton.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
+		    //Close Main Menu until close button is clicked
 		    guiFrame.setVisible(false);
 		    openOptionsWindow();
 		}
@@ -128,6 +129,47 @@ public class GUI {
  *TODO: Add Volume option
  */
 public void openOptionsWindow() {
+    boolean mute = false;
+    int difficulty = 1;
+    
+    JTextArea optionsText = new JTextArea("Options Menu",20,40);
+    
+        Font font = new Font("Times New Roman", Font.PLAIN, 12);
+        optionsText.setFont(font);
+        optionsText.setForeground(Color.CYAN);
+        optionsText.setBackground(Color.BLACK);
+        optionsText.setEditable(false);
+        optionsText.setLineWrap(true);
+        optionsText.setWrapStyleWord(true);
+
+	JButton muteButton = new JButton("Mute: " + mute);
+	setButtonCharacteristics(muteButton);
+	muteButton.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+		    mute = !mute;
+		}
+	});
+
+	JButton difficultyButton = new JButton("Difficulty: " + difficulty);
+	setButtonCharacteristics(difficultyButton);
+	difficultyButton.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+		    difficulty++;
+		    if (difficulty > 3)
+			difficulty = 1;
+		}
+	});
+
+
+	JFrame optionsFrame = new JFrame("Options");
+	optionsFrame.add(optionsText);
+	optionsFrame.add(muteButton);
+	optionsFrame.add(difficultyButton);
+	optionsFrame.pack();
+	optionsFrame.setVisible(true);
+	optionsFrame.getContentPane().setLayout(new GridLayout(3, 1));
+        optionsFrame.setLocationRelativeTo(null);
+	RogueController.MakeCloseOptionToMainMenu(optionsFrame);
 }
 
     
