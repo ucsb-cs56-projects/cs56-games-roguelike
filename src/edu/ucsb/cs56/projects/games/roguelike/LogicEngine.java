@@ -34,7 +34,7 @@ public class LogicEngine {
     {"Monster", "Troll", "Golem", "Bat", "Snake", "Zombie", "Pirate"};
 
     //How many monsters on the board when creating them
-    //the difficulty settings in the options menus changes this number
+    //the difficultyLevel settings in the options menus changes this number
     private int maxNumOfMonsters;
 
 
@@ -66,12 +66,15 @@ public class LogicEngine {
         gameOver = false;
 
         //The -1 is to remove the initial monster creation incrementation
-        if (GUI.difficulty == 1)
+        /*
+        if (GUI.difficultyLevel == 1)
             maxNumOfMonsters = 7;
-        if (GUI.difficulty == 2)
+        if (GUI.difficultyLevel == 2)
             maxNumOfMonsters = 10;
-        if (GUI.difficulty == 3)
-            maxNumOfMonsters = 13;
+        if (GUI.difficultyLevel == 3)
+            maxNumOfMonsters = 15;
+         */
+
         level = 1;
         elixirStepCounter = 0;
     }

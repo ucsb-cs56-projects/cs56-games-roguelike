@@ -6,9 +6,6 @@ import java.awt.GridLayout;
 import java.awt.Dimension;
 import java.awt.Color;
 import java.awt.Font;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 
 /**
  * GUI - Class used to create the menu interface. This class creates the frame and buttons and adds the actionListener events for different menu options. The Main Menu includes buttons for:
@@ -24,6 +21,7 @@ import java.io.FileReader;
 //change to cardlayout?
 public class GUI {
 
+    private int difficulty;
     /*
      * All the main does is call the no-arg constructor of the GUI class
      */
@@ -35,6 +33,10 @@ public class GUI {
      * This GUI class constructor makes the frame and the buttons for the menu screen.
      */
     public GUI() {
+
+        difficulty = 1;
+        System.out.println("Initializing difficulty to: " + difficulty);
+
         final JFrame guiFrame = new JFrame("Roguelike"); // frame window title will be Roguelike
         if (!GUI.mute)
             Sound.menuMusic.loop();
@@ -58,15 +60,15 @@ public class GUI {
             }
         });
 
-	JButton optionButton = new JButton("Options");
-	setButtonCharacteristics(optionButton);
-	optionButton.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-		    //Close Main Menu until close button is clicked
-		    guiFrame.setVisible(false);
-		    openOptionsWindow();
-		}
-	});
+        JButton optionButton = new JButton("Options");
+        setButtonCharacteristics(optionButton);
+        optionButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //Close Main Menu until close button is clicked
+                guiFrame.setVisible(false);
+                openOptionsWindow();
+            }
+        });
 		    
 
         JButton hiscoreButton = new JButton("View Highscores");
@@ -89,7 +91,7 @@ public class GUI {
 
         guiFrame.add(playButton);
         guiFrame.add(instrButton);
-	guiFrame.add(optionButton);
+	    guiFrame.add(optionButton);
         guiFrame.add(hiscoreButton);
         guiFrame.add(quitButton);
 
@@ -127,63 +129,71 @@ public class GUI {
 	RogueController.MakeCloseOptionToMainMenu(instrFrame);
     }
 
-/*
- *options window
- *TODO: Add difficulty option
- *TODO: Add Volume option
- */
+    /*
+     *options window
+     *TODO: Add difficultyLevel option
+     *TODO: Add Volume option
+     */
 
-static boolean mute = false;
-static int difficulty = 1;
-public void openOptionsWindow() {
+    static boolean mute = false;
 
-    
-    JTextArea optionsText = new JTextArea("Options Menu",20,40);
-    
-        Font font = new Font("Times New Roman", Font.PLAIN, 12);
-        optionsText.setFont(font);
-        optionsText.setForeground(Color.CYAN);
-        optionsText.setBackground(Color.BLACK);
-        optionsText.setEditable(false);
-        optionsText.setLineWrap(true);
-        optionsText.setWrapStyleWord(true);
-
-	JButton muteButton = new JButton("Mute: " + mute);
-	setButtonCharacteristics(muteButton);
-	muteButton.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-		    mute = !mute;
-		    muteButton.setText("Mute: " + mute);
-		    if (!mute)
-                Sound.menuMusic.loop();
-		    else
-		        Sound.menuMusic.stop();
-		}
-	});
-
-	//increasing the difficulty increases the max number of monsters you start with
-	JButton difficultyButton = new JButton("Difficulty: " + difficulty);
-	setButtonCharacteristics(difficultyButton);
-	difficultyButton.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-		    difficulty++;
-		    if (difficulty > 3)
-			difficulty = 1;
-            difficultyButton.setText("Difficulty: " + difficulty);
-		}
-	});
+    public void openOptionsWindow() {
 
 
-	JFrame optionsFrame = new JFrame("Options");
-	optionsFrame.add(optionsText);
-	optionsFrame.add(muteButton);
-	optionsFrame.add(difficultyButton);
-	optionsFrame.pack();
-	optionsFrame.setVisible(true);
-	optionsFrame.getContentPane().setLayout(new GridLayout(3, 1));
-        optionsFrame.setLocationRelativeTo(null);
-	RogueController.MakeCloseOptionToMainMenu(optionsFrame);
-}
+        JTextArea optionsText = new JTextArea("Options Menu",20,40);
+
+            Font font = new Font("Times New Roman", Font.PLAIN, 12);
+            optionsText.setFont(font);
+            optionsText.setForeground(Color.CYAN);
+            optionsText.setBackground(Color.BLACK);
+            optionsText.setEditable(false);
+            optionsText.setLineWrap(true);
+            optionsText.setWrapStyleWord(true);
+
+        JButton muteButton = new JButton("Mute: " + mute);
+        setButtonCharacteristics(muteButton);
+        muteButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                mute = !mute;
+                muteButton.setText("Mute: " + mute);
+                if (!mute)
+                    Sound.menuMusic.loop();
+                else
+                    Sound.menuMusic.stop();
+            }
+        });
+
+
+        System.out.println("Before pressing the button, difficulty is: " + difficulty);
+
+        //BUTTON ISNT UPDATING DIFFICULTY?
+        //increasing the difficultyLevel increases the max number of monsters you start with
+        JButton difficultyButton = new JButton("Difficulty: " + getDifficulty());
+        setButtonCharacteristics(difficultyButton);
+        difficultyButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                setDifficulty(getDifficulty() + 1);
+                if (getDifficulty() > 3)
+                    setDifficulty(1);
+                difficultyButton.setText("Difficulty: " + getDifficulty());
+
+                //System.out.println("Difficulty AFTER pressing is: " + getDifficulty());
+            }
+        });
+
+        System.out.println("AFTER pressing the button, difficulty is: " + difficulty);
+
+
+        JFrame optionsFrame = new JFrame("Options");
+        optionsFrame.add(optionsText);
+        optionsFrame.add(muteButton);
+        optionsFrame.add(difficultyButton);
+        optionsFrame.pack();
+        optionsFrame.setVisible(true);
+        optionsFrame.getContentPane().setLayout(new GridLayout(3, 1));
+            optionsFrame.setLocationRelativeTo(null);
+        RogueController.MakeCloseOptionToMainMenu(optionsFrame);
+    }
 
     
     /*
@@ -205,7 +215,10 @@ public void openOptionsWindow() {
         Sound.menuMusic.stop();
         if (!GUI.mute)
             Sound.gameMusic1.loop();
-        String[] args = {};
+
+        String diffStr = "" + getDifficulty();
+        System.out.println("The difficulty value we are finally passing into the RogueController is " + difficulty);
+        String[] args = {diffStr};
         RogueController.main(args);
     }
     /**
@@ -216,5 +229,13 @@ public void openOptionsWindow() {
         b.setPreferredSize(buttonDimension); //sets button size
         b.setBackground(Color.BLACK); // sets button background color
         b.setForeground(Color.WHITE); // sets button text color
+    }
+
+    public int getDifficulty() {
+        return this.difficulty;
+    }
+
+    public void setDifficulty(int difficultyInput) {
+        this.difficulty = difficultyInput;
     }
 }

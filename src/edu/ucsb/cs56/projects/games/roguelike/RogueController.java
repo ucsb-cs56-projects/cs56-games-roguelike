@@ -652,13 +652,22 @@ public class RogueController extends JFrame implements KeyListener {
         mainControl.setVisible(true);
         mainControl.setLocationRelativeTo(null); // center the window
 
+        //UPDATE DIFFICULTY AND MONSTERS USING VALUE PASSED INTO ARGS (from gui.java)
+        int monstersDifficultyNum = 7;
+        if(Integer.parseInt(args[0]) == 2)
+            monstersDifficultyNum = 15;
+        else if(Integer.parseInt(args[0]) == 3)
+            monstersDifficultyNum = 30;
+
+        mainControl.logicHandler.setMaxNumOfMonsters(monstersDifficultyNum);
+
         //Initially fills the map with monsters
         mainControl.logicHandler.createMonster();
 
         //Screen that shows after game is opened
         mainControl.canvas.write("MOVE WITH W A S D. MOVE DIAGONAL WITH Q E Z C. LINGER WITH L.", 9, 12, RoguePanel.white, RoguePanel.black);
-	mainControl.canvas.write(" Survive the waves. Eat or be eaten...",9,13, RoguePanel.red,RoguePanel.black);
-	MakeCloseOptionToMainMenu(mainControl);
+	    mainControl.canvas.write(" Survive the waves. Eat or be eaten...",9,13, RoguePanel.red,RoguePanel.black);
+	    MakeCloseOptionToMainMenu(mainControl);
 
 
 
