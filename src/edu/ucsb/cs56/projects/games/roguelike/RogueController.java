@@ -105,7 +105,8 @@ public class RogueController extends JFrame implements KeyListener {
 				logicHandler.move(x, y, origX, origY);
 			}
 			if (logicHandler.getItemConsumed()) {
-			    Sound.itemConsumedSound.play(); //Plays Item consumed noise
+			    if (!GUI.mute)
+			        Sound.itemConsumedSound.play(); //Plays Item consumed noise
 			    canvas.write("     Item Used  ", 61, 23, RoguePanel.green, RoguePanel.black);
 			}
 		}
@@ -637,7 +638,8 @@ public class RogueController extends JFrame implements KeyListener {
 		    Sound.gameMusic1.stop();
 		    Sound.gameMusic2.stop();
 		    Sound.gameMusic3.stop();
-		    Sound.menuMusic.loop();
+		    if (!GUI.mute)
+		        Sound.menuMusic.loop();
 		}
 	    });
 	}

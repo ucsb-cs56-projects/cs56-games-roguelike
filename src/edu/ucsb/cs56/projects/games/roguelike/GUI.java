@@ -33,7 +33,8 @@ public class GUI {
      */
     public GUI() {
         final JFrame guiFrame = new JFrame("Roguelike"); // frame window title will be Roguelike
-        Sound.menuMusic.loop();
+        if (!GUI.mute)
+            Sound.menuMusic.loop();
 
         JButton playButton = new JButton("Play"); //new button with text "Play"
         setButtonCharacteristics(playButton);
@@ -129,8 +130,8 @@ public class GUI {
  *TODO: Add Volume option
  */
 
-boolean mute = false;
-int difficulty = 1;
+static boolean mute = false;
+static int difficulty = 1;
 public void openOptionsWindow() {
 
     
@@ -150,9 +151,14 @@ public void openOptionsWindow() {
 		public void actionPerformed(ActionEvent e) {
 		    mute = !mute;
 		    muteButton.setText("Mute: " + mute);
+		    if (!mute)
+                Sound.menuMusic.loop();
+		    else
+		        Sound.menuMusic.stop();
 		}
 	});
 
+	//increasing the difficulty increases the max number of monsters you start with
 	JButton difficultyButton = new JButton("Difficulty: " + difficulty);
 	setButtonCharacteristics(difficultyButton);
 	difficultyButton.addActionListener(new ActionListener() {
@@ -189,7 +195,8 @@ public void openOptionsWindow() {
      */
     public void openGameWindow() {
         Sound.menuMusic.stop();
-        Sound.gameMusic1.loop();
+        if (!GUI.mute)
+            Sound.gameMusic1.loop();
         String[] args = {};
         RogueController.main(args);
     }

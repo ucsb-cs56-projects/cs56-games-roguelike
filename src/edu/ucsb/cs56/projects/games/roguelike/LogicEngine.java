@@ -33,7 +33,9 @@ public class LogicEngine {
     private final String[] monsterPieces = new String[]
     {"Monster", "Troll", "Golem", "Bat", "Snake", "Zombie", "Pirate"};
 
-    private int maxNumOfMonsters;//How many monsters on the board when creating them
+    //How many monsters on the board when creating them
+    //the difficulty settings in the options menus changes this number
+    private int maxNumOfMonsters;
 
 
 
@@ -64,7 +66,12 @@ public class LogicEngine {
         gameOver = false;
 
         //The -1 is to remove the initial monster creation incrementation
-        maxNumOfMonsters = 7;
+        if (GUI.difficulty == 1)
+            maxNumOfMonsters = 7;
+        if (GUI.difficulty == 2)
+            maxNumOfMonsters = 10;
+        if (GUI.difficulty == 3)
+            maxNumOfMonsters = 13;
         level = 1;
         elixirStepCounter = 0;
     }
@@ -333,7 +340,8 @@ public class LogicEngine {
 
 
             listOfMonsters[x][y] = null;
-	    Sound.monsterDeathSound.play(); //Plays monsters death sound
+            if (!GUI.mute)
+	            Sound.monsterDeathSound.play(); //Plays monsters death sound
             return true;
         }
         return false;
@@ -585,23 +593,26 @@ public class LogicEngine {
     public void changeMusic(){
 	//The Music change will start at gameMusic2.wav since gameMusic1.wav is 1st level
 	//This function loops through all 3 game music files
-	switch(musicTrack){
-	case 1:
-	    Sound.gameMusic1.stop();
-	    Sound.gameMusic2.loop();
-	    musicTrack++;
-	    break;
-	 case 2:
-	    Sound.gameMusic2.stop();
-	    Sound.gameMusic3.loop();
-	    musicTrack++;
-	    break;
-	 case 3:
-	    Sound.gameMusic3.stop();
-	    Sound.gameMusic1.loop();
-	    musicTrack=1; //loops back to top case 1
-	    break;
-	}
+
+        if (!GUI.mute) {
+            switch (musicTrack) {
+                case 1:
+                    Sound.gameMusic1.stop();
+                    Sound.gameMusic2.loop();
+                    musicTrack++;
+                    break;
+                case 2:
+                    Sound.gameMusic2.stop();
+                    Sound.gameMusic3.loop();
+                    musicTrack++;
+                    break;
+                case 3:
+                    Sound.gameMusic3.stop();
+                    Sound.gameMusic1.loop();
+                    musicTrack = 1; //loops back to top case 1
+                    break;
+            }
+        }
     }
 
     /**
