@@ -20,8 +20,7 @@ import java.awt.Font;
 
 //change to cardlayout?
 public class GUI {
-
-    private int difficulty;
+    public static int difficulty = 1;
     /*
      * All the main does is call the no-arg constructor of the GUI class
      */
@@ -32,75 +31,74 @@ public class GUI {
     /**
      * This GUI class constructor makes the frame and the buttons for the menu screen.
      */
-    public GUI() {
+        public GUI()
+        {
+            final JFrame guiFrame = new JFrame("Roguelike"); // frame window title will be Roguelike
+            if (!GUI.mute)
+                Sound.menuMusic.loop();
 
-        difficulty = 1;
-        System.out.println("Initializing difficulty to: " + difficulty);
+            JButton playButton = new JButton("Play"); //new button with text "Play"
+            setButtonCharacteristics(playButton);
+            playButton.addActionListener(new ActionListener() {
+                int currDifficulty = difficulty;
 
-        final JFrame guiFrame = new JFrame("Roguelike"); // frame window title will be Roguelike
-        if (!GUI.mute)
-            Sound.menuMusic.loop();
+                public void actionPerformed(ActionEvent e) {
+                    openGameWindow();
+            guiFrame.setVisible(false); //Takes away menu after game starts
+                }
+            });
 
-        JButton playButton = new JButton("Play"); //new button with text "Play"
-        setButtonCharacteristics(playButton);
-        playButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                openGameWindow();
-		guiFrame.setVisible(false); //Takes away menu after game starts
-            }
-        });
+            JButton instrButton = new JButton("Instructions");
+            setButtonCharacteristics(instrButton);
+            instrButton.addActionListener(new ActionListener() { // make anonymous innerclass to call openInstructionsWindow, which does what it says
+                public void actionPerformed(ActionEvent e) {
+            //Close Main Menu until close button is clicked
+            guiFrame.setVisible(false);
+                    openInstructionsWindow();
+                }
+            });
 
-        JButton instrButton = new JButton("Instructions");
-        setButtonCharacteristics(instrButton);
-        instrButton.addActionListener(new ActionListener() { // make anonymous innerclass to call openInstructionsWindow, which does what it says
-            public void actionPerformed(ActionEvent e) {
-		//Close Main Menu until close button is clicked
-		guiFrame.setVisible(false);
-                openInstructionsWindow();
-            }
-        });
+            JButton optionButton = new JButton("Options");
+            setButtonCharacteristics(optionButton);
+            optionButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    //Close Main Menu until close button is clicked
+                    guiFrame.setVisible(false);
+                    openOptionsWindow();
+                }
+            });
 
-        JButton optionButton = new JButton("Options");
-        setButtonCharacteristics(optionButton);
-        optionButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                //Close Main Menu until close button is clicked
-                guiFrame.setVisible(false);
-                openOptionsWindow();
-            }
-        });
-		    
 
-        JButton hiscoreButton = new JButton("View Highscores");
-        setButtonCharacteristics(hiscoreButton);
-        hiscoreButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-		//Close Main Menu until close button is clicked
-		guiFrame.setVisible(false);
-                openHighScoresWindow();
-            }
-        });
+            JButton hiscoreButton = new JButton("View Highscores");
+            setButtonCharacteristics(hiscoreButton);
+            hiscoreButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+            //Close Main Menu until close button is clicked
+            guiFrame.setVisible(false);
+                    openHighScoresWindow();
+                }
+            });
 
-        JButton quitButton = new JButton("Quit");
-        setButtonCharacteristics(quitButton);
-        quitButton.addActionListener(new ActionListener() { // make anonymous inner class to quit program when quit button is clicked
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-        });
+            JButton quitButton = new JButton("Quit");
+            setButtonCharacteristics(quitButton);
+            quitButton.addActionListener(new ActionListener() { // make anonymous inner class to quit program when quit button is clicked
+                public void actionPerformed(ActionEvent e) {
+                    System.exit(0);
+                }
+            });
 
-        guiFrame.add(playButton);
-        guiFrame.add(instrButton);
-	    guiFrame.add(optionButton);
-        guiFrame.add(hiscoreButton);
-        guiFrame.add(quitButton);
+            guiFrame.add(playButton);
+            guiFrame.add(instrButton);
+            guiFrame.add(optionButton);
+            guiFrame.add(hiscoreButton);
+            guiFrame.add(quitButton);
 
-        guiFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        guiFrame.getContentPane().setLayout(new GridLayout(5, 1)); // grid layout with 4 vertically stacked components
-        guiFrame.pack();
-        guiFrame.setLocationRelativeTo(null); // makes GUI appear in screen's center
-        guiFrame.setVisible(true);
-    }
+            guiFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            guiFrame.getContentPane().setLayout(new GridLayout(5, 1)); // grid layout with 4 vertically stacked components
+            guiFrame.pack();
+            guiFrame.setLocationRelativeTo(null); // makes GUI appear in screen's center
+            guiFrame.setVisible(true);
+        }
 
     /**
      * Opens a new window with game instructions displayed.
@@ -163,25 +161,22 @@ public class GUI {
             }
         });
 
-
-        System.out.println("Before pressing the button, difficulty is: " + difficulty);
-
         //BUTTON ISNT UPDATING DIFFICULTY?
         //increasing the difficultyLevel increases the max number of monsters you start with
-        JButton difficultyButton = new JButton("Difficulty: " + getDifficulty());
+        JButton difficultyButton = new JButton("Difficulty: " + GUI.difficulty);
         setButtonCharacteristics(difficultyButton);
         difficultyButton.addActionListener(new ActionListener() {
+
             public void actionPerformed(ActionEvent e) {
-                setDifficulty(getDifficulty() + 1);
-                if (getDifficulty() > 3)
-                    setDifficulty(1);
-                difficultyButton.setText("Difficulty: " + getDifficulty());
+                GUI.difficulty += 1;
+                if (GUI.difficulty > 3) {
+                    GUI.difficulty = 1;
+                }
+                difficultyButton.setText("Difficulty: " + GUI.difficulty);
 
                 //System.out.println("Difficulty AFTER pressing is: " + getDifficulty());
             }
         });
-
-        System.out.println("AFTER pressing the button, difficulty is: " + difficulty);
 
 
         JFrame optionsFrame = new JFrame("Options");
@@ -216,8 +211,7 @@ public class GUI {
         if (!GUI.mute)
             Sound.gameMusic1.loop();
 
-        String diffStr = "" + getDifficulty();
-        System.out.println("The difficulty value we are finally passing into the RogueController is " + difficulty);
+        String diffStr = "" + GUI.difficulty;
         String[] args = {diffStr};
         RogueController.main(args);
     }
@@ -231,11 +225,4 @@ public class GUI {
         b.setForeground(Color.WHITE); // sets button text color
     }
 
-    public int getDifficulty() {
-        return this.difficulty;
-    }
-
-    public void setDifficulty(int difficultyInput) {
-        this.difficulty = difficultyInput;
-    }
 }

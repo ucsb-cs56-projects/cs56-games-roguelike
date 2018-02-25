@@ -655,9 +655,9 @@ public class RogueController extends JFrame implements KeyListener {
         //UPDATE DIFFICULTY AND MONSTERS USING VALUE PASSED INTO ARGS (from gui.java)
         int monstersDifficultyNum = 7;
         if(Integer.parseInt(args[0]) == 2)
-            monstersDifficultyNum = 15;
+            monstersDifficultyNum = 10;
         else if(Integer.parseInt(args[0]) == 3)
-            monstersDifficultyNum = 30;
+            monstersDifficultyNum = 15;
 
         mainControl.logicHandler.setMaxNumOfMonsters(monstersDifficultyNum);
 
