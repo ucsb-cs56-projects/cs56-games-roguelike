@@ -1,4 +1,5 @@
 package edu.ucsb.cs56.projects.games.roguelike;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -6,11 +7,12 @@ import java.awt.event.ActionEvent;
 
 /**
  * GUI - Class used to create the menu interface. This class creates the frame and buttons and adds the actionListener events for different menu options. The Main Menu includes buttons for:
- *       >Play
- *       >Instructions
- *       >Options
- *       >View Highscores
- *       >Quit
+ * >Play
+ * >Instructions
+ * >Options
+ * >View Highscores
+ * >Quit
+ *
  * @author Derek Wang
  */
 
@@ -18,6 +20,7 @@ import java.awt.event.ActionEvent;
 //change to cardlayout?
 public class GUI {
     public static int difficulty = 1;
+
     /*
      * All the main does is call the no-arg constructor of the GUI class
      */
@@ -30,73 +33,72 @@ public class GUI {
     /**
      * This GUI class constructor makes the frame and the buttons for the menu screen.
      */
-        public GUI()
-        {
-            final JFrame guiFrame = new JFrame("Roguelike"); // frame window title will be Roguelike
+    public GUI() {
+        final JFrame guiFrame = new JFrame("Roguelike"); // frame window title will be Roguelike
 
-            JButton playButton = new JButton("Play"); //new button with text "Play"
-            setButtonCharacteristics(playButton);
-            playButton.addActionListener(new ActionListener() {
-                int currDifficulty = difficulty;
+        JButton playButton = new JButton("Play"); //new button with text "Play"
+        setButtonCharacteristics(playButton);
+        playButton.addActionListener(new ActionListener() {
+            int currDifficulty = difficulty;
 
-                public void actionPerformed(ActionEvent e) {
-                    openGameWindow();
-                    guiFrame.setVisible(false); //Takes away menu after game starts
-                }
-            });
+            public void actionPerformed(ActionEvent e) {
+                openGameWindow();
+                guiFrame.setVisible(false); //Takes away menu after game starts
+            }
+        });
 
-            JButton instrButton = new JButton("Instructions");
-            setButtonCharacteristics(instrButton);
-            instrButton.addActionListener(new ActionListener() { // make anonymous innerclass to call openInstructionsWindow, which does what it says
-                public void actionPerformed(ActionEvent e) {
-                    //Close Main Menu until close button is clicked
-                    guiFrame.setVisible(false);
-                    openInstructionsWindow();
-                }
-            });
+        JButton instrButton = new JButton("Instructions");
+        setButtonCharacteristics(instrButton);
+        instrButton.addActionListener(new ActionListener() { // make anonymous innerclass to call openInstructionsWindow, which does what it says
+            public void actionPerformed(ActionEvent e) {
+                //Close Main Menu until close button is clicked
+                guiFrame.setVisible(false);
+                openInstructionsWindow();
+            }
+        });
 
-            JButton optionButton = new JButton("Options");
-            setButtonCharacteristics(optionButton);
-            optionButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    //Close Main Menu until close button is clicked
-                    guiFrame.setVisible(false);
-                    openOptionsWindow();
-                }
-            });
-
-
-            JButton hiscoreButton = new JButton("View Highscores");
-            setButtonCharacteristics(hiscoreButton);
-            hiscoreButton.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    //Close Main Menu until close button is clicked
-                    guiFrame.setVisible(false);
-                    openHighScoresWindow();
-                }
-            });
-
-            JButton quitButton = new JButton("Quit");
-            setButtonCharacteristics(quitButton);
-            quitButton.addActionListener(new ActionListener() { // make anonymous inner class to quit program when quit button is clicked
-                public void actionPerformed(ActionEvent e) {
-                    System.exit(0);
-                }
-            });
-
-            guiFrame.add(playButton);
-            guiFrame.add(instrButton);
-            guiFrame.add(optionButton);
-            guiFrame.add(hiscoreButton);
-            guiFrame.add(quitButton);
+        JButton optionButton = new JButton("Options");
+        setButtonCharacteristics(optionButton);
+        optionButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //Close Main Menu until close button is clicked
+                guiFrame.setVisible(false);
+                openOptionsWindow();
+            }
+        });
 
 
-            guiFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            guiFrame.getContentPane().setLayout(new GridLayout(5,1)); // grid layout with 5 vertically stacked components
-            guiFrame.pack();
-            guiFrame.setLocationRelativeTo(null); // makes GUI appear in screen's center
-            guiFrame.setVisible(true);
-        }
+        JButton hiscoreButton = new JButton("View Highscores");
+        setButtonCharacteristics(hiscoreButton);
+        hiscoreButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //Close Main Menu until close button is clicked
+                guiFrame.setVisible(false);
+                openHighScoresWindow();
+            }
+        });
+
+        JButton quitButton = new JButton("Quit");
+        setButtonCharacteristics(quitButton);
+        quitButton.addActionListener(new ActionListener() { // make anonymous inner class to quit program when quit button is clicked
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+
+        guiFrame.add(playButton);
+        guiFrame.add(instrButton);
+        guiFrame.add(optionButton);
+        guiFrame.add(hiscoreButton);
+        guiFrame.add(quitButton);
+
+
+        guiFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        guiFrame.getContentPane().setLayout(new GridLayout(5, 1)); // grid layout with 5 vertically stacked components
+        guiFrame.pack();
+        guiFrame.setLocationRelativeTo(null); // makes GUI appear in screen's center
+        guiFrame.setVisible(true);
+    }
 
     /**
      * Opens a new window with game instructions displayed.
@@ -116,13 +118,13 @@ public class GUI {
 
         JScrollPane scrollPane = new JScrollPane(instructions);
 
-        JFrame instrFrame  = new JFrame("Instructions");
+        JFrame instrFrame = new JFrame("Instructions");
 
         instrFrame.add(scrollPane);
         instrFrame.pack();
         instrFrame.setVisible(true);
         instrFrame.setLocationRelativeTo(null);
-	RogueController.MakeCloseOptionToMainMenu(instrFrame);
+        RogueController.MakeCloseOptionToMainMenu(instrFrame);
     }
 
     static boolean mute = false;
@@ -130,15 +132,15 @@ public class GUI {
     public void openOptionsWindow() {
 
 
-        JTextArea optionsText = new JTextArea("Options Menu",20,40);
+        JTextArea optionsText = new JTextArea("Options Menu", 20, 40);
 
-            Font font = new Font("Times New Roman", Font.PLAIN, 12);
-            optionsText.setFont(font);
-            optionsText.setForeground(Color.CYAN);
-            optionsText.setBackground(Color.BLACK);
-            optionsText.setEditable(false);
-            optionsText.setLineWrap(true);
-            optionsText.setWrapStyleWord(true);
+        Font font = new Font("Times New Roman", Font.PLAIN, 12);
+        optionsText.setFont(font);
+        optionsText.setForeground(Color.CYAN);
+        optionsText.setBackground(Color.BLACK);
+        optionsText.setEditable(false);
+        optionsText.setLineWrap(true);
+        optionsText.setWrapStyleWord(true);
 
         JButton muteButton = new JButton("Mute: " + mute);
         setButtonCharacteristics(muteButton);
@@ -177,15 +179,16 @@ public class GUI {
         optionsFrame.pack();
         optionsFrame.setVisible(true);
         optionsFrame.getContentPane().setLayout(new GridLayout(3, 1));
-            optionsFrame.setLocationRelativeTo(null);
+        optionsFrame.setLocationRelativeTo(null);
         RogueController.MakeCloseOptionToMainMenu(optionsFrame);
     }
 
-    
+
     /*
      * This function calls a static method in the RogueController class that opens the losing screen (which contains high scores)
      */
     public static boolean highScoreWindow = false;
+
     public void openHighScoresWindow() {
         highScoreWindow = true;
         RogueController.goToLosingScreen();
@@ -206,6 +209,7 @@ public class GUI {
         String[] args = {diffStr};
         RogueController.main(args);
     }
+
     /**
      * This function sets the size and color for the menu buttons
      */

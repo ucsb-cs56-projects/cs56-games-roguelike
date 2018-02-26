@@ -6,9 +6,10 @@ import java.io.File;
 /**
  * This class stores music and methods to loop
  * or stop those songs
+ *
  * @author Max de Visser and Artem Jivotovski
  * @version cs56 F16
-*/
+ */
 
 public class Sound {
 
@@ -28,7 +29,7 @@ public class Sound {
     public static Sound monsterDeathSound = new Sound("./src/edu/ucsb/cs56/projects/games/roguelike/music/MonsterDeathSound.wav");
 
 
-    public Sound (String fileName) {
+    public Sound(String fileName) {
         try {
             File file = new File(fileName);
             AudioInputStream ais = AudioSystem.getAudioInputStream(file);
@@ -38,13 +39,15 @@ public class Sound {
             e.printStackTrace();
         }
     }
+
     /**
      * Stops playing a given Sound in the program.
      */
     public void stop() {
-        if(clip == null) return;
+        if (clip == null) return;
         clip.stop();
     }
+
     /**
      * Continues to play a Sound in the program continously and repeats on a loop.
      */
@@ -59,7 +62,7 @@ public class Sound {
                             clip.loop(Clip.LOOP_CONTINUOUSLY);
                         }
                     }
-                } .start();
+                }.start();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -68,13 +71,14 @@ public class Sound {
 
     /**
      * Checks if there is a Sound clip playing.
+     *
      * @return boolean value of true if sound is active, false otherwise.
      */
 
 
     //This play function loops sound once for sound effects 
-    public void play(){ 
-	try {
+    public void play() {
+        try {
             if (clip != null) {
                 new Thread() {
                     public void run() {
@@ -84,7 +88,7 @@ public class Sound {
                             clip.loop(0);
                         }
                     }
-                } .start();
+                }.start();
             }
         } catch (Exception e) {
             e.printStackTrace();
