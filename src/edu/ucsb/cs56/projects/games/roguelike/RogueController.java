@@ -350,7 +350,7 @@ public class RogueController extends JFrame implements KeyListener {
      * Recursively moves from the current coordinates to the target coordinates,
      * checking if there is a wall in the way as it goes. Returns true if there is an obstacle.
      *
-     * @param A boolean value indicating whether there was an obstacle in the way of desired x,y position.
+     * param: A boolean value indicating whether there was an obstacle in the way of desired x,y position.
      */
     private boolean isObstacle(int currentX, int currentY, int targetX, int targetY, double slope) {
         if (outOfBounds(currentX, currentY)) {

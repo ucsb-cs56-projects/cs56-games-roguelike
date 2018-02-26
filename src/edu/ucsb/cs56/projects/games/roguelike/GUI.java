@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 
 /**
  * GUI - Class used to create the menu interface. This class creates the frame and buttons and adds the actionListener events for different menu options. The Main Menu includes buttons for:
@@ -195,7 +198,8 @@ public class GUI {
         highScoreWindow = false;
         //JFrame highScoreFrame = new JFrame("High Scores");
         // display the HighScore after game is over by reading from Score.txt...
-    }
+
+}
 
     /*
      * This function opens up the game window for the player to begin playing the game.
