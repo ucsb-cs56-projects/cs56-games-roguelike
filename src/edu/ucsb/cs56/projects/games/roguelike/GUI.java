@@ -1,11 +1,8 @@
 package edu.ucsb.cs56.projects.games.roguelike;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.GridLayout;
-import java.awt.Dimension;
-import java.awt.Color;
-import java.awt.Font;
 
 /**
  * GUI - Class used to create the menu interface. This class creates the frame and buttons and adds the actionListener events for different menu options. The Main Menu includes buttons for:
@@ -25,6 +22,8 @@ public class GUI {
      * All the main does is call the no-arg constructor of the GUI class
      */
     public static void main(String[] args) {
+        if (!GUI.mute && !Sound.menuMusic.isActive())
+            Sound.menuMusic.loop();
         new GUI(); //call class constructor to make the GUI
     }
 
@@ -34,8 +33,6 @@ public class GUI {
         public GUI()
         {
             final JFrame guiFrame = new JFrame("Roguelike"); // frame window title will be Roguelike
-            if (!GUI.mute)
-                Sound.menuMusic.loop();
 
             JButton playButton = new JButton("Play"); //new button with text "Play"
             setButtonCharacteristics(playButton);
@@ -44,7 +41,7 @@ public class GUI {
 
                 public void actionPerformed(ActionEvent e) {
                     openGameWindow();
-            guiFrame.setVisible(false); //Takes away menu after game starts
+                    guiFrame.setVisible(false); //Takes away menu after game starts
                 }
             });
 
@@ -52,8 +49,8 @@ public class GUI {
             setButtonCharacteristics(instrButton);
             instrButton.addActionListener(new ActionListener() { // make anonymous innerclass to call openInstructionsWindow, which does what it says
                 public void actionPerformed(ActionEvent e) {
-            //Close Main Menu until close button is clicked
-            guiFrame.setVisible(false);
+                    //Close Main Menu until close button is clicked
+                    guiFrame.setVisible(false);
                     openInstructionsWindow();
                 }
             });
@@ -73,8 +70,8 @@ public class GUI {
             setButtonCharacteristics(hiscoreButton);
             hiscoreButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-            //Close Main Menu until close button is clicked
-            guiFrame.setVisible(false);
+                    //Close Main Menu until close button is clicked
+                    guiFrame.setVisible(false);
                     openHighScoresWindow();
                 }
             });
@@ -93,8 +90,9 @@ public class GUI {
             guiFrame.add(hiscoreButton);
             guiFrame.add(quitButton);
 
+
             guiFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            guiFrame.getContentPane().setLayout(new GridLayout(5, 1)); // grid layout with 4 vertically stacked components
+            guiFrame.getContentPane().setLayout(new GridLayout(5,1)); // grid layout with 5 vertically stacked components
             guiFrame.pack();
             guiFrame.setLocationRelativeTo(null); // makes GUI appear in screen's center
             guiFrame.setVisible(true);
@@ -127,12 +125,6 @@ public class GUI {
 	RogueController.MakeCloseOptionToMainMenu(instrFrame);
     }
 
-    /*
-     *options window
-     *TODO: Add difficultyLevel option
-     *TODO: Add Volume option
-     */
-
     static boolean mute = false;
 
     public void openOptionsWindow() {
@@ -161,7 +153,6 @@ public class GUI {
             }
         });
 
-        //BUTTON ISNT UPDATING DIFFICULTY?
         //increasing the difficultyLevel increases the max number of monsters you start with
         JButton difficultyButton = new JButton("Difficulty: " + GUI.difficulty);
         setButtonCharacteristics(difficultyButton);

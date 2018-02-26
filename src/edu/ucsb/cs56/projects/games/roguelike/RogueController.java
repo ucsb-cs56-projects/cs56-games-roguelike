@@ -638,8 +638,8 @@ public class RogueController extends JFrame implements KeyListener {
 		    Sound.gameMusic1.stop();
 		    Sound.gameMusic2.stop();
 		    Sound.gameMusic3.stop();
-		    if (!GUI.mute)
-		        Sound.menuMusic.loop();
+		    //if (!GUI.mute)
+		        //Sound.menuMusic.loop();
 		}
 	    });
 	}
