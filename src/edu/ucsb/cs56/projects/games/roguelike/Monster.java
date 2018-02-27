@@ -26,7 +26,7 @@ public class Monster implements GamePiece {
     public static final int[] SNAKE = {5, 3, 15, 83};
     public static final int[] TROLL = {10, 3, 15, 84};
     public static final int[] ZOMBIE = {15, 2, 15, 90};
-
+    private static int numMonsters = 7;
     /**
      * Creates a monster with 20 hitPoints and 10 attack and no random movement.
      */
@@ -71,41 +71,25 @@ public class Monster implements GamePiece {
 
     /**
      * Static factory method for generating a monster based on an input string.
-     *
-     * @param typeOfMovement determines the monster's movement behavior
-     * @param monsterName    a string containing the name of the monster you want to create
      */
 
-    public static Monster createMonster(int typeOfMovement, String monsterName) {
-        monsterName = monsterName.toUpperCase();
-        Monster retMonster;
-        switch (monsterName) {
-            case "BAT":
-                retMonster = new Monster(typeOfMovement, BAT);
-                break;
-            case "GOLEM":
-                retMonster = new Monster(typeOfMovement, GOLEM);
-                break;
-            case "MONSTER":
-                retMonster = new Monster(typeOfMovement, MONSTER);
-                break;
-            case "PIRATE":
-                retMonster = new Monster(typeOfMovement, PIRATE);
-                break;
-            case "SNAKE":
-                retMonster = new Monster(typeOfMovement, SNAKE);
-                break;
-            case "TROLL":
-                retMonster = new Monster(typeOfMovement, TROLL);
-                break;
-            case "ZOMBIE":
-                retMonster = new Monster(typeOfMovement, ZOMBIE);
-                break;
-            default:
-                retMonster = new Monster(typeOfMovement, MONSTER);
-        }
-
-        return retMonster;
+    public static int[] createMonster() {
+        int n = (int) (Math.random() * numMonsters);
+        if (n == 0)
+            return BAT;
+        if (n == 1)
+            return GOLEM;
+        if (n == 2)
+            return MONSTER;
+        if (n == 3)
+            return PIRATE;
+        if (n == 4)
+            return SNAKE;
+        if (n == 5)
+            return TROLL;
+        if (n == 6)
+            return ZOMBIE;
+        return MONSTER;
     }
 
     /**
