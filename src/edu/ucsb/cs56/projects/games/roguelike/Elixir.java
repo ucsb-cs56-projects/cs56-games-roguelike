@@ -20,6 +20,7 @@ public class Elixir extends Item {
     public Elixir() {
         super(1);
         this.setIcon('S');
+        this.setTypeOfPiece("elixir");
     }
 
     /**

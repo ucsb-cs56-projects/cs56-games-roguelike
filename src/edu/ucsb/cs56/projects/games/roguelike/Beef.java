@@ -22,6 +22,7 @@ public class Beef extends Item {
     public Beef() {
         super(20);
         this.setIcon('+');
+        this.setTypeOfPiece("beef");
     }
 
     /**

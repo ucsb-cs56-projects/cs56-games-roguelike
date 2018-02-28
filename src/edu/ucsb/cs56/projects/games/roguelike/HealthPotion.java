@@ -18,6 +18,7 @@ public class HealthPotion extends Item {
     public HealthPotion() {
         super(20);
         this.setIcon('H');
+        this.setTypeOfPiece("health");
     }
 
     /**

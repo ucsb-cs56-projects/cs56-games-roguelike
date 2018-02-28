@@ -19,6 +19,7 @@ public class Poison extends Item {
     public Poison() {
         super(20);
         this.setIcon('!');
+        this.setTypeOfPiece("poison");
     }
 
     /**

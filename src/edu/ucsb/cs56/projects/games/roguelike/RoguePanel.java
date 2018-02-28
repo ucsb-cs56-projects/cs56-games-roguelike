@@ -692,10 +692,13 @@ public class RoguePanel extends JPanel {
         write(i.getIcon(), xPosition, yPosition, RoguePanel.white, RoguePanel.black);
         //Tells the player an item is found using write function
         if (i.hasItemHUD_Displayed() == false) {
-            write("   Wow an Item!", 60, 23, RoguePanel.magenta, RoguePanel.black);
+
+            String itemStr = i.getTypeOfPiece();
+            write("You found " + itemStr + "!", 60, 23, RoguePanel.magenta, RoguePanel.black);
 
             //sets item has displayed boolean value to true so it only displays once
             i.setItemHasDisplayed(true);
+
         }
     }
 
