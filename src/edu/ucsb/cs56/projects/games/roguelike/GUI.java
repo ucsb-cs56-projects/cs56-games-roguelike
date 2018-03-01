@@ -1,26 +1,35 @@
 package edu.ucsb.cs56.projects.games.roguelike;
+
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.GridLayout;
-import java.awt.Dimension;
-import java.awt.Color;
-import java.awt.Font;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 
 /**
  * GUI - Class used to create the menu interface. This class creates the frame and buttons and adds the actionListener events for different menu options. The Main Menu includes buttons for:
- *       >Play
- *       >Instructions
- *       >View Highscores
- *       >Quit
+ * >Play
+ * >Instructions
+ * >Options
+ * >View Highscores
+ * >Quit
+ *
  * @author Derek Wang
  */
+
+
+//change to cardlayout?
 public class GUI {
+    public static int difficulty = 1;
 
     /*
      * All the main does is call the no-arg constructor of the GUI class
      */
     public static void main(String[] args) {
+        if (!GUI.mute && !Sound.menuMusic.isActive())
+            Sound.menuMusic.loop();
         new GUI(); //call class constructor to make the GUI
     }
 
@@ -29,14 +38,15 @@ public class GUI {
      */
     public GUI() {
         final JFrame guiFrame = new JFrame("Roguelike"); // frame window title will be Roguelike
-        Sound.menuMusic.loop();
 
         JButton playButton = new JButton("Play"); //new button with text "Play"
         setButtonCharacteristics(playButton);
         playButton.addActionListener(new ActionListener() {
+            int currDifficulty = difficulty;
+
             public void actionPerformed(ActionEvent e) {
                 openGameWindow();
-		guiFrame.setVisible(false); //Takes away menu after game starts
+                guiFrame.setVisible(false); //Takes away menu after game starts
             }
         });
 
@@ -44,18 +54,29 @@ public class GUI {
         setButtonCharacteristics(instrButton);
         instrButton.addActionListener(new ActionListener() { // make anonymous innerclass to call openInstructionsWindow, which does what it says
             public void actionPerformed(ActionEvent e) {
-		//Close Main Menu until close button is clicked
-		guiFrame.setVisible(false);
+                //Close Main Menu until close button is clicked
+                guiFrame.setVisible(false);
                 openInstructionsWindow();
             }
         });
+
+        JButton optionButton = new JButton("Options");
+        setButtonCharacteristics(optionButton);
+        optionButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //Close Main Menu until close button is clicked
+                guiFrame.setVisible(false);
+                openOptionsWindow();
+            }
+        });
+
 
         JButton hiscoreButton = new JButton("View Highscores");
         setButtonCharacteristics(hiscoreButton);
         hiscoreButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-		//Close Main Menu until close button is clicked
-		guiFrame.setVisible(false);
+                //Close Main Menu until close button is clicked
+                guiFrame.setVisible(false);
                 openHighScoresWindow();
             }
         });
@@ -70,11 +91,13 @@ public class GUI {
 
         guiFrame.add(playButton);
         guiFrame.add(instrButton);
+        guiFrame.add(optionButton);
         guiFrame.add(hiscoreButton);
         guiFrame.add(quitButton);
 
+
         guiFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        guiFrame.getContentPane().setLayout(new GridLayout(4, 1)); // grid layout with 4 vertically stacked components
+        guiFrame.getContentPane().setLayout(new GridLayout(5, 1)); // grid layout with 5 vertically stacked components
         guiFrame.pack();
         guiFrame.setLocationRelativeTo(null); // makes GUI appear in screen's center
         guiFrame.setVisible(true);
@@ -90,7 +113,7 @@ public class GUI {
 
         JTextArea instructions = new JTextArea(content, 20, 40);
         instructions.setFont(font);
-        instructions.setForeground(Color.RED);
+        instructions.setForeground(Color.CYAN);
         instructions.setBackground(Color.BLACK);
         instructions.setEditable(false);
         instructions.setLineWrap(true);
@@ -98,32 +121,99 @@ public class GUI {
 
         JScrollPane scrollPane = new JScrollPane(instructions);
 
-        JFrame instrFrame  = new JFrame("Instructions");
+        JFrame instrFrame = new JFrame("Instructions");
 
         instrFrame.add(scrollPane);
         instrFrame.pack();
         instrFrame.setVisible(true);
         instrFrame.setLocationRelativeTo(null);
-	RogueController.MakeCloseOptionToMainMenu(instrFrame);
+        RogueController.MakeCloseOptionToMainMenu(instrFrame);
     }
 
-    
+    static boolean mute = false;
+
+    public void openOptionsWindow() {
+
+
+        JTextArea optionsText = new JTextArea("Options Menu", 20, 40);
+
+        Font font = new Font("Times New Roman", Font.PLAIN, 12);
+        optionsText.setFont(font);
+        optionsText.setForeground(Color.CYAN);
+        optionsText.setBackground(Color.BLACK);
+        optionsText.setEditable(false);
+        optionsText.setLineWrap(true);
+        optionsText.setWrapStyleWord(true);
+
+        JButton muteButton = new JButton("Mute: " + mute);
+        setButtonCharacteristics(muteButton);
+        muteButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                mute = !mute;
+                muteButton.setText("Mute: " + mute);
+                if (!mute)
+                    Sound.menuMusic.loop();
+                else
+                    Sound.menuMusic.stop();
+            }
+        });
+
+        //increasing the difficultyLevel increases the max number of monsters you start with
+        JButton difficultyButton = new JButton("Difficulty: " + GUI.difficulty);
+        setButtonCharacteristics(difficultyButton);
+        difficultyButton.addActionListener(new ActionListener() {
+
+            public void actionPerformed(ActionEvent e) {
+                GUI.difficulty += 1;
+                if (GUI.difficulty > 3) {
+                    GUI.difficulty = 1;
+                }
+                difficultyButton.setText("Difficulty: " + GUI.difficulty);
+
+                //System.out.println("Difficulty AFTER pressing is: " + getDifficulty());
+            }
+        });
+
+
+        JFrame optionsFrame = new JFrame("Options");
+        optionsFrame.add(optionsText);
+        optionsFrame.add(muteButton);
+        optionsFrame.add(difficultyButton);
+        optionsFrame.pack();
+        optionsFrame.setVisible(true);
+        optionsFrame.getContentPane().setLayout(new GridLayout(3, 1));
+        optionsFrame.setLocationRelativeTo(null);
+        RogueController.MakeCloseOptionToMainMenu(optionsFrame);
+    }
+
+
     /*
      * This function calls a static method in the RogueController class that opens the losing screen (which contains high scores)
      */
+    public static boolean highScoreWindow = false;
+
     public void openHighScoresWindow() {
+        highScoreWindow = true;
         RogueController.goToLosingScreen();
-    }
+        highScoreWindow = false;
+        //JFrame highScoreFrame = new JFrame("High Scores");
+        // display the HighScore after game is over by reading from Score.txt...
+
+}
 
     /*
      * This function opens up the game window for the player to begin playing the game.
      */
     public void openGameWindow() {
         Sound.menuMusic.stop();
-        Sound.gameMusic1.loop();
-        String[] args = {};
+        if (!GUI.mute)
+            Sound.gameMusic1.loop();
+
+        String diffStr = "" + GUI.difficulty;
+        String[] args = {diffStr};
         RogueController.main(args);
     }
+
     /**
      * This function sets the size and color for the menu buttons
      */
@@ -133,4 +223,5 @@ public class GUI {
         b.setBackground(Color.BLACK); // sets button background color
         b.setForeground(Color.WHITE); // sets button text color
     }
+
 }

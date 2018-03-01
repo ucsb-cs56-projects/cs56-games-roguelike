@@ -1,4 +1,5 @@
 package edu.ucsb.cs56.projects.games.roguelike;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -15,10 +16,10 @@ import javax.swing.JButton;
 
 /**
  * Basic Grid of Ascii character used to represent a "floor" of the "dungeon"
+ *
  * @author Clayven Anderson and Trystan Spangler(provided tutorial on roguelike grids and some code)
  * @author Jonathan Tan
  * @author Rick Lee
- *
  */
 
 public class RoguePanel extends JPanel {
@@ -38,7 +39,7 @@ public class RoguePanel extends JPanel {
     public static Color brown = new Color(0x663300);
     //Array of colors that change the color of the ground with each level
     public static Color[] groundColor = new Color[]
-    {gray, white, yellow, green, cyan, blue, magenta, brown}; //first level starts at index 1
+            {gray, white, yellow, green, cyan, blue, magenta, brown}; //first level starts at index 1
 
 
     //attributes for handling things such as the Background and Foreground colors
@@ -69,120 +70,139 @@ public class RoguePanel extends JPanel {
     // char [][] floor = new char [40][40];
 
 
-
     /**
      * Getter: Returns 2D array of chars for map building.
+     *
      * @return the chars
      */
     public char[][] getChars() {
         return chars;
     }
-    
+
     /**
      * Setter: Sets the char value within a 2D array of chars for map building.
+     *
      * @param chars the chars to set
      */
     public void setChars(char[][] chars) {
         this.chars = chars;
     }
-    
+
     /**
      * Getter: Returns the integer height of a character in pixels for map building.
+     *
      * @return the integer value of charHeight
      */
     public int getCharHeight() {
         return charHeight;
     }
-    
+
     /**
      * Setter: Sets the height of a character. Measured in pixels.
+     *
      * @param charHeight the charHeight to set
      */
     public void setCharHeight(int charHeight) {
         this.charHeight = charHeight;
     }
+
     /**
-       Getter: Returns the integer width of a character in pixels for map building.
+     * Getter: Returns the integer width of a character in pixels for map building.
+     *
      * @return the charWidth
      */
     public int getCharWidth() {
         return charWidth;
     }
-    
+
     /**
      * Setter: Sets the width of a character. Measured in pixels.
+     *
      * @param charWidth the charWidth to set
      */
     public void setCharWidth(int charWidth) {
         this.charWidth = charWidth;
     }
-    
+
     /**
      * Getter: Returns the height in characters of the map grid.
+     *
      * @return the gridHeight
      */
     public int getGridHeight() {
         return gridHeight;
     }
+
     /**
      * set the height of the grid. Measured in characters.
+     *
      * @param gridHeight the gridHeight to set
      */
     public void setGridHeight(int gridHeight) {
         this.gridHeight = gridHeight;
     }
-    
+
     /**
      * Getter: Returns the width in characters of the map grid.
+     *
      * @return the gridWidth
      */
     public int getGridWidth() {
         return gridWidth;
     }
-    
+
     /**
      * Setter: Sets the width of the grid. Measured in characters.
+     *
      * @param gridWidth the gridWidth to set
      */
     public void setGridWidth(int gridWidth) {
         this.gridWidth = gridWidth;
     }
-    
+
     /**
      * Getter: Returns the x coordinate of where a character is drawn.
+     *
      * @return The x coordinate
      */
     public int getXcoord() {
         return Xcoord;
     }
+
     /**
      * Setter: Sets the X coordinate for where the character is draw, must be within the size or the frame.
+     *
      * @param xcoord the xcoord to set
      */
     public void setXcoord(int xcoord) {
         if (xcoord < 0 || xcoord >= gridWidth)
-            throw new IllegalArgumentException("Xcoord " + Xcoord + " must be within range [0," + gridWidth + ")." );
+            throw new IllegalArgumentException("Xcoord " + Xcoord + " must be within range [0," + gridWidth + ").");
         Xcoord = xcoord;
     }
+
     /**
      * Getter: Returns the y coordinate of where a character is drawn.
+     *
      * @return the ycoord
      */
     public int getYcoord() {
         return Ycoord;
     }
+
     /**
      * Setter: Sets the Y coordinate for where the character is to be drawn, must be within the size of the frame.
+     *
      * @param ycoord the ycoord to set
      */
     public void setYcoord(int ycoord) {
         if (ycoord < 0 || ycoord >= gridHeight)
-            throw new IllegalArgumentException("Ycoord " + Ycoord + " must be within range [0," + gridHeight + ")." );
+            throw new IllegalArgumentException("Ycoord " + Ycoord + " must be within range [0," + gridHeight + ").");
         Ycoord = ycoord;
     }
 
     /**
      * Setter: Sets the desired coordinates of where to draw the character.
+     *
      * @param x the x coordinate
      * @param y the y coordinate
      */
@@ -193,13 +213,16 @@ public class RoguePanel extends JPanel {
 
     /**
      * Getter: Returns the defaultBackgroundColor
+     *
      * @return the defaultBackgroundColor
      */
     public Color getDefaultBackgroundColor() {
         return defaultBackgroundColor;
     }
+
     /**
      * Setter: Sets the default background color with an input Color object.
+     *
      * @param defaultBackgroundColor the defaultBackgroundColor to set
      */
     public void setDefaultBackgroundColor(Color defaultBackgroundColor) {
@@ -207,12 +230,14 @@ public class RoguePanel extends JPanel {
             throw new NullPointerException("defaultBackgroundColor must not be null.");
         this.defaultBackgroundColor = defaultBackgroundColor;
     }
+
     /**
      * @return the defaultForegroundColor
      */
     public Color getDefaultForegroundColor() {
         return defaultForegroundColor;
     }
+
     /**
      * @param defaultForegroundColor the defaultForegroundColor to set
      */
@@ -221,83 +246,94 @@ public class RoguePanel extends JPanel {
             throw new NullPointerException("defaultForegroundColor must not be null.");
         this.defaultForegroundColor = defaultForegroundColor;
     }
+
     /**
      * @return the backgroundColors
      */
     public Color[][] getBackgroundColors() {
         return backgroundColors;
     }
+
     /**
      * @param backgroundColors the backgroundColors to set
      */
     public void setBackgroundColors(Color[][] backgroundColors) {
         this.backgroundColors = backgroundColors;
     }
+
     /**
      * @return the foregroundColors
      */
     public Color[][] getForegroundColors() {
         return foregroundColors;
     }
+
     /**
      * @param foregroundColors the foregroundColors to set
      */
     public void setForegroundColors(Color[][] foregroundColors) {
         this.foregroundColors = foregroundColors;
     }
+
     /**
      * @return the oldChars
      */
     public char[][] getOldChars() {
         return oldChars;
     }
+
     /**
      * @param oldChars the oldChars to set
      */
     public void setOldChars(char[][] oldChars) {
         this.oldChars = oldChars;
     }
+
     /**
      * @return the oldBackgroundColors
      */
     public Color[][] getOldBackgroundColors() {
         return oldBackgroundColors;
     }
+
     /**
      * @param oldBackgroundColors the oldBackgroundColors to set
      */
     public void setOldBackgroundColors(Color[][] oldBackgroundColors) {
         this.oldBackgroundColors = oldBackgroundColors;
     }
+
     /**
      * @return the oldForegroundColors
      */
     public Color[][] getOldForegroundColors() {
         return oldForegroundColors;
     }
+
     /**
      * @param oldForegroundColors the oldForegroundColors to set
      */
     public void setOldForegroundColors(Color[][] oldForegroundColors) {
         this.oldForegroundColors = oldForegroundColors;
     }
+
     /**
      * Getter: Returns the value of whether the player is in the Game or not.
+     *
      * @return Boolean value inGame set to true if game is still running, and false if it has ended.
-    */
+     */
     public boolean getInGame() {
         return inGame;
     }
-    
+
     /**
      * Setter: Sets the value of whether the player is in the Game or not.
+     *
      * @param b Boolean value setting if game is still running, and false if it has ended.
-    */
+     */
     public void setInGame(boolean b) {
         inGame = b;
     }
-
-
 
 
     /**
@@ -309,6 +345,7 @@ public class RoguePanel extends JPanel {
 
     /**
      * Creates a grid of a specified width and height
+     *
      * @param width
      * @param height
      */
@@ -316,10 +353,10 @@ public class RoguePanel extends JPanel {
         super();
 
         if (width < 1)
-            throw new IllegalArgumentException("width " + width + " must be greater than 0." );
+            throw new IllegalArgumentException("width " + width + " must be greater than 0.");
 
         if (height < 1)
-            throw new IllegalArgumentException("height " + height + " must be greater than 0." );
+            throw new IllegalArgumentException("height " + height + " must be greater than 0.");
 
         gridWidth = width;
         gridHeight = height;
@@ -386,11 +423,11 @@ public class RoguePanel extends JPanel {
         g.drawImage(offscreenBuffer, 0, 0, this);
 
 
-        if(inGame) {
+        if (inGame) {
             //draw shadows that cover undiscovered areas
-            for(int x = 0; x < gridWidth; x++) {
-                for(int y = 0; y < gridHeight - 1; y++) {
-                    if(discoveredArea[x][y] != 1) {
+            for (int x = 0; x < gridWidth; x++) {
+                for (int y = 0; y < gridHeight - 1; y++) {
+                    if (discoveredArea[x][y] != 1) {
                         g.setColor(backgroundColors[x][y]);
                         g.fillRect(x * charWidth, y * charHeight, charWidth, charHeight);
                     }//if
@@ -419,6 +456,7 @@ public class RoguePanel extends JPanel {
     /**
      * Create a <code>LookupOp</code> object (lookup table) mapping the original
      * pixels to the background and foreground colors, respectively.
+     *
      * @param bgColor the background color
      * @param fgColor the foreground color
      * @return the <code>LookupOp</code> object (lookup table)
@@ -457,17 +495,20 @@ public class RoguePanel extends JPanel {
 
     /**
      * Clear the entire screen to whatever the default background color is.
+     *
      * @return this for convenient chaining of method calls
      */
     public RoguePanel clear() {
         return clear(' ', 0, 0, gridWidth, gridHeight, defaultForegroundColor, defaultBackgroundColor);
 
     }
+
     /**
      * Clear the character at int x,y to whatever the default background color is.
-     * @return this for convenient chaining of method calls
+     *
      * @param x the distance from the left of the position to be cleared
      * @param y the distance from the top of the position to be cleared
+     * @return this for convenient chaining of method calls
      */
     public RoguePanel clear(int x, int y) {
         return clear(' ', x, y, 1, 1, defaultForegroundColor, defaultBackgroundColor);
@@ -475,6 +516,7 @@ public class RoguePanel extends JPanel {
 
     /**
      * Clear the section of the screen with the specified character and whatever the specified foreground and background colors are.
+     *
      * @param character  the character to write
      * @param x          the distance from the left to begin writing from
      * @param y          the distance from the top to begin writing from
@@ -486,25 +528,25 @@ public class RoguePanel extends JPanel {
      */
     public RoguePanel clear(char character, int x, int y, int width, int height, Color foreground, Color background) {
         if (character < 0 || character >= glyphs.length)
-            throw new IllegalArgumentException("character " + character + " must be within range [0," + glyphs.length + "]." );
+            throw new IllegalArgumentException("character " + character + " must be within range [0," + glyphs.length + "].");
 
         if (x < 0 || x >= gridWidth)
-            throw new IllegalArgumentException("x " + x + " must be within range [0," + gridWidth + ")" );
+            throw new IllegalArgumentException("x " + x + " must be within range [0," + gridWidth + ")");
 
         if (y < 0 || y >= gridHeight)
-            throw new IllegalArgumentException("y " + y + " must be within range [0," + gridHeight + ")" );
+            throw new IllegalArgumentException("y " + y + " must be within range [0," + gridHeight + ")");
 
         if (width < 1)
-            throw new IllegalArgumentException("width " + width + " must be greater than 0." );
+            throw new IllegalArgumentException("width " + width + " must be greater than 0.");
 
         if (height < 1)
-            throw new IllegalArgumentException("height " + height + " must be greater than 0." );
+            throw new IllegalArgumentException("height " + height + " must be greater than 0.");
 
         if (x + width > gridWidth)
-            throw new IllegalArgumentException("x + width " + (x + width) + " must be less than " + (gridWidth + 1) + "." );
+            throw new IllegalArgumentException("x + width " + (x + width) + " must be less than " + (gridWidth + 1) + ".");
 
         if (y + height > gridHeight)
-            throw new IllegalArgumentException("y + height " + (y + height) + " must be less than " + (gridHeight + 1) + "." );
+            throw new IllegalArgumentException("y + height " + (y + height) + " must be less than " + (gridHeight + 1) + ".");
 
         for (int xo = x; xo < x + width; xo++) {
             for (int yo = y; yo < y + height; yo++) {
@@ -517,12 +559,13 @@ public class RoguePanel extends JPanel {
     /**
      * Write a character to the cursor's position.
      * This updates the cursor's position.
-     * @param character  the character to write
+     *
+     * @param character the character to write
      * @return this for convenient chaining of method calls
      */
     public RoguePanel write(char character) {
         if (character < 0 || character >= glyphs.length)
-            throw new IllegalArgumentException("character " + character + " must be within range [0," + glyphs.length + "]." );
+            throw new IllegalArgumentException("character " + character + " must be within range [0," + glyphs.length + "].");
 
         return write(character, Xcoord, Ycoord, defaultForegroundColor, defaultBackgroundColor);
     }
@@ -530,6 +573,7 @@ public class RoguePanel extends JPanel {
     /**
      * Write a string to the specified position with the specified foreground and background colors.
      * This updates the cursor's position but not the default foreground or background colors.
+     *
      * @param string     the string to write
      * @param x          the distance from the left to begin writing from
      * @param y          the distance from the top to begin writing from
@@ -539,16 +583,16 @@ public class RoguePanel extends JPanel {
      */
     public RoguePanel write(String string, int x, int y, Color foreground, Color background) {
         if (string == null)
-            throw new NullPointerException("string must not be null." );
+            throw new NullPointerException("string must not be null.");
 
         if (x + string.length() >= gridWidth)
-            throw new IllegalArgumentException("x + string.length() " + (x + string.length()) + " must be less than " + gridWidth + "." );
+            throw new IllegalArgumentException("x + string.length() " + (x + string.length()) + " must be less than " + gridWidth + ".");
 
         if (x < 0 || x >= gridWidth)
-            throw new IllegalArgumentException("x " + x + " must be within range [0," + gridWidth + ")." );
+            throw new IllegalArgumentException("x " + x + " must be within range [0," + gridWidth + ").");
 
         if (y < 0 || y >= gridHeight)
-            throw new IllegalArgumentException("y " + y + " must be within range [0," + gridHeight + ")." );
+            throw new IllegalArgumentException("y " + y + " must be within range [0," + gridHeight + ").");
 
         if (foreground == null)
             foreground = defaultForegroundColor;
@@ -561,9 +605,11 @@ public class RoguePanel extends JPanel {
         }
         return this;
     }
+
     /**
      * Write a character to the specified position with the specified foreground and background colors.
      * This updates the cursor's position but not the default foreground or background colors.
+     *
      * @param character  the character to write
      * @param x          the distance from the left to begin writing from
      * @param y          the distance from the top to begin writing from
@@ -573,13 +619,13 @@ public class RoguePanel extends JPanel {
      */
     public RoguePanel write(char character, int x, int y, Color foreground, Color background) {
         if (character < 0 || character >= glyphs.length)
-            throw new IllegalArgumentException("character " + character + " must be within range [0," + glyphs.length + "]." );
+            throw new IllegalArgumentException("character " + character + " must be within range [0," + glyphs.length + "].");
 
         if (x < 0 || x >= gridWidth) {
-            throw new IllegalArgumentException("x " + x + " must be within range [0," + gridWidth + ")" );
+            throw new IllegalArgumentException("x " + x + " must be within range [0," + gridWidth + ")");
         }
         if (y < 0 || y >= gridHeight) {
-            throw new IllegalArgumentException("y " + y + " must be within range [0," + gridHeight + ")" );
+            throw new IllegalArgumentException("y " + y + " must be within range [0," + gridHeight + ")");
         }
         if (foreground == null) foreground = defaultForegroundColor;
         if (background == null) background = defaultBackgroundColor;
@@ -587,7 +633,7 @@ public class RoguePanel extends JPanel {
         chars[x][y] = character;
         foregroundColors[x][y] = foreground;
         backgroundColors[x][y] = background;
-        if(character == '@') {
+        if (character == '@') {
             Xcoord = x + 1;
             Ycoord = y;
         }
@@ -628,7 +674,7 @@ public class RoguePanel extends JPanel {
 
         try {
             write("@", xPosition, yPosition, RoguePanel.white, RoguePanel.black);
-        } catch(Exception ex) {
+        } catch (Exception ex) {
             write("HERE BE DRAGONS", 0, 22, RoguePanel.red, RoguePanel.black);
         }
 
@@ -645,16 +691,19 @@ public class RoguePanel extends JPanel {
 
         write(i.getIcon(), xPosition, yPosition, RoguePanel.white, RoguePanel.black);
         //Tells the player an item is found using write function
-	if(i.hasItemHUD_Displayed()==false){
-	    write("   Wow an Item!", 60, 23, RoguePanel.magenta, RoguePanel.black);
-	    
-	    //sets item has displayed boolean value to true so it only displays once
-	    i.setItemHasDisplayed(true);
-	}
+        if (i.hasItemHUD_Displayed() == false) {
+
+            String itemStr = i.getTypeOfPiece();
+            write("You found " + itemStr + "!", 60, 23, RoguePanel.magenta, RoguePanel.black);
+
+            //sets item has displayed boolean value to true so it only displays once
+            i.setItemHasDisplayed(true);
+
+        }
     }
 
     /**
-     *moves the monster to position xPosition,yPosition
+     * moves the monster to position xPosition,yPosition
      * Prints the x and y coordinates of the character.
      */
     public void moveMonster(int xPosition, int yPosition, GamePiece piece) {
@@ -668,7 +717,8 @@ public class RoguePanel extends JPanel {
      */
     public void monsterAttack() {
         write("   You were hit", 60, 23, RoguePanel.yellow, RoguePanel.black);
-	Sound.monsterHitSound.play(); // Plays hit sound when monster hit player
+        if (!GUI.mute)
+            Sound.monsterHitSound.play(); // Plays hit sound when monster hit player
 
     }
 
@@ -683,19 +733,33 @@ public class RoguePanel extends JPanel {
      * Displays the losing screen with player's score and HighScores.
      */
     public void displayLosingScreen(int score, int[] array) {
-        write("To play again: close this window and press play on the main menu.", 7, 10, RoguePanel.green, RoguePanel.black);
-        write("YOU LOSE", 35, 6, RoguePanel.red, RoguePanel.black);
-        write("Score:" + score, 35, 14, RoguePanel.white, RoguePanel.black);
-        write("High Scores", 35, 16, RoguePanel.white, RoguePanel.black);
-        int b = 17;
-        int rank = 1;
-        for( int a : array) {
-            write("" + rank + ":" + a, 40, b, RoguePanel.white, RoguePanel.black);
-            b++;
-            rank++;
+        if (!GUI.highScoreWindow) {
+            write("To play again: close this window and press play on the main menu.", 7, 10, RoguePanel.green, RoguePanel.black);
+            write("YOU LOSE", 35, 6, RoguePanel.red, RoguePanel.black);
+            write("Score:" + score, 35, 14, RoguePanel.white, RoguePanel.black);
+            write("High Scores", 35, 16, RoguePanel.white, RoguePanel.black);
+            int b = 17;
+            int rank = 1;
+            for (int a : array) {
+                write("" + rank + ":" + a, 40, b, RoguePanel.white, RoguePanel.black);
+                b++;
+                rank++;
+            }
+        }
+        else {
+            write("High Scores", 30, 1, RoguePanel.white, RoguePanel.black);
+            int b = 2;
+            int rank = 1;
+            for (int a : array) {
+                write("" + rank + ":" + a, 35, b, RoguePanel.white, RoguePanel.black);
+                b++;
+                rank++;
+            }
+
         }
 
     }
+
     /**
      * Displays the winning screen
      */
@@ -704,10 +768,11 @@ public class RoguePanel extends JPanel {
     }
 
     /**
-     *  Draws the "empty space" as'_' in the game map.
+     * Draws the "empty space" as'_' in the game map.
+     *
      * @param xPosition x coordinate to draw empty space
      * @param yPosition y coordinate to draw empty space
-     * @param colorNum Integer value for color of ground   
+     * @param colorNum  Integer value for color of ground
      */
     public void emptySpace(int xPosition, int yPosition, int colorNum) {
         write("_", xPosition, yPosition, groundColor[colorNum % groundColor.length], RoguePanel.black);
@@ -715,23 +780,23 @@ public class RoguePanel extends JPanel {
 
     /**
      * Draws the "walls" as '0' in the game map.
+     *
      * @param xPosition x coordinate to draw empty space
      * @param yPosition y coordinate to draw empty space
-     * @param colorNum Integer value for color of ground   
+     * @param colorNum  Integer value for color of ground
      */
     public void drawWall(int xPosition, int yPosition, int colorNum) {
         write("0", xPosition, yPosition, groundColor[colorNum % groundColor.length], RoguePanel.black);
     }
 
     /**
-     *  Covers the areas where the player has not discovered yet.
-     *  @param shadow 2D array of places that the player has discovered
-    */
+     * Covers the areas where the player has not discovered yet.
+     *
+     * @param shadow 2D array of places that the player has discovered
+     */
     public void recordShadows(int[][] shadow) {
         discoveredArea = shadow;
     }
-
-
 
 
 }
