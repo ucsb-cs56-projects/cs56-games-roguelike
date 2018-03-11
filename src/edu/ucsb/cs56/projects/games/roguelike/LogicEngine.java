@@ -236,6 +236,7 @@ public class LogicEngine {
             thePlayer.setPlayerPosition(position);
         }
 
+
         if (thePlayer.getSpeed() > 1) {
             elixirStepCounter++;
             if (elixirStepCounter % 200 == 0) {
@@ -414,6 +415,7 @@ public class LogicEngine {
         createWalls();
 
         //thePlayer = new Player();
+
         floor[3][2] = thePlayer; //was 40, 12
 
         //directly calls the method below that creates monsters

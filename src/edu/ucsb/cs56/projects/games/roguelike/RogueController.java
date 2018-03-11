@@ -29,13 +29,15 @@ public class RogueController extends JFrame implements KeyListener {
     private int x = 3;
     private int y = 2;
 
+    private Random randomNumber = new Random();
+
+
     private GamePiece[][] floor;
 
     //startx and starty are the locations the player should spawn after a new level begins
     public final int startx = x;
     public final int starty = y;
 
-    private Random randomNumber = new Random();
 
     // origX and origY is the position the character is at before the it moves
     private int origX;
@@ -66,6 +68,23 @@ public class RogueController extends JFrame implements KeyListener {
         logicHandler = new LogicEngine();
         addKeyListener(this);
         discoveredArea = new int[canvas.getGridWidth()][canvas.getGridHeight() - 1];
+
+        //********Carolyn's attempt********************************
+        //NON OBSTACLE GENERATOR WORKS, BUT NEED TO READJUST THE VISIBLE AREA SURROUNDING INITIAL LOCATION
+        int randXPos = 1;
+        int randYPos = 1;
+        boolean isObstacleLocation = true;
+        while(isObstacleLocation){
+            randXPos = (int) (Math.random() * (76) + 1);
+            randYPos = (int) (Math.random() * (20) + 1);
+            isObstacleLocation = isObstacle(randXPos, randYPos,randXPos, randYPos);
+        }
+
+        System.out.println("Generated a non wall coord at: " + randXPos + "," + randYPos);
+
+        //****************************************************************
+
+
     }
 
 
@@ -625,6 +644,7 @@ public class RogueController extends JFrame implements KeyListener {
         mainControl.checkPlayerStatus();
         MakeCloseOptionToMainMenu(mainControl);
     }
+
 
     /**
      * A method included within the Rogue Controller to force the window close button to open Main Menu
