@@ -364,16 +364,15 @@ public class LogicEngine {
             else {
                 double random = Math.random();
 
-                if (0 <= random && random <= .2) { // 20% chance to drop Health Potion
+                if (0 <= random && random <= .25) { // 25% chance to drop Health Potion
                     createItem(x, y, new HealthPotion());
-                } else if (.2 < random && random <= .4) { // 20% chance to drop Beef
+                } else if (.25 < random && random <= .5) { // 25% chance to drop Beef
                     createItem(x, y, new Beef());
-                } else if (.4 < random && random <= .55) { // 15% chance to drop Pioson
+                } else if (.5 < random && random <= .75) { // 25% chance to drop Pioson
                     createItem(x, y, new Poison());
-                } else if (.55 < random && random <= .60) {
-                    createItem(x, y, new Elixir()); // 5% chance of drop Elixir
-                } else // no item drop :(
-                    floor[x][y] = null;
+                } else if (.75 < random && random <= .100) {
+                    createItem(x, y, new Elixir()); // 25% chance of drop Elixir
+                }
 
             }
 
@@ -681,6 +680,10 @@ public class LogicEngine {
 
     }
 
+    /**
+     * Creates one chest per level at random
+     */
+
     public void createChest(){
         int[] chestCoords = newCoordsGenerator();
         floor[chestCoords[0]][chestCoords[1]] = new Monster(0, Monster.createChest());
@@ -689,6 +692,10 @@ public class LogicEngine {
         listOfMonsters[chestCoords[0]][chestCoords[1]].setIcon('C');
         listOfMonsters[chestCoords[0]][chestCoords[1]].setMonsterPosition(chestCoords[0], chestCoords[1]);
     }
+
+    /**
+     * Generates coordinates on the map that are not occupied by walls/other objects
+     */
 
     public int[] newCoordsGenerator(){
         int [] newCoords = new int[2];
@@ -705,8 +712,6 @@ public class LogicEngine {
         }
         newCoords[0] = newXPos;
         newCoords[1] = newYPos;
-
-        //System.out.println("New generator was called, and the new coordinates are: " + newXPos + "," + newYPos);
 
         return newCoords;
     }

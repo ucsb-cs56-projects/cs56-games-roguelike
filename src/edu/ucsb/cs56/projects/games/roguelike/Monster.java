@@ -13,7 +13,7 @@ public class Monster implements GamePiece {
     private int hitPoints;
     private int attack;
     private int direction = 0;
-private int typeOfMovement;
+    private int typeOfMovement;
     private int[] position = new int[2];
     private int pointValue = 5;
     private char icon;
@@ -71,16 +71,16 @@ private int typeOfMovement;
     }
 
     /**
-     * Static factory method for generating a monster based on an input string.
+     * Static factory method for generating a chest based on an input string.
      */
 
     public static int[] createChest(){
         return CHEST;
     }
 
-    public void setTypeOfMovement(int typeOfMovement) {
-        this.typeOfMovement = typeOfMovement;
-    }
+    /**
+     * Static factory method for generating a monster based on an input string.
+     */
 
     public static int[] createMonster() {
         int n = (int) (Math.random() * numMonsters);
@@ -99,6 +99,13 @@ private int typeOfMovement;
         if (n == 6)
             return ZOMBIE;
         return MONSTER;
+    }
+
+    /**
+     * @param typeOfMovement monster's type of movement
+     */
+    public void setTypeOfMovement(int typeOfMovement) {
+        this.typeOfMovement = typeOfMovement;
     }
 
     /**
