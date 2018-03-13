@@ -80,7 +80,7 @@ public class RogueController extends JFrame implements KeyListener {
             isObstacleLocation = isObstacle(randXPos, randYPos,randXPos, randYPos);
         }
 
-        System.out.println("Generated a non wall coord at: " + randXPos + "," + randYPos);
+        //System.out.println("Generated a non wall coord at: " + randXPos + "," + randYPos);
 
         //****************************************************************
 
@@ -199,7 +199,7 @@ public class RogueController extends JFrame implements KeyListener {
                         logicHandler.attack(xPos, yPos, xOrig, yOrig);
                         if (xPos > 0 && xPos <= 78 && yPos > 0 && yPos <= 20) {
                             //display the you were attacked flag if the collision was with a player
-                            if (logicHandler.getObject(xPos, yPos) instanceof Player) {
+                            if (logicHandler.getObject(xPos, yPos) instanceof Player && mon[xOrig][yOrig].getIcon() != 'C') {
                                 canvas.monsterAttack();
                                 canvas.moveHeroAnimated(x, y, logicHandler.getPlayer().getHitPoints(),
                                         logicHandler.getPlayer().getAttack(),
@@ -207,18 +207,22 @@ public class RogueController extends JFrame implements KeyListener {
                                         , logicHandler.getPlayer().getScore());
                             }
                             canvas.moveMonster(xOrig, yOrig, logicHandler.getObject(xOrig, yOrig));
+
                         }
-                    } else if (logicHandler.movable(xPos, yPos)) {
+                    } else if (logicHandler.movable(xPos, yPos) && mon[xOrig][yOrig].getIcon() != 'C') {
                         logicHandler.move(xPos, yPos, xOrig, yOrig);
                         canvas.moveMonster(xPos, yPos, logicHandler.getObject(xPos, yPos));
+
 
                         //This was a fix for monsters disappearing. Monster will remain in the same place if not movable
                     } else {
                         logicHandler.move(xOrig, yOrig, xOrig, yOrig);
                         canvas.moveMonster(xOrig, yOrig, logicHandler.getObject(xOrig, yOrig));
 
+
                     }
                 }
+
             }
         }
 
@@ -518,8 +522,8 @@ public class RogueController extends JFrame implements KeyListener {
 
         for (int xOrig = 0; xOrig < gridWidth; xOrig++) {
             for (int yOrig = 0; yOrig < gridHeight; yOrig++) {
-                if (mon[xOrig][yOrig] != null) {
-                    return;
+                if (mon[xOrig][yOrig] != null && mon[xOrig][yOrig].getIcon() != 'C') {
+                    return; //checks to see if monsters still exist. if they do, function returns
                 }
             }
         }
@@ -531,11 +535,11 @@ public class RogueController extends JFrame implements KeyListener {
         discoveredArea = new int[canvas.getGridWidth()][canvas.getGridHeight() - 1]; //resets exploration
         logicHandler.createAllObjects();//clear board, make walls, player, and monsters
         clearAllItems();
-        logicHandler.resetPlayerPosition();//moves the player back to the starting position
-        canvas.moveHeroAnimated(startx, starty, logicHandler.getPlayer().getHitPoints(), logicHandler.getPlayer().getAttack(),
+        int[] newPosition = logicHandler.resetPlayerPosition();//moves the player back to the starting position
+        canvas.moveHeroAnimated(newPosition[0], newPosition[1], logicHandler.getPlayer().getHitPoints(), logicHandler.getPlayer().getAttack(),
                 logicHandler.getPlayer().getSpeed(), logicHandler.getLevel(), logicHandler.getPlayer().getScore());
-        this.x = startx;
-        this.y = starty;
+        this.x = newPosition[0];
+        this.y = newPosition[1];
     }
 
     /**

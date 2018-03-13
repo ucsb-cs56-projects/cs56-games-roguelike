@@ -348,19 +348,37 @@ public class LogicEngine {
 
         if (listOfMonsters[x][y] != null && listOfMonsters[x][y].getHitPoints() <= 0) {
 
-            double random = Math.random();
+            if(listOfMonsters[x][y].getIcon() == 'C'){   //a chest was found
+                double random = Math.random();
 
-            if (0 <= random && random <= .2) { // 20% chance to drop Health Potion
-                createItem(x, y, new HealthPotion());
-            } else if (.2 < random && random <= .4) { // 20% chance to drop Beef
-                createItem(x, y, new Beef());
-            } else if (.4 < random && random <= .55) { // 15% chance to drop Pioson
-                createItem(x, y, new Poison());
-            } else if (.55 < random && random <= .60) {
-                createItem(x, y, new Elixir()); // 5% chance of drop Elixir
-            } else // no item drop :(
-                floor[x][y] = null;
+                if (0 <= random && random <= .25) { // 25% chance to drop Health Potion
+                    createItem(x, y, new HealthPotion());
+                } else if (.25 < random && random <= .5) { // 25% chance to drop Beef
+                    createItem(x, y, new Beef());
+                } else if (.5 < random && random <= .75) { // 25% chance to drop Pioson
+                    createItem(x, y, new Poison());
+                } else if (.75 < random && random <= .100) {
+                    createItem(x, y, new Elixir()); // 25% chance of drop Elixir
+                }
+                else // no item drop :(
+                    floor[x][y] = null;
+            }
+            else {
+                double random = Math.random();
 
+                if (0 <= random && random <= .2) { // 20% chance to drop Health Potion
+                    createItem(x, y, new HealthPotion());
+                } else if (.2 < random && random <= .4) { // 20% chance to drop Beef
+                    createItem(x, y, new Beef());
+                } else if (.4 < random && random <= .55) { // 15% chance to drop Pioson
+                    createItem(x, y, new Poison());
+                } else if (.55 < random && random <= .60) {
+                    createItem(x, y, new Elixir()); // 5% chance of drop Elixir
+                } else // no item drop :(
+                    floor[x][y] = null;
+
+
+            }
 
             listOfMonsters[x][y] = null;
             if (!GUI.mute)
@@ -420,6 +438,7 @@ public class LogicEngine {
 
         //directly calls the method below that creates monsters
         this.createMonster();
+        this.createChest();
     }
 
     /**
@@ -609,10 +628,11 @@ public class LogicEngine {
     /**
      * Resets the player to the starting position. Used at the start of a new level.
      */
-    public void resetPlayerPosition() {
-        int[] resetPosition = {3, 2};
+    public int[] resetPlayerPosition() {
+        int[] resetPosition = newCoordsGenerator();
         thePlayer.setPlayerPosition(resetPosition);
-        floor[3][2] = thePlayer;
+        floor[resetPosition[0]][resetPosition[1]] = thePlayer;
+        return resetPosition;
     }
 
 
@@ -662,5 +682,54 @@ public class LogicEngine {
             }
             i++;
         }
+
     }
+
+    /**
+     * Creates one chest per level at random
+     */
+
+    public void createChest(){
+        int[] chestCoords = newCoordsGenerator();
+        floor[chestCoords[0]][chestCoords[1]] = new Monster(0, Monster.createChest());
+        listOfMonsters[chestCoords[0]][chestCoords[1]] = (Monster) floor[chestCoords[0]][chestCoords[1]];
+        listOfMonsters[chestCoords[0]][chestCoords[1]].setLevelBonus(level);
+        listOfMonsters[chestCoords[0]][chestCoords[1]].setIcon('C');
+        listOfMonsters[chestCoords[0]][chestCoords[1]].setMonsterPosition(chestCoords[0], chestCoords[1]);
+    }
+
+    /**
+     * Generates coordinates on the map that are not occupied by walls/other objects
+     */
+
+    public int[] newCoordsGenerator(){
+        int [] newCoords = new int[2];
+        Random numGenerator = new Random();
+        boolean foundNewCoordinates = false;
+        int newXPos = 1;
+        int newYPos = 1;
+        while(!foundNewCoordinates){
+            newXPos = numGenerator.nextInt(77);
+            newYPos = numGenerator.nextInt(21);
+
+            //check that this new coordinate is null in center, and all around by 1 coordinate in every direction
+            if (floor[newXPos][newYPos] == null  //center
+                    && floor[newXPos-1][newYPos] == null  //one left
+                    && floor[newXPos+1][newYPos] == null  //one right
+                    && floor[newXPos][newYPos+1] == null //one up
+                    && floor[newXPos][newYPos-1] == null //one down
+                    && floor[newXPos-1][newYPos-1] == null  //bottom left corner
+                    && floor[newXPos-1][newYPos+1] == null  //top left corner
+                    && floor[newXPos+1][newYPos+1] == null  //top right corner
+                    && floor[newXPos+1][newYPos-1] == null)   //bottom right corner
+                {
+                foundNewCoordinates = true;
+            }
+        }
+        newCoords[0] = newXPos;
+        newCoords[1] = newYPos;
+
+        return newCoords;
+    }
+
 }
