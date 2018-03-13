@@ -729,36 +729,6 @@ public class RoguePanel extends JPanel {
         write("NEXT LEVEL!  ", 63, 23, RoguePanel.yellow, RoguePanel.black);
     }
 
-    /**
-     * Displays the losing screen with player's score and HighScores.
-     */
-    public void displayLosingScreen(int score, int[] array) {
-        if (!GUI.highScoreWindow) {
-            write("To play again: close this window and press play on the main menu.", 7, 10, RoguePanel.green, RoguePanel.black);
-            write("YOU LOSE", 35, 6, RoguePanel.red, RoguePanel.black);
-            write("Score:" + score, 35, 14, RoguePanel.white, RoguePanel.black);
-            write("High Scores", 35, 16, RoguePanel.white, RoguePanel.black);
-            int b = 17;
-            int rank = 1;
-            for (int a : array) {
-                write("" + rank + ":" + a, 40, b, RoguePanel.white, RoguePanel.black);
-                b++;
-                rank++;
-            }
-        }
-        else {
-            write("High Scores", 30, 1, RoguePanel.white, RoguePanel.black);
-            int b = 2;
-            int rank = 1;
-            for (int a : array) {
-                write("" + rank + ":" + a, 35, b, RoguePanel.white, RoguePanel.black);
-                b++;
-                rank++;
-            }
-
-        }
-
-    }
 
     /**
      * Displays the winning screen

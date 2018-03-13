@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -19,10 +21,10 @@ import java.io.FileReader;
  * @author Derek Wang
  */
 
-
-//change to cardlayout?
-public class GUI {
+public class GUI implements ItemListener {
     public static int difficulty = 1;
+    static boolean mute = false;
+    public static JPanel guiFrame;
 
     /*
      * All the main does is call the no-arg constructor of the GUI class
@@ -37,50 +39,24 @@ public class GUI {
      * This GUI class constructor makes the frame and the buttons for the menu screen.
      */
     public GUI() {
-        final JFrame guiFrame = new JFrame("Roguelike"); // frame window title will be Roguelike
+        JFrame frame = new JFrame("Roguelike");
+        JPanel mainMenu = new JPanel();
+        JPanel instructions = new JPanel();
+        JPanel options = new JPanel();
+        JPanel highScore = new JPanel();
 
+        //PLAY BUTTON
         JButton playButton = new JButton("Play"); //new button with text "Play"
         setButtonCharacteristics(playButton);
         playButton.addActionListener(new ActionListener() {
             int currDifficulty = difficulty;
-
             public void actionPerformed(ActionEvent e) {
                 openGameWindow();
-                guiFrame.setVisible(false); //Takes away menu after game starts
+                frame.setVisible(false); //Takes away menu after game starts
             }
         });
 
-        JButton instrButton = new JButton("Instructions");
-        setButtonCharacteristics(instrButton);
-        instrButton.addActionListener(new ActionListener() { // make anonymous innerclass to call openInstructionsWindow, which does what it says
-            public void actionPerformed(ActionEvent e) {
-                //Close Main Menu until close button is clicked
-                guiFrame.setVisible(false);
-                openInstructionsWindow();
-            }
-        });
-
-        JButton optionButton = new JButton("Options");
-        setButtonCharacteristics(optionButton);
-        optionButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                //Close Main Menu until close button is clicked
-                guiFrame.setVisible(false);
-                openOptionsWindow();
-            }
-        });
-
-
-        JButton hiscoreButton = new JButton("View Highscores");
-        setButtonCharacteristics(hiscoreButton);
-        hiscoreButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                //Close Main Menu until close button is clicked
-                guiFrame.setVisible(false);
-                openHighScoresWindow();
-            }
-        });
-
+        //QUIT BUTTON
         JButton quitButton = new JButton("Quit");
         setButtonCharacteristics(quitButton);
         quitButton.addActionListener(new ActionListener() { // make anonymous inner class to quit program when quit button is clicked
@@ -89,62 +65,7 @@ public class GUI {
             }
         });
 
-        guiFrame.add(playButton);
-        guiFrame.add(instrButton);
-        guiFrame.add(optionButton);
-        guiFrame.add(hiscoreButton);
-        guiFrame.add(quitButton);
-
-
-        guiFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        guiFrame.getContentPane().setLayout(new GridLayout(5, 1)); // grid layout with 5 vertically stacked components
-        guiFrame.pack();
-        guiFrame.setLocationRelativeTo(null); // makes GUI appear in screen's center
-        guiFrame.setVisible(true);
-    }
-
-    /**
-     * Opens a new window with game instructions displayed.
-     */
-    public void openInstructionsWindow() {
-        String content = String.format("Prepare yourself to be spooked out of existense.\n This Roguelike is like no other Roguelike.\n You are an @ symbol who has managed to find itself in the spookiest of dungeons. \nArmed with the ability to move in a desired direction, you will discover the true horrors that hide in the darkness.Muahahaha \n \nInstructions:\nUse WASD to move UP LEFT DOWN RIGHT \nUse QEZC to move UPLEFT UPRIGHT DOWNLEFT DOWNRIGHT \nUse L to shiver in fear and let a turn pass you by\n(Trust me, you\'re gonna press this button a lot muahahahha)\n \nNOTE: \n*Attack monsters by attempting to move directly on them. \n(IF THEY DON\'T KILL YOU FIRST o_O)\n \n*Monsters can steal items by moving on them. \n(OH BOY, this game is gonna make you rage!)\n\n*You will progress to next level if you can get over your fear and slay each monster in the dungeon.\n\n*Discover the darkness by exploring the dungeon on each level.\n(This isn\'t just any darkness, it\'s ADVANCED darkness!)\n\n*These monsters get more RIPPED, NASTY, and just utterly more DISGUSTING each level you progress.\n \nMonster Drops:\n-20%% [H] Health Potion(+20hp)\n-20%% [+] Beef(+Attack Power) \n-15%% [!] Poison(-20hp) \n-5%%  [S] Elixir(increases movement steps)\n");
-
-        Font font = new Font("Times New Roman", Font.PLAIN, 12);
-
-        JTextArea instructions = new JTextArea(content, 20, 40);
-        instructions.setFont(font);
-        instructions.setForeground(Color.CYAN);
-        instructions.setBackground(Color.BLACK);
-        instructions.setEditable(false);
-        instructions.setLineWrap(true);
-        instructions.setWrapStyleWord(true);
-
-        JScrollPane scrollPane = new JScrollPane(instructions);
-
-        JFrame instrFrame = new JFrame("Instructions");
-
-        instrFrame.add(scrollPane);
-        instrFrame.pack();
-        instrFrame.setVisible(true);
-        instrFrame.setLocationRelativeTo(null);
-        RogueController.MakeCloseOptionToMainMenu(instrFrame);
-    }
-
-    static boolean mute = false;
-
-    public void openOptionsWindow() {
-
-
-        JTextArea optionsText = new JTextArea("Options Menu", 20, 40);
-
-        Font font = new Font("Times New Roman", Font.PLAIN, 12);
-        optionsText.setFont(font);
-        optionsText.setForeground(Color.CYAN);
-        optionsText.setBackground(Color.BLACK);
-        optionsText.setEditable(false);
-        optionsText.setLineWrap(true);
-        optionsText.setWrapStyleWord(true);
-
+        //MUTE BUTTON
         JButton muteButton = new JButton("Mute: " + mute);
         setButtonCharacteristics(muteButton);
         muteButton.addActionListener(new ActionListener() {
@@ -158,11 +79,10 @@ public class GUI {
             }
         });
 
-        //increasing the difficultyLevel increases the max number of monsters you start with
+        //DIFFICULTY BUTTON
         JButton difficultyButton = new JButton("Difficulty: " + GUI.difficulty);
         setButtonCharacteristics(difficultyButton);
         difficultyButton.addActionListener(new ActionListener() {
-
             public void actionPerformed(ActionEvent e) {
                 GUI.difficulty += 1;
                 if (GUI.difficulty > 3) {
@@ -174,32 +94,97 @@ public class GUI {
             }
         });
 
+        //INSTRUCTIONS STUFF
+        String content = String.format("Prepare yourself to be spooked out of existense.\n This Roguelike is like no other Roguelike.\n You are an @ symbol who has managed to find itself in the spookiest of dungeons. \nArmed with the ability to move in a desired direction, you will discover the true horrors that hide in the darkness.Muahahaha \n \nInstructions:\nUse WASD to move UP LEFT DOWN RIGHT \nUse QEZC to move UPLEFT UPRIGHT DOWNLEFT DOWNRIGHT \nUse L to shiver in fear and let a turn pass you by\n(Trust me, you\'re gonna press this button a lot muahahahha)\n \nNOTE: \n*Attack monsters by attempting to move directly on them. \n(IF THEY DON\'T KILL YOU FIRST o_O)\n \n*Monsters can steal items by moving on them. \n(OH BOY, this game is gonna make you rage!)\n\n*You will progress to next level if you can get over your fear and slay each monster in the dungeon.\n\n*Discover the darkness by exploring the dungeon on each level.\n(This isn\'t just any darkness, it\'s ADVANCED darkness!)\n\n*These monsters get more RIPPED, NASTY, and just utterly more DISGUSTING each level you progress.\n \nMonster Drops:\n-20%% [H] Health Potion(+20hp)\n-20%% [+] Beef(+Attack Power) \n-15%% [!] Poison(-20hp) \n-5%%  [S] Elixir(increases movement steps)\n");
+        Font font = new Font("Times New Roman", Font.PLAIN, 12);
+        JTextArea inst = new JTextArea(content, 35, 45);
+        inst.setFont(font);
+        inst.setForeground(Color.CYAN);
+        inst.setBackground(Color.BLACK);
+        inst.setEditable(false);
+        inst.setLineWrap(true);
+        inst.setWrapStyleWord(true);
+        instructions.add(inst);
 
-        JFrame optionsFrame = new JFrame("Options");
-        optionsFrame.add(optionsText);
-        optionsFrame.add(muteButton);
-        optionsFrame.add(difficultyButton);
-        optionsFrame.pack();
-        optionsFrame.setVisible(true);
-        optionsFrame.getContentPane().setLayout(new GridLayout(3, 1));
-        optionsFrame.setLocationRelativeTo(null);
-        RogueController.MakeCloseOptionToMainMenu(optionsFrame);
+        //HIGH SCORE STUFF
+        int[] array = new int[5];
+        int a = 0;
+        try {
+            File myFile = new File("Score.txt");
+            FileReader fileReader = new FileReader("Score.txt");
+            BufferedReader reader = new BufferedReader(fileReader);
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                array[a] = Integer.parseInt(line);
+                a++;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        String hScore = "High Scores: \n";
+        for (int i: array) hScore += "  " + i + "\n";
+        JTextArea highScores = new JTextArea(hScore, 35, 45);
+        highScores.setFont(font);
+        highScores.setForeground(Color.CYAN);
+        highScores.setBackground(Color.BLACK);
+        highScores.setEditable(false);
+        highScores.setLineWrap(true);
+        highScores.setWrapStyleWord(true);
+        highScore.add(highScores);
+
+
+        JPanel comboBoxPanel = new JPanel();
+        guiFrame = new JPanel(new CardLayout());
+        String comboBoxItems[] = {"Main Menu","Instructions","Options","High Scores"};
+        JComboBox cb = new JComboBox(comboBoxItems);
+        cb.setEditable(false);
+        cb.setPreferredSize(new Dimension(500,75));
+        cb.setForeground(Color.CYAN);
+        cb.setBackground(Color.BLACK);
+        cb.setOpaque(false);
+        cb.addItemListener(this);
+        comboBoxPanel.add(cb);
+
+
+        mainMenu.setForeground(Color.CYAN);
+        mainMenu.setBackground(Color.BLACK);
+        mainMenu.add(playButton);
+        mainMenu.add(quitButton);
+
+        options.setForeground(Color.CYAN);
+        options.setBackground(Color.BLACK);
+        options.add(muteButton);
+        options.add(difficultyButton);
+
+
+        highScore.setForeground(Color.CYAN);
+        highScore.setBackground(Color.BLACK);
+
+        instructions.setForeground(Color.CYAN);
+        instructions.setBackground(Color.BLACK);
+
+        guiFrame.add(mainMenu, "Main Menu");
+        guiFrame.add(instructions, "Instructions");
+        guiFrame.add(options, "Options");
+        guiFrame.add(highScore, "High Scores");
+        guiFrame.setForeground(Color.CYAN);
+        guiFrame.setBackground(Color.BLACK);
+
+
+        frame.setForeground(Color.CYAN);
+        frame.setBackground(Color.BLACK);
+        frame.add(comboBoxPanel, BorderLayout.PAGE_START);
+        frame.add(guiFrame, BorderLayout.CENTER);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setLocationRelativeTo(null); // makes GUI appear in screen's center
+        frame.setVisible(true);
     }
 
-
-    /*
-     * This function calls a static method in the RogueController class that opens the losing screen (which contains high scores)
-     */
-    public static boolean highScoreWindow = false;
-
-    public void openHighScoresWindow() {
-        highScoreWindow = true;
-        RogueController.goToLosingScreen();
-        highScoreWindow = false;
-        //JFrame highScoreFrame = new JFrame("High Scores");
-        // display the HighScore after game is over by reading from Score.txt...
-
-}
+    public void itemStateChanged(ItemEvent evt) {
+        CardLayout c1 = (CardLayout)(guiFrame.getLayout());
+        c1.show(guiFrame, (String)evt.getItem());
+    }
 
     /*
      * This function opens up the game window for the player to begin playing the game.
@@ -208,7 +193,7 @@ public class GUI {
         Sound.menuMusic.stop();
         if (!GUI.mute)
             Sound.gameMusic1.loop();
-
+        guiFrame.setVisible(false);
         String diffStr = "" + GUI.difficulty;
         String[] args = {diffStr};
         RogueController.main(args);

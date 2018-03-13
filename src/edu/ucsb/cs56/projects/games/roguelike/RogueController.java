@@ -448,7 +448,11 @@ public class RogueController extends JFrame implements KeyListener {
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-            canvas.displayLosingScreen(logicHandler.getPlayer().getScore(), array);
+            Sound.gameMusic1.stop();
+            Sound.gameMusic2.stop();
+            Sound.gameMusic3.stop();
+            new LosingScreen(logicHandler.getPlayer().getScore());
+            setVisible(false);
         }
         // display the score and highScores after game is over and write the new highScore into Score.txt
         if (logicHandler.playerIsDead() && logicHandler.getGameOver() == false) {
@@ -492,7 +496,11 @@ public class RogueController extends JFrame implements KeyListener {
                 ex.printStackTrace();
             }
             canvas.clear();
-            canvas.displayLosingScreen(logicHandler.getPlayer().getScore(), array);
+            Sound.gameMusic1.stop();
+            Sound.gameMusic2.stop();
+            Sound.gameMusic3.stop();
+            new LosingScreen(logicHandler.getPlayer().getScore());
+            setVisible(false);
             logicHandler.setGameOver(true);
         }
 
