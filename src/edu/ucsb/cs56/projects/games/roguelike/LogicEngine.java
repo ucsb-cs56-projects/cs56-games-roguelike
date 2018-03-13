@@ -628,10 +628,11 @@ public class LogicEngine {
     /**
      * Resets the player to the starting position. Used at the start of a new level.
      */
-    public void resetPlayerPosition() {
-        int[] resetPosition = {3,2};
+    public int[] resetPlayerPosition() {
+        int[] resetPosition = newCoordsGenerator();
         thePlayer.setPlayerPosition(resetPosition);
-        floor[3][2] = thePlayer;
+        floor[resetPosition[0]][resetPosition[1]] = thePlayer;
+        return resetPosition;
     }
 
 
@@ -710,7 +711,18 @@ public class LogicEngine {
         while(!foundNewCoordinates){
             newXPos = numGenerator.nextInt(77);
             newYPos = numGenerator.nextInt(21);
-            if (floor[newXPos][newYPos] == null){
+
+            //check that this new coordinate is null in center, and all around by 1 coordinate in every direction
+            if (floor[newXPos][newYPos] == null  //center
+                    && floor[newXPos-1][newYPos] == null  //one left
+                    && floor[newXPos+1][newYPos] == null  //one right
+                    && floor[newXPos][newYPos+1] == null //one up
+                    && floor[newXPos][newYPos-1] == null //one down
+                    && floor[newXPos-1][newYPos-1] == null  //bottom left corner
+                    && floor[newXPos-1][newYPos+1] == null  //top left corner
+                    && floor[newXPos+1][newYPos+1] == null  //top right corner
+                    && floor[newXPos+1][newYPos-1] == null)   //bottom right corner
+                {
                 foundNewCoordinates = true;
             }
         }

@@ -527,11 +527,11 @@ public class RogueController extends JFrame implements KeyListener {
         discoveredArea = new int[canvas.getGridWidth()][canvas.getGridHeight() - 1]; //resets exploration
         logicHandler.createAllObjects();//clear board, make walls, player, and monsters
         clearAllItems();
-        logicHandler.resetPlayerPosition();//moves the player back to the starting position
-        canvas.moveHeroAnimated(startx, starty, logicHandler.getPlayer().getHitPoints(), logicHandler.getPlayer().getAttack(),
+        int[] newPosition = logicHandler.resetPlayerPosition();//moves the player back to the starting position
+        canvas.moveHeroAnimated(newPosition[0], newPosition[1], logicHandler.getPlayer().getHitPoints(), logicHandler.getPlayer().getAttack(),
                 logicHandler.getPlayer().getSpeed(), logicHandler.getLevel(), logicHandler.getPlayer().getScore());
-        this.x = startx;
-        this.y = starty;
+        this.x = newPosition[0];
+        this.y = newPosition[1];
     }
 
     /**
