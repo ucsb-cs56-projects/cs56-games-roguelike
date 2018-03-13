@@ -708,7 +708,10 @@ public class RoguePanel extends JPanel {
      */
     public void moveMonster(int xPosition, int yPosition, GamePiece piece) {
 
-        write(piece.getIcon(), xPosition, yPosition, RoguePanel.red, RoguePanel.black);
+        if(piece.getIcon() == 'C')
+            write(piece.getIcon(), xPosition, yPosition, RoguePanel.yellow, RoguePanel.black);
+        else
+            write(piece.getIcon(), xPosition, yPosition, RoguePanel.red, RoguePanel.black);
 
     }
 

@@ -348,19 +348,34 @@ public class LogicEngine {
 
         if (listOfMonsters[x][y] != null && listOfMonsters[x][y].getHitPoints() <= 0) {
 
-            double random = Math.random();
+            if(listOfMonsters[x][y].getIcon() == 'C'){   //a chest was found
+                double random = Math.random();
 
-            if (0 <= random && random <= .2) { // 20% chance to drop Health Potion
-                createItem(x, y, new HealthPotion());
-            } else if (.2 < random && random <= .4) { // 20% chance to drop Beef
-                createItem(x, y, new Beef());
-            } else if (.4 < random && random <= .55) { // 15% chance to drop Pioson
-                createItem(x, y, new Poison());
-            } else if (.55 < random && random <= .60) {
-                createItem(x, y, new Elixir()); // 5% chance of drop Elixir
-            } else // no item drop :(
-                floor[x][y] = null;
+                if (0 <= random && random <= .25) { // 20% chance to drop Health Potion
+                    createItem(x, y, new HealthPotion());
+                } else if (.25 < random && random <= .5) { // 20% chance to drop Beef
+                    createItem(x, y, new Beef());
+                } else if (.5 < random && random <= .75) { // 15% chance to drop Pioson
+                    createItem(x, y, new Poison());
+                } else if (.75 < random && random <= .100) {
+                    createItem(x, y, new Elixir()); // 5% chance of drop Elixir
+                }
+            }
+            else {
+                double random = Math.random();
 
+                if (0 <= random && random <= .2) { // 20% chance to drop Health Potion
+                    createItem(x, y, new HealthPotion());
+                } else if (.2 < random && random <= .4) { // 20% chance to drop Beef
+                    createItem(x, y, new Beef());
+                } else if (.4 < random && random <= .55) { // 15% chance to drop Pioson
+                    createItem(x, y, new Poison());
+                } else if (.55 < random && random <= .60) {
+                    createItem(x, y, new Elixir()); // 5% chance of drop Elixir
+                } else // no item drop :(
+                    floor[x][y] = null;
+
+            }
 
             listOfMonsters[x][y] = null;
             if (!GUI.mute)
@@ -420,6 +435,7 @@ public class LogicEngine {
 
         //directly calls the method below that creates monsters
         this.createMonster();
+        this.createChest();
     }
 
     /**
@@ -662,5 +678,37 @@ public class LogicEngine {
             }
             i++;
         }
+
     }
+
+    public void createChest(){
+        int[] chestCoords = newCoordsGenerator();
+        floor[chestCoords[0]][chestCoords[1]] = new Monster(0, Monster.createChest());
+        listOfMonsters[chestCoords[0]][chestCoords[1]] = (Monster) floor[chestCoords[0]][chestCoords[1]];
+        listOfMonsters[chestCoords[0]][chestCoords[1]].setLevelBonus(level);
+        listOfMonsters[chestCoords[0]][chestCoords[1]].setIcon('C');
+        listOfMonsters[chestCoords[0]][chestCoords[1]].setMonsterPosition(chestCoords[0], chestCoords[1]);
+    }
+
+    public int[] newCoordsGenerator(){
+        int [] newCoords = new int[2];
+        Random numGenerator = new Random();
+        boolean foundNewCoordinates = false;
+        int newXPos = 1;
+        int newYPos = 1;
+        while(!foundNewCoordinates){
+            newXPos = numGenerator.nextInt(77);
+            newYPos = numGenerator.nextInt(21);
+            if (floor[newXPos][newYPos] == null){
+                foundNewCoordinates = true;
+            }
+        }
+        newCoords[0] = newXPos;
+        newCoords[1] = newYPos;
+
+        //System.out.println("New generator was called, and the new coordinates are: " + newXPos + "," + newYPos);
+
+        return newCoords;
+    }
+
 }

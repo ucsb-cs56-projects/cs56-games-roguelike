@@ -80,7 +80,7 @@ public class RogueController extends JFrame implements KeyListener {
             isObstacleLocation = isObstacle(randXPos, randYPos,randXPos, randYPos);
         }
 
-        System.out.println("Generated a non wall coord at: " + randXPos + "," + randYPos);
+        //System.out.println("Generated a non wall coord at: " + randXPos + "," + randYPos);
 
         //****************************************************************
 
@@ -199,7 +199,7 @@ public class RogueController extends JFrame implements KeyListener {
                         logicHandler.attack(xPos, yPos, xOrig, yOrig);
                         if (xPos > 0 && xPos <= 78 && yPos > 0 && yPos <= 20) {
                             //display the you were attacked flag if the collision was with a player
-                            if (logicHandler.getObject(xPos, yPos) instanceof Player) {
+                            if (logicHandler.getObject(xPos, yPos) instanceof Player && mon[xOrig][yOrig].getIcon() != 'C') {
                                 canvas.monsterAttack();
                                 canvas.moveHeroAnimated(x, y, logicHandler.getPlayer().getHitPoints(),
                                         logicHandler.getPlayer().getAttack(),
@@ -207,18 +207,22 @@ public class RogueController extends JFrame implements KeyListener {
                                         , logicHandler.getPlayer().getScore());
                             }
                             canvas.moveMonster(xOrig, yOrig, logicHandler.getObject(xOrig, yOrig));
+
                         }
-                    } else if (logicHandler.movable(xPos, yPos)) {
+                    } else if (logicHandler.movable(xPos, yPos) && mon[xOrig][yOrig].getIcon() != 'C') {
                         logicHandler.move(xPos, yPos, xOrig, yOrig);
                         canvas.moveMonster(xPos, yPos, logicHandler.getObject(xPos, yPos));
+
 
                         //This was a fix for monsters disappearing. Monster will remain in the same place if not movable
                     } else {
                         logicHandler.move(xOrig, yOrig, xOrig, yOrig);
                         canvas.moveMonster(xOrig, yOrig, logicHandler.getObject(xOrig, yOrig));
 
+
                     }
                 }
+
             }
         }
 

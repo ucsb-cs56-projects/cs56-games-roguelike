@@ -13,7 +13,7 @@ public class Monster implements GamePiece {
     private int hitPoints;
     private int attack;
     private int direction = 0;
-    private int typeOfMovement;
+private int typeOfMovement;
     private int[] position = new int[2];
     private int pointValue = 5;
     private char icon;
@@ -26,7 +26,8 @@ public class Monster implements GamePiece {
     public static final int[] SNAKE = {5, 3, 15, 83};
     public static final int[] TROLL = {10, 3, 15, 84};
     public static final int[] ZOMBIE = {15, 2, 15, 90};
-    private static int numMonsters = 7;
+    public static final int[] CHEST = {0,0,0,67};
+    private static int numMonsters = 8;
     /**
      * Creates a monster with 20 hitPoints and 10 attack and no random movement.
      */
@@ -72,6 +73,14 @@ public class Monster implements GamePiece {
     /**
      * Static factory method for generating a monster based on an input string.
      */
+
+    public static int[] createChest(){
+        return CHEST;
+    }
+
+    public void setTypeOfMovement(int typeOfMovement) {
+        this.typeOfMovement = typeOfMovement;
+    }
 
     public static int[] createMonster() {
         int n = (int) (Math.random() * numMonsters);
