@@ -514,8 +514,8 @@ public class RogueController extends JFrame implements KeyListener {
 
         for (int xOrig = 0; xOrig < gridWidth; xOrig++) {
             for (int yOrig = 0; yOrig < gridHeight; yOrig++) {
-                if (mon[xOrig][yOrig] != null) {
-                    return;
+                if (mon[xOrig][yOrig] != null && mon[xOrig][yOrig].getIcon() != 'C') {
+                    return; //checks to see if monsters still exist. if they do, function returns
                 }
             }
         }

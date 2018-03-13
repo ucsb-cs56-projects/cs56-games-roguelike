@@ -351,19 +351,6 @@ public class LogicEngine {
             if(listOfMonsters[x][y].getIcon() == 'C'){   //a chest was found
                 double random = Math.random();
 
-                if (0 <= random && random <= .25) { // 20% chance to drop Health Potion
-                    createItem(x, y, new HealthPotion());
-                } else if (.25 < random && random <= .5) { // 20% chance to drop Beef
-                    createItem(x, y, new Beef());
-                } else if (.5 < random && random <= .75) { // 15% chance to drop Pioson
-                    createItem(x, y, new Poison());
-                } else if (.75 < random && random <= .100) {
-                    createItem(x, y, new Elixir()); // 5% chance of drop Elixir
-                }
-            }
-            else {
-                double random = Math.random();
-
                 if (0 <= random && random <= .25) { // 25% chance to drop Health Potion
                     createItem(x, y, new HealthPotion());
                 } else if (.25 < random && random <= .5) { // 25% chance to drop Beef
@@ -373,6 +360,23 @@ public class LogicEngine {
                 } else if (.75 < random && random <= .100) {
                     createItem(x, y, new Elixir()); // 25% chance of drop Elixir
                 }
+                else // no item drop :(
+                    floor[x][y] = null;
+            }
+            else {
+                double random = Math.random();
+
+                if (0 <= random && random <= .2) { // 20% chance to drop Health Potion
+                    createItem(x, y, new HealthPotion());
+                } else if (.2 < random && random <= .4) { // 20% chance to drop Beef
+                    createItem(x, y, new Beef());
+                } else if (.4 < random && random <= .55) { // 15% chance to drop Pioson
+                    createItem(x, y, new Poison());
+                } else if (.55 < random && random <= .60) {
+                    createItem(x, y, new Elixir()); // 5% chance of drop Elixir
+                } else // no item drop :(
+                    floor[x][y] = null;
+
 
             }
 
@@ -625,7 +629,7 @@ public class LogicEngine {
      * Resets the player to the starting position. Used at the start of a new level.
      */
     public void resetPlayerPosition() {
-        int[] resetPosition = {3, 2};
+        int[] resetPosition = {3,2};
         thePlayer.setPlayerPosition(resetPosition);
         floor[3][2] = thePlayer;
     }
