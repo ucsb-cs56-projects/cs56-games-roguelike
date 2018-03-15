@@ -216,3 +216,18 @@ Things you could work on:
 * Combat is currently lackluster. Anything to make the game more exciting to play would be a big improvement
 
 There arent too many bugs left in this code, but there are numerous improvements that can be made to the code and new features that can be added. With this in mind, good luck on this project!
+
+W18 Final Remarks
+========================
+Hey future CS56 students!
+
+We recommend that the first thing you do is download an IDE to edit/view the Rogue program, such as Intellij. Intellij is free and also great for easy refactoring, find usages, and safe deletions.
+
+At the current state of the game, there are definitely a few bugs to work out, sometimes the game will randomly freeze in the middle of game play. We don't know why. That's up to you to figure it out! We think it has to do with map generation, but we are not entirely sure.
+
+We also noticed that a lot of the code has potential for refactoring, especially the LogicEngine, RoguePanel, and RogueController classes.
+
+We mostly fixed up the GUI in this iteration, we recommend the next group work on Bosses, Combat, and Bugfixing.
+
+
+
