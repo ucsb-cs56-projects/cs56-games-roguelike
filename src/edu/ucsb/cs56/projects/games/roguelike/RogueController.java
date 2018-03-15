@@ -29,13 +29,15 @@ public class RogueController extends JFrame implements KeyListener {
     private int x = 3;
     private int y = 2;
 
+    private Random randomNumber = new Random();
+
+
     private GamePiece[][] floor;
 
     //startx and starty are the locations the player should spawn after a new level begins
     public final int startx = x;
     public final int starty = y;
 
-    private Random randomNumber = new Random();
 
     // origX and origY is the position the character is at before the it moves
     private int origX;
@@ -66,6 +68,23 @@ public class RogueController extends JFrame implements KeyListener {
         logicHandler = new LogicEngine();
         addKeyListener(this);
         discoveredArea = new int[canvas.getGridWidth()][canvas.getGridHeight() - 1];
+
+        //********Carolyn's attempt********************************
+        //NON OBSTACLE GENERATOR WORKS, BUT NEED TO READJUST THE VISIBLE AREA SURROUNDING INITIAL LOCATION
+        int randXPos = 1;
+        int randYPos = 1;
+        boolean isObstacleLocation = true;
+        while(isObstacleLocation){
+            randXPos = (int) (Math.random() * (76) + 1);
+            randYPos = (int) (Math.random() * (20) + 1);
+            isObstacleLocation = isObstacle(randXPos, randYPos,randXPos, randYPos);
+        }
+
+        //System.out.println("Generated a non wall coord at: " + randXPos + "," + randYPos);
+
+        //****************************************************************
+
+
     }
 
 
@@ -180,7 +199,7 @@ public class RogueController extends JFrame implements KeyListener {
                         logicHandler.attack(xPos, yPos, xOrig, yOrig);
                         if (xPos > 0 && xPos <= 78 && yPos > 0 && yPos <= 20) {
                             //display the you were attacked flag if the collision was with a player
-                            if (logicHandler.getObject(xPos, yPos) instanceof Player) {
+                            if (logicHandler.getObject(xPos, yPos) instanceof Player && mon[xOrig][yOrig].getIcon() != 'C') {
                                 canvas.monsterAttack();
                                 canvas.moveHeroAnimated(x, y, logicHandler.getPlayer().getHitPoints(),
                                         logicHandler.getPlayer().getAttack(),
@@ -188,18 +207,22 @@ public class RogueController extends JFrame implements KeyListener {
                                         , logicHandler.getPlayer().getScore());
                             }
                             canvas.moveMonster(xOrig, yOrig, logicHandler.getObject(xOrig, yOrig));
+
                         }
-                    } else if (logicHandler.movable(xPos, yPos)) {
+                    } else if (logicHandler.movable(xPos, yPos) && mon[xOrig][yOrig].getIcon() != 'C') {
                         logicHandler.move(xPos, yPos, xOrig, yOrig);
                         canvas.moveMonster(xPos, yPos, logicHandler.getObject(xPos, yPos));
+
 
                         //This was a fix for monsters disappearing. Monster will remain in the same place if not movable
                     } else {
                         logicHandler.move(xOrig, yOrig, xOrig, yOrig);
                         canvas.moveMonster(xOrig, yOrig, logicHandler.getObject(xOrig, yOrig));
 
+
                     }
                 }
+
             }
         }
 
@@ -429,7 +452,11 @@ public class RogueController extends JFrame implements KeyListener {
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-            canvas.displayLosingScreen(logicHandler.getPlayer().getScore(), array);
+            Sound.gameMusic1.stop();
+            Sound.gameMusic2.stop();
+            Sound.gameMusic3.stop();
+            new LosingScreen(logicHandler.getPlayer().getScore());
+            setVisible(false);
         }
         // display the score and highScores after game is over and write the new highScore into Score.txt
         if (logicHandler.playerIsDead() && logicHandler.getGameOver() == false) {
@@ -473,7 +500,11 @@ public class RogueController extends JFrame implements KeyListener {
                 ex.printStackTrace();
             }
             canvas.clear();
-            canvas.displayLosingScreen(logicHandler.getPlayer().getScore(), array);
+            Sound.gameMusic1.stop();
+            Sound.gameMusic2.stop();
+            Sound.gameMusic3.stop();
+            new LosingScreen(logicHandler.getPlayer().getScore());
+            setVisible(false);
             logicHandler.setGameOver(true);
         }
 
@@ -491,8 +522,8 @@ public class RogueController extends JFrame implements KeyListener {
 
         for (int xOrig = 0; xOrig < gridWidth; xOrig++) {
             for (int yOrig = 0; yOrig < gridHeight; yOrig++) {
-                if (mon[xOrig][yOrig] != null) {
-                    return;
+                if (mon[xOrig][yOrig] != null && mon[xOrig][yOrig].getIcon() != 'C') {
+                    return; //checks to see if monsters still exist. if they do, function returns
                 }
             }
         }
@@ -504,11 +535,11 @@ public class RogueController extends JFrame implements KeyListener {
         discoveredArea = new int[canvas.getGridWidth()][canvas.getGridHeight() - 1]; //resets exploration
         logicHandler.createAllObjects();//clear board, make walls, player, and monsters
         clearAllItems();
-        logicHandler.resetPlayerPosition();//moves the player back to the starting position
-        canvas.moveHeroAnimated(startx, starty, logicHandler.getPlayer().getHitPoints(), logicHandler.getPlayer().getAttack(),
+        int[] newPosition = logicHandler.resetPlayerPosition();//moves the player back to the starting position
+        canvas.moveHeroAnimated(newPosition[0], newPosition[1], logicHandler.getPlayer().getHitPoints(), logicHandler.getPlayer().getAttack(),
                 logicHandler.getPlayer().getSpeed(), logicHandler.getLevel(), logicHandler.getPlayer().getScore());
-        this.x = startx;
-        this.y = starty;
+        this.x = newPosition[0];
+        this.y = newPosition[1];
     }
 
     /**
@@ -625,6 +656,7 @@ public class RogueController extends JFrame implements KeyListener {
         mainControl.checkPlayerStatus();
         MakeCloseOptionToMainMenu(mainControl);
     }
+
 
     /**
      * A method included within the Rogue Controller to force the window close button to open Main Menu
