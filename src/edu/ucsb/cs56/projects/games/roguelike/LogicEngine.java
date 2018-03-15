@@ -713,6 +713,7 @@ public class LogicEngine {
             newYPos = numGenerator.nextInt(21);
 
             //check that this new coordinate is null in center, and all around by 1 coordinate in every direction
+            //This is important, to make sure new coordinate has no interference with curent game state.
             if (floor[newXPos][newYPos] == null  //center
                     && floor[newXPos-1][newYPos] == null  //one left
                     && floor[newXPos+1][newYPos] == null  //one right
@@ -721,7 +722,11 @@ public class LogicEngine {
                     && floor[newXPos-1][newYPos-1] == null  //bottom left corner
                     && floor[newXPos-1][newYPos+1] == null  //top left corner
                     && floor[newXPos+1][newYPos+1] == null  //top right corner
-                    && floor[newXPos+1][newYPos-1] == null)   //bottom right corner
+                    && floor[newXPos+1][newYPos-1] == null   //bottom right corner
+                    && floor[newXPos-2][newYPos] == null //two left
+                    && floor[newXPos+2][newYPos] == null  //two right
+                    && floor[newXPos][newYPos+2] == null  //two up
+                    && floor[newXPos][newYPos-2] == null)  //two down
                 {
                 foundNewCoordinates = true;
             }
